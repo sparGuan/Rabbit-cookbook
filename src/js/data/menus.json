@@ -1,0 +1,39 @@
+{
+    "0": {
+        "name": "统计",
+        "router": "census"
+    },
+    "1": {
+        "name": "荣誉",
+        "router": "honor"
+    },
+    "2": {
+        "name": "关于我们",
+        "router": "aboutus"
+    },
+    "3": {
+        "name": "档案",
+        "router": "archives"
+    },
+    "4": {
+        "name": "云应用",
+        "router": "cloud"
+    },
+    "5": {
+        "name": "旅行玩家",
+        "router": "games"
+    },
+    "6": {
+        "name": "计划",
+        "router": "plan"
+    },
+    "7": {
+        "name": "奖品",
+        "router": "award"
+    },
+    "8": {
+        "name": "教育",
+        "router": "education"
+    },
+    "length": 9
+}

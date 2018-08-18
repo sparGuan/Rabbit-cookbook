@@ -1,0 +1,19 @@
+{
+  "git.ignoreMissingGitWarning": true,   
+  "prettier.singleQuote": true,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.tabSize": 2,
+  "files.associations": {
+      "*.cjson": "jsonc",
+      "*.wxss": "css",
+      "*.wxs": "javascript"
+  },
+  "emmet.includeLanguages": {
+      "wxml": "html"
+  },
+  "minapp-vscode.disableAutoConfig": true,
+  "eslint.autoFixOnSave": false, // #每次保存的时候将代码按eslint格式进行修复
+  "prettier.eslintIntegration": true, //  #让prettier使用eslint的代码格式进行校验
+  "prettier.semi": true, // #去掉代码结尾的分号
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true // #让函数(名)和后面
+}

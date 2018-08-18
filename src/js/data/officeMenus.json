@@ -1,0 +1,67 @@
+{
+  "0": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 0,
+    "className": "paint0",
+    "transform": "translate3d(0, 40px, 0px)",
+    "bgColor": "#7797d5",
+    "path": ""
+  },
+  "1": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 1,
+    "className": "paint1",
+    "transform": "translate3d(100px,-80px,0px)",
+    "bgColor": "#8fcf92",
+    "path": ""
+  },
+  "2": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 2,
+    "className": "paint2",
+    "transform": "translate3d(230px,-160px,0px)",
+    "bgColor": "#ff8759",
+    "path": ""
+  },
+  "3": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 3,
+    "className": "paint3",
+    "transform": "translate3d(270px,-172px,0px)",
+    "bgColor": "#deb7df",
+    "path": ""
+  },
+  "4": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 4,
+    "className": "paint4",
+    "transform": "translate3d(55px,-220px,0px)",
+    "bgColor": "#ffb955",
+    "path": ""
+  },
+  "5": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 5,
+    "className": "paint5",
+    "transform": "translate3d(0px,-240px,0px)",
+    "bgColor": "#7e9adc",
+    "path": ""
+  },
+  "6": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 6,
+    "className": "paint6",
+    "transform": "translate3d(130px,-300px,0px)",
+    "bgColor": "#ffb955",
+    "path": ""
+  },
+  "7": {
+    "imgSrc": "../../../src/imgs/cloud/office",
+    "id": 7,
+    "className": "paint7",
+    "transform": "translate3d(190px,-500px,0px)",
+    "bgColor": "#ea8db5",
+    "path": ""
+  },
+  "length": 8
+}

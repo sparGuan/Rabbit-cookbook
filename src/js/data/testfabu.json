@@ -1,0 +1,19 @@
+{
+  "0": {
+    "id": "0",
+    "bgBanner": "../../../../src/imgs/userCenter/row0.png"
+  },
+  "1": {
+    "id": "1",    
+    "bgBanner": "../../../../src/imgs/userCenter/row1.gif"
+  },
+  "2": {
+    "id": "2",    
+    "bgBanner": "../../../../src/imgs/userCenter/row2.png"    
+  },
+  "3": {
+    "id": "3",    
+    "bgBanner": "../../../../src/imgs/userCenter/row3.png"    
+  },
+  "length": 4
+}

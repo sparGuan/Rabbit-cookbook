@@ -1,0 +1,212 @@
+/* === app基础样式  (start) === */
+html, body {
+    height: 100%;
+}
+body {
+    min-width: 320px;
+    background: #f9f9f9;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #333;    
+}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin: 0;
+    padding: 0;
+}
+body,button,input,select,textarea {
+    font: normal 14px/1.5  'Open Sans Condensed','Arial Narrow', serif,"PingFang SC", "Heiti SC","Arial","Lucida Grande",Verdana,STXhei,"Microsoft YaHei","hei";
+}
+[v-cloak] {
+    display: block;
+}
+.app {
+    height: 100%;
+    position: relative;
+    max-width: 540px;
+    margin: 0 auto;
+}
+/* 文本居中 */
+.text-center{
+    text-align: center
+}
+/* 定义间距 */
+.mr-all-5{margin:5px;}
+.mr-t-5{margin-top: 5px}
+.mr-all-10{margin:10px;}
+.pd-t-10{margin-top: 10px}
+.pd-all-5{padding:5px;}
+.pd-t-5{padding-top: 5px}
+.pd-all-10{padding:10px;}
+.pd-tb-10{padding:10px 0;}
+.pd-t-10{padding-top: 10px}
+.toolbar-fixed {
+    padding: 0 0 50px;
+}
+
+.views, .view, .pages {
+    height: 100%;
+}
+
+.views .view .pages {
+    height: 100%;
+    
+    [data-page] {
+        height: 100%;
+        
+        .page-content {
+            height: 100%;
+        }
+    }
+}
+    
+/*下一页*/
+.next-enter-active {
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+    opacity: 1;
+    position: fixed;
+    width:100vw;
+}
+
+.next-enter, .next-leave-active {
+    opacity: 0;
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+}
+
+.next-leave-active {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+/*上一页*/
+.prev-enter-active {
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+    width:100vw;
+}
+
+.prev-enter, .prev-leave-active {
+    opacity: 0;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+}
+
+.prev-active {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+footer.toolbar {
+    z-index: 2000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    width: 100%;    
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    .toolbar-icon, .toolbar-link {
+        font-size: 12px;
+        text-align: center;
+        height: 100%;
+        display: block;
+        color: #999;
+        // transition: all .3s ease;
+        &>i{
+            display: block;
+            padding: 10px 0 5px 0;
+            font-size: 16px;
+            transition: all .3s ease;
+        }
+    }
+    
+    .toolbar-link{
+        &.router-link-active {
+            color: rgba(0, 122, 255, 0.9);
+            &>i{
+                transform: scale(1.5);
+            }
+        }
+        
+        .mui-icon {
+            display: block;
+            margin: 6px auto 0;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+        }
+    }
+}
+// 公共上传样式
+#drop {
+    background-color: #2E3134;
+    padding: 0px 50px;
+    border: 20px solid rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    border-image: url(../imgs/upload/upborder.png) 25 repeat;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    color: #7f858a;
+    position: relative;
+}
+#upload {
+    font-family: 'PT Sans Narrow', sans-serif;
+    background-color: #373a3d;
+    background-image: -webkit-linear-gradient(top, #373a3d, #313437);
+    background-image: -moz-linear-gradient(top, #373a3d, #313437);
+    background-image: linear-gradient(top, #373a3d, #313437);
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding:15px;
+}
+#drop > a {
+    background-color: #007a96;
+    padding: 12px 26px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 12px;
+    line-height: 1;
+}
+#drop > input {
+    opacity: 0;
+    width: 80px;
+    top: 10px;
+    left: 85px;
+    position: absolute;
+    height: 38px;
+}
+.search.layout-1{
+    width: 75%;
+    height: 30px;
+    margin: 7px auto;
+    box-shadow: inset 0 0 0 2px #e4e4e4;
+}
+/* === app基础样式  (end) === */
+// @import url('./_mixins.less');
+// @import url('./_colors-vars.less');
+@import url('../css/mui.css');
+// 引入字体样式
+@import url('../css/icons-extra.css');
+
+
+
