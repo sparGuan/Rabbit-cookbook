@@ -1,5 +1,5 @@
 ## 前言
-这是一个app(android/iOS)项目，但页面视图全部都用的是html5页，没有使用app的原生页面，项目可以直接在PC上运行html5页面。与服务端的交互全部都是走web api接口方式。客户端的登录是JSON WEB TOKEN 认证([JSON Web Token（JWT)是什么鬼](https://github.com/bigmeow/JWT))。项目里有android Apk打包文件,可以直接下载安装[点此链接下载](https://github.com/yujinjin/fans/tree/master/unpackage/release/fans.apk)。 
+这是一个app(android/iOS)项目，但页面视图全部都用的是html5页，没有使用app的原生页面，项目可以直接在PC上运行html5页面。与服务端的交互全部都是走web api接口方式。客户端的登录是JSON WEB TOKEN 认证([JSON Web Token（JWT)是什么鬼](https://github.com/bigmeow/JWT))。项目里有android Apk打包文件,可以直接下载安装[点此链接下载]()。 
 
 前端h5是基于[mui](http://dev.dcloud.net.cn/mui/) + [vue2](http://cn.vuejs.org/v2/api/) + [vue-router2](http://router.vuejs.org/zh-cn/) + [es6](http://es6.ruanyifeng.com/) + [webpack2](http://webpack.github.io/) + [vuex](http://vuex.vuejs.org/zh-cn/) + [signalR](http://signalr.net/)的前端webApp单页项目框架。
 
@@ -8,7 +8,7 @@ app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键
 本项目只是一个技术框架，对于项目中具体的业务的东西只会大概的说明一下。
 
 
-**说明：** 可能有些朋友不知道[signalR](http://signalr.net/)是什么东西，其实[signalR](http://signalr.net/)就是让客户端（Web页面）和服务器端可以互相通知消息及调用方法的前端JS，当WebSockets可用时（即浏览器支持Html5）[signalR](http://signalr.net/)使用WebSockets，当不支持时[signalR](http://signalr.net/)将使用其它技术来保证达到相同效果。
+**说明：** 
 
 
 > 1. 前端UI的部分使用mui框架
@@ -49,23 +49,23 @@ app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键
 {
 	"name": "Fans",
 	"version": "1.0.0",
-	"description": "粉丝煲",
+	"description": "鲸众",
 	"main": "js/entrance.js",
-	"keywords": "粉丝煲",
+	"keywords": "鲸众",
 	"homepage": "",
 	"bugs": {
-		"url": "https://github.com/yujinjin/fans/issues",
-		"email": "yujinjin9@126.com"
+		"url": "",
+		"email": "493683987@qq.com"
 	},
 	"author": {
 		"name": "jinyu",
-		"email": "yujinjin9@126.com",
+		"email": "493683987@qq.com",
 		"url": "https://github.com/yujinjin"
 	},
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/yujinjin/fans.git"
+		"url": "git@193.112.125.250:root/jingz.git"
 	},
 	"scripts": {
 		"R_DEV": "set NODE_RUN=1&&webpack-dev-server --progress --watch --inline --host=0.0.0.0  --port 8083",
@@ -161,6 +161,14 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 
 
 ```
+|-- server
+			|-- dist                          //服务器编译后存放目录
+			|-- src                           //源码目录
+						|-- api                     // 开放api目录
+						|-- config                  // 各种配置地址和编译解释
+						|-- db                      // module源目录
+								 |-- schema             // schema模块路径
+								 |-- connection.ts      // mongodb配置文件
 |-- build                               // webapck打包后的文件目录
 |-- logo                                // 存放app的图表地址目录
 |-- src                                 // 源码目录
@@ -236,60 +244,31 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 
 ## 上图
 ##### 1. app首次启动-欢迎页面
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/969A81C308FE49EB9F04FC527DC3CEB1/1098)
+![image]()
 
-##### 2. 登录页
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/4450268334F74135AD89CD829DACBB3A/1251)
+##### 2. 首页
+![image]()
 
-##### 3. 首页
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DF54BD8D51AA4B35A4F54A02EBA0743A/1086)
+##### 3. 消息列表
+![image]()
 
-###### 3. 1. 扫码核销
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/049F878BA97F4B8BBB581094DC9533CF/1091)
+###### 4. 个人中心
+![image]()
 
-
-###### 3. 2. 会员识别
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/0FACF7F6C6894C4E8557AD08658E0A89/1088)
-
-###### 3. 3. 素材列表
-
-
-##### 4. 我的集客(随便凑的一个页面)
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/D4B0EB839E53489F9A64F6F3FF5DB45B/1249)
-
-###### 4. 1. 会员列表
-
-
-##### 5. 个人中心
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/227254DE56E2459AB053B31352688643/965)
-
-###### 5. 1. 个人资料
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/0E885C4086324932B18B816FB2F31B57/1074)
-
-###### 5. 2. 我的收益
-
-
-###### 5. 3. 密码修改
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/BA781772D4964035B55AA432CA0A9C21/972)
-
-###### 5. 4. 消息列表
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/C08C00F62A0E46AE94D8031AFD9E3864/974)
-
-###### 5. 5. 消息内容
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DC592CD8FA92455E8C445120FC6D0242/975)
+###### 5. 素材列表
 
 ## 运行程序
 
 项目地址：（`git clone`）
 ```shell
-git clone https://github.com/yujinjin/fans.git
+git clone git@193.112.125.250:root/jingz.git
 ```
 通过`npm`安装本地服务第三方依赖模块(需要已安装[Node.js](https://nodejs.org/))
 
 ```
 npm install
 ```
-启动DEV服务(http://localhost:8083)
+启动DEV服务(http://localhost:8081)
 
 ```
 npm run R_DEV (window)
