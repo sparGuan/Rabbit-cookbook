@@ -33,7 +33,7 @@
 <style lang="less" scoped>
 .mui-popover .mui-table-view {
   background-color: #eee;
-      border-radius: 0;
+  border-radius: 0;
 }
 .mui-backdrop.mui-backdrop-action {
   display: none;
@@ -90,12 +90,11 @@
   width: 100%;
   height: 100%;
   left: 0;
-  top:0;
+  top: 0;
 }
-
 </style>
 <script>
-import coverflow from '@/components/vue-coverflow';
+import coverflow from "@/components/vue-coverflow";
 export default {
   components: {
     coverflow
@@ -104,26 +103,26 @@ export default {
     return {
       coverList: [
         {
-          cover: 'http://ogu51f989.bkt.clouddn.com/react.png'
+          cover: "http://ogu51f989.bkt.clouddn.com/react.png"
         },
         {
-          cover: 'http://ogu51f989.bkt.clouddn.com/angular.png'
+          cover: "http://ogu51f989.bkt.clouddn.com/angular.png"
         },
         {
-          cover: 'http://ogu51f989.bkt.clouddn.com/vue.png'
+          cover: "http://ogu51f989.bkt.clouddn.com/vue.png"
         },
         {
-          cover: 'http://ogu51f989.bkt.clouddn.com/webpack.png'
+          cover: "http://ogu51f989.bkt.clouddn.com/webpack.png"
         },
         {
-          cover: 'http://ogu51f989.bkt.clouddn.com/yarn.png'
+          cover: "http://ogu51f989.bkt.clouddn.com/yarn.png"
         },
         {
-          cover: 'http://ogu51f989.bkt.clouddn.com/node.png'
+          cover: "http://ogu51f989.bkt.clouddn.com/node.png"
         }
       ],
       commitData: {
-        formulation: '',
+        formulation: ""
       },
       files: []
     };
@@ -133,26 +132,24 @@ export default {
   },
   methods: {
     publishDynamic() {
-      mui(this.$refs['publish']).popover('toggle');
-      mui('.mui-backdrop-action.mui-active')[0].style.display = 'none';
+      mui(this.$refs["publish"]).popover("toggle");
+      mui(".mui-backdrop-action.mui-active")[0].style.display = "none";
     },
     uploadAlbum(e) {
       if (e.target.files && e.target.files[0]) {
         let reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = evt => {
-          this.coverList.push({cover:evt.target.result})
-         // this.updateActivityData.bgBanner = evt.target.result;
+          this.coverList.push({ cover: evt.target.result });
+          // this.updateActivityData.bgBanner = evt.target.result;
         };
       }
-      this.files.push(e.target.files[0])
+      this.files.push(e.target.files[0]);
     },
     canclDynamic() {
-      mui(this.$refs['publish']).popover('toggle');
+      mui(this.$refs["publish"]).popover("toggle");
     },
-    submit() {
-
-    }
+    submit() {}
   }
 };
 </script>

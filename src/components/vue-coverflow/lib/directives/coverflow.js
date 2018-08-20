@@ -57,7 +57,7 @@ const renderAllCover = (el, binding, vnode) => {
   vnode.context.coverIndex = index
   let imgHeight = Math.max(vnode.context.coverHeight, vnode.context.coverWidth)
   let imgs = []
-  let placeholding
+  let placeholding  
   for (let i = 0; i < el.childNodes.length; ++i) {
     if(el.childNodes[i].nodeName === 'IMG'){
       imgs.push(el.childNodes[i])
@@ -117,32 +117,66 @@ const renderAllCover = (el, binding, vnode) => {
   }
 
   el.style.position = 'relative'
-  const handleClick = event =>{
-    if (event.target && event.target.nodeName.toUpperCase() === 'IMG') {
-      let index = imgs.indexOf(event.target)
-      displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
+  
+  displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
+  return {
+    imgSize,
+    spacing,    
+    imgs,
+    flat,
+    titleBox
+  }
+}
+const matchImgSrc = (newSrcArr,oldSrcArr) => {
+  for(let i=0;i<newSrcArr.length;i++) {
+    console.log(oldSrcArr[i])
+    if(newSrcArr.length !== oldSrcArr.length
+      &&
+      newSrcArr[i].src !== oldSrcArr[i].elm.src){
+      return false
     }
   }
-  displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
-  el.$destroy = () => {
-    el.removeEventListener('click', handleClick, false)
-  }
-  // 绑定函数
-  el.addEventListener('click', handleClick, false)
+  return true
 }
 export default {
   bind:  (el, binding, vnode) => {
-    renderAllCover(el, binding, vnode)
+    const {
+      imgSize,
+      spacing,    
+      imgs,
+      flat,
+      titleBox
+    } = renderAllCover(el, binding, vnode)
+    const handleClick = event =>{
+      if (event.target && event.target.nodeName.toUpperCase() === 'IMG') {
+        let index = imgs.indexOf(event.target)
+        console.log(imgSize)
+        displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
+      }
+    }
+    el.$destroy = () => {
+      el.removeEventListener('click', handleClick, false)
+    }
+    // 绑定函数
+    el.addEventListener('click', handleClick, false)
   },
-  update:  (el, binding, vnode) => {    // 根据获得的新值执行对应的更新
+  componentUpdated:  (el, binding, vnode,oldVnode) => {    // 根据获得的新值执行对应的更新
     // 对于初始值也会被调用一次
     // if(typeof el.$destroy === 'function') {
+    //   console.log(11)
     //   el.$destroy()
     // }
-    renderAllCover(el, binding, vnode)
+    // console.log(matchImgSrc(el.childNodes,binding.oldValue))
+    console.log(vnode)
+    console.log(oldVnode)
+    if(oldVnode && matchImgSrc(vnode.elm.children,oldVnode.children)) {
+      renderAllCover(el, binding, vnode)
+    }
+    
+    // 
     // el.dispatchEvent('click');
   },
   unbind: (el) => {
-    el.$destroy()
+     el.$destroy()
   }
 }
