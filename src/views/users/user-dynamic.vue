@@ -57,12 +57,14 @@
                 </div>
               </li>
            </ul>
+           <Publish></Publish>
          </div>
     </div>
 </template>
 <script>
+import Publish from './common/publish'
 export default {
-  components: {},
+  components: {Publish},
   props: ["headImg", "nickName", "descPerson"],
   data() {
     return {
