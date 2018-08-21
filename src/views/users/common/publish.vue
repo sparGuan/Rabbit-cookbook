@@ -125,6 +125,7 @@ export default {
         };
       }
       this.album.push(e.target.files[0]);
+      
     },
     canclDynamic() {
       mui(this.$refs["publish"]).popover("toggle");

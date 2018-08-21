@@ -11,5 +11,6 @@ export default (Router: any) => {
       )
     }
   }
+  
   return Router
 }

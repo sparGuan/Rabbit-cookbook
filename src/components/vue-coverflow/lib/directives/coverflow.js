@@ -137,6 +137,7 @@ const renderAllCover = (el, binding, vnode) => {
 }
 export default {
   bind:  (el, binding, vnode) => {
+    
   renderAllCover(el, binding, vnode)
   },
   componentUpdated:  (el, binding, vnode, oldVnode) => {    // 根据获得的新值执行对应的更新   
