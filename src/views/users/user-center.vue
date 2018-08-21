@@ -261,6 +261,9 @@ export default {
       height: 100%;
       padding-top: 20px;
       background: linear-gradient(to bottom, #40b9fc, #f7f7f7) no-repeat center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
       .switch-btn {
         width: calc(~'50% - 30px');
         position: relative;

@@ -2,7 +2,7 @@
 	<div data-page="user-siteInfo">
 		<div class="page-content">
 			<ul class="mui-table-view mui-table-view-chevron">
-				<li class="mui-table-view-cell mui-media head-image-panel" :style="'background-image:url('+headBgImg+')'">
+				<li class="mui-table-view-cell mui-media head-image-panel" :style="'background-image:url('+showHeadBgImg+')'">
 					<div class="item head-content">
 						<div class="item-content">
 							<span class="header-img iconfont icon-paizhaoshangchuan" @click="chooseImageControl">
@@ -11,7 +11,7 @@
 						</div>
             <div class="upload-user-bg"><i class="iconfont icon-shangchuan" style="font-size: 26px;color:#007aff;"></i></div>
 					</div>
-          <input type="file" ubt="upBgImg" accept="image/gif,image/jpeg,image/jpg,image/png" class="img-file uploadBg" @change="takeAlbum($event,'showHeadBgImg')"> 
+          <input type="file" ubt="upBgImg" accept="image/gif,image/jpeg,image/jpg,image/png" class="img-file uploadBg" @change="takeAlbum($event,'headBgImg')"> 
 				</li>
 				<li class="mui-table-view-cell mui-media">
 					<div class="item">
@@ -102,6 +102,7 @@ export default {
       headImg: '',
       headBgImg: '',
       showHeadImg: '../../../src/imgs/userCenter/touxiangDefault.png',
+      showHeadBgImg: '',
       userInfo: {
         sex: null, // 0是男，1是女
         nickName: '',
@@ -122,6 +123,7 @@ export default {
         vm.userInfo.Mobile = vm.$route.params.userInfo.Mobile;
         vm.showHeadImg = vm.headImg = app.getResourceUrl(vm.$route.params.userInfo.headImg);
         vm.headBgImg = app.getResourceUrl(vm.$route.params.userInfo.headBgImg);
+        vm.showHeadBgImg = app.getResourceUrl(vm.$route.params.userInfo.headBgImg);
         vm.userInfo.descPerson = vm.$route.params.userInfo.descPerson;
       }
     });
@@ -154,7 +156,7 @@ export default {
               this.showHeadImg = evt.target.result;
               mui(this.$refs['uploadImage']).popover('toggle');
               break;
-            case 'showHeadBgImg':
+            case 'headBgImg':
               this.showHeadBgImg = evt.target.result;
               break;
             default:
@@ -177,7 +179,6 @@ export default {
     updateUserInfo(e) {
       mui(e.target).button('loading');
       const userInfo = Object.assign({}, this.userInfo);
-      console.log(userInfo)
       const data = new FormData();
       data.append('userInfo', JSON.stringify(userInfo));
       data.append('headBgImg', this.headBgImg);

@@ -12,7 +12,7 @@
                   <textarea  class="formSet" style="border-bottom: 1px solid #eee;    padding: 5px;" rows="3" placeholder="说点什么吧..." v-model="commitData.formulation"></textarea>
                   <div class="dynamicAlbum">
                     <div style="text-align: left;margin-left: 5px;">
-                      <i class="iconfont icon-shangchuan1" style="font-size: 50px;color: #999;display:inline-block;vertical-align: top;position: relative;" @click="uploadAlbum">
+                      <i class="iconfont icon-shangchuan1" style="font-size: 50px;color: #999;display:inline-block;vertical-align: top;position: relative;" >
                           <input type="file" ubt="upDynamicAlbum" @change="uploadAlbum($event)" accept="image/gif,image/jpeg,image/jpg,image/png" class="upDynamicAlbum"> 
                       </i><coverflow :coverList="coverList" :coverWidth="50" :width="250" :height="50" :coverHeight="50" :coverSpace="10" :index="0" :coverFlat="true"
                       :showText="false" 

@@ -17,7 +17,6 @@ const displayIndex = (imgSize, spacing, left, imgs, index, flat, width, titleBox
     imgs[i].style.zIndex = i + 1
     setTransform3D(imgs[i], flat ? 0 : ((index - i) * 10 + 45), 300, flat ? -(index - i) * 10 : (-(index - i) * 30 - 20))
   }
-
   imgs[index].style['-webkit-filter'] = 'none'
   imgs[index].style.marginLeft = (mLeft + imgSize * 0.1) + 'px'
   imgs[index].style.zIndex = imgs.length
@@ -53,6 +52,7 @@ const renderAllCover = (el, binding, vnode) => {
   let flat = vnode.context.coverFlat
   let width = vnode.context.width
   let index = vnode.context.index
+  let isPlacehold = vnode.context.isPlacehold
   let showText = vnode.context.showText
   vnode.context.coverIndex = index
   let imgHeight = Math.max(vnode.context.coverHeight, vnode.context.coverWidth)
@@ -71,12 +71,9 @@ const renderAllCover = (el, binding, vnode) => {
     imgs[j].style.bottom = '10px'
     imgs[j].style.transition = 'transform .4s ease, margin-left .4s ease, -webkit-filter .4s ease'
   }
-
   el.style.overflowX = 'hidden'
   el.style.backgroundColor = bgColor
-
   let titleBox = document.createElement('SPAN')
-
   if (!shadow) {
     titleBox.className = 'coverflow-title-box'
     titleBox.style.position = 'absolute'
@@ -95,13 +92,13 @@ const renderAllCover = (el, binding, vnode) => {
     titleBox.style.display = showText ?'block':'none'
     showText ? el.appendChild(titleBox):''
   }
-
   setTransform3D(el, 0, 600, 0)
-  placeholding = document.createElement('DIV')
-  placeholding.style.width = width * 2 + 'px'
-  placeholding.style.height = '1px'
-  el.appendChild(placeholding)
-
+  if(isPlacehold) {
+    placeholding = document.createElement('DIV')
+    placeholding.style.width = width * 2 + 'px'
+    placeholding.style.height = '1px'
+    el.appendChild(placeholding)
+  }
   el.style.width = width + 'px'
 
   if (shadow) {
@@ -117,66 +114,39 @@ const renderAllCover = (el, binding, vnode) => {
   }
 
   el.style.position = 'relative'
-  
   displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
+  if(el.$destroy && typeof el.$destroy === 'function') {
+    el.$destroy()
+  }
+  let handleClick = event => {
+    if (event.target && event.target.nodeName.toUpperCase() === 'IMG') {
+      console.log(imgs)
+      let index = imgs.indexOf(event.target)
+      displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
+    }
+  }
+  el.$destroy = () => {
+    el.removeEventListener('click', handleClick, true)
+  }
+  el.addEventListener('click', handleClick, true)
   return {
     imgSize,
-    spacing,    
-    imgs,
+    spacing, 
+    imgs,   
     flat,
     titleBox
   }
 }
-const matchImgSrc = (newSrcArr,oldSrcArr) => {
-  for(let i=0;i<newSrcArr.length;i++) {
-    console.log(oldSrcArr[i])
-    if(newSrcArr.length !== oldSrcArr.length
-      &&
-      newSrcArr[i].src !== oldSrcArr[i].elm.src){
-      return false
-    }
-  }
-  return true
-}
 export default {
   bind:  (el, binding, vnode) => {
-    const {
-      imgSize,
-      spacing,    
-      imgs,
-      flat,
-      titleBox
-    } = renderAllCover(el, binding, vnode)
-    const handleClick = event =>{
-      if (event.target && event.target.nodeName.toUpperCase() === 'IMG') {
-        let index = imgs.indexOf(event.target)
-        console.log(imgSize)
-        displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
-      }
-    }
-    el.$destroy = () => {
-      el.removeEventListener('click', handleClick, false)
-    }
-    // 绑定函数
-    el.addEventListener('click', handleClick, false)
+  renderAllCover(el, binding, vnode)
   },
-  componentUpdated:  (el, binding, vnode,oldVnode) => {    // 根据获得的新值执行对应的更新
+  componentUpdated:  (el, binding, vnode, oldVnode) => {    // 根据获得的新值执行对应的更新
+    renderAllCover(el, binding, vnode)
     // 对于初始值也会被调用一次
-    // if(typeof el.$destroy === 'function') {
-    //   console.log(11)
-    //   el.$destroy()
-    // }
-    // console.log(matchImgSrc(el.childNodes,binding.oldValue))
-    console.log(vnode)
-    console.log(oldVnode)
-    if(oldVnode && matchImgSrc(vnode.elm.children,oldVnode.children)) {
-      renderAllCover(el, binding, vnode)
-    }
-    
-    // 
-    // el.dispatchEvent('click');
   },
   unbind: (el) => {
+    console.log(111)
      el.$destroy()
   }
 }

@@ -57,6 +57,10 @@ export default {
     showText: {
       type: Boolean,
       default: false
+    },
+    isPlacehold: {
+      type: Boolean,
+      default: false
     }
   },
   // watch: {
