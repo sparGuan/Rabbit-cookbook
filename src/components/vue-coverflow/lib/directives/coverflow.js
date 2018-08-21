@@ -4,10 +4,10 @@ const setTransform3D = (el, degree, perspective, z) => {
   el.style['-webkit-perspective'] = el.style['perspective'] = el.style['-moz-perspective'] = perspective + 'px'
   el.style['-webkit-transform'] = el.style['transform'] = 'rotateY(' + degree + 'deg) translateZ(' + z + 'px)'
 }
-const displayIndex = (imgSize, spacing, left, imgs, index, flat, width, titleBox, vnode) => {
+const displayIndex = (imgSize, spacing, left, imgs, index, flat, width, titleBox, vnode) => {  
   if (imgs.length <= 0) {
     return
-  }
+  }  
   let mLeft = (width - imgSize) * 0.1 - spacing * (index + 1) - imgSize * 0.1
 
   for (let i = 0; i <= index; i++) {
@@ -16,7 +16,7 @@ const displayIndex = (imgSize, spacing, left, imgs, index, flat, width, titleBox
     imgs[i].style['-webkit-filter'] = 'brightness(0.65)'
     imgs[i].style.zIndex = i + 1
     setTransform3D(imgs[i], flat ? 0 : ((index - i) * 10 + 45), 300, flat ? -(index - i) * 10 : (-(index - i) * 30 - 20))
-  }
+  }  
   imgs[index].style['-webkit-filter'] = 'none'
   imgs[index].style.marginLeft = (mLeft + imgSize * 0.1) + 'px'
   imgs[index].style.zIndex = imgs.length
@@ -39,7 +39,6 @@ const displayIndex = (imgSize, spacing, left, imgs, index, flat, width, titleBox
     imgs[j].style.zIndex = imgs.length - j
     setTransform3D(imgs[j], flat ? 0 : ((index - j) * 10 - 45), 300, flat ? (index - j) * 10 : ((index - j) * 30 - 20))
   }
-
   if (vnode.context.coverIndex !== index) {
     vnode.context.handleChange(index)
   }
@@ -62,8 +61,8 @@ const renderAllCover = (el, binding, vnode) => {
     if(el.childNodes[i].nodeName === 'IMG'){
       imgs.push(el.childNodes[i])
     }
-    
   }
+  console.log(imgs)
   for (let j = 0; j < imgs.length; j++) {
     imgs[j].style.position = 'absolute'
     imgs[j].style.width = imgSize + 'px'
@@ -119,9 +118,8 @@ const renderAllCover = (el, binding, vnode) => {
     el.$destroy()
   }
   let handleClick = event => {
-    if (event.target && event.target.nodeName.toUpperCase() === 'IMG') {
-      console.log(imgs)
-      let index = imgs.indexOf(event.target)
+    if (event.target && event.target.nodeName.toUpperCase() === 'IMG') {      
+      let index = imgs.indexOf(event.target)      
       displayIndex(imgSize, spacing, el.scrollLeft, imgs, index, flat, parseInt(el.style.width), titleBox, vnode)
     }
   }
@@ -141,12 +139,14 @@ export default {
   bind:  (el, binding, vnode) => {
   renderAllCover(el, binding, vnode)
   },
-  componentUpdated:  (el, binding, vnode, oldVnode) => {    // 根据获得的新值执行对应的更新
-    renderAllCover(el, binding, vnode)
-    // 对于初始值也会被调用一次
+  componentUpdated:  (el, binding, vnode, oldVnode) => {    // 根据获得的新值执行对应的更新   
+    // 只有在元素被插入的时候才应该去渲染    
+    // 对于初始值也会被调用一次 
+    if(vnode.children.length !== oldVnode.children.length) {
+      renderAllCover(el, binding, vnode)
+    }
   },
-  unbind: (el) => {
-    console.log(111)
+  unbind: (el) => {    
      el.$destroy()
   }
 }

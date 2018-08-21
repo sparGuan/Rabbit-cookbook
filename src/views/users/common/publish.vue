@@ -9,7 +9,7 @@
           <li class="mui-table-view-cell" style="border-radius: 0;">
               <div class="mui-input-group">
                 <div class="mui-input-row" style="margin-bottom:5px;">
-                  <textarea  class="formSet" style="border-bottom: 1px solid #eee;    padding: 5px;" rows="3" placeholder="说点什么吧..." v-model="commitData.formulation"></textarea>
+                  <textarea  class="formSet" style="border-bottom: 1px solid #eee;    padding: 5px;" rows="3" placeholder="说点什么吧..." v-model="commitData.speech"></textarea>
                   <div class="dynamicAlbum">
                     <div style="text-align: left;margin-left: 5px;">
                       <i class="iconfont icon-shangchuan1" style="font-size: 50px;color: #999;display:inline-block;vertical-align: top;position: relative;" >
@@ -22,7 +22,7 @@
                 </div>
                 <div style="padding: 5px;padding-top: 0;text-align: right;">
                   <button type="button" class="mui-btn" @click="canclDynamic">取消</button>
-                  <button type="button" @click="submit" class="mui-btn mui-btn-primary">发表</button>
+                  <button type="button" @click="submit($event)" class="mui-btn mui-btn-primary">发表</button>
                 </div>
               </div>
           </li>
@@ -101,30 +101,11 @@ export default {
   },
   data() {
     return {
-      coverList: [
-        {
-          cover: "http://ogu51f989.bkt.clouddn.com/react.png"
-        },
-        {
-          cover: "http://ogu51f989.bkt.clouddn.com/angular.png"
-        },
-        {
-          cover: "http://ogu51f989.bkt.clouddn.com/vue.png"
-        },
-        {
-          cover: "http://ogu51f989.bkt.clouddn.com/webpack.png"
-        },
-        {
-          cover: "http://ogu51f989.bkt.clouddn.com/yarn.png"
-        },
-        {
-          cover: "http://ogu51f989.bkt.clouddn.com/node.png"
-        }
-      ],
+      coverList: [],             
       commitData: {
-        formulation: ""
+        speech: ""
       },
-      files: []
+      album: []
     };
   },
   mounted() {
@@ -140,16 +121,26 @@ export default {
         let reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = evt => {
-          this.coverList.push({ cover: evt.target.result });
-          // this.updateActivityData.bgBanner = evt.target.result;
+          this.coverList.push({ cover: evt.target.result });      
         };
       }
-      this.files.push(e.target.files[0]);
+      this.album.push(e.target.files[0]);
     },
     canclDynamic() {
       mui(this.$refs["publish"]).popover("toggle");
     },
-    submit() {}
+    submit() {
+      mui(e.target).button('loading');
+      const commitData = Object.assign({}, this.commitData.formulation);
+      const data = new FormData();
+      data.append('userInfo', JSON.stringify(userInfo));
+      data.append('headBgImg', this.headBgImg);
+      data.append('headImg', this.headImg);
+      // 更新用户信息
+      app.api.user.updateUserInfo({
+
+      })
+    }
   }
 };
 </script>
