@@ -7,7 +7,7 @@ import app from '../../app';
 define(function() {
 	return {
 		//上传更新活动业务
-		saveOrUpdate: ajaxOptions => {
+		save: ajaxOptions => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
@@ -21,15 +21,15 @@ define(function() {
 			);
 		},
 		//查询用户基本信息
-		queryUserActivityInfo: ajaxOptions => {
-			return app.ajax(
-				window.app.mui.extend(
-					{
-						url: '/api/activity/queryUserActivityInfo'
-					},
-					ajaxOptions
-				)
-			);
-		}
+		// queryUserActivityInfo: ajaxOptions => {
+		// 	return app.ajax(
+		// 		window.app.mui.extend(
+		// 			{
+		// 				url: '/api/queryUserActivityInfo'
+		// 			},
+		// 			ajaxOptions
+		// 		)
+		// 	);
+		// }
 	};
 });

@@ -11,7 +11,7 @@ define(() => {
 			app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/forgetPwd'
+						url: '/api/login/forgetPwd'
 					},
 					ajaxOptions
 				)
@@ -20,7 +20,7 @@ define(() => {
 			app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/msgValid'
+						url: '/api/login/msgValid'
 					},
 					ajaxOptions
 				)
@@ -39,7 +39,7 @@ define(() => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/login'
+						url: '/api/login/login'
 					},
 					ajaxOptions
 				)
@@ -50,7 +50,7 @@ define(() => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/useWxOrQQLogin'
+						url: '/api/login/useWxOrQQLogin'
 					},
 					ajaxOptions
 				)
@@ -60,7 +60,7 @@ define(() => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/updateUserInfo',
+						url: '/api/login/updateUserInfo',
 						cache: false,
 						processData: false,
 						contentType: false
@@ -74,7 +74,7 @@ define(() => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/register'
+						url: '/api/login/register'
 					},
 					ajaxOptions
 				)
@@ -85,7 +85,7 @@ define(() => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/info'
+						url: '/api/login/info'
 					},
 					ajaxOptions
 				)

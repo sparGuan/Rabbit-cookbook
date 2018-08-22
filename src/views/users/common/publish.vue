@@ -130,13 +130,23 @@ export default {
     canclDynamic() {
       mui(this.$refs["publish"]).popover("toggle");
     },
+    // 将文件循环放进formData
+    loopAppendToAlbum(formData) {
+      if(this.album.length > 0) {
+         this.album.forEach( (item,index) => {
+           formData.append('album'+index ,item)
+         })
+      }
+      return formData 
+    },
     submit() {
       mui(e.target).button('loading');
-      const commitData = Object.assign({}, this.commitData.formulation);
+      const commitData = Object.assign({}, this.commitData);
       const data = new FormData();
-      data.append('userInfo', JSON.stringify(userInfo));
-      data.append('headBgImg', this.headBgImg);
-      data.append('headImg', this.headImg);
+      data.append('dynamic', JSON.stringify(commitData));
+      this.loopAppendToAlbum(data)
+      loopAppendToAlbum
+      data.append('headBgImg', this.headBgImg);      
       // 更新用户信息
       app.api.user.updateUserInfo({
 
