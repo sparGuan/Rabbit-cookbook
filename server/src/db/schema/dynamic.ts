@@ -10,12 +10,12 @@ import autoIncrement = require('mongoose-auto-increment'); // id自增插件
  **/
 export interface IDynamic extends mongoose.Document {
   speech: string;
-  album: Array<string>;  
+  album: string [];
   userId: string;
   // 其他元信息
   meta: IMeta;
 }
-export interface IMeta {  
+export interface IMeta {
   totalPosts: number, // 帖子数
   totalCollection: number, // 收藏数
   totalShare: number, // 分享数
@@ -32,7 +32,7 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
   album: {
     type: Array,
     trim: true
-  }, 
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     trim: true
@@ -40,7 +40,7 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
   mobileType: {
     type: Array,
     trim: true
-  },  
+  },
   // 发布日期
   // 发布日期
   create_at: { type: Date, default: Date.now },
@@ -50,10 +50,10 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
   // 其他元信息
   meta: {
     totalPosts: {type: Number, default: 0}, // 帖子数
-    totalCollection: {type: Number,default: 0}, // 收藏数
-    totalShare: {type: Number,default: 0}, // 分享数
-    totalDays: {type: Number,default: 0}, // 在线天数
-    totalPraise: {type: Number,default: 0} // 赞数
+    totalCollection: {type: Number, default: 0}, // 收藏数
+    totalShare: {type: Number, default: 0}, // 分享数
+    totalDays: {type: Number, default: 0}, // 在线天数
+    totalPraise: {type: Number, default: 0} // 赞数
   }
 });
 // 转化成普通 JavaScript 对象

@@ -1,10 +1,11 @@
 import { statusCode } from '../../config/index';
-import Activity, { IActivity } from '../../db/schema/Activity';
+import Activity, { IActivity } from '../../db/schema/activity';
 import DirExistUtils from '../../utils/DirExistUtils';
+// import ProcessingImage from '../../utils/ProcessingImage';
 const formidable = require('formidable');
 class ActivityController {
-  private Activity: IActivity;
-  private ActivityList: IActivity[];
+  private activity: IActivity;
+  private activityList: IActivity[];
   public saveOrUpdate() {
     return async (ctx: any) => {
       // 让异步变同步
@@ -37,16 +38,16 @@ class ActivityController {
                 await Activity.findByIdAndUpdate(_id, body, {new: true})
                 reslove()
               } else {
-                this.Activity = await new Activity(body);
-                this.Activity = await this.Activity.save();
+                this.activity = await new Activity(body);
+                this.activity = await this.activity.save();
                 reslove()
               }
             });
         })
-        if (!global._.isEmpty(this.Activity)) {
+        if (!global._.isEmpty(this.activity)) {
           ctx.body = {
             message: statusCode.success,
-            Activity: this.Activity
+            activity: this.activity
           };
         } else {
           ctx.body = {
@@ -62,19 +63,19 @@ class ActivityController {
    *  查询所有用户下的活动列表
    *  @param userId
    *  @return void
-   *  @data ActivityList
+   *  @data activityList
    */
   public queryUserActivityInfo() {
     return async (ctx: any) => {
       // 让异步变同步
       const { body } = ctx.request;
       if (!global._.isEmpty(body.userId)) {
-        this.ActivityList = await Activity.find({ userId: body.userId });
+        this.activityList = await Activity.find({ userId: body.userId });
       }
-      if (this.ActivityList.length > 0) {
+      if (this.activityList.length > 0) {
         ctx.body = {
           message: statusCode.success,
-          ActivityList: this.ActivityList
+          activityList: this.activityList
         };
       } else {
         ctx.body = {
@@ -83,6 +84,5 @@ class ActivityController {
       }
     };
   }
-  
 }
 export default new ActivityController() as any;

@@ -3,7 +3,7 @@ import Dynamic, { IDynamic } from '../../db/schema/dynamic';
 import DirExistUtils from '../../utils/DirExistUtils';
 const formidable = require('formidable');
 class DynamicController {
-  private Dynamic: IDynamic;
+  private dynamic: IDynamic;
   private DynamicList: IDynamic[];
   public saveOrUpdate() {
     return async (ctx: any) => {
@@ -16,20 +16,12 @@ class DynamicController {
               if (err) {
                 throw err;
               }
-              body = JSON.parse(fields.userDynamic);
+              body = JSON.parse(fields.dynamic);
               if (Object.keys(files).length > 0) {
-                const bgDynamicArray: any = await DirExistUtils.uploadFileCommon(
+                const dynamicFilesArray: any = await DirExistUtils.uploadFileCommon(
                   files
                 );
-                if (bgDynamicArray.bgBanner) {
-                  body.bgBanner = bgDynamicArray.bgBanner;
-                }
-                if (bgDynamicArray.uploadBoxPic) {
-                  body.uploadBoxPic = bgDynamicArray.uploadBoxPic;
-                }
-                if (bgDynamicArray.ruleBg) {
-                  body.ruleBg = bgDynamicArray.ruleBg;
-                }
+                body.album = dynamicFilesArray
               }
               const _id: string = body._id;
               if (!global._.isEmpty(_id)) {
@@ -37,16 +29,16 @@ class DynamicController {
                 await Dynamic.findByIdAndUpdate(_id, body, {new: true})
                 reslove()
               } else {
-                this.Dynamic = await new Dynamic(body);
-                this.Dynamic = await this.Dynamic.save();
+                this.dynamic = await new Dynamic(body);
+                this.dynamic = await this.dynamic.save();
                 reslove()
               }
             });
         })
-        if (!global._.isEmpty(this.Dynamic)) {
+        if (!global._.isEmpty(this.dynamic)) {
           ctx.body = {
             message: statusCode.success,
-            Dynamic: this.Dynamic
+            Dynamic: this.dynamic
           };
         } else {
           ctx.body = {
@@ -83,6 +75,5 @@ class DynamicController {
   //     }
   //   };
   // }
-  
 }
 export default new DynamicController() as any;
