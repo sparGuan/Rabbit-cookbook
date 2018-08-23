@@ -109,7 +109,7 @@
 
     "array-type": [true, "array"],
 
-    "class-name": true,
+    "class-name": false,
 
     "comment-format": [true, "check-space"],
 

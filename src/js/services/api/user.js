@@ -29,7 +29,7 @@ define(() => {
 			app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/useMobileLogin'
+						url: '/api/login/useMobileLogin'
 					},
 					ajaxOptions
 				)

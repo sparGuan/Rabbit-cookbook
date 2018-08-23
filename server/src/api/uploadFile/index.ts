@@ -2,7 +2,7 @@ import uploadFileController from './uploadFile.controller'
 const koaBody = require('koa-body')({
   multipart: true // 支持文件上传
 })
-export default (Router: any) => {
+export const Routing = (Router: any) => {
   for (const reqMethod of Object.getOwnPropertyNames(
     Object.getPrototypeOf(uploadFileController)
   )) {

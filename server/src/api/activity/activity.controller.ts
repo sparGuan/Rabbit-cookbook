@@ -2,12 +2,13 @@ import { statusCode } from '../../config/index';
 import Activity, { IActivity } from '../../db/schema/activity';
 import DirExistUtils from '../../utils/DirExistUtils';
 // import ProcessingImage from '../../utils/ProcessingImage';
-// import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
+import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 const formidable = require('formidable');
-class ActivityController { // extends BASE_OPEN_SOURCE_API
-  // constructor() {
-  //   super()
-  // }
+// 此处需要的是路由
+class ActivityController extends BASE_OPEN_SOURCE_API {
+  constructor() {
+    super()
+  }
   private activity: IActivity;
   private activityList: IActivity[];
   public saveOrUpdate() {
