@@ -6,11 +6,11 @@ import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 const formidable = require('formidable');
 // 此处需要的是路由
 class ActivityController extends BASE_OPEN_SOURCE_API {
+  private activity: IActivity;
+  private activityList: IActivity[];
   constructor() {
     super()
   }
-  private activity: IActivity;
-  private activityList: IActivity[];
   public saveOrUpdate() {
     return async (ctx: any) => {
       // 让异步变同步

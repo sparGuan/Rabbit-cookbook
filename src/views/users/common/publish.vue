@@ -139,16 +139,16 @@ export default {
       }      
     },
     submit() {
-      // mui(e.target).button('loading');
-      // const commitData = Object.assign({}, this.commitData);
-      // const data = new FormData();
-      // data.append('dynamic', JSON.stringify(commitData));
-      // this.loopAppendToAlbum(data) //循环放进formdata                 
-      // // 更新用户信息
-      // // 更新一条数据
-      // app.api.user.save({
+      mui(e.target).button('loading');
+      const commitData = Object.assign({}, this.commitData);
+      const data = new FormData();
+      data.append('dynamic', JSON.stringify(commitData));
+      this.loopAppendToAlbum(data) //循环放进formdata                 
+      // 更新用户信息
+      // 更新一条数据
+      app.api.user.userDynamic({
 
-      // })
+      })
     }
   }
 };

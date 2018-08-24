@@ -1,9 +1,15 @@
 import { statusCode } from '../../config/index';
 import Dynamic, { IDynamic } from '../../db/schema/dynamic';
 import DirExistUtils from '../../utils/DirExistUtils';
+import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 const formidable = require('formidable');
-class DynamicController {
+// 实验目的：能够在子类的controller里面使用basecontroller的公共方法
+// this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
+class DynamicController extends BASE_OPEN_SOURCE_API {
   private dynamic: IDynamic;
+  constructor() {
+    super()
+  }
   // private DynamicList: IDynamic[];
   /**
    *  个人动态控制器

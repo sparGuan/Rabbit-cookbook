@@ -11,7 +11,7 @@ define(function() {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/activity/saveOrUpdate',
+						url: '/api/dynamic/saveOrUpdate',
 						cache: false,
 						processData: false,
 						contentType: false
