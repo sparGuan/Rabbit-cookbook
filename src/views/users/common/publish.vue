@@ -125,8 +125,8 @@ export default {
         };
       }
       this.album.push(e.target.files[0]);
-      
     },
+     
     canclDynamic() {
       mui(this.$refs["publish"]).popover("toggle");
     },
@@ -138,7 +138,7 @@ export default {
          })
       }      
     },
-    submit() {
+    submit(e) {
       mui(e.target).button('loading');
       const commitData = Object.assign({}, this.commitData);
       const data = new FormData();
@@ -146,8 +146,16 @@ export default {
       this.loopAppendToAlbum(data) //循环放进formdata                 
       // 更新用户信息
       // 更新一条数据
-      app.api.user.userDynamic({
-
+      app.api.userDynamic.saveDynamic({
+        data,
+        success: res => {
+          if (res.message === 'success') {
+            console.log(res)
+          }
+        },
+        complete: () => {
+            app.mui(e.target).button('reset')
+        }
       })
     }
   }

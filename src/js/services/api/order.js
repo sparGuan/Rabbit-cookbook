@@ -5,7 +5,7 @@
  */
 import app from '../../app'
 
-define(function() {
+define(() =>{
 	if (app.Config && app.Config.isDebug) {
 		//前端调试模式
 		return {

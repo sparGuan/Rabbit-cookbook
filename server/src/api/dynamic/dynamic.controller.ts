@@ -21,8 +21,9 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
    *      meta : {其他元信息}
    *    }
    */
-  public save() {
+  public saveDynamic() {
     return async (ctx: any) => {
+      console.log(111)
       // 让异步变同步
       try {
         const form = new formidable.IncomingForm();
@@ -65,24 +66,27 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
    *  @return void
    *  @data DynamicList
    */
-  // public queryUserDynamicInfo() {
-  //   return async (ctx: any) => {
-  //     // 让异步变同步
-  //     const { body } = ctx.request;
-  //     if (!global._.isEmpty(body.userId)) {
-  //       this.DynamicList = await Dynamic.find({ userId: body.userId });
-  //     }
-  //     if (this.DynamicList.length > 0) {
-  //       ctx.body = {
-  //         message: statusCode.success,
-  //         DynamicList: this.DynamicList
-  //       };
-  //     } else {
-  //       ctx.body = {
-  //         message: statusCode.error
-  //       };
-  //     }
-  //   };
-  // }
+  public queryUserAndFriendsDynamic() {
+    return async (ctx: any) => {
+      // 让异步变同步
+      const { body } = ctx.request;
+      // 用userId去查出所有的friendsIds && 查出自己的最新动态10条
+      // 判断是否有firendsIds,把所有的friendsIds去查对应自己的最新动态10条
+      // 最后进行合并 时间排序
+      // if (!global._.isEmpty(body.userId)) {
+      //   this.DynamicList = await Dynamic.find({ userId: body.userId });
+      // }
+      // if (this.DynamicList.length > 0) {
+      //   ctx.body = {
+      //     message: statusCode.success,
+      //     DynamicList: this.DynamicList
+      //   };
+      // } else {
+      //   ctx.body = {
+      //     message: statusCode.error
+      //   };
+      // }
+    };
+  }
 }
 export default new DynamicController() as any;

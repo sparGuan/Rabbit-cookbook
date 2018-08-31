@@ -8,12 +8,18 @@ import autoIncrement = require('mongoose-auto-increment'); // id自增插件
  * @param {Array<string>} album  相册
  * @param {String} userId  用户ID
  **/
-export interface IDynamic extends mongoose.Document {
+export declare interface IDynamic extends mongoose.Document {
   speech: string;
   album: string [];
   userId: string;
+  phoneType: string;
+  create_at: Date;
+  // 最后修改日期
+  update_at: Date;
   // 其他元信息
   meta: IMeta;
+  // 分享回来展示的动态
+  forwardingDynamics: IforwardingDynamics;
 }
 export interface IMeta {
   totalPosts: number, // 帖子数
@@ -21,6 +27,11 @@ export interface IMeta {
   totalShare: number, // 分享数
   totalDays: number, // 在线天数
   totalPraise: number // 赞数
+}
+export interface IforwardingDynamics {
+  title: string, // 分享的标题
+  content: string, // 分享的内容
+  album: string // 分享的相册
 }
 // 自增ID初始化
 autoIncrement.initialize(db.connection);
@@ -33,12 +44,21 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
     type: Array,
     trim: true
   },
+  forwardingDynamics: {
+    title: { type: String, trim: true },
+    content: { type: String, trim: true },
+    album: {type: Array, trim: true}
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     trim: true
   },
   mobileType: {
     type: Array,
+    trim: true
+  },
+  phoneType: {
+    type: String,
     trim: true
   },
   // 发布日期
@@ -66,4 +86,4 @@ dynamic_schema.plugin(autoIncrement.plugin, {
   startAt: 4,
   incrementBy: 1
 });
-export default mongoose.model<IDynamic>('dynamic', dynamic_schema);
+export default mongoose.model<IDynamic>('Dynamic', dynamic_schema);

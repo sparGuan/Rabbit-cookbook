@@ -18,6 +18,9 @@ export interface IActivity extends mongoose.Document {
   introduce: string;
   rule: string;
   userId: string;
+  create_at: Date;
+  // 最后修改日期
+  update_at: Date;
   // 其他元信息
   meta: IMeta;
 }

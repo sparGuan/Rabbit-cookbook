@@ -115,7 +115,17 @@ export default {
             ]
           }
         ]
-      }
+      },
+      listData: [
+        {
+          headImg: '',
+          nickName: '',
+          create_at: '',
+          speech: '',
+          album: [],
+          forwardingDynamics: []
+        }
+      ]
     };
   },
   mounted() {

@@ -4,14 +4,14 @@
  * 描述：订单API接口
  */
 import app from '../../app';
-define(function() {
+define(() =>{
 	return {
 		//上传更新活动业务
-		save: ajaxOptions => {
+		saveDynamic: ajaxOptions => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/dynamic/saveOrUpdate',
+						url: '/api/dynamic/saveDynamic',
 						cache: false,
 						processData: false,
 						contentType: false
