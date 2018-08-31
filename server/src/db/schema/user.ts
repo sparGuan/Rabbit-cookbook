@@ -1,5 +1,4 @@
 import mongoose = require('mongoose')
-
 /**
  * 用户模型
  * @param {String} name 昵称
@@ -9,7 +8,7 @@ import mongoose = require('mongoose')
  * @param {Date} expiredTime  * expiredTime--失效时间
  * */
 export interface IUser extends mongoose.Document {
-  friendIds: string[]
+  friends: object[]
   tenancyName: string
   nickName: string
   openid: string
@@ -25,9 +24,9 @@ export interface IUser extends mongoose.Document {
   descPerson: string
 }
 const user_schema: mongoose.Schema = new mongoose.Schema({
-  friendIds: {
-    type: Array
-  },
+  friends: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  ],
   tenancyName: {
     type: String,
     trim: true

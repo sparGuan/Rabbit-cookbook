@@ -1,5 +1,6 @@
 import { statusCode } from '../../config/index';
 import Dynamic, { IDynamic } from '../../db/schema/dynamic';
+import User, { IUser } from '../../db/schema/user';
 import DirExistUtils from '../../utils/DirExistUtils';
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 const formidable = require('formidable');
@@ -7,10 +8,11 @@ const formidable = require('formidable');
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
 class DynamicController extends BASE_OPEN_SOURCE_API {
   private dynamic: IDynamic;
+  private dynamicList: IDynamic[];
+  private user: IUser;
   constructor() {
     super()
   }
-  // private DynamicList: IDynamic[];
   /**
    *  个人动态控制器
    *  实现保存个人动态
@@ -70,22 +72,25 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
     return async (ctx: any) => {
       // 让异步变同步
       const { body } = ctx.request;
+      // 找出所有自己和自己的朋友的动态，最新时间排序
       // 用userId去查出所有的friendsIds && 查出自己的最新动态10条
       // 判断是否有firendsIds,把所有的friendsIds去查对应自己的最新动态10条
-      // 最后进行合并 时间排序
-      // if (!global._.isEmpty(body.userId)) {
-      //   this.DynamicList = await Dynamic.find({ userId: body.userId });
-      // }
-      // if (this.DynamicList.length > 0) {
-      //   ctx.body = {
-      //     message: statusCode.success,
-      //     DynamicList: this.DynamicList
-      //   };
-      // } else {
-      //   ctx.body = {
-      //     message: statusCode.error
-      //   };
-      // }
+      // Model.find({id:{$in:[]},function(err,list){})
+      if (!global._.isEmpty(body.userId)) {
+        // 先查出自己的10条动态
+        // 查找当前用户判断是否存在好友
+        // 将所有的好友的Id在动态集合中使用查询$in查找出来
+        // this.DynamicList = await Dynamic.find({ userId: body.userId });
+        const _id = body.userId
+        this.user = await User.findById(_id) as IUser // 查询一条用户对象信息
+        const friends: IUser[] = this.user.get('friends') as IUser[]
+        const userIds: string[] = [...friends, this.user].map(v => v._id )
+        const dynamicList = await Dynamic.find({user: { $in: userIds }}).sort({update_at: 1}).limit(10).exec() as IDynamic[]
+        ctx.body = {
+          message: statusCode.success,
+          dynamicList: this.dynamicList
+        };
+      }
     };
   }
 }

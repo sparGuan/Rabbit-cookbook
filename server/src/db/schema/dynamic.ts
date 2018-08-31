@@ -2,17 +2,18 @@ import mongoose = require('mongoose');
 import { db } from '../connection';
 import mongoosePaginate = require('mongoose-paginate'); // 翻页插件
 import autoIncrement = require('mongoose-auto-increment'); // id自增插件
+
 /**
  * 动态发布模型
  * @param {String} speech 言论
  * @param {Array<string>} album  相册
- * @param {String} userId  用户ID
+ * @param {String} user  用户ID
  **/
 export declare interface IDynamic extends mongoose.Document {
   speech: string;
   album: string [];
-  userId: string;
-  phoneType: string;
+  user: object; // 每一个用户对应多条动态
+  mobileType: string;
   create_at: Date;
   // 最后修改日期
   update_at: Date;
@@ -49,15 +50,12 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
     content: { type: String, trim: true },
     album: {type: Array, trim: true}
   },
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    trim: true
+    trim: true,
+    ref: 'User'
   },
   mobileType: {
-    type: Array,
-    trim: true
-  },
-  phoneType: {
     type: String,
     trim: true
   },
@@ -75,7 +73,7 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
     totalDays: {type: Number, default: 0}, // 在线天数
     totalPraise: {type: Number, default: 0} // 赞数
   }
-});
+})
 // 转化成普通 JavaScript 对象
 dynamic_schema.set('toObject', { getters: true });
 // 翻页 + 自增ID插件配置
