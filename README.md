@@ -28,15 +28,22 @@ app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键
 > 8. 使用webpack2实现对模块打包、压缩、混淆，预处理，热加载。
 > 
 > 9. 自己实现了一套路由机制，但它只适用于app中使用h5的header。
+>10. 后端使用 
 
 **吐槽：** 我想吐槽一下webpack2的webpack.config.js中各个插件配置，当时配置了好几天，这个loader配置好了，另外一个又出问题了，而且网上关于webapck2 API太少了，都是靠摸索着前进，真的是好难配。那有人肯定问了为啥不用VUE官方提供的vue-cli创建项目，我想说兄弟呀那个vue-cli是针对webpack1的，我想用webpack2（不要问我为什么，我就是固执的想用），而且官方配置的JS太TM的不直接了，10个配置文件我想改一些配置得看半天。
 
 
 ## 安装
+- 下载[VS CODE IDE](https://code.visualstudio.com/)开发工具，VS CODE开发工具自带强大的git自动提交功能，安装vue提示功能vetur
+
 - 下载[HBuilder IDE](http://www.dcloud.io/index.html)开发工具，其实HBuilder是dcloud 把eclipse的改造成一个专门应用于app打包、多种语言支持：php、jsp、ruby、python、nodejs等web语言，less、coffee等编译型语言均支持的开发工具
 
 - 下载[node.js](https://nodejs.org/en/)，作为前端web的运行环境。我当前的node.js版本是6.9.2 npm版本是3.10.9
 
+- 下载[Mongodb 数据库](https://www.mongodb.com/)MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。
+MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。
+
+- 下载[nginx 图片资源服务器](http://nginx.org/)Nginx 是一个很强大的高性能Web和反向代理服务。该服务器用来加载图片资源灵活好用
 
 - app打包完全是基于manifest.json配置文件，它主要是用来配置app的基本信息（版本号、appid等）、图标(app的应用图标)、sdk配置、模块权限配置、页面引用关系、代码视图，具体参看dcloud提供的[文档](http://ask.dcloud.net.cn/docs/#//ask.dcloud.net.cn/article/94)。
 
@@ -47,14 +54,14 @@ app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键
 
 ```
 {
-	"name": "Fans",
+	"name": "business-culture",
 	"version": "1.0.0",
 	"description": "鲸众",
 	"main": "js/entrance.js",
-	"keywords": "鲸众",
-	"homepage": "",
+	"keywords": "SPAR",
+	"homepage": "homepackage",
 	"bugs": {
-		"url": "",
+		"url": "https://as15099883651@163.com",
 		"email": "493683987@qq.com"
 	},
 	"author": {
@@ -65,55 +72,65 @@ app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git@193.112.125.250:root/jingz.git"
+		"url": "https://github.com/yujinjin/fans.git"
 	},
 	"scripts": {
-		"R_DEV": "set NODE_RUN=1&&webpack-dev-server --progress --watch --inline --host=0.0.0.0  --port 8083",
-		"B_DEV":"set NODE_ENV=dev&set NODE_RUN=0&webpack --progress --hide-modules",
+		"R_DEV": "set NODE_RUN=1&&webpack-dev-server --progress --watch --inline --host=0.0.0.0  --port 8081",
+		"MR_DEV": "export NODE_RUN=1&&webpack-dev-server --progress --watch --inline --host=0.0.0.0  --port 8081",
+		"B_DEV": "set NODE_ENV=dev&&set NODE_RUN=0&&webpack --progress --hide-modules",
+		"MB_DEV": "export NODE_ENV=dev&&export NODE_RUN=0&&webpack --progress --hide-modules",
 		"lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
 	},
 	"dependencies": {
+		"echarts": "^4.1.0",
 		"vue": "^2.1.8",
+		"vue-baidu-map": "^0.21.10",
+		"vue-better-calendar": "^1.3.1",
+		"vue-directive-touch": "^1.0.9",
+		"vue-html5-editor": "^1.1.1",
+		"vue-layer-mobile": "^1.0.0",
+		"vue-loader": "10.0.0",
 		"vue-resource": "^1.0.3",
 		"vue-router": "^2.0.1",
-		"vue-html-loader": "1.2.3",
-    	"vue-loader": "10.0.0",
-    	"vue-style-loader": "^1.0.0",
-    	"vue-template-compiler": "^2.1.0"
+		"vue-style-loader": "^1.0.0",
+		"vue-template-compiler": "^2.1.0",
+		"vuex": "^2.0.0"
 	},
 	"devDependencies": {
-		"vuex": "^2.0.0",
+		"vue-html-loader": "1.2.3",
+		"babel-preset-es2017": "^6.24.1",
+		"es6-promise": "^4.2.4",
 		"autoprefixer": "^6.4.0",
-	    "babel-core": "^6.0.0",
-	    "babel-eslint": "^7.0.0",
-	    "babel-loader": "^6.0.0",
-	    "babel-plugin-transform-runtime": "^6.0.0",
-	    "babel-preset-es2015": "^6.0.0",
-	    "babel-preset-stage-2": "^6.0.0",
-	    "babel-register": "^6.0.0",
-	    "babel-polyfill": "^6.22.0",
+		"babel-core": "^6.0.0",
+		"babel-eslint": "^7.0.0",
+		"babel-loader": "^6.0.0",
+		"babel-plugin-transform-runtime": "^6.0.0",
+		"babel-polyfill": "^6.22.0",
+		"babel-preset-es2015": "^6.0.0",
+		"babel-preset-stage-2": "^6.0.0",
+		"babel-register": "^6.0.0",
 		"cross-env": "^1.0.6",
 		"css-loader": "^0.25.0",
-		"less": "^2.7.1",
-		"less-loader": "^2.2.3",
+		"extract-text-webpack-plugin": "^2.0.0-beta.4",
 		"file-loader": "^0.9.0",
 		"html-loader": "^0.4.4",
 		"html-webpack-plugin": "^2.24.1",
 		"jshint": "^2.9.4",
 		"jshint-loader": "^0.8.3",
+		"less": "^2.7.1",
+		"less-loader": "^2.2.3",
 		"style-loader": "^0.13.1",
 		"url-loader": "^0.5.7",
-		"extract-text-webpack-plugin": "^2.0.0-beta.4",
-		"webpack": "^2.1.0-beta.25",
-		"webpack-dev-server": "^2.1.0-beta.10",
+		"webpack": "^2.7.0",
+		"webpack-dev-server": "^2.11.2",
 		"webpack-require-http": "^0.4.0"
 	},
-	
 	"engines": {
 		"node": ">=5.0.0",
 		"npm": ">=3.3.6"
 	}
 }
+
 
 ```
 
@@ -155,7 +172,10 @@ webpack-dev-server             //开发环境下，设置代理服务器
 webpack-require-http           //webapck打包环境下的requrire加载http文件的插件
 ```
 
+服务器相关
+```
 
+```
 
 ## 项目目录说明
 
