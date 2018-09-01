@@ -12,26 +12,28 @@
               <p class="txt">{{descPerson}}</p>
             </div>
          </header>
-         <div class="mui-scroll-wrapper dynamic-list-content">
+         <div class="mui-scroll-wrapper dynamic-list-content" ref="dynamic-list">
            <ul class="mui-scroll dynamic-list-ul">
-              <li class="dynamic-list-item">
+              <li class="dynamic-list-item" v-for="(item,index) in listData" :key="index">
                 <!-- 头部 -->
                 <div class="mui-row">
                   <!-- 头像 -->
                   <div class="item-head">
-                    <img :src="headImg"/>
+                    <img :src="item.user && item.user.headImg"/>
                   </div>
                   <div class="item-txt">
                     <!-- 名称 -->
-                    <span class="nick">{{ nickName }}</span>
+                    <span class="nick">{{ item.user && item.user.nickName }}</span>
                     <!-- 时间 -->
-                    <span class="time">{{ new Date()}}</span>
+                    <span class="time">{{ item.create_at}}</span>
                   </div>
                 </div>
                 <!-- 身体 -->
-                <div class="matter-desc mui-row">大爱node啊</div>
-                <div class="matter-album"></div>
-                <div class="mui-row publishing">
+                <div class="matter-desc mui-row">{{ item.speech }}</div>
+                <!-- 有分享显示分享，没分享，显示相册-->
+                <!-- 来自发表的相册 -->
+                <!-- 来自分享的动态 -->
+                <div class="mui-row publishing" v-if="Object.keys(item.forwardingDynamics).length > 0 && item.forwardingDynamics.album.length > 0">
                   <div class="publishing-content">                    
                     <div class="publishing-l-img">
                       <img src="../../imgs/test/shuijiao.jpg"/>
@@ -42,7 +44,16 @@
                     </div>                    
                   </div>                  
                 </div>
-                <div class="phone-model"><p>来自Iphone6s 4G</p></div>
+
+                <div class="matter-album"   v-else>
+                  <ul class="matter-album-list mui-clearfix">
+                    <li class="matter-album-list-item" v-for="(element,index) in (item && item.album[0]) || []" :key="index">
+                      <img :src="element"/>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="phone-model" v-if="item.mobileType !== ''" ><p>{{ item.mobileType }}</p></div>
                 <!-- 底部功能 -->
                 <div class="mui-row">
                   <div class="tools-bar">
@@ -57,7 +68,7 @@
                 </div>
               </li>
            </ul>
-           <Publish></Publish>
+           <Publish @reLoadDynamics="queryUserAndFriendsDynamic"></Publish>
          </div>
     </div>
 </template>
@@ -123,7 +134,8 @@ export default {
           create_at: '',
           speech: '',
           album: [],
-          forwardingDynamics: []
+          mobileType: '',
+          forwardingDynamics: {}
         }
       ]
     };
@@ -131,19 +143,42 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // 基于准备好的dom，初始化echarts实例
-      let echarts = require("echarts");
-      let myChart = echarts.init(this.$refs["sixStart"]);
+      const echarts = require("echarts");
+      const myChart = echarts.init(this.$refs["sixStart"]);
       myChart.setOption(this.optionChar);
+      this.queryUserAndFriendsDynamic()
+      mui(this.$refs['dynamic-list']).scroll({
+        deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        indicators: false // 是否显示滚动条
+      });
     });
+  },
+  methods: {
+    queryUserAndFriendsDynamic() {
+      const data = {userId:app.globalService.getLoginUserInfo()._id}
+      app.api.userDynamic.queryUserAndFriendsDynamic({
+        data,
+        success: res => {
+          if (res.message === 'success') {
+            this.listData = res.dynamicList.map(item => {
+              item.user.headImg = app.getResourceUrl(item.user.headImg)
+              item.album[0] = Object.keys(item.album[0]).map( element => {
+                return app.getResourceUrl(item.album[0][element])
+              })
+              return item
+              })
+          }
+        },
+        complete: () => {
+        }
+      })
+    }
   }
 };
 </script>
 <style lang="less" scoped>
 @import url("../../css/button.less");
 [data-page="user-dynamic"] {
-  .head-image-panel {
-
-  }
   .drop.icon {
     padding-right: 0.6em;
   }
@@ -311,6 +346,19 @@ export default {
         color: #ded44f;
       }
     }
+  }
+  .matter-album-list-item {
+    width: calc(~ '(100% - 45px) / 4');
+    height: 65px;
+    float: left;
+    margin-right: 15px;
+    & > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .matter-album-list-item:nth-child(4n) {
+    margin-right: 0px;
   }
 }
 </style>

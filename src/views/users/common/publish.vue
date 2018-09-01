@@ -79,6 +79,7 @@
   text-align: center;
   line-height: 52px;
   color: #fff;
+  z-index: 1;
   box-shadow: 0 0 5px #007aff;
 }
 .dynamicAlbum {
@@ -107,9 +108,6 @@ export default {
       },
       album: []
     };
-  },
-  mounted() {
-    this.$nextTick(() => {});
   },
   methods: {
     publishDynamic() {
@@ -140,7 +138,7 @@ export default {
     },
     submit(e) {
       mui(e.target).button('loading');
-      const commitData = Object.assign({}, this.commitData);
+      const commitData = Object.assign({user:app.globalService.getLoginUserInfo()._id}, this.commitData);
       const data = new FormData();
       data.append('dynamic', JSON.stringify(commitData));
       this.loopAppendToAlbum(data) //循环放进formdata                 
@@ -150,7 +148,8 @@ export default {
         data,
         success: res => {
           if (res.message === 'success') {
-            console.log(res)
+            this.canclDynamic()
+            this.$emit('reLoadDynamics')
           }
         },
         complete: () => {

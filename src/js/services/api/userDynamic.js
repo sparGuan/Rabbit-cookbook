@@ -20,16 +20,16 @@ define(() =>{
 				)
 			);
 		},
-		//查询用户基本信息
-		// queryUserActivityInfo: ajaxOptions => {
-		// 	return app.ajax(
-		// 		window.app.mui.extend(
-		// 			{
-		// 				url: '/api/queryUserActivityInfo'
-		// 			},
-		// 			ajaxOptions
-		// 		)
-		// 	);
-		// }
+	//	查询当前用户以及所有朋友发表的最新动态数据
+		queryUserAndFriendsDynamic: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/dynamic/queryUserAndFriendsDynamic'
+					},
+					ajaxOptions
+				)
+			);
+		}
 	};
 });

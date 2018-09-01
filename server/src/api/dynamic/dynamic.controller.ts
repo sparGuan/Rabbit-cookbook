@@ -11,7 +11,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
   private dynamicList: IDynamic[];
   private user: IUser;
   constructor() {
-    super()
+    super();
   }
   /**
    *  个人动态控制器
@@ -25,7 +25,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
    */
   public saveDynamic() {
     return async (ctx: any) => {
-      console.log(111)
+      console.log(111);
       // 让异步变同步
       try {
         const form = new formidable.IncomingForm();
@@ -81,11 +81,17 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
         // 查找当前用户判断是否存在好友
         // 将所有的好友的Id在动态集合中使用查询$in查找出来
         // this.DynamicList = await Dynamic.find({ userId: body.userId });
-        const _id = body.userId
-        this.user = await User.findById(_id) as IUser // 查询一条用户对象信息
-        const friends: IUser[] = this.user.get('friends') as IUser[]
-        const userIds: string[] = [...friends, this.user].map(v => v._id )
-        const dynamicList = await Dynamic.find({user: { $in: userIds }}).sort({update_at: 1}).limit(10).exec() as IDynamic[]
+        const _id = body.userId;
+        console.log(_id);
+        this.user = (await User.findById(_id)) as IUser; // 查询一条用户对象信息
+        console.log(this.user);
+        const friends: IUser[] = this.user.get('friends') as IUser[];
+        const userIds: string[] = [...friends, this.user].map(v => v._id);
+        console.log(userIds);
+        this.dynamicList = (await Dynamic.find({ user: { $in: userIds } })        .populate({path: 'user', select: 'headImg nickName'})
+          .sort({ create_at: 1 })
+          .limit(10)
+          .exec()) as IDynamic[];
         ctx.body = {
           message: statusCode.success,
           dynamicList: this.dynamicList

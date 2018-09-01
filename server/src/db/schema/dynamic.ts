@@ -2,7 +2,7 @@ import mongoose = require('mongoose');
 import { db } from '../connection';
 import mongoosePaginate = require('mongoose-paginate'); // 翻页插件
 import autoIncrement = require('mongoose-auto-increment'); // id自增插件
-
+import { IUser } from './user'
 /**
  * 动态发布模型
  * @param {String} speech 言论
@@ -12,7 +12,7 @@ import autoIncrement = require('mongoose-auto-increment'); // id自增插件
 export declare interface IDynamic extends mongoose.Document {
   speech: string;
   album: string [];
-  user: object; // 每一个用户对应多条动态
+  user: IUser; // 每一个用户对应多条动态
   mobileType: string;
   create_at: Date;
   // 最后修改日期
@@ -52,7 +52,6 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    trim: true,
     ref: 'User'
   },
   mobileType: {

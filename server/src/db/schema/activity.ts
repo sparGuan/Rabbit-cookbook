@@ -17,7 +17,7 @@ export interface IActivity extends mongoose.Document {
   ruleBg: string;
   introduce: string;
   rule: string;
-  userId: string;
+  userId: object;
   create_at: Date;
   // 最后修改日期
   update_at: Date;
@@ -54,7 +54,8 @@ const activity_schema: mongoose.Schema = new mongoose.Schema({
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    trim: true
+    trim: true,
+    ref: 'User'
   },
   // 发布日期
   // 发布日期
