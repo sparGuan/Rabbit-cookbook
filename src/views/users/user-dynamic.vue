@@ -62,14 +62,14 @@
                     <a href="#" data-icon="✍" class="button green"></a>
                     <a href="#" data-icon="✿" title="Reddit" class="button green serif back xl glass icon"></a>
                   </div>
-                  <div class="leave-msg">
+                  <div class="leave-msg" @click="sendLeaveMsg">
                     <span class="comment">评论</span>
                     <i class="iconfont icon-tianjiabiaoqing"></i>
                   </div>
                 </div>
               </li>
            </ul>
-           <Publish @reLoadDynamics="queryUserAndFriendsDynamic"></Publish>
+           <Publish @reLoadDynamics="queryUserAndFriendsDynamic" v-model="showModal"></Publish>
          </div>
     </div>
 </template>
@@ -80,6 +80,7 @@ export default {
   props: ["headImg", "nickName", "descPerson"],
   data() {
     return {
+      showModal: false,
       optionChar: {
         title: {},
         tooltip: {
@@ -155,6 +156,9 @@ export default {
     });
   },
   methods: {
+    sendLeaveMsg() {      
+      this.showModal = true;
+    },
     queryUserAndFriendsDynamic() {
       const data = {userId:app.globalService.getLoginUserInfo()._id}
       app.api.userDynamic.queryUserAndFriendsDynamic({

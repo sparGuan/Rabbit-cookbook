@@ -4,13 +4,13 @@
     <div class="best-publish" @click="publishDynamic">
       <i class="iconfont icon-fabiao" style="font-size:24px;"></i>
     </div>
-    <div ref="publish" class="mui-popover mui-popover-action mui-popover-bottom">
+    <div ref="publish" class="mui-popover mui-popover-action mui-popover-bottom" >
         <ul class="mui-table-view">
           <li class="mui-table-view-cell" style="border-radius: 0;">
               <div class="mui-input-group">
                 <div class="mui-input-row" style="margin-bottom:5px;">
                   <textarea  class="formSet" style="border-bottom: 1px solid #eee;    padding: 5px;" rows="3" placeholder="说点什么吧..." v-model="commitData.speech"></textarea>
-                  <div class="dynamicAlbum">
+                  <div class="dynamicAlbum" v-if="!showModal">
                     <div style="text-align: left;margin-left: 5px;">
                       <i class="iconfont icon-shangchuan1" style="font-size: 50px;color: #999;display:inline-block;vertical-align: top;position: relative;" >
                           <input type="file" ubt="upDynamicAlbum" @change="uploadAlbum($event)" accept="image/gif,image/jpeg,image/jpg,image/png" class="upDynamicAlbum"> 
@@ -19,6 +19,7 @@
                       style="display: inline-block;"></coverflow>
                     </div>
                   </div>
+
                 </div>
                 <div style="padding: 5px;padding-top: 0;text-align: right;">
                   <button type="button" class="mui-btn" @click="canclDynamic">取消</button>
@@ -31,12 +32,12 @@
   </div>  
 </template>
 <style lang="less" scoped>
+.mui-backdrop.mui-backdrop-action {
+  display: none;
+}
 .mui-popover .mui-table-view {
   background-color: #eee;
   border-radius: 0;
-}
-.mui-backdrop.mui-backdrop-action {
-  display: none;
 }
 .mui-input-group {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
@@ -96,18 +97,33 @@
 </style>
 <script>
 import coverflow from "@/components/vue-coverflow";
+const emoji = require('emoji');
 export default {
   components: {
     coverflow
   },
   data() {
     return {
+      showModal:false,
       coverList: [],             
       commitData: {
         speech: ""
       },
       album: []
     };
+  },
+  props:['value'],
+  watch: {
+    value(now,old) {
+      this.showModal = now
+    },
+    showModal(now,old) {
+      if(now) {        
+        mui(this.$refs["publish"]).popover('show');        
+        mui('.mui-backdrop-action.mui-active')[0].classList.add("mui-hidden");
+      }      
+      this.$emit('input',now)
+    }
   },
   methods: {
     publishDynamic() {
@@ -126,6 +142,7 @@ export default {
     },
      
     canclDynamic() {
+      this.showModal = false;
       mui(this.$refs["publish"]).popover("toggle");
     },
     // 将文件循环放进formData
@@ -138,6 +155,7 @@ export default {
     },
     submit(e) {
       mui(e.target).button('loading');
+      this.commitData.speech = emoji.unifiedToHTML(this.commitData.speech)
       const commitData = Object.assign({user:app.globalService.getLoginUserInfo()._id}, this.commitData);
       const data = new FormData();
       data.append('dynamic', JSON.stringify(commitData));
