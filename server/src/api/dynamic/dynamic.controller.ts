@@ -89,7 +89,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
         const userIds: string[] = [...friends, this.user].map(v => v._id);
         console.log(userIds);
         this.dynamicList = (await Dynamic.find({ user: { $in: userIds } })        .populate({path: 'user', select: 'headImg nickName'})
-          .sort({ create_at: 1 })
+          .sort({ create_at: -1 })
           .limit(10)
           .exec()) as IDynamic[];
         ctx.body = {

@@ -49,6 +49,7 @@
                   <ul class="matter-album-list mui-clearfix">
                     <li class="matter-album-list-item" v-for="(element,index) in (item && item.album[0]) || []" :key="index">
                       <img :src="element"/>
+                      <div class="dumming"></div>
                     </li>
                   </ul>
                 </div>
@@ -348,16 +349,22 @@ export default {
     }
   }
   .matter-album-list-item {
-    width: calc(~ '(100% - 45px) / 4');
-    height: 65px;
+    width: calc(~ '(100% - 2px) / 3');
     float: left;
-    margin-right: 15px;
+    margin-right: 1px;
+    position: relative;
+    .dumming {
+      padding-top: 100%; 
+    }
     & > img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
     }
   }
-  .matter-album-list-item:nth-child(4n) {
+  .matter-album-list-item:nth-child(3n) {
     margin-right: 0px;
   }
 }
