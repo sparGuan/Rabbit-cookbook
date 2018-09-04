@@ -29,7 +29,7 @@
                   </div>
                 </div>
                 <!-- 身体 -->
-                <div class="matter-desc mui-row">{{ item.speech }}</div>
+                <div class="matter-desc mui-row" v-html="item.speech"></div>
                 <!-- 有分享显示分享，没分享，显示相册-->
                 <!-- 来自发表的相册 -->
                 <!-- 来自分享的动态 -->

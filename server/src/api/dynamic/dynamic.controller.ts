@@ -25,7 +25,6 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
    */
   public saveDynamic() {
     return async (ctx: any) => {
-      console.log(111);
       // 让异步变同步
       try {
         const form = new formidable.IncomingForm();
@@ -62,8 +61,18 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
       }
     };
   }
+  public saveDynamicComment() {
+    return async (ctx: any) => {
+      // 让异步变同步
+      try {
+        const { body } = ctx.request;
+      } catch (error) {
+        throw error;
+      }
+    };
+  }
   /**
-   *  查询所有用户下的活动列表
+   *  查询所有用户下的活动列表和所有的评论
    *  @param userId
    *  @return void
    *  @data DynamicList
@@ -82,12 +91,9 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
         // 将所有的好友的Id在动态集合中使用查询$in查找出来
         // this.DynamicList = await Dynamic.find({ userId: body.userId });
         const _id = body.userId;
-        console.log(_id);
         this.user = (await User.findById(_id)) as IUser; // 查询一条用户对象信息
-        console.log(this.user);
         const friends: IUser[] = this.user.get('friends') as IUser[];
         const userIds: string[] = [...friends, this.user].map(v => v._id);
-        console.log(userIds);
         this.dynamicList = (await Dynamic.find({ user: { $in: userIds } })        .populate({path: 'user', select: 'headImg nickName'})
           .sort({ create_at: -1 })
           .limit(10)

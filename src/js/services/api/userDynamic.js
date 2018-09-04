@@ -20,6 +20,17 @@ define(() =>{
 				)
 			);
 		},
+		// 保存该条动态下的评论
+		saveDynamicComment: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/dynamic/saveDynamicComment'
+					},
+					ajaxOptions
+				)
+			);
+		},
 	//	查询当前用户以及所有朋友发表的最新动态数据
 		queryUserAndFriendsDynamic: ajaxOptions => {
 			return app.ajax(

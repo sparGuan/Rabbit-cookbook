@@ -3,10 +3,12 @@ import { db } from '../connection';
 import mongoosePaginate = require('mongoose-paginate'); // 翻页插件
 import autoIncrement = require('mongoose-auto-increment'); // id自增插件
 import { IUser } from './user'
+import { IDynamicComment } from './dynamic_comment'
 /**
  * 动态发布模型
  * @param {String} speech 言论
  * @param {Array<string>} album  相册
+ * @param {Array<IDynamicComment>}  评论数组
  * @param {String} user  用户ID
  **/
 export declare interface IDynamic extends mongoose.Document {
@@ -21,6 +23,7 @@ export declare interface IDynamic extends mongoose.Document {
   meta: IMeta;
   // 分享回来展示的动态
   forwardingDynamics: IforwardingDynamics;
+  dynamicCommentList: IDynamicComment[];
 }
 export interface IMeta {
   totalPosts: number, // 帖子数
@@ -53,6 +56,10 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  },
+  dynamicCommentList: {
+    type: Array,
+    trim: true
   },
   mobileType: {
     type: String,

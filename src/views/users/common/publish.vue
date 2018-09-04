@@ -180,7 +180,18 @@ export default {
         });
       } else {
         // 如果是评论
-        // 追加数据
+        app.api.userDynamic.saveDynamicComment({
+          data,
+          success: res => {
+            if (res.message === 'success') {
+              this.canclDynamic();
+              this.$emit('reLoadDynamics');
+            }
+          },
+          complete: () => {
+            app.mui(e.target).button('reset');
+          }
+        });
       }
       // 更新用户信息
       // 更新一条数据
