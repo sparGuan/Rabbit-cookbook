@@ -1,4 +1,5 @@
 <template>
+
     <div class="wra-contnet mui-scroll-wrapper" ref="wra_contnet">
         <!-- 宝箱内部的是随机功能 -->
         <!-- 随机获得个人发布 -->
@@ -9,6 +10,7 @@
                   <i class="iconfont icon-icon-test"></i>
                   <!-- <span class="establish-text">创建</span> -->
                 </div>
+                
                 <div class="community">
                   <ul>
                     <li class="community-item" v-for="item in CommunityItem" :key="item.index" :style="'transform:translate3d('+item.index * -25+'px,0px,0px)'"></li>

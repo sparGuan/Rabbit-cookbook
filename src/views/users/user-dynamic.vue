@@ -1,4 +1,5 @@
 <template>
+
     <div  data-page="user-dynamic" class="user-dynamic" ref="user-dynamic">
          <header class="clearfix">
             <div ref="sixStart" class="sixStart"></div>

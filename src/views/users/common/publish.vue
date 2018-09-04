@@ -186,6 +186,7 @@ export default {
             if (res.message === 'success') {
               this.canclDynamic();
               this.$emit('reLoadDynamics');
+              
             }
           },
           complete: () => {

@@ -15,6 +15,7 @@
               </user-dynamic> 
           </div>
         </aside>
+        
         <!-- 主页面内容容器 -->
         <div class="mui-content mui-scroll-wrapper">
           <div class="mui-off-canvas-backdrop" @click="closeOffCanvas" v-show="isMaskShow"></div>
