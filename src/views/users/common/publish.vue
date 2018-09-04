@@ -96,84 +96,94 @@
 }
 </style>
 <script>
-import coverflow from "@/components/vue-coverflow";
+import coverflow from '@/components/vue-coverflow';
 const emoji = require('emoji');
+
 export default {
   components: {
     coverflow
   },
   data() {
     return {
-      showModal:false,
-      coverList: [],             
+      showModal: false,
+      coverList: [],
       commitData: {
-        speech: ""
+        speech: ''
       },
       album: []
     };
   },
-  props:['value'],
+  props: ['value'],
   watch: {
-    value(now,old) {
-      this.showModal = now
+    value(now, old) {
+      this.showModal = now;
     },
-    showModal(now,old) {
-      if(now) {        
-        mui(this.$refs["publish"]).popover('show');        
-        mui('.mui-backdrop-action.mui-active')[0].classList.add("mui-hidden");
-      }      
-      this.$emit('input',now)
+    showModal(now, old) {
+      if (now) {
+        mui(this.$refs['publish']).popover('show');
+        mui('.mui-backdrop-action.mui-active')[0].classList.add('mui-hidden');
+      }
+      this.$emit('input', now);
     }
   },
   methods: {
     publishDynamic() {
-      mui(this.$refs["publish"]).popover("toggle");
-      mui(".mui-backdrop-action.mui-active")[0].style.display = "none";
+      mui(this.$refs['publish']).popover('toggle');
+      mui('.mui-backdrop-action.mui-active')[0].style.display = 'none';
     },
     uploadAlbum(e) {
       if (e.target.files && e.target.files[0]) {
         let reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = evt => {
-          this.coverList.push({ cover: evt.target.result });      
+          this.coverList.push({ cover: evt.target.result });
         };
       }
       this.album.push(e.target.files[0]);
     },
-     
+
     canclDynamic() {
       this.showModal = false;
-      mui(this.$refs["publish"]).popover("toggle");
+      mui(this.$refs['publish']).popover('toggle');
     },
     // 将文件循环放进formData
     loopAppendToAlbum(formData) {
-      if(this.album.length > 0) {
-         this.album.forEach( (item,index) => {
-           formData.append('album'+index ,item)
-         })
-      }      
+      if (this.album.length > 0) {
+        this.album.forEach((item, index) => {
+          formData.append('album' + index, item);
+        });
+      }
     },
     submit(e) {
       mui(e.target).button('loading');
-      this.commitData.speech = emoji.unifiedToHTML(this.commitData.speech)
-      const commitData = Object.assign({user:app.globalService.getLoginUserInfo()._id}, this.commitData);
+      this.commitData.speech = emoji.unifiedToHTML(this.commitData.speech);
+      const commitData = Object.assign(
+        { user: app.globalService.getLoginUserInfo()._id },
+        this.commitData
+      );
       const data = new FormData();
       data.append('dynamic', JSON.stringify(commitData));
-      this.loopAppendToAlbum(data) //循环放进formdata                 
+      // 如果是发表
+      if (!this.showModal) {
+        this.loopAppendToAlbum(data); //循环放进formdata
+        app.api.userDynamic.saveDynamic({
+          data,
+          success: res => {
+            if (res.message === 'success') {
+              this.canclDynamic();
+              this.$emit('reLoadDynamics');
+            }
+          },
+          complete: () => {
+            app.mui(e.target).button('reset');
+          }
+        });
+      } else {
+        // 如果是评论
+        // 追加数据
+      }
       // 更新用户信息
       // 更新一条数据
-      app.api.userDynamic.saveDynamic({
-        data,
-        success: res => {
-          if (res.message === 'success') {
-            this.canclDynamic()
-            this.$emit('reLoadDynamics')
-          }
-        },
-        complete: () => {
-            app.mui(e.target).button('reset')
-        }
-      })
     }
   }
 };

@@ -29,7 +29,7 @@
                     <div class="adaim">{{userInfo.nickName}}</div>
                     <div class="desc-person">{{userInfo.descPerson}}</div>
                     <div>
-                        <div class="switch-btn dynamic" @click="editDynamic($event)"><i class="iconfont icon-xingzhuang" style="margin-right: 5px;"></i>动态</div>
+                        <div class="switch-btn dynamic" @click="editDynamic($event)"><i class="iconfont icon-discover" style="margin-right: 5px;"></i>动态</div>
                         <div class="switch-btn modification" @click="editModification($event)">
                           <i class="iconfont  icon-gerenxinxi1" style="margin-right: 5px;"></i>认证</div>
                     </div>                            
@@ -109,7 +109,6 @@ export default {
         vm.$route.params.user
       ) {
         const user = vm.$route.params.user;
-        console.log(user)
         vm.userInfo.headImg = user.headImg;
         vm.userInfo.headBgImg = user.headBgImg;
         vm.userInfo.nickName = user.nickName;

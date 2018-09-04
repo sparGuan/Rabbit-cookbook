@@ -28,19 +28,19 @@
 			    <div class="mui-col-xs-4 toolbar-icon" >
 	            <router-link :to="{name: 'home'}"  class="active toolbar-link" exact >
 	            	<i class="iconfont icon-ic_shouyemokuai_yingyefenxi"></i>
-	            	<span>小模块</span>
+	            	<!-- <span>小模块</span> -->
 	            </router-link>
 	        </div>
 	        <div class="mui-col-xs-4 toolbar-icon">
 	            <router-link :to="{name: 'myCustomerGathers'}" class="toolbar-link">
-	            	<i class="iconfont icon-ic_shouyemokuai_gukepingjia"></i>
-	            	<span>互动</span>
+	            	<i class="iconfont icon-footprint"></i>
+	            	<!-- <span>互动</span> -->
 	            </router-link>
 	        </div>
 	        <div class="mui-col-xs-4 toolbar-icon">
 	            <router-link :to="{name: 'userCenter'}" class="toolbar-link">
-	            	<i class="iconfont icon-ic_shouyemokuai_yuangongqingkuang"></i>
-	            	<span>我的</span>
+	            	<i class="iconfont icon-friendfill"></i>
+	            	<!-- <span>我的</span> -->
 	            </router-link>
 	        </div>
 		</footer>

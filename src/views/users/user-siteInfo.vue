@@ -9,7 +9,7 @@
 								<img class="preview-img" :src="showHeadImg"> 
 							</span>              
 						</div>
-            <div class="upload-user-bg"><i class="iconfont icon-shangchuan" style="font-size: 26px;color:#007aff;"></i></div>
+            <div class="upload-user-bg"><i class="iconfont icon-fenxiangwenjian-xuanzhong" style="font-size: 26px;color:#007aff;"></i></div>
 					</div>
           <input type="file" ubt="upBgImg" accept="image/gif,image/jpeg,image/jpg,image/png" class="img-file uploadBg" @change="takeAlbum($event,'headBgImg')"> 
 				</li>

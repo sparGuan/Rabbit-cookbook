@@ -48,8 +48,9 @@
                 <div class="matter-album"   v-else>
                   <ul class="matter-album-list mui-clearfix">
                     <li class="matter-album-list-item" v-for="(element,index) in (item && item.album[0]) || []" :key="index">
-                      <img :src="element"/>
-                      <div class="dumming"></div>
+                      <div class="dumming">
+                        <img :src="element"/>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -58,13 +59,16 @@
                 <!-- 底部功能 -->
                 <div class="mui-row">
                   <div class="tools-bar">
-                    <a href="#" data-icon="👍" class="button orange drop glass"></a>
-                    <a href="#" data-icon="✍" class="button green"></a>
-                    <a href="#" data-icon="✿" title="Reddit" class="button green serif back xl glass icon"></a>
+                    <a href="#" class="button  pink drop "><i class="iconfont icon-zan-"></i></a>
+                    <a href="#"  class="button green"><i class="iconfont icon-jiaoya"></i></a>
+                    <a href="#" title="Reddit" style="padding: 3px 11px;display: inline-block;vertical-align: top;" class="button blue serif back xl glass">
+                      <i class="iconfont icon-wode-fenxiang" style="font-size: 14px;"></i>
+                    </a>
                   </div>
                   <div class="leave-msg" @click="sendLeaveMsg">
                     <span class="comment">评论</span>
-                    <i class="iconfont icon-tianjiabiaoqing"></i>
+                    <svg class="icon" style="width: 2em; height: 2em;    position: absolute;right: -5px;padding-bottom: 3px;
+                    top: -1px;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="72010"><path d="M793.6 824.0128l-399.36-230.4c-52.9408-30.72-95.8464-112.64-95.8464-183.0912v-232.448C298.5984 107.52 341.504 75.0592 394.24 105.6256l399.36 230.4c52.9408 30.72 95.8464 112.64 95.8464 183.0912v232.2944c0.1536 70.7072-42.752 103.1168-95.8464 72.6016z" fill="#007aff" p-id="72011"></path><path d="M853.6064 830.3616l-164.2496 94.7712v-240.9472l164.2496-94.8224v240.9984zM328.3456 343.6544L164.1472 438.4768V197.5296l164.1984-94.8224v240.9472z" fill="#007aff" p-id="72012"></path><path d="M629.76 918.3744l-399.36-230.4c-52.9408-30.72-95.8464-112.64-95.8464-183.0912v-232.448c0-70.5536 42.9056-103.0144 95.8464-72.448l399.36 230.4c52.9408 30.72 95.8464 112.64 95.8464 183.0912v232.2944c-0.2048 70.7072-43.1104 103.168-95.8464 72.6016z" fill="#007aff" p-id="72013"></path><path d="M506.624 746.5984L221.6448 389.2736l-2.0992 380.16 287.0784-22.8352z" fill="#007aff" p-id="72014"></path><path d="M354.56 498.6368c0 34.4576-24.1664 48.4352-54.016 31.1808S246.4768 470.7328 246.4768 436.2752s24.1664-48.4352 54.016-31.1808 54.0672 59.0848 54.0672 93.5424zM498.6368 581.8368c0 34.4576-24.1664 48.4352-54.016 31.1808s-54.016-59.136-54.016-93.5424S414.72 471.04 444.6208 488.2944s54.016 59.0848 54.016 93.5424zM642.7648 665.0368c0 34.4576-24.1664 48.4352-54.016 31.1808s-54.016-59.136-54.016-93.5424 24.1664-48.4352 54.016-31.1808 54.016 59.0848 54.016 93.5424z" fill="#DCDDDD" p-id="72015"></path><path d="M625.6128 700.8256l-28.8768 16.64v-42.3424l28.8768-16.6912v42.3936zM552.2944 609.1776l-28.8768 16.6912v-42.3936l28.8768-16.64v42.3424zM481.4848 617.472l-28.8768 16.6912v-42.3936l28.8768-16.64v42.3424zM408.1664 525.8752l-28.8768 16.6912v-42.3936l28.8768-16.6912v42.3936zM336.4352 534.8864l-28.8768 16.6912v-42.3936l28.8768-16.64v42.3424zM263.1168 443.2896l-28.8768 16.64v-42.3424l28.8768-16.6912v42.3936z" fill="#DCDDDD" p-id="72016"></path><path d="M325.0688 515.7376c0 34.4576-24.1664 48.4352-54.016 31.1808S217.0368 487.7824 217.0368 453.376s24.1664-48.4352 54.016-31.1808S325.0688 481.28 325.0688 515.7376zM469.1456 599.04c0 34.4576-24.1664 48.4352-54.016 31.1808s-54.016-59.2384-54.016-93.6448 24.1664-48.4352 54.016-31.1808S469.1456 564.48 469.1456 599.04zM613.2736 682.1376c0 34.4576-24.1664 48.4352-54.016 31.1808S505.2416 654.1824 505.2416 619.52s24.1664-48.4352 54.016-31.1808 54.016 59.3408 54.016 93.7984z" fill="#F6F6F6" p-id="72017"></path></svg>
                   </div>
                 </div>
               </li>
@@ -74,52 +78,52 @@
     </div>
 </template>
 <script>
-import Publish from './common/publish'
+import Publish from './common/publish';
 export default {
-  components: {Publish},
-  props: ["headImg", "nickName", "descPerson"],
+  components: { Publish },
+  props: ['headImg', 'nickName', 'descPerson'],
   data() {
     return {
       showModal: false,
       optionChar: {
         title: {},
         tooltip: {
-          trigger: "axis"
+          trigger: 'axis'
         },
         calculable: true,
         polar: [
           {
-            name: { show: true, textStyle: { fontSize: 16, color: "#32cd32" } },
+            name: { show: true, textStyle: { fontSize: 16, color: '#32cd32' } },
             indicator: [
-              { name: "帖子", max: 100, color: "#fff" },
-              { name: "互赞", max: 100, color: "#fff" },
-              { name: "天数", max: 100, color: "#fff" },
-              { name: "分享", max: 100, color: "#fff" },
-              { name: "收藏", max: 100, color: "#fff" }
+              { name: '帖子', max: 100, color: '#fff' },
+              { name: '互赞', max: 100, color: '#fff' },
+              { name: '天数', max: 100, color: '#fff' },
+              { name: '分享', max: 100, color: '#fff' },
+              { name: '收藏', max: 100, color: '#fff' }
             ],
-            center: ["50%", "60%"],
+            center: ['50%', '60%'],
             radius: 60 //半径，可放大放小雷达图
           }
         ],
         series: [
           {
-            type: "radar", //图表类型 radar为雷达图
+            type: 'radar', //图表类型 radar为雷达图
             itemStyle: {
               normal: {
                 lineStyle: {
-                  color: "#87cefa",
+                  color: '#87cefa',
                   width: 1
                 },
                 areaStyle: {
-                  color: "#87cefa",
-                  type: "default"
+                  color: '#87cefa',
+                  type: 'default'
                 }
               }
             },
             symbolSize: 3,
             tooltip: {
-              trigger: "item",
-              triggerOn: "none"
+              trigger: 'item',
+              triggerOn: 'none'
             },
             data: [
               {
@@ -145,10 +149,10 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // 基于准备好的dom，初始化echarts实例
-      const echarts = require("echarts");
-      const myChart = echarts.init(this.$refs["sixStart"]);
+      const echarts = require('echarts');
+      const myChart = echarts.init(this.$refs['sixStart']);
       myChart.setOption(this.optionChar);
-      this.queryUserAndFriendsDynamic()
+      this.queryUserAndFriendsDynamic();
       mui(this.$refs['dynamic-list']).scroll({
         deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
         indicators: false // 是否显示滚动条
@@ -156,34 +160,33 @@ export default {
     });
   },
   methods: {
-    sendLeaveMsg() {      
+    sendLeaveMsg() {
       this.showModal = true;
     },
     queryUserAndFriendsDynamic() {
-      const data = {userId:app.globalService.getLoginUserInfo()._id}
+      const data = { userId: app.globalService.getLoginUserInfo()._id };
       app.api.userDynamic.queryUserAndFriendsDynamic({
         data,
         success: res => {
           if (res.message === 'success') {
             this.listData = res.dynamicList.map(item => {
-              item.user.headImg = app.getResourceUrl(item.user.headImg)
-              item.album[0] = Object.keys(item.album[0]).map( element => {
-                return app.getResourceUrl(item.album[0][element])
-              })
-              return item
-              })
+              item.user.headImg = app.getResourceUrl(item.user.headImg);
+              item.album[0] = Object.keys(item.album[0]).map(element => {
+                return app.getResourceUrl(item.album[0][element]);
+              });
+              return item;
+            });
           }
         },
-        complete: () => {
-        }
-      })
+        complete: () => {}
+      });
     }
   }
 };
 </script>
 <style lang="less" scoped>
-@import url("../../css/button.less");
-[data-page="user-dynamic"] {
+@import url('../../css/button.less');
+[data-page='user-dynamic'] {
   .drop.icon {
     padding-right: 0.6em;
   }
@@ -191,9 +194,15 @@ export default {
     font-size: 20px;
   }
   .button {
-    padding: 3px;
-    margin: 0.5rem;
-    font: 14px/1em "Droid Sans", sans-serif;
+    padding: 0 10px;
+    margin: 0;
+    margin-right: 6px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font: 14px/1em 'Droid Sans', sans-serif;
+    & > i {
+      font-size: 22px;
+    }
   }
   .button:before {
     margin-right: 0;
@@ -208,7 +217,7 @@ export default {
     .descDetail {
       height: 90px;
       float: right;
-      width: calc(~"100% - 200px");
+      width: calc(~'100% - 200px');
       margin-top: 90px;
       background-color: rgba(0, 0, 0, 0.4);
       padding: 5px;
@@ -256,9 +265,9 @@ export default {
     }
   }
   .dynamic-list-content {
-    height: calc(~"100% - 180px");
+    height: calc(~'100% - 180px');
     margin-top: 180px;
-    background-color: rgba(245, 245, 245, 0.6);    
+    background-color: rgba(245, 245, 245, 0.6);
     .mui-row {
       padding-bottom: 10px;
     }
@@ -267,6 +276,7 @@ export default {
       margin-bottom: 10px;
       padding-left: 10px;
       background-color: #fff;
+      padding-right:10px;
       .item-head {
         width: 30px;
         height: 30px;
@@ -315,7 +325,7 @@ export default {
         }
         .publishing-r-txt {
           display: inline-block;
-          width: calc(~"100% - 85px");
+          width: calc(~'100% - 85px');
           height: 80px;
         }
       }
@@ -336,6 +346,7 @@ export default {
         padding: 3px 0;
         color: #666;
         margin-top: 5px;
+        position: relative;
         .icon-tianjiabiaoqing {
           font-size: 18px;
         }
@@ -353,19 +364,21 @@ export default {
     }
   }
   .matter-album-list-item {
-    width: calc(~ '(100% - 2px) / 3');
+    width: calc(~'(100% - 2px) / 3');
     float: left;
     margin-right: 1px;
     position: relative;
+    display: block;
     .dumming {
-      padding-top: 100%; 
-    }
-    & > img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      padding-top: 100%;
+      position: relative;
+      & > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .matter-album-list-item:nth-child(3n) {
