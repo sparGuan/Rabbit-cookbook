@@ -113,7 +113,7 @@ export default {
       album: []
     };
   },
-  props: ['value'],
+  props: ['value','dynamicId'],
   watch: {
     value(now, old) {
       this.showModal = now;
@@ -141,7 +141,6 @@ export default {
       }
       this.album.push(e.target.files[0]);
     },
-
     canclDynamic() {
       this.showModal = false;
       mui(this.$refs['publish']).popover('toggle');
@@ -157,14 +156,14 @@ export default {
     submit(e) {
       mui(e.target).button('loading');
       this.commitData.speech = emoji.unifiedToHTML(this.commitData.speech);
-      const commitData = Object.assign(
-        { user: app.globalService.getLoginUserInfo()._id },
-        this.commitData
-      );
-      const data = new FormData();
-      data.append('dynamic', JSON.stringify(commitData));
       // 如果是发表
       if (!this.showModal) {
+        const commitData = Object.assign(
+        { user: app.globalService.getLoginUserInfo()._id },
+        this.commitData
+        );
+        const data = new FormData();
+        data.append('dynamic', JSON.stringify(commitData));
         this.loopAppendToAlbum(data); //循环放进formdata
         app.api.userDynamic.saveDynamic({
           data,
@@ -180,6 +179,8 @@ export default {
         });
       } else {
         // 如果是评论
+        // 评论要上传的数据有用户ID和动态ID
+        const data = Object.assign({dynamicId:this.dynamicId},this.commitData)
         app.api.userDynamic.saveDynamicComment({
           data,
           success: res => {
