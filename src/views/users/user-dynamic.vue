@@ -44,7 +44,6 @@
                     </div>                    
                   </div>                  
                 </div>
-
                 <div class="matter-album"   v-else>
                   <ul class="matter-album-list mui-clearfix">
                     <li class="matter-album-list-item" v-for="(element,index) in (item && item.album[0]) || []" :key="index">
@@ -54,18 +53,33 @@
                     </li>
                   </ul>
                 </div>
-
-                <div class="phone-model" v-if="item.mobileType !== ''" ><p>{{ item.mobileType }}</p></div>
+                <div class="phone-model" v-if="item.phoneBy !== ''" ><p>{{ item.phoneBy }}</p></div>
+                <!-- 评论 -->
+                <div class="comment-container" v-if="item.dynamicCommentList && item.dynamicCommentList.length > 0">
+                  <ul class="comment-list" v-for="(item,index) in item.dynamicCommentList" :key="index">
+                    <li class="comment-list-item">
+                      <div class="comment-list-item-wrapper">
+                        <!-- 箭头 -->
+                        <div class="arrow-to-top"></div>
+                        <span class="comment-name" v-text="item.user.nickName"></span>
+                        <p class="comment-content" v-text="item.speech"></p>
+                      </div>
+                    </li>
+                  </ul>                  
+                </div>
                 <!-- 底部功能 -->
                 <div class="mui-row">
                   <div class="tools-bar">
-                    <a href="#" class="button  pink drop "><i class="iconfont icon-zan-"></i></a>
+                    <a href="#" class="button  pink drop ">
+                      <svg class="icon" style="width: 18px;height: 22px;
+                        " viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="826"><path d="M679.5264 862.1056l-155.0848 89.4976v-227.4816l155.0848-89.4976z m0 0" fill="#F95450" p-id="827"></path><path d="M861.9008 386.1504L680.96 281.6l-90.8288 83.7632-90.5728-188.416-181.1456-104.6016L227.84 201.216 499.5584 757.76 680.96 862.208l271.36-242.688z m0 0" fill="#F95450" p-id="828"></path><path d="M162.0992 161.792l156.3136-89.4464 181.1456 104.6016L343.04 266.24z m0 0" fill="#FF9797" p-id="829"></path><path d="M705.5872 475.5456l-181.1456-104.6016-90.5728 83.8656L343.04 266.24 162.0992 161.792 71.68 290.6624l271.36 556.3904 181.1456 104.5504 271.7696-242.6368z m0 0" fill="#FF7171" p-id="830"></path><path d="M524.4416 370.944L680.96 281.6l181.1456 104.6016-156.5184 89.344z m0 0" fill="#FF9797" p-id="831"></path><path d="M952.32 619.52l-156.16 89.4976-271.7696 242.6368L680.96 862.208z m0 0" fill="#EA5050" p-id="832"></path><path d="M500.7872 543.744l-64.8704-37.4784-32.4096 30.0032-32.4608-67.4816-64.8704-37.4272-32.4096 46.08 97.28 199.2704 64.8704 37.4784 97.28-87.04z m0 0" fill="#FFFFFF" p-id="833"></path></svg>
+                    </a>
                     <a href="#"  class="button green"><i class="iconfont icon-jiaoya"></i></a>
                     <a href="#" title="Reddit" style="padding: 3px 11px;display: inline-block;vertical-align: top;" class="button blue serif back xl glass">
-                      <i class="iconfont icon-wode-fenxiang" style="font-size: 14px;"></i>
+                      <i class="iconfont icon-pengyouwang" style="font-size: 14px;"></i>
                     </a>
                   </div>
-                  <div class="leave-msg" @click="sendLeaveMsg({dynamicId:item._id,userId:item.user.id})">
+                  <div class="leave-msg" @click="sendLeaveMsg(item._id)">
                     <span class="comment">评论</span>
                     <svg class="icon" style="width: 2em; height: 2em;    position: absolute;right: -5px;padding-bottom: 3px;
                     top: -1px;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="72010"><path d="M793.6 824.0128l-399.36-230.4c-52.9408-30.72-95.8464-112.64-95.8464-183.0912v-232.448C298.5984 107.52 341.504 75.0592 394.24 105.6256l399.36 230.4c52.9408 30.72 95.8464 112.64 95.8464 183.0912v232.2944c0.1536 70.7072-42.752 103.1168-95.8464 72.6016z" fill="#007aff" p-id="72011"></path><path d="M853.6064 830.3616l-164.2496 94.7712v-240.9472l164.2496-94.8224v240.9984zM328.3456 343.6544L164.1472 438.4768V197.5296l164.1984-94.8224v240.9472z" fill="#007aff" p-id="72012"></path><path d="M629.76 918.3744l-399.36-230.4c-52.9408-30.72-95.8464-112.64-95.8464-183.0912v-232.448c0-70.5536 42.9056-103.0144 95.8464-72.448l399.36 230.4c52.9408 30.72 95.8464 112.64 95.8464 183.0912v232.2944c-0.2048 70.7072-43.1104 103.168-95.8464 72.6016z" fill="#007aff" p-id="72013"></path><path d="M506.624 746.5984L221.6448 389.2736l-2.0992 380.16 287.0784-22.8352z" fill="#007aff" p-id="72014"></path><path d="M354.56 498.6368c0 34.4576-24.1664 48.4352-54.016 31.1808S246.4768 470.7328 246.4768 436.2752s24.1664-48.4352 54.016-31.1808 54.0672 59.0848 54.0672 93.5424zM498.6368 581.8368c0 34.4576-24.1664 48.4352-54.016 31.1808s-54.016-59.136-54.016-93.5424S414.72 471.04 444.6208 488.2944s54.016 59.0848 54.016 93.5424zM642.7648 665.0368c0 34.4576-24.1664 48.4352-54.016 31.1808s-54.016-59.136-54.016-93.5424 24.1664-48.4352 54.016-31.1808 54.016 59.0848 54.016 93.5424z" fill="#DCDDDD" p-id="72015"></path><path d="M625.6128 700.8256l-28.8768 16.64v-42.3424l28.8768-16.6912v42.3936zM552.2944 609.1776l-28.8768 16.6912v-42.3936l28.8768-16.64v42.3424zM481.4848 617.472l-28.8768 16.6912v-42.3936l28.8768-16.64v42.3424zM408.1664 525.8752l-28.8768 16.6912v-42.3936l28.8768-16.6912v42.3936zM336.4352 534.8864l-28.8768 16.6912v-42.3936l28.8768-16.64v42.3424zM263.1168 443.2896l-28.8768 16.64v-42.3424l28.8768-16.6912v42.3936z" fill="#DCDDDD" p-id="72016"></path><path d="M325.0688 515.7376c0 34.4576-24.1664 48.4352-54.016 31.1808S217.0368 487.7824 217.0368 453.376s24.1664-48.4352 54.016-31.1808S325.0688 481.28 325.0688 515.7376zM469.1456 599.04c0 34.4576-24.1664 48.4352-54.016 31.1808s-54.016-59.2384-54.016-93.6448 24.1664-48.4352 54.016-31.1808S469.1456 564.48 469.1456 599.04zM613.2736 682.1376c0 34.4576-24.1664 48.4352-54.016 31.1808S505.2416 654.1824 505.2416 619.52s24.1664-48.4352 54.016-31.1808 54.016 59.3408 54.016 93.7984z" fill="#F6F6F6" p-id="72017"></path></svg>
@@ -141,7 +155,7 @@ export default {
           create_at: '',
           speech: '',
           album: [],
-          mobileType: '',
+          phoneBy: '',
           forwardingDynamics: {}
         }
       ]
@@ -163,7 +177,7 @@ export default {
   methods: {
     sendLeaveMsg(dynamicId) {
       this.showModal = true;
-      this.dynamicId = dynamicId
+      this.dynamicId = dynamicId;
     },
     queryUserAndFriendsDynamic() {
       const data = { userId: app.globalService.getLoginUserInfo()._id };
@@ -202,6 +216,7 @@ export default {
     margin-top: 6px;
     margin-bottom: 6px;
     font: 14px/1em 'Droid Sans', sans-serif;
+    vertical-align: top;
     & > i {
       font-size: 22px;
     }
@@ -278,7 +293,7 @@ export default {
       margin-bottom: 10px;
       padding-left: 10px;
       background-color: #fff;
-      padding-right:10px;
+      padding-right: 10px;
       .item-head {
         width: 30px;
         height: 30px;
@@ -385,6 +400,21 @@ export default {
   }
   .matter-album-list-item:nth-child(3n) {
     margin-right: 0px;
+  }
+  .comment-list-item-wrapper {
+    width: 100%;
+    height: auto;
+    background-color: #f3f3f3;
+  }
+  .arrow-to-top {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid #f3f3f3;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
   }
 }
 </style>

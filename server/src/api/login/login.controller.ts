@@ -252,7 +252,6 @@ class LoginController {
         });
       });
       if (!global._.isEmpty(this.user)) {
-        console.log(this.user)
         ctx.body = {
           message: statusCode.success,
           user: this.user,

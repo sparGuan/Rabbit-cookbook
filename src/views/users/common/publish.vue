@@ -98,7 +98,6 @@
 <script>
 import coverflow from '@/components/vue-coverflow';
 const emoji = require('emoji');
-
 export default {
   components: {
     coverflow
@@ -179,8 +178,8 @@ export default {
         });
       } else {
         // 如果是评论
-        // 评论要上传的数据有用户ID和动态ID
-        const data = Object.assign({dynamicId:this.dynamicId},this.commitData)
+        // 评论要上传的数据有用户ID和动态ID        
+        const data = Object.assign({dynamicId:this.dynamicId,userId:app.globalService.getLoginUserInfo()._id},this.commitData)
         app.api.userDynamic.saveDynamicComment({
           data,
           success: res => {

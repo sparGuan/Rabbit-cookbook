@@ -15,7 +15,7 @@
                   </ul>
                 </div>
                 <div class="search-circle">
-                  <i class="iconfont icon-btnlist"></i>
+                  <i class="iconfont icon-wodehaoyou" style="font-size:26px;"></i>
                 </div>
             </div> 
             <!-- id是作为排序字段存在的 -->
@@ -176,9 +176,8 @@ export default {
         .search-circle {
           position: absolute;
           right: 5px;
-          top: 5px;
+          top: 3px;
           background: transparent;
-          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
           padding: 5px 0px 0px 0px;
           border-radius: 3px;
           .icon-sousuo {

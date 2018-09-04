@@ -3,7 +3,6 @@ import { db } from '../connection';
 import mongoosePaginate = require('mongoose-paginate'); // 翻页插件
 import autoIncrement = require('mongoose-auto-increment'); // id自增插件
 import { IUser } from './user'
-import { IDynamicComment } from './dynamic_comment'
 /**
  * 动态发布模型
  * @param {String} speech 言论
@@ -15,7 +14,7 @@ export declare interface IDynamic extends mongoose.Document {
   speech: string;
   album: string [];
   user: IUser; // 每一个用户对应多条动态
-  mobileType: string;
+  phoneBy: string;
   create_at: Date;
   // 最后修改日期
   update_at: Date;
@@ -36,6 +35,11 @@ export interface IforwardingDynamics {
   title: string, // 分享的标题
   content: string, // 分享的内容
   album: string // 分享的相册
+}
+export interface IDynamicComment{
+  user: IUser
+  speech: string
+  createTime: Date
 }
 // 自增ID初始化
 autoIncrement.initialize(db.connection);
@@ -61,7 +65,7 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
     type: Array,
     trim: true
   },
-  mobileType: {
+  phoneBy: {
     type: String,
     trim: true
   },
