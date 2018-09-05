@@ -23,7 +23,6 @@ export declare interface IDynamic extends mongoose.Document {
   // 分享回来展示的动态
   forwardingDynamics: IforwardingDynamics;
   dynamicCommentList: IDynamicComment[];
-  
 }
 export interface IMeta {
   totalPosts: number, // 帖子数
@@ -37,8 +36,8 @@ export interface IforwardingDynamics {
   content: string, // 分享的内容
   album: string // 分享的相册
 }
-export interface IDynamicComment{
-  user: IUser
+export interface IDynamicComment {
+  nickName: string
   speech: string
   createTime: Date
 }

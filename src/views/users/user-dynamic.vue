@@ -62,7 +62,7 @@
                       <div class="comment-list-item-wrapper">
                         <!-- 箭头 -->
                         <div class="arrow-to-top"></div>
-                        <span class="comment-name" v-text="item.user.nickName"></span>
+                        <span class="comment-name" v-text="`${item.nickName}：`"></span>
                         <p class="comment-content" v-text="item.speech"></p>
                       </div>
                     </li>
@@ -402,20 +402,33 @@ export default {
   .matter-album-list-item:nth-child(3n) {
     margin-right: 0px;
   }
-  .comment-list-item-wrapper {
-    width: 100%;
-    height: auto;
-    background-color: #f3f3f3;
+  .comment-list-item {
+      position: relative;
+      margin-top: 10px;
+      .comment-list-item-wrapper {
+        width: 100%;
+        height: auto;
+        background-color: #f3f3f3;
+        padding: 5px;
+        .comment-name {
+          display: inline-block;
+          color: #80c4ff;
+        }
+        .comment-content {
+          display: inline-block;
+          font-size: 12px;
+        }
+      }
   }
   .arrow-to-top {
     position: absolute;
-    top:0;
-    left:0;
+    top: -5px;
+    left: 10px;
     width: 0;
     height: 0;
-    border-bottom: 10px solid #f3f3f3;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    border-bottom: 5px solid #f3f3f3;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
   }
 }
 </style>

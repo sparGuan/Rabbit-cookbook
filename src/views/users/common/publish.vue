@@ -119,6 +119,7 @@ export default {
     },
     showModal(now, old) {
       if (now) {
+        this.commitData.speech = ''
         mui(this.$refs['publish']).popover('show');
         mui('.mui-backdrop-action.mui-active')[0].classList.add('mui-hidden');
       }
@@ -128,6 +129,8 @@ export default {
   methods: {
     publishDynamic() {
       mui(this.$refs['publish']).popover('toggle');
+      this.commitData.speech = ''
+      this.album = []
       mui('.mui-backdrop-action.mui-active')[0].style.display = 'none';
     },
     uploadAlbum(e) {
