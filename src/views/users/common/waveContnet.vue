@@ -10,14 +10,13 @@
                   <i class="iconfont icon-icon-test"></i>
                   <!-- <span class="establish-text">创建</span> -->
                 </div>
-                
                 <div class="community">
                   <ul>
                     <li class="community-item" v-for="item in CommunityItem" :key="item.index" :style="'transform:translate3d('+item.index * -25+'px,0px,0px)'"></li>
                   </ul>
                 </div>
-                <div class="search-circle">
-                  <i class="iconfont icon-wodehaoyou" style="font-size:26px;"></i>
+                <div class="search-circle" @click="showFriendsListMenus">
+                  <i class="iconfont icon-wodehaoyou" style="font-size:26px;color: #999;text-shadow: rgba(255, 255, 255, 0.8) 1px 2px 10px;"></i>
                 </div>
             </div> 
             <!-- id是作为排序字段存在的 -->
@@ -37,6 +36,7 @@ export default {
   props: ['value'],
   data() {
     return {
+      isShowFriendsListMenus: false,
       CommunityItem: testCommunity,
       rowData: testfabu,
       rowData: testfabu
@@ -70,6 +70,11 @@ export default {
     })
   },
   methods: {
+    showFriendsListMenus() {
+      this.isShowFriendsListMenus = true
+      console.log(this.isShowFriendsListMenus)
+      this.$emit('showFriendsListMenus',this.isShowFriendsListMenus)
+    },
     // 浏览活动
     visitActivity(activityInfo) {
         activityInfo.uploadBoxPic = app.getResourceUrl(activityInfo.uploadBoxPic)

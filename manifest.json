@@ -97,7 +97,7 @@
         	"description": "原生对象"
         },"OAuth":{
         		"description": "登录授权"
-        }
+        },"Share":{}
     },
     "plus": {
         "splashscreen": {
@@ -107,8 +107,8 @@
         "popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
         "runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
         "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-        "distribute": {"plugins":{"oauth":{"weixin":{"appid":"wx42b982ad407ac631","appsecret":"9a8dc76e938d116c0bea6d09f940bc24","description": "微信登录"},"qq": {
-                        "appid": "1106932568",
+        "distribute": {"plugins":{"share":{"qq":{"appid":"1107749441","description":"QQ分享"}},"oauth":{"weixin":{"appid":"wx42b982ad407ac631","appsecret":"9a8dc76e938d116c0bea6d09f940bc24","description": "微信登录"},"qq": {
+                        "appid": "1107749441",
                         "description": "QQ登录"
                     }}},
             "apple": {

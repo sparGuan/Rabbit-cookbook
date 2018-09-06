@@ -49,7 +49,7 @@
       "es2015.promise"
     ],
     "sourceMap": true,
-    "pretty": true,
+    "pretty": true
     // "esModuleInterop": true
   }
 }

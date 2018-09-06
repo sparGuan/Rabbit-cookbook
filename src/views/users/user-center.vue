@@ -55,7 +55,7 @@
                           <i class="ico-tool iconfont" :class="icon"></i>
                         </li>           
                       </ul>
-                     </div><user-waveContnet></user-waveContnet>
+                     </div><user-waveContnet @showFriendsListMenus="showFriendsListMenus" ></user-waveContnet>
                 </div>     			
               </div>
           </div>
@@ -85,19 +85,23 @@
         </ul>
 			</div>
     </div>
+    <usesr-friendsListMenu v-model="isShowMenuModal">
+    </usesr-friendsListMenu>
 	</div>
 </template>
 <script>
 import userDynamic from './user-dynamic';
 import userAuthentication from './user-authentication';
 import waveContnet from './common/waveContnet';
+import friendsListMenu from './common/friendsListMenu';
 import takeH5Photos from '../../js/utils/takeH5Photos';
 export default {
   name: 'userCenter',
   components: {
     'user-dynamic': userDynamic,
     'user-authentication': userAuthentication,
-    'user-waveContnet': waveContnet
+    'user-waveContnet': waveContnet,
+    'usesr-friendsListMenu':friendsListMenu
   },
   beforeRouteEnter(to, from, next) {
     // 在渲染该组件的对应路由被 confirm 前调用
@@ -138,6 +142,7 @@ export default {
       // 先去完成用户登录后直接可以看见部分资料的代码
       usertools: Array.from(require('@/js/data/usertools.json')),
       money: 0,
+      isShowMenuModal: false,
       isMaskShow: false,
       isStartAuthentication: false,
       toolIndex: 0,
@@ -152,6 +157,10 @@ export default {
     });
   },
   methods: {
+    showFriendsListMenus(isShow) {
+      this.isShowMenuModal = isShow
+      console.log(this.isShowMenuModal)
+    },
     closepopver() {
       mui(this.$refs['sheet_upload']).popover('hide');
     },
