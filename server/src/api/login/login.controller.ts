@@ -228,14 +228,22 @@ class LoginController {
   // 更新登录日志信息
   /**
    * @param {string} userId 用户Id
+   * @param {object} currentPosition 当前用户位置
    */
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
-      const { userId } = ctx.request.body;
+      const { userId, currentPosition } = ctx.request.body;
       if (!global._.isEmpty(userId)) {
         console.log(111)
-        // this.userInfo = 
-        // this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {new: true})) as IUser;
+        const expiredTime: number = Date.parse(
+          getDateAfter('', statusCode.expiredTime, '/')
+        );
+        this.userInfo = {
+          updateTime: new Date(), // 更新时间
+          currentPosition, // 更新当前位置
+          expiredTime // 更新报废时长
+        }
+        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {new: true})) as IUser;
       }
     };
   }

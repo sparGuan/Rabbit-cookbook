@@ -19,10 +19,15 @@ export interface IUser extends mongoose.Document {
   Mobile: boolean
   createTime: Date
   updateTime: Date // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
+  currentPosition: ICurrentPosition, // 当前位置信息
   loginTime: Date
   logoutTime: Date
   expiredTime: number // 报废时长
   descPerson: string // 个人描述
+}
+interface ICurrentPosition {
+  longitude: string,
+  latitude: string
 }
 const user_schema: mongoose.Schema = new mongoose.Schema({
   friends: [
@@ -62,6 +67,10 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
   descPerson: {
     type: String,
     trim: true
+  },
+  currentPosition: {
+    longitude: { type: String, trim: true },
+    latitude: { type: String, trim: true }
   },
   createTime: { type: Date, default: Date.now },
   loginTime: { type: Date, default: Date.now },
