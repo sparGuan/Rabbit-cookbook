@@ -9,6 +9,7 @@ export default {
 	//判断当前用户信息是否登录
 	isLogin() {
 		if (this.getLoginUserInfo().token) {
+			// 在此处更新登录信息：token，时间，位置信息
 			return true
 		}
 		return false

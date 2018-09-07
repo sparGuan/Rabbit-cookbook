@@ -8,7 +8,7 @@ import mongoose = require('mongoose')
  * @param {Date} expiredTime  * expiredTime--失效时间
  * */
 export interface IUser extends mongoose.Document {
-  friends: object[]
+  friends: IUser[]
   tenancyName: string
   nickName: string
   openid: string
@@ -18,10 +18,11 @@ export interface IUser extends mongoose.Document {
   sex: number
   Mobile: boolean
   createTime: Date
+  updateTime: Date // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
   loginTime: Date
   logoutTime: Date
-  expiredTime: number
-  descPerson: string
+  expiredTime: number // 报废时长
+  descPerson: string // 个人描述
 }
 const user_schema: mongoose.Schema = new mongoose.Schema({
   friends: [
@@ -65,6 +66,7 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
   createTime: { type: Date, default: Date.now },
   loginTime: { type: Date, default: Date.now },
   logoutTime: { type: Date, default: '' },
+  updateTime: {type: Date, default: Date.now},
   expiredTime: Number
 })
 // 转化成普通 JavaScript 对象

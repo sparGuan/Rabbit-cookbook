@@ -225,6 +225,20 @@ class LoginController {
       }
     };
   }
+  // 更新登录日志信息
+  /**
+   * @param {string} userId 用户Id
+   */
+  public updateLoginInfo() {
+    return async (ctx: any, next: any) => {
+      const { userId } = ctx.request.body;
+      if (!global._.isEmpty(userId)) {
+        console.log(111)
+        // this.userInfo = 
+        // this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {new: true})) as IUser;
+      }
+    };
+  }
   public updateUserInfo() {
     return async (ctx: any, next: any) => {
       const form = new formidable.IncomingForm();

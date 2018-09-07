@@ -22,6 +22,9 @@ export default {
   watch: {
     showModal(old, now) {
       if (app.globalService.isLogin()) {
+        app.api.user.updateLoginInfo({
+
+			  })
         this.detals = '登出';
         this.icon = 'icon-shoujidenglu';
       }

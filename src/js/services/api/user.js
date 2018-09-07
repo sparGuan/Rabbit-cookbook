@@ -56,6 +56,7 @@ define(() => {
 				)
 			);
 		},
+		// 更新用户数据
 		updateUserInfo: ajaxOptions => {
 			return app.ajax(
 				window.app.mui.extend(
@@ -64,6 +65,17 @@ define(() => {
 						cache: false,
 						processData: false,
 						contentType: false
+					},
+					ajaxOptions
+				)
+			);
+		},
+		// 更新登录日志
+		updateLoginInfo: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/login/updateLoginInfo'
 					},
 					ajaxOptions
 				)

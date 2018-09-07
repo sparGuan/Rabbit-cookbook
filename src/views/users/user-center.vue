@@ -15,7 +15,6 @@
               </user-dynamic> 
           </div>
         </aside>
-        
         <!-- 主页面内容容器 -->
         <div class="mui-content mui-scroll-wrapper">
           <div class="mui-off-canvas-backdrop" @click="closeOffCanvas" v-show="isMaskShow"></div>
@@ -55,7 +54,9 @@
                           <i class="ico-tool iconfont" :class="icon"></i>
                         </li>           
                       </ul>
-                     </div><user-waveContnet @showFriendsListMenus="showFriendsListMenus" ></user-waveContnet>
+                     </div><user-waveContnet 
+                     :isShowMenuModal="isShowMenuModal"
+                     @showFriendsListMenus="showFriendsListMenus" ></user-waveContnet>
                 </div>     			
               </div>
           </div>
@@ -85,8 +86,8 @@
         </ul>
 			</div>
     </div>
-    <usesr-friendsListMenu v-model="isShowMenuModal">
-    </usesr-friendsListMenu>
+    <user-friendsListMenu v-model="isShowMenuModal">
+    </user-friendsListMenu>
 	</div>
 </template>
 <script>
@@ -101,7 +102,7 @@ export default {
     'user-dynamic': userDynamic,
     'user-authentication': userAuthentication,
     'user-waveContnet': waveContnet,
-    'usesr-friendsListMenu':friendsListMenu
+    'user-friendsListMenu':friendsListMenu
   },
   beforeRouteEnter(to, from, next) {
     // 在渲染该组件的对应路由被 confirm 前调用
@@ -159,7 +160,6 @@ export default {
   methods: {
     showFriendsListMenus(isShow) {
       this.isShowMenuModal = isShow
-      console.log(this.isShowMenuModal)
     },
     closepopver() {
       mui(this.$refs['sheet_upload']).popover('hide');
@@ -406,100 +406,6 @@ export default {
         }
       }
     }
-    // .wra-contnet {
-    //   width: calc(~'100% - 60px');
-    //   margin-right: 10px;
-    //   display: inline-block;
-    //   height: calc(~'100% - 10px');
-    //   border-radius: 5px;
-    //   background: linear-gradient(to bottom, #fff, rgba(0, 122, 255, 0.1)),
-    //     url(../../imgs/userCenter/bg.png) no-repeat center;
-    //   background-position: 0px 0px;
-    //   padding: 5px 10px;
-    //   background-size: calc(~'100% + 88px');
-    //   box-shadow: 0px 10px 1px #fff;
-    //   max-height: 100%;
-    //   left: auto;
-    //   .title-treasure {
-    //     padding: 10px 0 10px 10px;
-    //     position: relative;
-    //     & > i {
-    //       font-size: 26px;
-    //       color: #666;
-    //     }
-    //   }
-    //   .treasure-item {
-    //     position: relative;
-    //     height: 135px;
-    //     border-radius: 5px;
-    //     margin: 5px;
-    //     border-radius: 5px;
-    //     background-size: cover;
-    //     background-repeat: no-repeat;
-    //     background-position: center;
-    //     box-shadow: 1px 1px 5px rgba(10, 116, 236, 0.57);
-    //     &.community-column {
-    //       height: auto;
-    //       border-radius: 0;
-    //       border-radius: 5px;
-    //       border-bottom-left-radius: 0px;
-    //       border-top-right-radius: 0px;
-    //       padding: 0;
-    //     }
-    //     .treasure-border {
-    //       width: calc(~'50% - 20px');
-    //       height: 65px;
-    //       display: inline-block;
-    //       margin-top: 10px;
-    //     }
-    //     .fem {
-    //       font-size: 50px;
-    //       color: #666;
-    //       padding-right: 10px;
-    //       display: inline-block;
-    //     }
-    //     .establish {
-    //       display: inline-block;
-    //       .icon-icon-test {
-    //         font-size: 18px;
-    //         color: rgba(10, 116, 236, 0.57);
-    //         display: inline-block;
-    //       }
-    //       .establish-text {
-    //         font-size: 12px;
-    //         color: rgba(10, 116, 236, 0.57);
-    //         letter-spacing: 1px;
-    //       }
-    //     }
-    //     .community {
-    //       display: inline-block;
-    //       width: calc(~'100% - 115px');
-    //       height: 41px;
-    //       overflow: auto;
-    //       white-space: nowrap;
-    //       vertical-align: top;
-    //       .community-item {
-    //         width: 39px;
-    //         height: 39px;
-    //         background-color: blueviolet;
-    //         display: inline-block;
-    //         border-radius: 50%;
-    //       }
-    //     }
-    //     .search-circle {
-    //       position: absolute;
-    //       right: 5px;
-    //       top: 5px;
-    //       background: transparent;
-    //       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
-    //       padding: 5px 0px 0px 0px;
-    //       border-radius: 3px;
-    //       .icon-sousuo {
-    //         font-size: 18px;
-    //       }
-    //     }
-    //   }
-    // }
   }
   .prpo-bg {
     z-index: 2001;

@@ -16,7 +16,7 @@
                   </ul>
                 </div>
                 <div class="search-circle" @click="showFriendsListMenus">
-                  <i class="iconfont icon-wodehaoyou" style="font-size:26px;color: #999;text-shadow: rgba(255, 255, 255, 0.8) 1px 2px 10px;"></i>
+                  <i class="iconfont" style="font-size:26px;color: #999;text-shadow: rgba(255, 255, 255, 0.8) 1px 2px 10px;transition: all .1s ease;" :style="isActive?'color:#007aff':'color: #999'" :class="isActive?'icon-haoyou':'icon-wodehaoyou'"></i>
                 </div>
             </div> 
             <!-- id是作为排序字段存在的 -->
@@ -33,7 +33,7 @@ const testCommunity = Array.from(
 const testfabu = Array.from(require('@/js/data/testfabu.json'));
 export default {
   name: 'user-waveContnet',
-  props: ['value'],
+  props: ['value','isShowMenuModal'],
   data() {
     return {
       isShowFriendsListMenus: false,
@@ -41,6 +41,11 @@ export default {
       rowData: testfabu,
       rowData: testfabu
     };
+  },
+   computed: {
+    isActive: function () {
+      return this.isShowFriendsListMenus = this.isShowMenuModal
+    }
   },
   beforeRouteEnter(to, from, next) {
     // 在渲染该组件的对应路由被 confirm 前调用
@@ -72,7 +77,6 @@ export default {
   methods: {
     showFriendsListMenus() {
       this.isShowFriendsListMenus = true
-      console.log(this.isShowFriendsListMenus)
       this.$emit('showFriendsListMenus',this.isShowFriendsListMenus)
     },
     // 浏览活动
