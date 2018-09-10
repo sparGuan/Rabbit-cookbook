@@ -203,8 +203,12 @@ const site = {
 	},
 	//获取图片地址，如果地址带有 http://那么就认为是绝对地址，然后直接返回
 	getResourceUrl(url) {
-		const re = new RegExp('^(https://|http://|../)')
-		if (url && (url.match(re))) {
+		const re = new RegExp('^(https://|http://)')
+		if(url.indexOf('imgs') > -1) {			
+			return url
+		}
+		if (url && re.test(url)) {
+			console.log(url)
 			return url;
 		}
 		//全站统一配置

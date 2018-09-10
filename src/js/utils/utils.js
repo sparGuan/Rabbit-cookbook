@@ -201,4 +201,25 @@ export default {
 
 // 		return resultArr.join("&")
 // 	}
+,
+/** 
+	 * 获取当前坐标 => 参考以下demo
+	 * 
+		MapPoint(position) {
+			const Lon = position.coords.longitude;   //获取经度
+			const Lat = position.coords.latitude;  //获取纬度
+			const address = "当前地址：" + position.address.province + "," + position.address.city + "," + position.address.district + "," + position.address.street + "," + position.address.streetNum;
+			alert(Lon + "," + Lat);
+			alert(address);  
+	}
+	 * @param {Function} MapPoint 回调函数，返回position
+	 */
+getCurrentPosition(MapPoint) {
+	mui.plusReady(() => {
+		// 成功进入第一个回调，失败进入第二个回调
+    plus.geolocation.getCurrentPosition(MapPoint, (e) => {
+        mui.toast("error:" + e.message);
+    })
+})
+}
 }

@@ -21,10 +21,7 @@ export default {
   components: { Login },
   watch: {
     showModal(old, now) {
-      if (app.globalService.isLogin()) {
-        app.api.user.updateLoginInfo({
-
-			  })
+      if (app.globalService.isLogin()) {                
         this.detals = '登出';
         this.icon = 'icon-shoujidenglu';
       }
@@ -37,7 +34,36 @@ export default {
       showModal: false
     };
   },
+  mounted() {
+    alert(111)
+    this.updateLoginInfo()
+  },
   methods: {
+    updateLoginInfo() {
+      if (app.globalService.isLogin()) {
+        console.log(1111)
+          app.utils.getCurrentPosition( position => {
+            const longitude = position.coords.longitude;   //获取经度
+            const latitude = position.coords.latitude;
+            alert(app.api.user.updateLoginInfo)
+            alert(app.globalService.getLoginUserInfo()._id)
+            alert(longitude)
+            alert(latitude)
+              app.api.user.updateLoginInfo({
+                data: {
+                userId: app.globalService.getLoginUserInfo()._id,
+                currentPosition: {longitude,latitude}
+                },
+                success: res => {
+                if (res.message === 'success') {
+                  
+                }
+                }
+              }
+            )
+          })
+      }       
+    },
     openLog() {
       if (this.detals === '登录') {
         this.showModal = true;

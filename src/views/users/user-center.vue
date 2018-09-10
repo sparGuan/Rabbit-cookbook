@@ -38,10 +38,10 @@
                 <div class="waveWrapper">
                     <!--css3实现波纹-->
                     <div class="waveWrapperInner bgTop">
-                      <div class="wave waveTop" style="background-image: url('../../../src/imgs/userCenter/wave-top.png')"></div>
+                      <div class="wave waveTop" :style="'background-image: url('+require('../../../src/imgs/userCenter/wave-top.png')+')'"></div>
                     </div>
                     <div class="waveWrapperInner bgMiddle">
-                      <div class="wave waveMiddle" style="background-image: url('../../../src/imgs/userCenter/wave-mid.png')"></div>
+                      <div class="wave waveMiddle" :style="'background-image: url('+require('../../../src/imgs/userCenter/wave-mid.png')+')'"></div>
                     </div>
                     <!-- 左侧功能项 -->
                     <div class="tool-left">

@@ -233,17 +233,29 @@ class LoginController {
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
       const { userId, currentPosition } = ctx.request.body;
-      if (!global._.isEmpty(userId)) {
-        console.log(111)
-        const expiredTime: number = Date.parse(
+      if (!global._.isEmpty(userId)) {        
+        const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
+        console.log(userId)
         this.userInfo = {
           updateTime: new Date(), // 更新时间
           currentPosition, // 更新当前位置
-          expiredTime // 更新报废时长
+          expiredTime:expiredtime // 更新报废时长
         }
-        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {new: true})) as IUser;
+        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {new: true})) as IUser;                
+        ctx.body = {
+          message: statusCode.success,
+          user: this.user,
+          token: jwt.sign(
+            {
+              data: this.user,
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+            },
+            'secret'
+          )
+        };
       }
     };
   }

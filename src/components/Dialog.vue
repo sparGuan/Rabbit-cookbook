@@ -44,7 +44,7 @@ export default {
     },
     headBg: {
       type: String,
-      default: 'background-image:url(../../../src/imgs/fm/byme.png)'
+      default: 'background-image:url('+require('@/imgs/fm/byme.png')+')'
     },
     closeBack: {
       type:Function,
