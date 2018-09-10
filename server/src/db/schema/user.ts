@@ -15,8 +15,8 @@ export interface IUser extends mongoose.Document {
   passWord: string
   headImg: string
   headBgImg: string
-  sex: number
-  Mobile: boolean
+  sex: string
+  Mobile: string
   createTime: Date
   updateTime: Date // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
   currentPosition: ICurrentPosition, // 当前位置信息
@@ -58,7 +58,8 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
     trim: true
   },
   sex: {
-    type: Number
+    type: String,
+    trim: true
   },
   Mobile: {
     type: String,

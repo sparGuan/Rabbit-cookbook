@@ -187,32 +187,37 @@ export default {
                 let name = auth.userInfo.nickname || auth.userInfo.name
                 // 因为是微信登录所有没有账户，先帮他注册一个账户
                 // 如果有账户了就不注册了直接登录
-                app.api.user.useWxOrQQLogin({
-                  data: {
-                    tenancyName: this.tenancyName, // 是QQ还是微信--第三方服务名
-                    nickName: name, // 昵称
-                    openid: auth.userInfo.openid, // opid
-                    headImg: auth.userInfo.headimgurl // 头像图片
-                  },
-                  success: data => {
-                    if (data.message === 'success') {
-                      app.mui.toast('已登录')
-                      app.globalService.setUserInfo({
-                        token: data.token,
-                        headImg: data.headImg,
-                        nickName: data.nickName,
-                        openid: data.openid,
-                        tenancyName: data.tenancyName,
-                        expiredTime: data.expiredTime // 失效时间
-                      })
-                      this.showModal = false
+                app.utils.getCurrentPosition(position => {
+                  const longitude = position.coords.longitude; //获取经度
+                  const latitude = position.coords.latitude;
+                    app.api.user.useWxOrQQLogin({
+                    data: {
+                      tenancyName: this.tenancyName, // 是QQ还是微信--第三方服务名
+                      nickName: name, // 昵称
+                      openid: auth.userInfo.openid, // opid
+                      headImg: auth.userInfo.headimgurl, // 头像图片
+                      currentPosition: { longitude, latitude }
+                    },
+                    success: data => {
+                      if (data.message === 'success') {
+                        app.mui.toast('已登录')
+                        app.globalService.setUserInfo({
+                          token: data.token,
+                          headImg: data.headImg,
+                          nickName: data.nickName,
+                          openid: data.openid,
+                          tenancyName: data.tenancyName,
+                          expiredTime: data.expiredTime // 失效时间
+                        })
+                        this.showModal = false
+                      }
+                    },
+                    complete: () => {
+                      plus.nativeUI.toast(data.message)
+                      // app.mui(e.target).button('reset')
                     }
-                  },
-                  complete: () => {
-                    plus.nativeUI.toast(data.message)
-                    // app.mui(e.target).button('reset')
-                  }
-                })
+                  })
+                })                
               },
               e => {
                 plus.nativeUI.toast('获取用户信息失败：' + e.message)
@@ -266,9 +271,11 @@ export default {
             passWord: _this.passWord
           },
           success: data => {
-            let userInfo = Object.assign(data.user,{token:data.token})
-            app.globalService.setUserInfo(userInfo)
-            this.showModal = false
+            if (data.success === 'success') {
+              let userInfo = Object.assign(data.user,{token:data.token})
+              app.globalService.setUserInfo(userInfo)
+              this.showModal = false
+            }
           },
           complete: () => {
             app.mui(e.target).button('reset')

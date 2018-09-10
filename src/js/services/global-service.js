@@ -102,6 +102,8 @@ export default {
 		openid, // 三方登录id
 		tenancyName, // 第三方登录名称
 		token, // 将用户信息加以base64编码返回前台的认证
+		currentPosition,
+		updateTime,
 		Mobile, // 用户名或者邮箱
 		headImg,// 头像
 		expiredTime = -1 // 是否过期 -- 过期时间的意思是从数据库里面获取一个过期时间，如果有就获取，如果没有就生成一个，算是第一次登录
@@ -126,6 +128,8 @@ export default {
 				tenancyName,
 				token,
 				Mobile,
+				currentPosition,
+				updateTime,
 				expiredTime,
 				headImg: app.getResourceUrl(headImg),
 				version: app.Config.innerVersion // 版本号

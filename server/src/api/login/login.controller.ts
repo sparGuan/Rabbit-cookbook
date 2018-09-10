@@ -3,7 +3,6 @@ import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import { statusCode, qsms } from '../../config/index';
 import getDateAfter from '../../utils/getDateAfter';
-import { promises } from 'fs';
 import Qsms = require('qcloudsms_js');
 import DirExistUtils from '../../utils/DirExistUtils';
 import formidable = require('formidable');
@@ -40,9 +39,9 @@ class LoginController {
       const valid = global._.random(999999);
       const smsType = 0; // Enum{0: 普通短信, 1: 营销短信}
       const ssender = this.qsms.SmsSingleSender();
-      // await ssender.send(smsType, 86, body.Mobile,
-      // 	`您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`, "", "", ()=>{
-      // 	});
+      await ssender.send(smsType, 86, body.Mobile,
+      	`您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`, "", "", ()=>{
+      	});
       ctx.body = {
         message: valid
       };
@@ -56,6 +55,7 @@ class LoginController {
   public register() {
     return async (ctx: any, next: any) => {
       const { body } = ctx.request;
+      body.passWord = await bcrypt.hash(body.passWord, 5);
       this.user = new User(body);
       const UserModel = await this.user.save();
       await LoginController.resetExpiredTime(UserModel.get('_id'));
@@ -96,13 +96,18 @@ class LoginController {
       }
     };
   }
+  // 更新登录日志信息
+  /**
+   * @param {object} obj 所有用户信息
+   * 
+   */
   public useWxOrQQLogin() {
     return async (ctx: any, next: any) => {
-      const { body } = ctx.request;
-      let expiredTime
+      const { body } = ctx.request;  
+      let expiredTime          
       try {
         // 没有账号密码直接报400
-        // 微信 QQ登录的自动创建账号密码
+        // 微信 QQ登录的自动创建账号密码        
         if (!body.tenancyName || !body.openid) {
           // 400的报错是缺少参数
           ctx.status = 400;
@@ -110,17 +115,29 @@ class LoginController {
             error: `expected an object with userName, passWord but got: ${body}`
           };
           return;
-        }
-        body.passWord = await bcrypt.hash(body.passWord, 5);
-        let UserModel: any = await User.find({ openid: body.openid });
-        if (!UserModel.length) {
-          const newUser = new User(body);
-          UserModel = await newUser.save();
-          expiredTime = await LoginController.resetExpiredTime(UserModel.get('_id'));
-        }
+        }        
+        this.user = await User.findOne({ openid: body.openid }) as IUser;
+        if (global._.isEmpty(this.user)) {
+          body.passWord = await bcrypt.hash(body.openid, 5);
+          this.user = new User(body);
+          this.user  = await this.user.save();
+        } else {
+          expiredTime = Date.parse(
+            getDateAfter('', statusCode.expiredTime, '/')
+          );
+          this.user = await User.update(
+            { _id: this.user._id },
+            { $set: {
+              currentPosition: body.currentPosition,
+              updateTime: new Date(),
+              expiredTime
+            } },
+            { new: true }
+          );
+        }        
         ctx.body = {
           message: statusCode.success,
-          UserModel,
+          UserModel: this.user ,
           expiredTime // 失效时间
         };
       } catch (error) {
@@ -163,7 +180,7 @@ class LoginController {
         return;
       }
       // 匹配密码是否相等
-      // 使用中间件坐比较
+      // 使用中间件坐比较      
       if (await bcrypt.compare(body.passWord, this.user.passWord)) {
         ctx.status = 200;
         let expiredTime;
@@ -259,6 +276,13 @@ class LoginController {
       }
     };
   }
+  // 更新用户个人信息
+  /**
+   * @param {string} userId 用户Id
+   * @param {img} headImg 当前用户头像
+   * @param {img} headBgImg 当前用户背景图
+   * 
+   */
   public updateUserInfo() {
     return async (ctx: any, next: any) => {
       const form = new formidable.IncomingForm();
