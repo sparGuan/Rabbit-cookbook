@@ -27,7 +27,7 @@ class LoginController {
       const { body } = ctx.request;
       // 初始化接口
       // 先查询该手机号是否被注册
-      this.user = await User.findOne({ Mobile: body.Mobile }) as IUser;
+      this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
       // 如果是注册用户就要进入该判断
       if (!global._.isEmpty(this.user) && body.register === true) {
         // 如果存在
@@ -39,9 +39,14 @@ class LoginController {
       const valid = global._.random(999999);
       const smsType = 0; // Enum{0: 普通短信, 1: 营销短信}
       const ssender = this.qsms.SmsSingleSender();
-      await ssender.send(smsType, 86, body.Mobile,
-      	`您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`, "", "", ()=>{
-      	});
+      await ssender.send(
+        smsType,
+        86,
+        body.Mobile,
+        `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`,
+        '',
+        ''
+      );
       ctx.body = {
         message: valid
       };
@@ -99,15 +104,14 @@ class LoginController {
   // 更新登录日志信息
   /**
    * @param {object} obj 所有用户信息
-   * 
    */
   public useWxOrQQLogin() {
     return async (ctx: any, next: any) => {
-      const { body } = ctx.request;  
-      let expiredTime          
+      const { body } = ctx.request;
+      let expiredTime;
       try {
         // 没有账号密码直接报400
-        // 微信 QQ登录的自动创建账号密码        
+        // 微信 QQ登录的自动创建账号密码
         if (!body.tenancyName || !body.openid) {
           // 400的报错是缺少参数
           ctx.status = 400;
@@ -115,30 +119,39 @@ class LoginController {
             error: `expected an object with userName, passWord but got: ${body}`
           };
           return;
-        }        
-        this.user = await User.findOne({ openid: body.openid }) as IUser;
+        }
+        this.user = (await User.findOne({ openid: body.openid })) as IUser;
         if (global._.isEmpty(this.user)) {
           body.passWord = await bcrypt.hash(body.openid, 5);
           this.user = new User(body);
-          this.user  = await this.user.save();
+          this.user = await this.user.save();
         } else {
           expiredTime = Date.parse(
             getDateAfter('', statusCode.expiredTime, '/')
           );
           this.user = await User.update(
             { _id: this.user._id },
-            { $set: {
-              currentPosition: body.currentPosition,
-              updateTime: new Date(),
-              expiredTime
-            } },
+            {
+              $set: {
+                currentPosition: body.currentPosition,
+                updateTime: new Date(),
+                expiredTime
+              }
+            },
             { new: true }
           );
-        }        
+        }
         ctx.body = {
           message: statusCode.success,
-          UserModel: this.user ,
-          expiredTime // 失效时间
+          user: this.user,
+          token: jwt.sign(
+            {
+              data: this.user,
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+            },
+            'secret'
+          )
         };
       } catch (error) {
         ctx.throw(500);
@@ -169,8 +182,10 @@ class LoginController {
       const { body } = ctx.request;
       // 不用用户名登录就是手机登录
       if (!global._.isEmpty(body.Mobile)) {
-        this.user = await User.findOne({ Mobile: body.Mobile }) as IUser;
+        this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
       }
+      console.log(body.Mobile)
+      console.log(global._.isEmpty(this.user))
       // 如果找不到用户，就报401
       if (global._.isEmpty(this.user)) {
         ctx.status = 401;
@@ -180,13 +195,15 @@ class LoginController {
         return;
       }
       // 匹配密码是否相等
-      // 使用中间件坐比较      
+      // 使用中间件坐比较
       if (await bcrypt.compare(body.passWord, this.user.passWord)) {
         ctx.status = 200;
         let expiredTime;
-        await LoginController.resetExpiredTime(this.user.get('_id')).then(result => {
-          expiredTime = result;
-        }); // 设置过期时间
+        await LoginController.resetExpiredTime(this.user.get('_id')).then(
+          result => {
+            expiredTime = result;
+          }
+        ); // 设置过期时间
         ctx.body = {
           message: statusCode.success,
           user: this.user,
@@ -250,17 +267,19 @@ class LoginController {
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
       const { userId, currentPosition } = ctx.request.body;
-      if (!global._.isEmpty(userId)) {        
+      if (!global._.isEmpty(userId)) {
         const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
-        console.log(userId)
+        console.log(userId);
         this.userInfo = {
           updateTime: new Date(), // 更新时间
           currentPosition, // 更新当前位置
-          expiredTime:expiredtime // 更新报废时长
-        }
-        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {new: true})) as IUser;                
+          expiredTime: expiredtime // 更新报废时长
+        };
+        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {
+          new: true
+        })) as IUser;
         ctx.body = {
           message: statusCode.success,
           user: this.user,
@@ -281,7 +300,7 @@ class LoginController {
    * @param {string} userId 用户Id
    * @param {img} headImg 当前用户头像
    * @param {img} headBgImg 当前用户背景图
-   * 
+   *
    */
   public updateUserInfo() {
     return async (ctx: any, next: any) => {
@@ -304,7 +323,9 @@ class LoginController {
           const _id: string = this.userInfo.userId;
           if (!global._.isEmpty(_id)) {
             // 有ID就update
-            this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {new: true})) as IUser;
+            this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {
+              new: true
+            })) as IUser;
             reslove();
           }
         });
@@ -329,5 +350,35 @@ class LoginController {
       }
     };
   }
+  // 搜索手机号，获取该好友信息
+  /**
+   * @param {string} Mobile 用户手机号
+   */
+  public searchNewFriends() {
+    return async (ctx: any, next: any) => {
+      const { body } = ctx.request;
+      if (!global._.isEmpty(body.Mobile)) {
+        this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
+        if (!global._.isEmpty(this.user)) {
+          // 返回的数据只需要昵称，年龄，描述，头像
+         const user = {
+          _id: this.user._id,
+          nickName: this.user.nickName,
+          headImg: this.user.headImg,
+          sex: this.user.sex,
+          age: this.user.age
+         }
+          ctx.body = {
+            message: statusCode.success,
+            user
+          };
+        } else {
+          ctx.body = {
+            message: statusCode.noOne
+          };
+        }
+      }
+    }
+  }
 }
-export default new LoginController() as any;
+export default new LoginController();

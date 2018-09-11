@@ -61,8 +61,8 @@ mongoosePaginate.paginate.options = {
     console.error('ERROR:', e)
     return
   }
-  // 服务器部署需要写上服务器ip，不能localhost  
-  http.createServer(app.callback()).listen(port, webServerDoMain, () => {
+  // 服务器部署需要写上服务器ip，不能localhost
+  http.createServer(app.callback()).listen(port, () => {
     console.log(`${webServerDoMain} ${port} server listen`)
   })
 })()

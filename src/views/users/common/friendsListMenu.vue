@@ -4,13 +4,47 @@
       <div ref="menu-wrapper" class="menu-wrapper fade-out-up animated hidden">
         <div ref="menu" class="menu bounce-out-up animated">
           <ul class="mui-table-view mui-table-view-inverted">
-            <li class="mui-table-view-cell">
-              <a href="javascript:void(0)">
+            <li class="mui-table-view-cell mui-collapse">
+              <a href="javascript:void(0)" >
                 <svg class="icon" style="width: 2em;
                 height: 2em;
                 vertical-align: bottom;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="646"><path d="M569.37617493 690.67919787c0-12.4848096 1.23306773-24.73841813 3.4680032-36.68376 0.92480107-4.93226987-1.5413344-9.78747413-6.08827093-11.86827627-37.5314944-17.72534613-60.11204373-42.23256427-60.1120448-66.9709824 0-11.94534187 4.8552032-22.96588373 15.18214507-34.9112256 4.1616032-3.9304032 8.01493973-8.01493973 11.94534186-12.40774187C567.98897387 488.76438293 587.79512213 432.89100907 587.79512213 374.78269973c0-114.67528427-74.2152544-207.6948192-165.46225493-207.6948192-91.24700053 0-165.46225493 93.01953493-165.46225387 207.6948192 0 65.04431467 23.42828373 124.77102507 64.1195136 163.8438528v0.2312c8.47733973 8.24613973 18.57308053 21.34748267 18.57308054 37.45442774 0 28.05228693-31.2120224 56.0275072-81.76779414 72.82805333-0.2312 0.2312-0.4624 0.2312-0.6936 0.2312-7.09013867 1.84960107-13.56374293 3.6992032-23.19708373 6.62773867C128.78571947 689.9855968 63.2790048 749.7123072 55.26406507 817.45395733c-2.23493547 18.6501472 12.87014293 34.98829227 31.5973568 34.98829227h534.14945813c9.8645408 0 14.41147733-11.79120853 7.39840533-18.80428053-36.45256-36.52962667-59.0331104-87.08539733-59.0331104-142.9587712z" fill="#007aff" p-id="647"></path><path d="M794.17980693 507.4915968c-96.48753707 0-174.71026133 78.22272427-174.71026133 174.71026133 0 96.48753707 78.22272427 174.71026133 174.71026133 174.71026134 96.48753707 0 174.71026133-78.22272427 174.71026134-174.71026134 0-96.48753707-78.22272427-174.71026133-174.71026134-174.71026133z m98.72247254 195.05587627h-75.9107232v78.3768576H776.60859413V702.54747307H695.4573344v-40.46002987h81.07419307v-78.6080576h40.38296213v78.6080576h75.91072213v40.46002987z" fill="#007aff" p-id="648"></path></svg>
                 <span style="margin-left: 1px;">新朋友</span>
               </a>
+              <div class="mui-collapse-content" style="padding-bottom:0;">
+               <div class="mui-content" style="max-width: 320px; margin: 0 auto;background: none;"  >
+                    <form action @submit.prevent="searchNewFriends">
+                      <div class="mui-input-row mui-search" :class="activeSearchToClass?'mui-active':''" @click="activeSearchStatus(true)">
+                          <input type="search" class="mui-input-clear search-friends" :placeholder="activeSearchToClass?'请搜索好友手机号':''" data-input-clear="15" data-input-search="15" ref="searchFriends"  @blur="activeSearchStatus(false)" v-model="Mobile"><span class="mui-icon mui-icon-clear mui-hidden" ></span><span class="mui-placeholder"><span class="mui-icon mui-icon-search"></span><span></span></span>
+                      </div>
+                    </form>
+                    <ul class="search-golost-list">
+                      <li class="golost-list-item" style="border-bottom:1px solid #eee;">
+                        <div>
+                          <i class="iconfont icon-saoyisao"></i>
+                          <p>扫码添加</p>
+                        </div>
+                      </li>
+                      <li class="golost-list-item">
+                        <div>
+                        <i class="iconfont icon-chaxuntiaojian" ></i>
+                        <p>按条件查找</p>
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="search-list" v-if="newFirendsList.length > 0">
+                      <ul>
+                        <li v-for="item in newFirendsList" :key="item._id">
+                          <img :src="item.headImg"/>
+                          <div class="search-user-info">
+                            <p class="search-user-nick"></p>
+                            <p class="search-user-desc"></p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>  
+                  </div>
+              </div>
             </li>
             <li class="mui-table-view-cell mui-collapse" v-for="item in friendsListDefault" :key="item.id">
               <a class="mui-navigate-right" href="javascript:void(0)">
@@ -39,6 +73,8 @@ export default {
   props: ['value'],
   data() {
     return {
+      Mobile: '',
+      newFirendsList: [],
       friendsListDefault: [
         {
           id: '0',
@@ -58,6 +94,8 @@ export default {
         }
       ],
       isShowMenuModal: false,
+      activeSearchToClass: false,
+      showNewFriendsList: false,
       menuWrapper: null,
       menu: null,
       menuWrapperClassList: null,
@@ -84,6 +122,34 @@ export default {
     this.backdrop = this.$refs['menu-backdrop'];
   },
   methods: {
+    searchNewFriends() {
+      if(this.Mobile !== '') {
+        const data = {Mobile:this.Mobile}
+        app.api.user.searchNewFriends({
+        data,
+        success: res => {
+          if (res.message === 'success') {
+
+          } else {
+            mui.toast(res.message)
+          }
+        }
+      });
+      } else {
+        return
+      }
+    },
+    activeSearchStatus(status) {
+      if (status) {
+        this.$refs['searchFriends'].focus();
+        this.activeSearchToClass = status;
+      } else if (this.$refs['searchFriends'].value !== '') {
+        this.$refs['searchFriends'].focus();
+        this.activeSearchToClass = true;
+      } else {
+        this.activeSearchToClass = status;
+      }
+    },
     toggleMenu() {
       if (this.busying) {
         return;
@@ -113,10 +179,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@list-color:#f3f3f3;
+@list-color: #f3f3f3;
 .friendsList-view-menu {
   .mui-table-view-cell > a:not(.mui-btn) {
-        text-align: left;
+    text-align: left;
     font-size: 12px;
     & > span {
       margin-left: 30px;
@@ -131,7 +197,7 @@ export default {
       width: 100%;
       display: block;
       z-index: 998;
-      background-color: rgba(0,0,0,.3);
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
   .mui-navigate-right:after {
@@ -429,6 +495,37 @@ export default {
   .menu-wrapper.mui-active .menu {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+  }
+  .mui-search:before {
+    top: 60%;
+  }
+  .search-friends {
+    margin-bottom: 0;
+  }
+  .search-friends::-webkit-input-placeholder {
+    font-size: 12px;
+  }
+  .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {
+    padding-left: 22px;
+  }
+  .mui-navigate-right.arrow:after{    left: 0px;transform: rotate(0deg);}
+  .search-golost-list {
+    text-align: left;
+    margin-top: 10px;
+    .golost-list-item {
+      display: block;
+      padding: 5px 0;
+      .icon-saoyisao,.icon-genggaichaxuntiaojian {
+        display: inline-block;
+        font-size: 22px;
+        vertical-align: middle;
+      }
+    p {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 12px;
+    }  
+    }
   }
 }
 </style>

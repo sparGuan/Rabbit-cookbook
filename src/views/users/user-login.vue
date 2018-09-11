@@ -201,14 +201,8 @@ export default {
                     success: data => {
                       if (data.message === 'success') {
                         app.mui.toast('已登录')
-                        app.globalService.setUserInfo({
-                          token: data.token,
-                          headImg: data.headImg,
-                          nickName: data.nickName,
-                          openid: data.openid,
-                          tenancyName: data.tenancyName,
-                          expiredTime: data.expiredTime // 失效时间
-                        })
+                        const userInfo = Object.assign(data.user,{token:data.token})
+                        app.globalService.setUserInfo(userInfo)
                         this.showModal = false
                       }
                     },
@@ -271,8 +265,8 @@ export default {
             passWord: _this.passWord
           },
           success: data => {
-            if (data.success === 'success') {
-              let userInfo = Object.assign(data.user,{token:data.token})
+            if (data.message === 'success') {
+              const userInfo = Object.assign(data.user,{token:data.token})
               app.globalService.setUserInfo(userInfo)
               this.showModal = false
             }

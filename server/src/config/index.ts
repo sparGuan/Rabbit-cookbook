@@ -2,8 +2,8 @@ export const port =  3011;
 export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';
-export const webServerDoMain = '192.168.0.102';
-export const webSourceDoMain = '192.168.0.102';
+export const webServerDoMain = 'localhost';
+export const webSourceDoMain = 'localhost';
 export const limit = '10';
 export const qsms = {
   appid: 1400106290,
@@ -12,6 +12,7 @@ export const qsms = {
 export const statusCode = {
   success: 'success',
   error: 'error',
+  noOne: '没有该用户',
   expiredTime: 3 // 过期时间是倒数三天
 };
 // 8011是gitlab库的端口

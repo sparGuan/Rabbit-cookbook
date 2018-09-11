@@ -16,6 +16,7 @@ export interface IUser extends mongoose.Document {
   headImg: string
   headBgImg: string
   sex: string
+  age: number
   Mobile: string
   createTime: Date
   updateTime: Date // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
@@ -59,6 +60,10 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
   },
   sex: {
     type: String,
+    trim: true
+  },
+  age: {
+    type: Number,
     trim: true
   },
   Mobile: {

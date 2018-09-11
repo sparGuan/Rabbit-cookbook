@@ -102,9 +102,19 @@ export default {
     });
   },
   methods: {
+    checkHasMobileInfo() {
+      if(app.globalService.isLogin() && app.globalService.getLoginUserInfo().Mobile) {
+        return true
+      }
+      return false
+    },
     showFriendsListMenus() {
-      this.isShowFriendsListMenus = true;
-      this.$emit('showFriendsListMenus', this.isShowFriendsListMenus);
+      if (this.checkHasMobileInfo()) {
+        this.isShowFriendsListMenus = true;
+        this.$emit('showFriendsListMenus', this.isShowFriendsListMenus);
+      } else {
+        app.mui.toast('请先完善个人信息')
+      }
     },
     // 浏览活动
     visitActivity(activityInfo) {

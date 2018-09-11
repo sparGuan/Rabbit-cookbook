@@ -90,4 +90,4 @@ class ActivityController extends BASE_OPEN_SOURCE_API {
     };
   }
 }
-export default new ActivityController() as any;
+export default new ActivityController();

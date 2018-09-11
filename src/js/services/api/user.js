@@ -70,6 +70,16 @@ define(() => {
 				)
 			);
 		},
+		searchNewFriends: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/login/searchNewFriends'
+					},
+					ajaxOptions
+				)
+			);
+		},
 		// 更新登录日志
 		updateLoginInfo: ajaxOptions => {
 			return app.ajax(

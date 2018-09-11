@@ -141,4 +141,4 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
     };
   }
 }
-export default new DynamicController() as any;
+export default new DynamicController();

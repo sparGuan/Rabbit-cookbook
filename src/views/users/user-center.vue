@@ -110,12 +110,16 @@ export default {
     // 因为当钩子执行前，组件实例还没被创建
     next(vm => {
        if (app.globalService.isLogin()) {
-         alert(11111)
         const user =  app.globalService.getLoginUserInfo()
         vm.userInfo.headImg = user.headImg;
         vm.userInfo.headBgImg = user.headBgImg;
         vm.userInfo.nickName = user.nickName;
-        vm.userInfo.descPerson = user.descPerson;
+        if (user.Mobile) {
+          vm.userInfo.Mobile = user.Mobile;
+        }
+        if (user.descPerson) {
+          vm.userInfo.descPerson = user.descPerson;
+        }
       } else
       if (
         from.name === 'userSiteInfo' &&
@@ -146,7 +150,8 @@ export default {
         nickName: '游客',
         headImg: require('../../../src/imgs/userCenter/touxiangDefault.png'),
         headBgImg: '',
-        descPerson: '又到了奋斗的一天,哈趣到底，赶快去发布吧~'
+        descPerson: '这个人真懒，什么都没留下~',
+        Mobile: ''
       },
       // 先去完成用户登录后直接可以看见部分资料的代码
       usertools: Array.from(require('@/js/data/usertools.json')),
@@ -161,7 +166,6 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.userInfo = app.globalService.getLoginUserInfo();
       this.takeH5Photos = new takeH5Photos({ isSendToServer: true });
     });
   },
@@ -278,7 +282,7 @@ export default {
       height: 100%;
       padding-top: 20px;
       background: linear-gradient(to bottom, #40b9fc, #f7f7f7) no-repeat center;
-      background-size: contain;
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       .switch-btn {
