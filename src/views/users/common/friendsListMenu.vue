@@ -32,17 +32,59 @@
                         </div>
                       </li>
                     </ul>
+
                     <div class="search-list" v-if="newFirendsList.length > 0">
                       <ul>
                         <li v-for="item in newFirendsList" :key="item._id">
-                          <img :src="item.headImg"/>
-                          <div class="search-user-info">
-                            <p class="search-user-nick"></p>
-                            <p class="search-user-desc"></p>
-                          </div>
+                          <div class="firendDetil">
+                            <img :src="item.headImg"/>
+                            <div class="search-user-info">
+                              <p class="search-user-nick" v-html="item.nickName"></p>
+                              <p class="search-user-desc" v-html="item.descPerson"></p>
+                            </div>
+                          </div><div class="send" ref="send">
+                            <div class="send-indicator">
+                              <div class="send-indicator-dot"></div>
+                              <div class="send-indicator-dot"></div>
+                              <div class="send-indicator-dot"></div>
+                              <div class="send-indicator-dot"></div>
+                            </div>
+                            <button class="send-button" ref="sendButton" @click="send">
+                              <div class="sent-bg" ref="sentBg"></div>
+                              <svg ref="sendIcon" class="icon send-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="45406"><path d="M768 0H256C115.2 0 0 115.2 0 256v512c0 140.8 115.2 256 256 256h512c140.8 0 256-115.2 256-256V256c0-140.8-115.2-256-256-256zM182.4 246.4c-28.8 0-51.2-22.4-51.2-51.2 0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 27.2-24 51.2-51.2 51.2z m555.2 316.8H563.2V736c0 28.8-24 51.2-51.2 51.2s-51.2-24-51.2-51.2V563.2H286.4c-28.8 0-51.2-24-51.2-51.2s24-51.2 51.2-51.2h172.8V286.4c0-28.8 24-51.2 51.2-51.2s51.2 24 51.2 51.2v172.8h172.8c28.8 0 51.2 24 51.2 51.2s-20.8 52.8-48 52.8z" fill="#FF943F" p-id="45407"></path></svg>
+                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
+                                <defs>
+                                  <filter id="goo">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                                    <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+                                  </filter>
+                                  <filter id="goo-no-comp">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                                  </filter>
+                                </defs>
+                              </svg>
+                              <i class="iconfont icon-icon-test1 sent-icon" ref="sentIcon"></i>
+                            </button>
+                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
+                                  <defs>
+                                    <filter id="goo">
+                                      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                                      <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+                                    </filter>
+                                    <filter id="goo-no-comp">
+                                      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                                    </filter>
+                                  </defs>
+                                </svg>
+                            </div>
                         </li>
                       </ul>
                     </div>  
+
                   </div>
               </div>
             </li>
@@ -69,6 +111,7 @@
 	</div>
 </template>
 <script>
+import { TweenMax } from 'gsap';
 export default {
   props: ['value'],
   data() {
@@ -100,7 +143,14 @@ export default {
       menu: null,
       menuWrapperClassList: null,
       backdrop: null,
-      busying: false
+      busying: false,
+      locked: false,
+      sendButton: null,
+      sendIcon: null,
+      sentIcon: null,
+      sentBg: null,
+      indicatorDots: null,
+      circle: []
     };
   },
   watch: {
@@ -122,21 +172,177 @@ export default {
     this.backdrop = this.$refs['menu-backdrop'];
   },
   methods: {
-    searchNewFriends() {
-      if(this.Mobile !== '') {
-        const data = {Mobile:this.Mobile}
-        app.api.user.searchNewFriends({
-        data,
-        success: res => {
-          if (res.message === 'success') {
-
-          } else {
-            mui.toast(res.message)
-          }
+    setGoo() {
+      this.setFilter('url(#goo)');
+    },
+    setFilter(filter) {
+      // this.refs['send'].css({
+      //   webkitFilter: filter,
+      //   mozFilter: filter,
+      //   filter: filter
+      // });
+      console.log(this.$refs['send']);
+      this.$refs['send'][0].style.cssText +=
+        'webkitFilter: filter; mozFilter: filter;filter: filter';
+    },
+    setGooNoComp() {
+      this.setFilter('url(#goo-no-comp)');
+    },
+    setupCircle($obj, index) {
+      if (typeof this.circle[index] === 'undefined') {
+        //  $obj.data('circle', { radius: 0, angle: 0 });
+        this.circle[index] = { radius: 0, angle: 0 };
+        const updateCirclePos = () => {
+          const circle = this.circle[index];
+          TweenMax.set($obj, {
+            x: Math.cos(circle.angle) * circle.radius,
+            y: Math.sin(circle.angle) * circle.radius
+          });
+          requestAnimationFrame(updateCirclePos);
+        };
+        updateCirclePos();
+      }
+    },
+    startCircleAnim($obj, index, radius, delay, startDuration, loopDuration) {
+      this.setupCircle($obj, index);
+      this.circle[index].radius = 0;
+      this.circle[index].angle = 0;
+      // $obj.data('circle').radius = 0;
+      // $obj.data('circle').angle = 0;
+      TweenMax.to(this.circle[index], startDuration, {
+        delay: delay,
+        radius: radius,
+        ease: Quad.easeInOut
+      });
+      TweenMax.to(this.circle[index], loopDuration, {
+        delay: delay,
+        angle: Math.PI * 2,
+        ease: Linear.easeNone,
+        repeat: -1
+      });
+    },
+    stopCircleAnim($obj, index, duration) {
+      TweenMax.to(this.circle[index], duration, {
+        radius: 0,
+        ease: Quad.easeInOut,
+        onComplete: () => {
+          TweenMax.killTweensOf(this.circle[index]);
         }
       });
+    },
+    send() {
+      this.sendButton = this.$refs['sendButton'];
+      this.sendIcon = this.$refs['sendIcon'][0];
+      this.sentIcon = this.$refs['sentIcon'][0];
+      this.sentBg = this.$refs['sentBg'];
+      // this.indicatorDots = mui('.send-button,.send-indicator-dot');
+      // console.log(this.indicatorDots)
+      if (this.locked) {
+        return;
+      }
+      this.locked = true;
+      TweenMax.to(this.sendIcon, 0.3, {
+        x: 100,
+        y: -100,
+        ease: Quad.easeIn,
+        onComplete: () => {
+          this.setGooNoComp();
+          this.sendIcon.style.display = 'none';
+          // sendIcon.css({
+          //   display: 'none'
+          // });
+        }
+      });
+      TweenMax.to(this.sendButton, 0.6, {
+        scale: 0.5,
+        ease: Back.easeOut
+      });
+      mui('.send-button,.send-indicator-dot').each((i, item) => {
+        console.log(item);
+        this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
+      });
+      setTimeout(() => {
+        // success anim start
+        // close circle
+        mui('.send-button,.send-indicator-dot').each((i, item) => {
+          this.stopCircleAnim(item, i, 0.8 + i * 0.1);
+        });
+        TweenMax.to(this.sentBg, 0.7, {
+          delay: 0.7,
+          opacity: 1
+        });
+        // show icon
+        setTimeout(() => {
+          this.setGoo();
+          TweenMax.fromTo(
+            this.sentIcon,
+            1.5,
+            {
+              display: 'inline-block',
+              opacity: 0,
+              scale: 0.1
+            },
+            {
+              scale: 1,
+              ease: Elastic.easeOut
+            }
+          );
+          TweenMax.to(this.sentIcon, 0.5, {
+            delay: 0,
+            opacity: 1
+          });
+          TweenMax.to(this.sendButton, 0.3, {
+            scale: 1,
+            ease: Back.easeOut
+          });
+          // back to normal
+          setTimeout(() => {
+            TweenMax.to(this.sentBg, 0.4, {
+              opacity: 0
+            });
+            TweenMax.to(this.sentIcon, 0.2, {
+              opacity: 0,
+              onComplete: () => {
+                this.locked = false;
+                // sentIcon.css({
+                //   display: 'none'
+                // });
+                this.sentIcon.style.display = 'none';
+                TweenMax.fromTo(
+                  this.sendIcon,
+                  0.2,
+                  {
+                    display: 'inline-block',
+                    opacity: 0,
+                    x: 0,
+                    y: 0
+                  },
+                  {
+                    opacity: 1
+                  }
+                );
+              }
+            });
+          }, 2000);
+        }, 1000);
+      }, 3000 + Math.random() * 3000);
+    },
+    searchNewFriends() {
+      if (this.Mobile !== '') {
+        const data = { Mobile: this.Mobile };
+        app.api.user.searchNewFriends({
+          data,
+          success: res => {
+            if (res.message === 'success') {
+              res.user.headImg = app.getResourceUrl(res.user.headImg);
+              this.newFirendsList = [res.user];
+            } else {
+              mui.toast(res.message);
+            }
+          }
+        });
       } else {
-        return
+        return;
       }
     },
     activeSearchStatus(status) {
@@ -179,353 +385,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@list-color: #f3f3f3;
-.friendsList-view-menu {
-  .mui-table-view-cell > a:not(.mui-btn) {
-    text-align: left;
-    font-size: 12px;
-    & > span {
-      margin-left: 30px;
-    }
-  }
-  &.menu-open {
-    .menu-backdrop {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      height: 100%;
-      width: 100%;
-      display: block;
-      z-index: 998;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-  }
-  .mui-navigate-right:after {
-    transform: rotate(-89deg);
-    left: 20px;
-    right: auto !important;
-    top: 35%;
-    transition: all 0.5s ease;
-  }
-  .mui-table-view-cell.mui-collapse.mui-active > .mui-navigate-right:after {
-    transform: rotate(89deg);
-    content: '\E583';
-  }
-  .mui-table-view-inverted {
-    background-color: #fff;
-  }
-  .mui-table-view-inverted:before {
-    background-color: @list-color;
-  }
-  .mui-table-view-inverted:after {
-    background-color: @list-color;
-  }
-  .mui-table-view-inverted .mui-table-view-cell:after {
-    background-color: @list-color;
-  }
-  .mui-table-view-inverted .mui-table-view-cell.mui-active {
-    background-color: @list-color;
-  }
-  .mui-table-view-inverted .mui-table-view-cell > a:not(.mui-btn).mui-active {
-    background-color: @list-color;
-  }
-  .animated {
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
-  @-webkit-keyframes bounceInDown {
-    0%,
-    60%,
-    75%,
-    90%,
-    100% {
-      -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    0% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-    60% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 25px, 0);
-      transform: translate3d(0, 25px, 0);
-    }
-    75% {
-      -webkit-transform: translate3d(0, -10px, 0);
-      transform: translate3d(0, -10px, 0);
-    }
-    90% {
-      -webkit-transform: translate3d(0, 5px, 0);
-      transform: translate3d(0, 5px, 0);
-    }
-    100% {
-      -webkit-transform: none;
-      transform: none;
-    }
-  }
-  @keyframes bounceInDown {
-    0%,
-    60%,
-    75%,
-    90%,
-    100% {
-      -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    0% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-    60% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 25px, 0);
-      transform: translate3d(0, 25px, 0);
-    }
-    75% {
-      -webkit-transform: translate3d(0, -10px, 0);
-      transform: translate3d(0, -10px, 0);
-    }
-    90% {
-      -webkit-transform: translate3d(0, 5px, 0);
-      transform: translate3d(0, 5px, 0);
-    }
-    100% {
-      -webkit-transform: none;
-      transform: none;
-    }
-  }
-  .bounce-in-down {
-    -webkit-animation-name: bounceInDown;
-    animation-name: bounceInDown;
-  }
-  @-webkit-keyframes fadeInDown {
-    0%,
-    60%,
-    75%,
-    90%,
-    100% {
-      -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    0% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-    60% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    75% {
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    90% {
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    100% {
-      -webkit-transform: none;
-      transform: none;
-    }
-  }
-  @keyframes fadeInDown {
-    0%,
-    60%,
-    75%,
-    90%,
-    100% {
-      -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    0% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-    60% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    75% {
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    90% {
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    100% {
-      -webkit-transform: none;
-      transform: none;
-    }
-  }
-  .fade-in-down {
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-  }
-  @-webkit-keyframes bounceOutUp {
-    20% {
-      -webkit-transform: translate3d(0, -10px, 0);
-      transform: translate3d(0, -10px, 0);
-    }
-    40%,
-    45% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 20px, 0);
-      transform: translate3d(0, 20px, 0);
-    }
-    100% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-  }
-  @keyframes bounceOutUp {
-    20% {
-      -webkit-transform: translate3d(0, -10px, 0);
-      transform: translate3d(0, -10px, 0);
-    }
-    40%,
-    45% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 20px, 0);
-      transform: translate3d(0, 20px, 0);
-    }
-    100% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-  }
-  .bounce-out-up {
-    -webkit-animation-name: bounceOutUp;
-    animation-name: bounceOutUp;
-  }
-  @-webkit-keyframes fadeOutUp {
-    20% {
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    40%,
-    45% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    100% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-  }
-  @keyframes fadeOutUp {
-    20% {
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    40%,
-    45% {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0px, 0);
-      transform: translate3d(0, 0px, 0);
-    }
-    100% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-  }
-  .fade-out-up {
-    -webkit-animation-name: fadeOutUp;
-    animation-name: fadeOutUp;
-  }
-  .menu-open {
-    height: 100%;
-    width: 100%;
-  }
-  .mui-scroll-wrapper {
-    position: absolute;
-    top: 48;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    overflow: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-  .menu-backdrop {
-    display: none;
-  }
-  .menu-wrapper {
-    position: absolute;
-    top: 0px;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    text-align: center;
-    background-color: @list-color;
-    width: 100%;
-  }
-  .menu-wrapper.hidden {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-    z-index: -1;
-  }
-  .menu {
-    width: 100%;
-  }
-  .menu .mui-table-view-inverted {
-    color: gray;
-    font-size: 19px;
-  }
-  .menu .mui-table-view-inverted .mui-table-view-cell:after {
-    height: 2px;
-    left: 0;
-    right: 0;
-  }
-  .menu-wrapper.mui-active,
-  .menu-wrapper.mui-active .menu {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  .mui-search:before {
-    top: 60%;
-  }
-  .search-friends {
-    margin-bottom: 0;
-  }
-  .search-friends::-webkit-input-placeholder {
-    font-size: 12px;
-  }
-  .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {
-    padding-left: 22px;
-  }
-  .mui-navigate-right.arrow:after{    left: 0px;transform: rotate(0deg);}
-  .search-golost-list {
-    text-align: left;
-    margin-top: 10px;
-    .golost-list-item {
-      display: block;
-      padding: 5px 0;
-      .icon-saoyisao,.icon-genggaichaxuntiaojian {
-        display: inline-block;
-        font-size: 22px;
-        vertical-align: middle;
-      }
-    p {
-      display: inline-block;
-      vertical-align: middle;
-      font-size: 12px;
-    }  
-    }
-  }
-}
+@import url('./send.less');
+@import url('./friendsListViewMenu.less');
 </style>

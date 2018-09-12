@@ -20,7 +20,6 @@ export interface IUser extends mongoose.Document {
   Mobile: string
   createTime: Date
   updateTime: Date // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
-  currentPosition: ICurrentPosition, // 当前位置信息
   loginTime: Date
   logoutTime: Date
   expiredTime: number // 报废时长

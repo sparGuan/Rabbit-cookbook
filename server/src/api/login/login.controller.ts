@@ -366,7 +366,8 @@ class LoginController {
           nickName: this.user.nickName,
           headImg: this.user.headImg,
           sex: this.user.sex,
-          age: this.user.age
+          age: this.user.age,
+          descPerson: this.user.descPerson
          }
           ctx.body = {
             message: statusCode.success,
