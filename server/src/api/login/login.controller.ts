@@ -355,8 +355,8 @@ class LoginController {
    * @param {string} Mobile 用户手机号
    */
   public searchNewFriends() {
-    return async (ctx: any, next: any) => {
-      const { body } = ctx.request;
+    return async (ctx: any) => {
+      const  { body }  = ctx.request;
       if (!global._.isEmpty(body.Mobile)) {
         this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
         if (!global._.isEmpty(this.user)) {

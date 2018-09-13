@@ -144,7 +144,6 @@ const site = {
 				options.complete(data, textStatus);
 			}
 		};
-		Promise.resolve;
 		_options.error = (xhr, error) => {
 			app.log.debug(xhr, error);
 			if (typeof options.error === 'function') {

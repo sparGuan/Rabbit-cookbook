@@ -1,5 +1,5 @@
-import routesLoader from '../utils/routesLoader';
-import Router = require('koa-router');
+import routesLoader from './routesLoader';
+import * as Router from 'koa-router' // x导入koa路由
 import Koa = require('koa');
 const path = require('path');
 const resolve = (dir: string) => path.join(__dirname, '..', dir);

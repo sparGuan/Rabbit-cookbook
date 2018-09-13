@@ -1,3 +1,5 @@
+import { IRouterContext, IRouterOptions } from "koa-router";
+
 export default (Router: any) => {
   const router = new Router()
   /**

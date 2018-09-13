@@ -10,7 +10,7 @@ import path = require('path');
 export default (filePath: string) => {
   return new Promise((resolve, reject) => {
     // 根据文件路径读取文件，返回文件列表
-    fs.readdir(filePath, (err: any, files: any) => {
+    fs.readdir(filePath, (err: Error, files: any []) => {
       if (err) {
         throw err;
       } else {
@@ -29,23 +29,23 @@ export default (filePath: string) => {
             // 如果不存在，就获取controller返回controller对象
             // 如果不存在，将获得的controller对象直接返回默认的index.ts里面的路由函数
             // 去遍历该文件夹下面的所有文件
-            const customRoutingAddr = `${filedir}/index.ts`;
+            const customRoutingAddr = `${filedir}\\index.ts`;
             const exists: boolean = fs.existsSync(customRoutingAddr);
             if (exists) {
-              const files: string[] = glob.sync(customRoutingAddr, {
+              const filesArr: string[] = glob.sync(customRoutingAddr, {
                 ignore: 'index.ts'
               });
-              const Routing = require(files[0]);
+              const Routing = require(filesArr[0]);
               routes.push(Routing);
             } else {
               // 不存在之下，去读controller.ts，使用导出的controller，生成默认的Route导出函数
-              const files: string[] = glob.sync(`${filedir}/*.controller.ts`, {
+              const filesArr: string[] = glob.sync(`${filedir}\\*.controller.ts`, {
                 ignore: '*.controller.ts'
               });
-              const Controller = require(files[0]);
+              const Controller = require(filesArr[0]);
               const Routing = (Router: any) => {
                 const ControllerdirName = filedir.substring(
-                  filedir.lastIndexOf('/') + 1
+                  filedir.lastIndexOf('\\') + 1
                 );
                 for (const reqMethod of Object.getOwnPropertyNames(
                   Object.getPrototypeOf(Controller.default)

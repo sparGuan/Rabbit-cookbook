@@ -3,7 +3,6 @@ export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';
 export const webServerDoMain = 'localhost';
-export const webSourceDoMain = 'localhost';
 export const limit = '10';
 export const qsms = {
   appid: 1400106290,
