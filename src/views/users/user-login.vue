@@ -70,6 +70,7 @@
 import Dialog from '@/components/Dialog'
 import Register from './user-register'
 import ResetPassword from './user-reset-password'
+var io = require('socket.io')();
 export default {
   components: { 'v-dialog': Dialog, Register, ResetPassword },
   props: ['value'],
@@ -84,7 +85,9 @@ export default {
       tenancyName: 'default',
       Mobile: '15099883651',
       passWord: '462A06C1C5E581F319EDB0B4732A48DA',
-      focusName: ''
+      focusName: '',
+      socket: '',
+      
     }
   },
   watch: {
@@ -259,6 +262,11 @@ export default {
       }
       app.mui(e.target).button('loading')
         // 失效时间中间件由后台生产，不做处理
+        //登录的时候要做websocket的与服务器的对接
+	      socket = io("ws://localhost:3000");
+        
+        io.on('connection', function(client){});
+        io.listen(3000);
         app.api.user.useMobileLogin({
           data: {
             Mobile: _this.Mobile,

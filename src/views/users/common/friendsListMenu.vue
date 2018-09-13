@@ -49,7 +49,7 @@
                               <div class="send-indicator-dot"></div>
                               <div class="send-indicator-dot"></div>
                             </div>
-                            <button class="send-button" ref="sendButton" @click="send">
+                            <button class="send-button" ref="sendButton" @click="requestToAddOne">
                               <div class="sent-bg" ref="sentBg"></div>
                               <svg ref="sendIcon" class="icon send-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="45406"><path d="M768 0H256C115.2 0 0 115.2 0 256v512c0 140.8 115.2 256 256 256h512c140.8 0 256-115.2 256-256V256c0-140.8-115.2-256-256-256zM182.4 246.4c-28.8 0-51.2-22.4-51.2-51.2 0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 27.2-24 51.2-51.2 51.2z m555.2 316.8H563.2V736c0 28.8-24 51.2-51.2 51.2s-51.2-24-51.2-51.2V563.2H286.4c-28.8 0-51.2-24-51.2-51.2s24-51.2 51.2-51.2h172.8V286.4c0-28.8 24-51.2 51.2-51.2s51.2 24 51.2 51.2v172.8h172.8c28.8 0 51.2 24 51.2 51.2s-20.8 52.8-48 52.8z" fill="#FF943F" p-id="45407"></path></svg>
                               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
@@ -230,7 +230,8 @@ export default {
         }
       });
     },
-    send() {
+    // 调用接口给双方增加一个备用的ID字段，存储发送增加好友请求
+    requestToAddOne() {
       this.sendButton = this.$refs['sendButton'];
       this.sendIcon = this.$refs['sendIcon'][0];
       this.sentIcon = this.$refs['sentIcon'][0];
@@ -257,8 +258,7 @@ export default {
         scale: 0.5,
         ease: Back.easeOut
       });
-      mui('.send-button,.send-indicator-dot').each((i, item) => {
-        console.log(item);
+      mui('.send-button,.send-indicator-dot').each((i, item) => {        
         this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
       });
       setTimeout(() => {
@@ -294,36 +294,7 @@ export default {
           TweenMax.to(this.sendButton, 0.3, {
             scale: 1,
             ease: Back.easeOut
-          });
-          // back to normal
-          setTimeout(() => {
-            TweenMax.to(this.sentBg, 0.4, {
-              opacity: 0
-            });
-            TweenMax.to(this.sentIcon, 0.2, {
-              opacity: 0,
-              onComplete: () => {
-                this.locked = false;
-                // sentIcon.css({
-                //   display: 'none'
-                // });
-                this.sentIcon.style.display = 'none';
-                TweenMax.fromTo(
-                  this.sendIcon,
-                  0.2,
-                  {
-                    display: 'inline-block',
-                    opacity: 0,
-                    x: 0,
-                    y: 0
-                  },
-                  {
-                    opacity: 1
-                  }
-                );
-              }
-            });
-          }, 2000);
+          });          
         }, 1000);
       }, 3000 + Math.random() * 3000);
     },

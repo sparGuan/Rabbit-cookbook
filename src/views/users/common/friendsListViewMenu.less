@@ -370,7 +370,7 @@
       display: inline-block;
       vertical-align: middle;
       & > p {
-        color: #fff;
+        color: #333;
         font-size: 12px;
       }
     }
@@ -378,10 +378,21 @@
       display: inline-block;
       vertical-align: middle;
       padding-left: 5px;
-      width: calc(~'100% - 45px');
-      background: -webkit-linear-gradient(bottom left, #eee 10%, #ccc 30%,#999 100%);
+      width: calc(~'100% - 50px');
+      background: -webkit-linear-gradient(bottom left, #f5f5f5 10%, #eee 30%, #999 100%);
       margin: 10px 0;
       border-radius: 10px;
+      &:after {
+        width: 45px;
+        height: 45px;
+        position: absolute;
+        border-radius: 50%;
+        content: '';
+        display: block;
+        right: 25px;
+        top: 5px;
+        background-color: #fff;
+      }
     }
   }
 }

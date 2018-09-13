@@ -24,6 +24,8 @@ export interface IUser extends mongoose.Document {
   logoutTime: Date
   expiredTime: number // 报废时长
   descPerson: string // 个人描述
+  currentPosition: ICurrentPosition,
+  requestByAddOne: string[]
 }
 interface ICurrentPosition {
   longitude: string,
