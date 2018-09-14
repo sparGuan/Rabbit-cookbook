@@ -1,5 +1,4 @@
 import mongoosePaginate = require('mongoose-paginate');
-import http = require('http');
 import * as Koa from 'koa'; // koa
 import * as Router from 'koa-router'; // x导入koa路由
 import * as parser from 'koa-bodyparser'; // json
@@ -7,21 +6,30 @@ import * as cors from 'koa2-cors';
 import * as helmet from 'koa-helmet'; // 安全相关
 import api from './routes/api';
 import routes from './routes/index';
-import ioLoader from './io/index';
 import mongoConnection from './db/connection';
 import * as nunjucks from 'koa-nunjucks-2';
 import { port, webServerDoMain, baseApi, limit } from './config/index';
 import path = require('path');
+import IO = require('koa-socket');
+import Socket, { ISocket } from './db/schema/socket';
+// 中间件导入
+const catchError = require('./middlewares/catchErrors');
+const seal = require('./middlewares/seal');
+const frequency = require('./middlewares/frequency');
+const isVaild = require('./middlewares/isVaild');
+const log = require('./middlewares/log');
+// 初始化应用
 global._ = require('lodash');
 const app = new Koa();
+const io = new IO({});
 const router = new Router({
   prefix: baseApi
 });
+// 初始化完成，配置应用,加载中间件
 // @ts-ignore
 mongoosePaginate.paginate.options = {
   limit: `${limit}`
 };
-const server = http.createServer(app.callback());
 (async () => {
   try {
     await app
@@ -56,18 +64,40 @@ const server = http.createServer(app.callback());
           }
         })
       ) // 部署node的模板引擎
-      .use(routes(Router));
-    await api(app, router); // 部署所有的api
+      .use(routes(Router))
+      // .use(seal)
+      // .use(frequency)
+      // .use(isVaild)
+      // .use(log)
      // 先连接数据库
-    await mongoConnection();
-    await ioLoader(server)
+    await api(app, router); // 部署所有的api
+    // 注入应用io
+    io.attach(app);
     // 首先必须所有接口部署完成
+    app.io.on('connection', async (ctx: any) => {
+      console.log(`  <<<< connection ${ctx.socket.id} ${ctx.socket.request.connection.remoteAddress}`);
+      // const socket: ISocket = new Socket({
+      //   id: ctx.socket.id,
+      //   ip: ctx.socket.request.connection.remoteAddress
+      // }) as ISocket;
+      // await socket.save();
+    });
+    app.io.on('disconnect', async (ctx: any) => {
+        console.log(`  >>>> disconnect ${ctx.socket.id}`);
+        await Socket.remove({
+            id: ctx.socket.id
+        });
+    });
+    await mongoConnection();
   } catch (e) {
     console.error('ERROR:', e);
     return;
   }
   // 服务器部署需要写上服务器ip，不能localhost
-  server.listen(port, () => {
-    console.log(`${webServerDoMain} ${port} server listen`);
-  });
+  // http.createServer(app.callback()).listen(port, () => {
+  //   console.log(`${webServerDoMain} ${port} server listen`);
+  // });
+  app.listen(port, () => {
+      console.log(`${webServerDoMain} ${port} server listen`);
+    });
 })();

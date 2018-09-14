@@ -84,7 +84,8 @@ export default {
       tenancyName: 'default',
       Mobile: '15099883651',
       passWord: '462A06C1C5E581F319EDB0B4732A48DA',
-      focusName: ''
+      focusName: '',
+      socketId:''
     }
   },
   watch: {
@@ -99,6 +100,16 @@ export default {
     mui.plusReady(() => {
       this.plusReady()
     })
+  },
+  sockets: {
+    // 已经成功连接一次之后不会再进来了
+    connect() {
+      this.socketId = this.$socket.id
+      console.log(`The ${this.socketId} is connected`)
+    },
+    customEmit(val){
+      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+    }
   },
   methods: {
     changeEye(e) {
@@ -269,11 +280,6 @@ export default {
             if (data.message === 'success') {
               const userInfo = Object.assign(data.user,{token:data.token})
               app.globalService.setUserInfo(userInfo)
-              console.log(this.$options)
-              this.$options.sockets.connect = data => {
-                  console.log(data)
-              }
-             
               this.showModal = false
             }
           },

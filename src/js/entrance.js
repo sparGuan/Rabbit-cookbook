@@ -24,12 +24,7 @@ const initVue = () => {
 	Vue.use(VueRouter)
 	Vue.use(touch)
 	Vue.use(layer)
-	Vue.use(VueSocketio,  socketio(`${app.Config.webapiDomain}:3011`, {
-		path: '/ioServer',
-		query: {
-			token: window.app.globalService.getLoginUserInfo().token || ''
-		}
-	}), store);
+	Vue.use(VueSocketio,  `${app.Config.webapiDomain}`, store);
 	const [router, VueApp] = [
 		routers.createRouter(VueRouter, store),
 		Vue.extend(vueApp)

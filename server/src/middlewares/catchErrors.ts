@@ -3,7 +3,7 @@ const assert = require('assert');
  * 全局异常捕获
  */
 module.exports =  () => {
-    return async (ctx :any, next: any) => {
+    return async (ctx: any, next: any) => {
         try {
             await next();
         } catch (err) {
@@ -15,4 +15,4 @@ module.exports =  () => {
             console.error('Unhandled Error\n', err);
         }
     };
-};
+}

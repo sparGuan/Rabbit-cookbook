@@ -1,6 +1,8 @@
 import User, { IUser } from '../../db/schema/user';
 import * as jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcryptjs';
+const bluebird = require('bluebird');
+const { isValid } = require('mongoose').Types.ObjectId;
+const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
 import { statusCode, qsms } from '../../config/index';
 import getDateAfter from '../../utils/getDateAfter';
 import Qsms = require('qcloudsms_js');
@@ -10,6 +12,7 @@ class LoginController {
   private qsms: any;
   private user: IUser;
   private userInfo: any;
+  private saltRounds = 5;
   constructor() {
     this.qsms = new Qsms(qsms.appid, qsms.appkey);
   }
@@ -60,7 +63,8 @@ class LoginController {
   public register() {
     return async (ctx: any, next: any) => {
       const { body } = ctx.request;
-      body.passWord = await bcrypt.hash(body.passWord, 5);
+      const salt = await bcrypt.genSalt$(this.saltRounds);
+      body.passWord = await bcrypt.hash$(body.passWord, salt);
       this.user = new User(body);
       const UserModel = await this.user.save();
       await LoginController.resetExpiredTime(UserModel.get('_id'));
@@ -122,7 +126,8 @@ class LoginController {
         }
         this.user = (await User.findOne({ openid: body.openid })) as IUser;
         if (global._.isEmpty(this.user)) {
-          body.passWord = await bcrypt.hash(body.openid, 5);
+          const salt = await bcrypt.genSalt$(this.saltRounds);
+          body.passWord = await bcrypt.hash$(body.openid, salt);
           this.user = new User(body);
           this.user = await this.user.save();
         } else {
@@ -267,7 +272,7 @@ class LoginController {
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
       const { userId, currentPosition } = ctx.request.body;
-      if (!global._.isEmpty(userId)) {
+      if (!global._.isEmpty(userId) && isValid(userId)) {
         const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
@@ -321,7 +326,7 @@ class LoginController {
             }
           }
           const _id: string = this.userInfo.userId;
-          if (!global._.isEmpty(_id)) {
+          if (!global._.isEmpty(_id) && isValid(_id)) {
             // 有ID就update
             this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {
               new: true
