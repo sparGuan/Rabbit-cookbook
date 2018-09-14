@@ -20,7 +20,6 @@ export interface ISocket extends mongoose.Document {
   // 最后修改日期
   update_at: Date;
 }
-// 自增ID初始化
 const socket_schema: mongoose.Schema = new mongoose.Schema({
   id: {
     type: String,

@@ -281,6 +281,7 @@ export default {
               const userInfo = Object.assign(data.user,{token:data.token})
               app.globalService.setUserInfo(userInfo)
               this.showModal = false
+              this.$socket.emit('isLogin', userInfo);
             }
           },
           complete: () => {
