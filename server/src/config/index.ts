@@ -4,6 +4,7 @@ export const baseApi = '/api';
 export const secret = 'jwt_secret';
 export const webServerDoMain = 'localhost';
 export const limit = '10';
+export const emit = 'SURE';
 export const qsms = {
   appid: 1400106290,
   appkey: '53977389a4ef6a7fce4b916881e583a2'

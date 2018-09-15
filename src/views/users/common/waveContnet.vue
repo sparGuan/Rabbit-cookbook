@@ -12,7 +12,8 @@
                 </div>
                 <div class="community">
                   <ul>
-                    <li class="community-item" v-for="item in CommunityItem" :key="item.index" :style="'transform:translate3d('+item.index * -25+'px,0px,0px)'"></li>
+                    <!-- 好友聊天小头像-->
+                    <li class="community-item" v-for="item in communicator" :key="item.index" :style="'transform:translate3d('+item.index * -25+'px,0px,0px)'"></li>
                   </ul>
                 </div>
                 <div class="search-circle" @click="showFriendsListMenus">
@@ -27,7 +28,7 @@
 <style lang="less" scoped>
 </style>
 <script>
-const testCommunity = Array.from(
+const communicator = Array.from(
   require('@/js/data/testCommunity-user-center.json')
 );
 export default {
@@ -36,7 +37,7 @@ export default {
   data() {
     return {
       isShowFriendsListMenus: false,
-      CommunityItem: testCommunity,
+      communicator: communicator,
       rowData: [
         {
           id: '0',
@@ -132,7 +133,7 @@ export default {
             data.activityList.forEach(item => {
               item.bgBanner = app.getResourceUrl(
                 app.getResourceUrl(item.bgBanner)
-              );              
+              ); 
               if (item.bgBanner.indexOf('src/imgs') > -1) {
                 console.log(item.bgBanner)
                 item.bgBanner = require('../../../../src/imgs/test/bgbingxue.png');
