@@ -1,4 +1,5 @@
 import mongoose = require('mongoose')
+import { ISocket } from 'db/schema/socket';
 /**
  * 用户模型
  * @param {String} name 昵称
@@ -8,7 +9,7 @@ import mongoose = require('mongoose')
  * @param {Date} expiredTime  * expiredTime--失效时间
  * */
 export interface IUser extends mongoose.Document {
-  friends: IUser[]
+  friends: IUser[] // 所有的好友
   tenancyName: string
   nickName: string
   openid: string
@@ -25,7 +26,7 @@ export interface IUser extends mongoose.Document {
   expiredTime: number // 报废时长
   descPerson: string // 个人描述
   currentPosition: ICurrentPosition,
-  requestByAddOne: string[]
+  socket: ISocket, // 用户自己的socket，判断是否在线 -->socket为空代表已经不在线了
 }
 interface ICurrentPosition {
   longitude: string,
@@ -78,6 +79,10 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
   currentPosition: {
     longitude: { type: String, trim: true },
     latitude: { type: String, trim: true }
+  },
+  socket: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Socket'
   },
   createTime: { type: Date, default: Date.now },
   loginTime: { type: Date, default: Date.now },

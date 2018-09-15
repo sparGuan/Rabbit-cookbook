@@ -70,6 +70,7 @@ export default {
             app.globalService.logOut();
             this.detals = '登录';
           } else {
+            this.showModal = false
           }
         });
       }

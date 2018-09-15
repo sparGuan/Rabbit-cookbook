@@ -13,6 +13,7 @@ import path = require('path');
 import IO = require('koa-socket');
 import Socket, { ISocket } from './db/schema/socket';
 // 中间件导入
+const ioLoader = require('./io/index');
 const catchError = require('./middlewares/catchErrors');
 // const seal = require('./middlewares/seal');
 // const frequency = require('./middlewares/frequency');
@@ -81,6 +82,8 @@ mongoosePaginate.paginate.options = {
       }) as ISocket;
       await socket.save();
       // 此处应该循环导入所有的监听
+      // ctx.socket是当前的socket
+      ioLoader.socketConnect(ctx.socket)
       // app.io.sockets.sockets[socketid].emit('message', 'for your eyes only');
     });
     app.io.on('disconnect', async (ctx: any) => {

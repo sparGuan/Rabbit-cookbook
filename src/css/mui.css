@@ -6,7 +6,7 @@
 
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 html {
-	font-family: 'local-file,Arial,Verdana,\\5FAE\8F6F\96C5\9ED1,\\9ED1\4F53,"serif';
+	font-family: local-file,Arial,Verdana,\\5FAE\8F6F\96C5\9ED1,\\9ED1\4F53,"serif";
 	-webkit-text-size-adjust: 100%;
 }
 
@@ -238,13 +238,11 @@ th {
 }
 
 body {
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
-	font-size: 17px;
-	line-height: 21px;
-
-	color: #000;
+	font-family: local-file,Arial,Verdana,\\5FAE\8F6F\96C5\9ED1,\\9ED1\4F53,"serif";
+	font-size: 14px;
+	line-height: 1.5;
+	color: #333;
 	background-color: #efeff4;
-
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -2584,7 +2582,7 @@ input[type='submit'].mui-active:enabled,
 input,
 textarea,
 select {
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: local-file,Arial,Verdana,\\5FAE\8F6F\96C5\9ED1,\\9ED1\4F53,"serif";
 	font-size: 17px;
 
 	-webkit-tap-highlight-color: transparent;
@@ -2767,7 +2765,7 @@ select:focus {
 }
 
 .mui-input-row label {
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: local-file,Arial,Verdana,\\5FAE\8F6F\96C5\9ED1,\\9ED1\4F53,"serif";
 	line-height: 1.1;
 
 	float: left;

@@ -171,6 +171,11 @@ export default {
     this.menuWrapperClassList = this.menuWrapper.classList;
     this.backdrop = this.$refs['menu-backdrop'];
   },
+  sockets: {
+    message_sent(val){
+      console.log(val)
+    }
+  },
   methods: {
     setGoo() {
       this.setFilter('url(#goo)');
@@ -249,9 +254,8 @@ export default {
         onComplete: () => {
           this.setGooNoComp();
           this.sendIcon.style.display = 'none';
-          // sendIcon.css({
-          //   display: 'none'
-          // });
+          // 这里开始发送sockiet请求
+          this.$socket.emit('addFriendRequest', this.Mobile,app.globalService.getLoginUserInfo()._id);
         }
       });
       TweenMax.to(this.sendButton, 0.6, {

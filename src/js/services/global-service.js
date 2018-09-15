@@ -95,6 +95,7 @@ export default {
 	// expiredTime
 	setUserInfo({
 		_id,
+		socketId,
 		nickName,
 		sex,
 		descPerson,
@@ -120,6 +121,7 @@ export default {
 			expiredTime = new Date().getTime() + (expiredTime - 60) * 1000 // 重新设置一个登录过期时间
 			const userInfo = _site_local_storage.userInfo = Object.assign(_site_local_storage.userInfo, {
 				_id,
+				socketId,
 				nickName,
 				sex,
 				descPerson,

@@ -107,7 +107,10 @@ export default {
       this.socketId = this.$socket.id
       console.log(`The ${this.socketId} is connected`)
     },
-    customEmit(val){
+    isLogin_sent(val){
+      val.userInfo.token = val.token
+      app.globalService.setUserInfo(val.userInfo)
+      this.showModal = false
       console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
     }
   },
@@ -278,10 +281,7 @@ export default {
           },
           success: data => {
             if (data.message === 'success') {
-              const userInfo = Object.assign(data.user,{token:data.token})
-              app.globalService.setUserInfo(userInfo)
-              this.showModal = false
-              this.$socket.emit('isLogin', userInfo);
+              this.$socket.emit('isLogin', data.user,data.token);
             }
           },
           complete: () => {

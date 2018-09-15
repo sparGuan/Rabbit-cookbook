@@ -178,6 +178,11 @@
   url('//at.alicdn.com/t/font_677642_h79p3y4fjxg.svg#iconfont') format('svg');
 }
 @import url('//at.alicdn.com/t/font_677642_h79p3y4fjxg.css'); 
+@font-face {
+	font-family: 'local-file';
+	src: url('../fonts/font.woff');
+}
+
 /* 打包的时候只能引用本地资源，因为没有了服务器支持，全部都是静态文件支持
 
 @import url('./iconfont.css');
