@@ -13,8 +13,8 @@
                 <div class="community">
                   <ul>
                     <!-- 好友聊天小头像-->
-                    <li class="community-item" v-for="item in communicator" :key="item.index" :style="'transform:translate3d('+item.index * -25+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" >
-                      <div class="new-msg" v-if="item.newMsg"></div>
+                    <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -25+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" >
+                      <i class="new-msg iconfont icon-gengduo2" v-if="item.newMsg"></i>
                     </li>
                   </ul>
                 </div>
@@ -35,7 +35,7 @@ const communicator = Array.from(
 );
 export default {
   name: 'user-waveContnet',
-  props: ['value', 'isShowMenuModal'],
+  props: ['value', 'isShowMenuModal','addFriendData'],
   data() {
     return {
       isShowFriendsListMenus: false,
@@ -59,6 +59,13 @@ export default {
         }
       ]
     };
+  },
+  watch: {
+    addFriendData: function(old,now) {
+      console.log(old)
+      this.communicator.push(old)
+      console.log(this.communicator)
+    }
   },
   computed: {
     isActive: function() {
@@ -241,6 +248,14 @@ export default {
         font-size: 18px;
       }
     }
+  }
+  .new-msg {
+    font-size:12px;
+    color:#d81e06;   
+    position: absolute;
+    right: -7px;
+    top: -6px;
+    box-shadow: 0 0 15px rgba(0,0,0,.4);
   }
 }
 </style>

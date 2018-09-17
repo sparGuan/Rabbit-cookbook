@@ -11,8 +11,6 @@ socket.on('addFriendRequest', async (Mobile: string, userId: string) => {
    const acceptUser: IUser = await User.findOne({Mobile}).populate({ path: 'socket', select: 'id' }) as IUser
    const sentUser: IUser = await User.findById(userId) as IUser
    // 转发到当前用户客户端
-   console.log(acceptUser.socket.id)
-   console.log(111)
    socket.nsp.sockets[acceptUser.socket.id].emit('message', sentUser )
    // socket.sockets[acceptUser.socket.id].emit(`message_${emit}`, sentUser );
    // 回应请求是否添加

@@ -189,8 +189,6 @@ class LoginController {
       if (!global._.isEmpty(body.Mobile)) {
         this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
       }
-      console.log(body.Mobile)
-      console.log(global._.isEmpty(this.user))
       // 如果找不到用户，就报401
       if (global._.isEmpty(this.user)) {
         ctx.status = 401;

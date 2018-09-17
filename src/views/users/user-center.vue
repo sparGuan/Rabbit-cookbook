@@ -56,7 +56,9 @@
                       </ul>
                      </div><user-waveContnet 
                      :isShowMenuModal="isShowMenuModal"
-                     @showFriendsListMenus="showFriendsListMenus" ></user-waveContnet>
+                     @showFriendsListMenus="showFriendsListMenus" 
+                     :addFriendData="addFriendData"
+                     ></user-waveContnet>
                 </div>     			
               </div>
           </div>
@@ -86,7 +88,7 @@
         </ul>
 			</div>
     </div>
-    <user-friendsListMenu v-model="isShowMenuModal">
+    <user-friendsListMenu v-model="isShowMenuModal" @addFriend="addFriend">
     </user-friendsListMenu>
 	</div>
 </template>
@@ -161,7 +163,8 @@ export default {
       isStartAuthentication: false,
       toolIndex: 0,
       dataBase64: '',
-      takeH5Photos: null
+      takeH5Photos: null,
+      addFriendData:'',
     };
   },
   mounted() {
@@ -170,6 +173,9 @@ export default {
     });
   },
   methods: {
+    addFriend(val) {
+      this.addFriendData = val
+    },
     showFriendsListMenus(isShow) {
       this.isShowMenuModal = isShow
     },

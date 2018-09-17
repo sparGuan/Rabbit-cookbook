@@ -174,7 +174,7 @@ export default {
   sockets: {
     message(val){
       val.newMsg = true
-      this.communicator.push(val)
+      this.$emit('addFriend',val)
     }
   },
   methods: {
