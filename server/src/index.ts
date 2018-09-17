@@ -92,7 +92,7 @@ mongoosePaginate.paginate.options = {
         await Socket.remove({
             id: ctx.socket.id
         });
-        await User.update({sockId: ctx.socket.id}, {$set: {sockId: ''}})
+        await User.findOneAndUpdate({sockId: ctx.socket.id}, {$set: {sockId: ''}})
     });
     mongoConnection(); // 最后连接数据库
   } catch (e) {

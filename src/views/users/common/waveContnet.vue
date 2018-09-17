@@ -13,7 +13,7 @@
                 <div class="community">
                   <ul>
                     <!-- 好友聊天小头像-->
-                    <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -25+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" >
+                    <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -25+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
                       <i class="new-msg iconfont icon-gengduo2" v-if="item.newMsg"></i>
                     </li>
                   </ul>
@@ -112,6 +112,27 @@ export default {
     });
   },
   methods: {
+    chatOrgetNewFriend(item) {
+      // 如果是新朋友提示消息
+      if(item.isNew) {
+        // 弹窗添加好友
+        const btnArray = ['忽略', '是'];
+        app.mui.confirm(`${item.nickName}请求添加好友`,'',btnArray, (e) => {
+          if (e.index == 1) 
+            {
+                item.isNew = false
+                // 调用接口，往后台添加好友数据
+                
+            } 
+            else 
+            {
+                
+            }
+        })
+      } else {
+        // 否则是旧好友，直接打开聊天窗口
+      }
+    },
     checkHasMobileInfo() {
       if(app.globalService.isLogin() && app.globalService.getLoginUserInfo().Mobile) {
         return true
@@ -250,12 +271,11 @@ export default {
     }
   }
   .new-msg {
-    font-size:12px;
-    color:#d81e06;   
+    font-size: 16px;
+    color: #d81e06;
     position: absolute;
-    right: -7px;
-    top: -6px;
-    box-shadow: 0 0 15px rgba(0,0,0,.4);
+    right: -3px;
+    top: 0px;    
   }
 }
 </style>
