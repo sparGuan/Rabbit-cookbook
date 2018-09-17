@@ -172,8 +172,9 @@ export default {
     this.backdrop = this.$refs['menu-backdrop'];
   },
   sockets: {
-    message_sent(val){
-      console.log(val)
+    message(val){
+      val.newMsg = true
+      this.communicator.push(val)
     }
   },
   methods: {
@@ -181,12 +182,6 @@ export default {
       this.setFilter('url(#goo)');
     },
     setFilter(filter) {
-      // this.refs['send'].css({
-      //   webkitFilter: filter,
-      //   mozFilter: filter,
-      //   filter: filter
-      // });
-      console.log(this.$refs['send']);
       this.$refs['send'][0].style.cssText +=
         'webkitFilter: filter; mozFilter: filter;filter: filter';
     },

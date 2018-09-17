@@ -107,11 +107,14 @@ export default {
       this.socketId = this.$socket.id
       console.log(`The ${this.socketId} is connected`)
     },
-    isLogin_sent(val){
+    disconnect() {
+
+    },
+    isLogin_sent(val) {
       val.userInfo.token = val.token
       app.globalService.setUserInfo(val.userInfo)
       this.showModal = false
-      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————user-login.Vue)')
     }
   },
   methods: {

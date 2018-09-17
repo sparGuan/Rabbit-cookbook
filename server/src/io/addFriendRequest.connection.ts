@@ -12,7 +12,9 @@ socket.on('addFriendRequest', async (Mobile: string, userId: string) => {
    const sentUser: IUser = await User.findById(userId) as IUser
    // 转发到当前用户客户端
    console.log(acceptUser.socket.id)
-   socket.sockets[acceptUser.socket.id].emit(`message_${emit}`, sentUser );
+   console.log(111)
+   socket.nsp.sockets[acceptUser.socket.id].emit('message', sentUser )
+   // socket.sockets[acceptUser.socket.id].emit(`message_${emit}`, sentUser );
    // 回应请求是否添加
    // 返回数据：是否添加好友，userId---》客户端的用户
     // socket.emit(`echo_${emit}`, {

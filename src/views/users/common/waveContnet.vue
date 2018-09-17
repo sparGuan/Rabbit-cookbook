@@ -13,7 +13,9 @@
                 <div class="community">
                   <ul>
                     <!-- 好友聊天小头像-->
-                    <li class="community-item" v-for="item in communicator" :key="item.index" :style="'transform:translate3d('+item.index * -25+'px,0px,0px)'"></li>
+                    <li class="community-item" v-for="item in communicator" :key="item.index" :style="'transform:translate3d('+item.index * -25+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" >
+                      <div class="new-msg" v-if="item.newMsg"></div>
+                    </li>
                   </ul>
                 </div>
                 <div class="search-circle" @click="showFriendsListMenus">

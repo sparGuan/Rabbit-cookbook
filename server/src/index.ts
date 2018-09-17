@@ -12,6 +12,7 @@ import { port, webServerDoMain, baseApi, limit } from './config/index';
 import path = require('path');
 import IO = require('koa-socket');
 import Socket, { ISocket } from './db/schema/socket';
+import User, { IUser } from './db/schema/user';
 // 中间件导入
 const ioLoader = require('./io/index');
 const catchError = require('./middlewares/catchErrors');
@@ -91,6 +92,7 @@ mongoosePaginate.paginate.options = {
         await Socket.remove({
             id: ctx.socket.id
         });
+        await User.update({sockId: ctx.socket.id}, {$set: {sockId: ''}})
     });
     mongoConnection(); // 最后连接数据库
   } catch (e) {

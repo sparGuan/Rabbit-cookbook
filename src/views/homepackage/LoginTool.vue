@@ -37,27 +37,47 @@ export default {
   mounted() {    
     this.updateLoginInfo();
   },
+  sockets: {
+    isLogin_sent(val){
+      val.userInfo.token = val.token
+      app.globalService.setUserInfo(val.userInfo)
+      this.showModal = false
+      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
+    }
+  },
   methods: {
     updateLoginInfo() {
+      // pc测试
       if (app.globalService.isLogin()) {
-        app.utils.getCurrentPosition(position => {
-          const longitude = position.coords.longitude; //获取经度
-          const latitude = position.coords.latitude;
-          alert(app.api.user.updateLoginInfo);
-          alert(app.globalService.getLoginUserInfo()._id);
-          alert(longitude);
-          alert(latitude);
-          app.api.user.updateLoginInfo({
+        console.log(1111)
+         app.api.user.updateLoginInfo({
             data: {
               userId: app.globalService.getLoginUserInfo()._id,
-              currentPosition: { longitude, latitude }
+              currentPosition: { longitude: '113.0071691637521' , latitude :'22.98209228868979' }
             },
             success: res => {
               if (res.message === 'success') {
+                console.log(22222)
+                this.$socket.emit('isLogin', res.user,res.token);
               }
             }
           });
-        });
+          // 正式手机测试
+        // app.utils.getCurrentPosition(position => {
+        //   const longitude = position.coords.longitude; //获取经度
+        //   const latitude = position.coords.latitude;
+        //   app.api.user.updateLoginInfo({
+        //     data: {
+        //       userId: app.globalService.getLoginUserInfo()._id,
+        //       currentPosition: { longitude, latitude }
+        //     },
+        //     success: res => {
+        //       if (res.message === 'success') {
+        //         this.$socket.emit('isLogin', res.user,res.token);
+        //       }
+        //     }
+        //   });
+        // });
       }
     },
     openLog() {
