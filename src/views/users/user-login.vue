@@ -101,22 +101,6 @@ export default {
       this.plusReady()
     })
   },
-  sockets: {
-    // 已经成功连接一次之后不会再进来了
-    connect() {
-      this.socketId = this.$socket.id
-      console.log(`The ${this.socketId} is connected`)
-    },
-    disconnect() {
-
-    },
-    isLogin_sent(val) {
-      val.userInfo.token = val.token
-      app.globalService.setUserInfo(val.userInfo)
-      this.showModal = false
-      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————user-login.Vue)')
-    }
-  },
   methods: {
     changeEye(e) {
       if (
@@ -285,6 +269,7 @@ export default {
           success: data => {
             if (data.message === 'success') {
               this.$socket.emit('isLogin', data.user,data.token);
+              this.showModal = false
             }
           },
           complete: () => {

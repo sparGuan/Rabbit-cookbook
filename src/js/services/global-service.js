@@ -98,6 +98,8 @@ export default {
 		socketId,
 		nickName,
 		sex,
+		friends,
+		requestList,
 		descPerson,
 		headBgImg,
 		openid, // 三方登录id
@@ -127,6 +129,8 @@ export default {
 				descPerson,
 				headBgImg: app.getResourceUrl(headBgImg),
 				openid,
+				friends,
+				requestList,
 				tenancyName,
 				token,
 				Mobile,

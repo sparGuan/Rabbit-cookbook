@@ -26,11 +26,11 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
         if (!global._.isEmpty(this.allowableUserId) && isValid(this.allowableUserId) && isValid(this.userId) && !global._.isEmpty(this.userId)) {
           await User.findByIdAndUpdate(this.userId, { $push: {
             friends: this.allowableUserId
-            }},{new:true})
-          // 如果id不为空          
+            }}, {new: true})
+          // 如果id不为空
           await User.findByIdAndUpdate(this.allowableUserId, { $push: {
           friends: this.userId
-          }},{new:true})
+          }}, {new: true})
           // 通过验证保存双方数据
           ctx.body = {
             message: statusCode
@@ -41,6 +41,36 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
       }
     };
   }
-  
+  // 搜索手机号，获取该好友信息
+  /**
+   * @param {string} Mobile 用户手机号
+   */
+  public searchNewFriends() {
+    return async (ctx: any) => {
+      const  { body }  = ctx.request;
+      if (!global._.isEmpty(body.Mobile)) {
+        this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
+        if (!global._.isEmpty(this.user)) {
+          // 返回的数据只需要昵称，年龄，描述，头像
+         const user = {
+          _id: this.user._id,
+          nickName: this.user.nickName,
+          headImg: this.user.headImg,
+          sex: this.user.sex,
+          age: this.user.age,
+          descPerson: this.user.descPerson
+         }
+          ctx.body = {
+            message: statusCode.success,
+            user
+          };
+        } else {
+          ctx.body = {
+            message: statusCode.noOne
+          };
+        }
+      }
+    }
+  }
 }
 export default new FriendsController();

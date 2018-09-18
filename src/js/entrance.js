@@ -29,7 +29,11 @@ const initVue = () => {
 		routers.createRouter(VueRouter, store),
 		Vue.extend(vueApp)
 	]
-	window.app.vueApp = new VueApp({ router, name: 'app', store }).$mount(
+	window.app.vueApp = new VueApp({ 
+		router, 
+		name: 'app', 
+		store
+		 }).$mount(
 		'#app'
 	)
 }

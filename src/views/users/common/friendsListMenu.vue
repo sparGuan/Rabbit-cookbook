@@ -171,12 +171,6 @@ export default {
     this.menuWrapperClassList = this.menuWrapper.classList;
     this.backdrop = this.$refs['menu-backdrop'];
   },
-  sockets: {
-    message(val){
-      val.newMsg = true
-      this.$emit('addFriend',val)
-    }
-  },
   methods: {
     setGoo() {
       this.setFilter('url(#goo)');
@@ -300,7 +294,7 @@ export default {
     searchNewFriends() {
       if (this.Mobile !== '') {
         const data = { Mobile: this.Mobile };
-        app.api.user.searchNewFriends({
+        app.api.userFriends.searchNewFriends({
           data,
           success: res => {
             if (res.message === 'success') {

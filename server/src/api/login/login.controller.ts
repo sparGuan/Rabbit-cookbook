@@ -92,7 +92,7 @@ class LoginController {
               passWord: body.passWord
             }
           }
-        );
+        ).select('-passWord -updateTime -logoutTime -createTime ');
         ctx.body = {
           message: statusCode.success,
           user: this.user
@@ -129,7 +129,7 @@ class LoginController {
           const salt = await bcrypt.genSalt$(this.saltRounds);
           body.passWord = await bcrypt.hash$(body.openid, salt);
           this.user = new User(body);
-          this.user = await this.user.save();
+          this.user = await this.user.save() as IUser;
         } else {
           expiredTime = Date.parse(
             getDateAfter('', statusCode.expiredTime, '/')
@@ -144,7 +144,7 @@ class LoginController {
               }
             },
             { new: true }
-          );
+          ).select('-passWord -updateTime -logoutTime -createTime ');
         }
         ctx.body = {
           message: statusCode.success,
@@ -187,7 +187,7 @@ class LoginController {
       const { body } = ctx.request;
       // 不用用户名登录就是手机登录
       if (!global._.isEmpty(body.Mobile)) {
-        this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
+        this.user = await User.findOne({ Mobile: body.Mobile }).select(' -updateTime -logoutTime -createTime ') as IUser;
       }
       // 如果找不到用户，就报401
       if (global._.isEmpty(this.user)) {
@@ -207,6 +207,7 @@ class LoginController {
             expiredTime = result;
           }
         ); // 设置过期时间
+        delete this.user.passWord;
         ctx.body = {
           message: statusCode.success,
           user: this.user,
@@ -274,15 +275,14 @@ class LoginController {
         const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
-        console.log(userId);
         this.userInfo = {
           updateTime: new Date(), // 更新时间
           currentPosition, // 更新当前位置
           expiredTime: expiredtime // 更新报废时长
         };
-        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {
+        this.user = await User.findByIdAndUpdate(userId, this.userInfo, {
           new: true
-        })) as IUser;
+        }).select('-passWord -updateTime -logoutTime -createTime ') as IUser;
         ctx.body = {
           message: statusCode.success,
           user: this.user,
@@ -326,9 +326,9 @@ class LoginController {
           const _id: string = this.userInfo.userId;
           if (!global._.isEmpty(_id) && isValid(_id)) {
             // 有ID就update
-            this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {
+            this.user = await User.findByIdAndUpdate(_id, this.userInfo, {
               new: true
-            })) as IUser;
+            }).select('-passWord -updateTime -logoutTime -createTime ') as IUser;
             reslove();
           }
         });
@@ -352,37 +352,6 @@ class LoginController {
         };
       }
     };
-  }
-  // 搜索手机号，获取该好友信息
-  /**
-   * @param {string} Mobile 用户手机号
-   */
-  public searchNewFriends() {
-    return async (ctx: any) => {
-      const  { body }  = ctx.request;
-      if (!global._.isEmpty(body.Mobile)) {
-        this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
-        if (!global._.isEmpty(this.user)) {
-          // 返回的数据只需要昵称，年龄，描述，头像
-         const user = {
-          _id: this.user._id,
-          nickName: this.user.nickName,
-          headImg: this.user.headImg,
-          sex: this.user.sex,
-          age: this.user.age,
-          descPerson: this.user.descPerson
-         }
-          ctx.body = {
-            message: statusCode.success,
-            user
-          };
-        } else {
-          ctx.body = {
-            message: statusCode.noOne
-          };
-        }
-      }
-    }
   }
 }
 export default new LoginController();

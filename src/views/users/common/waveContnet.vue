@@ -14,7 +14,7 @@
                   <ul>
                     <!-- 好友聊天小头像-->
                     <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -25+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
-                      <i class="new-msg iconfont icon-gengduo2" v-if="item.newMsg"></i>
+                      <svg class="icon new-msg" v-if="item.newMsg" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="648"><path d="M960 512a448 448 0 1 0-896 0A448 448 0 0 0 960 512z m-672.00000001 0a44.8 44.8 0 1 1 89.53600001-0.064A44.8 44.8 0 0 1 287.99999999 512z m179.20000001 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 467.2 512z m179.2 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 646.4 512z" fill="#d81e06" p-id="649"></path></svg>
                     </li>
                   </ul>
                 </div>
@@ -33,13 +33,14 @@
 const communicator = Array.from(
   require('@/js/data/testCommunity-user-center.json')
 );
+import { mapState } from 'vuex'
 export default {
   name: 'user-waveContnet',
-  props: ['value', 'isShowMenuModal','addFriendData'],
+  props: ['value', 'isShowMenuModal'],
   data() {
     return {
       isShowFriendsListMenus: false,
-      communicator: communicator,
+      communicator: [], // 好友和请求列表
       rowData: [
         {
           id: '0',
@@ -60,16 +61,29 @@ export default {
       ]
     };
   },
-  watch: {
-    addFriendData: function(old,now) {
-      console.log(old)
-      this.communicator.push(old)
-      console.log(this.communicator)
-    }
-  },
+  // watch: {
+  //   addFriendData: function(old,now) {
+  //     this.communicator.push(old)
+  //     console.log(this.communicator)
+  //   }
+  // },
   computed: {
+    ...mapState(['requestNewFriendsList']),
     isActive: function() {
       return (this.isShowFriendsListMenus = this.isShowMenuModal);
+    },
+    getRequestList: function() {
+      const requestNewFriendsList = app.globalService.getLoginUserInfo().requestList.map( item => {
+            app.getResourceUrl(item.headImg)
+            return item
+        } ) || []
+      const NewFriendsList = this.requestNewFriendsList || []
+      return [...requestNewFriendsList,...NewFriendsList]
+    }
+  },
+  watch: {
+    'requestNewFriendsList': function(now,old) {
+      this.communicator.push(now)
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -107,30 +121,38 @@ export default {
         this.getUserActivityInfoList(app.globalService.getLoginUserInfo()._id);
         this.$store.dispatch('updateKeepLivesConfig', {
           isReFlashActivityInfoList: false
-        });
+        }); // 清除缓存数据
+        const friends = app.globalService.getLoginUserInfo().friends || []
+        const requestList = this.getRequestList || []
+        console.log(this.getRequestList)
+        this.communicator = [...friends,...requestList]
       }
     });
   },
   methods: {
-
     // 后面处理忽略之后的操作
     chatOrgetNewFriend(item) {
       // 如果是新朋友提示消息
       if(item.isNew) {
         // 弹窗添加好友
-        const btnArray = ['忽略', '是'];
-        app.mui.confirm(`${item.nickName}请求添加好友`,'',btnArray, (e) => {
-          if (e.index == 1) 
-            {
-                item.isNew = false
-                // 调用接口，往后台添加好友数据
-                
-            } 
-            else 
-            {
-                
-            }
-        })
+        const btnArray = ['是', '忽略'];
+        this.$layer.open({
+          content: `${item.nickName}请求添加好友`,
+          btn: btnArray,
+          shadeClose: false,
+          yes: () => {
+            item.isNew = false
+            this.$layer.open({
+              content: '添加成功'
+              ,time: 2
+              ,skin: 'msg'
+            });
+            
+          },
+          no: () =>{
+
+          }
+        });
       } else {
         // 否则是旧好友，直接打开聊天窗口
         // 打开聊天窗

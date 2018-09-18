@@ -10,6 +10,7 @@ import { ISocket } from 'db/schema/socket';
  * */
 export interface IUser extends mongoose.Document {
   friends: IUser[] // 所有的好友
+  requestList: IUser[] // 请求列表
   tenancyName: string
   nickName: string
   openid: string
@@ -34,6 +35,9 @@ interface ICurrentPosition {
 }
 const user_schema: mongoose.Schema = new mongoose.Schema({
   friends: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  ],
+  requestList: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   ],
   tenancyName: {

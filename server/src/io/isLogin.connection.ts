@@ -19,8 +19,9 @@ export default (socket: any) => {
     const userInfo: IUser = await User.findByIdAndUpdate(user._id, { $set: {
       socket: socket_schema,
       updateTime: new Date()
-    }}, {new: true}) as IUser
-    console.log(`?>>>>>> ------> isLogin_${emit}`, userInfo)
+    }}, {new: true}).select('-passWord -updateTime -logoutTime -createTime ')
+    .populate({ path: 'requestList', select: ' headImg nickName descPerson sex' }).exec() as IUser
+    console.log(`here is isLogin.conn 23 page ${userInfo}`)
     // 返回去的token码是不带socket值的
     socket.emit(`isLogin_${emit}`, {userInfo, token});
   });

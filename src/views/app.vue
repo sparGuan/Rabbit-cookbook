@@ -56,6 +56,7 @@ export default {
   components: { Search, YouYingTitle,HeadSaveBtn },
   data() {
     return {
+      socketId: '',
       rightToolClass: 'layout-1'
     }
   },
@@ -65,7 +66,32 @@ export default {
   created() {
     this.initApp()
   },
-  mounted() {},
+  mounted() {
+  },
+  sockets: {
+    // 已经成功连接一次之后不会再进来了
+    connect() {
+      this.socketId = this.$socket.id
+      this.$store.commit('SOCKET_CONNECT')
+      console.log(`The ${this.socketId} is connected`)
+    },
+    disconnect() {
+      console.log(`The ${this.$socket.id} is connected`)
+    },
+    isLogin_sent(val){
+      val.userInfo.token = val.token
+      console.log(val)
+      app.globalService.setUserInfo(val.userInfo)
+      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
+    },
+		// 把它写在vuex里面去吧，然后监听vuex的数据变化，更新请求好友列表
+		// 每次有新信息来的时候把它放进vuex里面去，让每个页面可以监听到
+    message(val){
+      val.newMsg = true
+      console.log(val)
+			this.$store.commit('SOCKET_USER_MESSAGE',val)
+    }
+  },
   methods: {
     initApp: function() {
       var _this = this

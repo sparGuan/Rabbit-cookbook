@@ -10,10 +10,11 @@ import appData from './app-data'
 import appEvent from './app-event'
 import routerStatus from './router-status'
 import appSave from './app-save'
+import appSocketIoSession from './app-socketIoSession'
 Vue.use(Vuex);
 export default new Vuex.Store({
     strict: process.env.NODE_ENV !== 'PRD', //在非生产环境下，使用严格模式
     modules: {
-        appData, routerStatus, appEvent,appSave// 将所有公共的模块仍进去了
+        appData, routerStatus, appEvent, appSave,appSocketIoSession   // 将所有公共的模块仍进去了
     }
 })

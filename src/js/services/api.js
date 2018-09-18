@@ -7,4 +7,5 @@ import user from './api/user'
 import order from './api/order'
 import userActivity from './api/userActivity'
 import userDynamic from './api/userDynamic'
-export default {user, order,userActivity,userDynamic}
+import userFriends from './api/userFriends'
+export default {user, order,userActivity,userDynamic,userFriends}

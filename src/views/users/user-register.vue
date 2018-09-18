@@ -82,14 +82,14 @@ export default {
               Mobile: this.Mobile,
               passWord: this.passWord
             },
-            success: data => {
-              if (data.message === "success") {
+            success: res => {
+              if (res.message === "success") {
                 this.$emit("close", false);
                 app.mui.toast("注册成功!");
                 app.globalService.setUserInfo({
-                  token: data.token,
+                  token: res.token,
                   Mobile: this.Mobile,
-                  expiredTime: data.expiredTime // 失效时间
+                  expiredTime: res.expiredTime // 失效时间
                 });
               }
             },

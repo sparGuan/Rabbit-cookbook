@@ -37,19 +37,10 @@ export default {
   mounted() {    
     this.updateLoginInfo();
   },
-  sockets: {
-    isLogin_sent(val){
-      val.userInfo.token = val.token
-      app.globalService.setUserInfo(val.userInfo)
-      this.showModal = false
-      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
-    }
-  },
   methods: {
     updateLoginInfo() {
       // pc测试
       if (app.globalService.isLogin()) {
-        console.log(1111)
          app.api.user.updateLoginInfo({
             data: {
               userId: app.globalService.getLoginUserInfo()._id,
@@ -57,8 +48,9 @@ export default {
             },
             success: res => {
               if (res.message === 'success') {
-                console.log(22222)
+                console.log(11111)
                 this.$socket.emit('isLogin', res.user,res.token);
+                this.showModal = false
               }
             }
           });
