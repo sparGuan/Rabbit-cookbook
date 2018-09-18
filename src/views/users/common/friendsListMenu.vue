@@ -313,7 +313,7 @@ export default {
       if (status) {
         this.$refs['searchFriends'].focus();
         this.activeSearchToClass = status;
-      } else if (this.$refs['searchFriends'].value !== '') {
+      } else if (this.$refs['searchFriends'] && this.$refs['searchFriends'].value !== '') {
         this.$refs['searchFriends'].focus();
         this.activeSearchToClass = true;
       } else {

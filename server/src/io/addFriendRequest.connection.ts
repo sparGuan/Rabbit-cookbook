@@ -1,8 +1,5 @@
 import User , { IUser } from "../db/schema/user";
-import { emit } from '../config/index'
-import Socket, { ISocket } from '../db/schema/socket';
 export default (socket: any) => {
-const acceptUser = []
   // 实现需求，使用一条手机号向对应的客户端发送添加好友的请求
 socket.on('addFriendRequest', async (Mobile: string, userId: string) => {
     // 登录之后把user放进socket对象，然后完事

@@ -20,7 +20,8 @@ import Login from '../users/user-login';
 export default {
   components: { Login },
   watch: {
-    showModal(old, now) {
+    showModal(old, now) { 
+      console.log(app.globalService.isLogin())     
       if (app.globalService.isLogin()) {
         this.detals = '登出';
         this.icon = 'icon-shoujidenglu';
@@ -34,6 +35,14 @@ export default {
       showModal: false
     };
   },
+  sockets: {
+      isLogin_sent(val){
+        val.userInfo.token = val.token        
+        app.globalService.setUserInfo(val.userInfo)
+        this.showModal = false        
+        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
+      }
+    },
   mounted() {    
     this.updateLoginInfo();
   },
@@ -47,10 +56,8 @@ export default {
               currentPosition: { longitude: '113.0071691637521' , latitude :'22.98209228868979' }
             },
             success: res => {
-              if (res.message === 'success') {
-                console.log(11111)
+              if (res.message === 'success') {                
                 this.$socket.emit('isLogin', res.user,res.token);
-                this.showModal = false
               }
             }
           });

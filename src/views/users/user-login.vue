@@ -171,7 +171,15 @@ export default {
     微信直接登录
     QQ直接登录
     */
-
+    sockets: {
+      isLogin_sent(val){
+        val.userInfo.token = val.token
+        console.log(val)
+        app.globalService.setUserInfo(val.userInfo)        
+        this.showModal = false
+        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
+      }
+    },
     // 第三方登录，只为微信、QQ服务
     openThirdLogin(authId) {
       if (authId) {
@@ -199,12 +207,10 @@ export default {
                       headImg: auth.userInfo.headimgurl, // 头像图片
                       currentPosition: { longitude, latitude }
                     },
-                    success: data => {
-                      if (data.message === 'success') {
+                    success: res => {
+                      if (res.message === 'success') {
                         app.mui.toast('已登录')
-                        const userInfo = Object.assign(data.user,{token:data.token})
-                        app.globalService.setUserInfo(userInfo)
-                        this.showModal = false
+                        this.$socket.emit('isLogin', res.user,res.token);
                       }
                     },
                     complete: () => {
@@ -266,10 +272,10 @@ export default {
             Mobile: _this.Mobile,
             passWord: _this.passWord
           },
-          success: data => {
-            if (data.message === 'success') {
-              this.$socket.emit('isLogin', data.user,data.token);
-              this.showModal = false
+          success: res => {
+            if (res.message === 'success') {
+              this.$socket.emit('isLogin', res.user,res.token);
+             // this.showModal = false
             }
           },
           complete: () => {

@@ -15,7 +15,7 @@ export default {
 			if (message.headImg) {
 				message.headImg = app.getResourceUrl(message.headImg)
 			}
-			state.message = message;
+			state.message = message;			
 			state.requestNewFriendsList.push(message)
 		}
 	},

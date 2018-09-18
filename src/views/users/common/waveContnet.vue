@@ -11,9 +11,9 @@
                   <!-- <span class="establish-text">创建</span> -->
                 </div>
                 <div class="community">
-                  <ul>
+                  <ul style="padding-top:2px;" v-if="communicator.length > 0">
                     <!-- 好友聊天小头像-->
-                    <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -25+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
+                    <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
                       <svg class="icon new-msg" v-if="item.newMsg" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="648"><path d="M960 512a448 448 0 1 0-896 0A448 448 0 0 0 960 512z m-672.00000001 0a44.8 44.8 0 1 1 89.53600001-0.064A44.8 44.8 0 0 1 287.99999999 512z m179.20000001 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 467.2 512z m179.2 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 646.4 512z" fill="#d81e06" p-id="649"></path></svg>
                     </li>
                   </ul>
@@ -61,12 +61,6 @@ export default {
       ]
     };
   },
-  // watch: {
-  //   addFriendData: function(old,now) {
-  //     this.communicator.push(old)
-  //     console.log(this.communicator)
-  //   }
-  // },
   computed: {
     ...mapState(['requestNewFriendsList']),
     isActive: function() {
@@ -75,15 +69,22 @@ export default {
     getRequestList: function() {
       const requestNewFriendsList = app.globalService.getLoginUserInfo().requestList.map( item => {
             app.getResourceUrl(item.headImg)
+            item.newMsg = true            
             return item
-        } ) || []
-      const NewFriendsList = this.requestNewFriendsList || []
+        } ) || []        // 在数据库里面的好友信息        
+      const NewFriendsList = (this.requestNewFriendsList && this.requestNewFriendsList.map( item => {
+        item.newMsg = true
+        return item
+      })) || [] // 请求的好友信息
       return [...requestNewFriendsList,...NewFriendsList]
     }
   },
   watch: {
-    'requestNewFriendsList': function(now,old) {
-      this.communicator.push(now)
+    '$store.state.appSocketIoSession.requestNewFriendsList': {
+      handler: function(now,old) {        
+        this.communicator = this.communicator.concat(now)
+    },
+      deep: true    //深度监听
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -122,18 +123,18 @@ export default {
         this.$store.dispatch('updateKeepLivesConfig', {
           isReFlashActivityInfoList: false
         }); // 清除缓存数据
-        const friends = app.globalService.getLoginUserInfo().friends || []
-        const requestList = this.getRequestList || []
-        console.log(this.getRequestList)
-        this.communicator = [...friends,...requestList]
       }
+      const friends = app.globalService.getLoginUserInfo().friends || []
+      const requestList = this.getRequestList || []      
+      this.communicator = [...friends,...requestList]
     });
   },
   methods: {
     // 后面处理忽略之后的操作
     chatOrgetNewFriend(item) {
       // 如果是新朋友提示消息
-      if(item.isNew) {
+      console.log(item)
+      if(item.newMsg) {
         // 弹窗添加好友
         const btnArray = ['是', '忽略'];
         this.$layer.open({
@@ -271,7 +272,7 @@ export default {
     .community {
       display: inline-block;
       width: calc(~'100% - 115px');
-      height: 41px;
+      height: 46px;
       overflow: auto;
       white-space: nowrap;
       vertical-align: top;
@@ -296,11 +297,9 @@ export default {
     }
   }
   .new-msg {
-    font-size: 16px;
-    color: #d81e06;
     position: absolute;
-    right: -3px;
-    top: 0px;    
+    right: 2px;
+    top: -3px;    
   }
 }
 </style>
