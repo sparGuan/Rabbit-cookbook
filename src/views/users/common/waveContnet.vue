@@ -112,6 +112,8 @@ export default {
     });
   },
   methods: {
+
+    // 后面处理忽略之后的操作
     chatOrgetNewFriend(item) {
       // 如果是新朋友提示消息
       if(item.isNew) {
@@ -131,6 +133,7 @@ export default {
         })
       } else {
         // 否则是旧好友，直接打开聊天窗口
+        // 打开聊天窗
       }
     },
     checkHasMobileInfo() {

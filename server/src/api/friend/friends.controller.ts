@@ -31,6 +31,10 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
           await User.findByIdAndUpdate(this.allowableUserId, { $push: {
           friends: this.userId
           }},{new:true})
+          // 通过验证保存双方数据
+          ctx.body = {
+            message: statusCode
+          };
         }
       } catch (error) {
         throw error;
