@@ -6,34 +6,47 @@ import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
 class FriendsController extends BASE_OPEN_SOURCE_API {
   private user: IUser;
-  private allowableUserId: string;
+  private acceptUserId: string;
   private userId: string;
   constructor() {
     super();
   }
  /**
    *  响应该好友请求，添加成功
-   *  @param {string} allowableUserId 发起请求添加的id
+   *  @param {string} acceptUserId 发起请求添加的id
    *  @param {string} userId 当前用户ID
    *  @return void
    */
   public addNewFriend() {
     return async (ctx: any) => {
       // 让异步变同步
+      const  { body }  = ctx.request;
       try {
-        const  { body }  = ctx.request;
-        this.allowableUserId = body._id
-        if (!global._.isEmpty(this.allowableUserId) && isValid(this.allowableUserId) && isValid(this.userId) && !global._.isEmpty(this.userId)) {
+        this.acceptUserId = body.acceptUserId
+        this.userId = body.userId
+        console.log(this.acceptUserId)
+        console.log(this.userId)
+        if (!global._.isEmpty(this.acceptUserId) && isValid(this.acceptUserId) && isValid(this.userId) && !global._.isEmpty(this.userId)) {
           const acceptUser: IUser = await User.findByIdAndUpdate(this.userId, { $push: {
-            friends: this.allowableUserId
-            }}, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
+            friends: this.acceptUserId
+            },
+          $pull: {
+            requestList: this.acceptUserId
+          }  
+          }, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
           // 如果id不为空
-          const user: IUser = await User.findByIdAndUpdate(this.allowableUserId, { $push: {
-          friends: this.userId
-          }}, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
+          const user: IUser = await User.findByIdAndUpdate(this.acceptUserId, { $push: {
+              friends: this.userId
+           },
+            $pull: {
+              requestList: this.acceptUserId
+            } 
+        }, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
           // 通过验证保存双方数据
+          console.log(`请求发送的好友有：------->${acceptUser}`)
+          console.log(`当前用户是：------->${user}`)
           ctx.body = {
-            message: statusCode,
+            message: statusCode.success,
             relations: {acceptUser, user}
           };
         }

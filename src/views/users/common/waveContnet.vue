@@ -29,9 +29,9 @@
 <style lang="less" scoped>
 </style>
 <script>
-const communicator = Array.from(
-  require('@/js/data/testCommunity-user-center.json')
-);
+// const communicator = Array.from(
+//   require('@/js/data/testCommunity-user-center.json')
+// );
 import { mapState } from 'vuex';
 export default {
   name: 'user-waveContnet',
@@ -66,6 +66,7 @@ export default {
       return (this.isShowFriendsListMenus = this.isShowMenuModal);
     },
     getRequestList: function() {
+      console.log(1111)
       const requestNewFriendsList =
         app.globalService.getLoginUserInfo().requestList.map(item => {
           app.getResourceUrl(item.headImg);
@@ -85,7 +86,8 @@ export default {
   watch: {
     '$store.state.appSocketIoSession.requestNewFriendsList': {
       handler: function(now, old) {
-        this.communicator = this.communicator.concat(now);
+        const communicator = this.communicator.slice()
+        this.communicator = communicator.concat(now);
       },
       deep: true //深度监听
     }
@@ -132,6 +134,14 @@ export default {
       this.communicator = [...friends, ...requestList];
     });
   },
+  sockets: {
+    // 发送请求消息的用户更新
+    updateBothRelations_sent(acceptUser) {
+      console.log(acceptUser)
+      app.globalService.setUserInfo(acceptUser)
+      this.communicator.push(acceptUser)
+    }
+  },
   methods: {
     // 后面处理忽略之后的操作
     chatOrgetNewFriend(item) {
@@ -150,17 +160,19 @@ export default {
             // res为0时是用户点击了左边  为1时用户点击了右边
             if (res > 0) {
               // 是
-              item.newMsg = false;
-              const allowableUserId = item._id
+              console.log(app.globalService.getLoginUserInfo()._id)
+              const acceptUserId = item._id
               const userId = app.globalService.getLoginUserInfo()._id
-              const data = {allowableUserId,userId}
+              const data = {acceptUserId,userId}
               app.api.userFriends.addNewFriend({
                 data,
                 success: res => {
                   if (res.message === 'success') {
                     // 把更新好友关系的当前用户重新设置到缓存里去
                     app.globalService.setUserInfo(res.relations.user)
-                    this.$socket.emit('updateBothRelations',res.relations)
+                    item.newMsg = false;
+                    // 通知请求用户，好友添加完成
+                    this.$socket.emit('updateBothRelations',res.relations.acceptUser)
                   }
                 }
               });
