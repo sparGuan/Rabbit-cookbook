@@ -1,5 +1,4 @@
 <template>
-
     <div class="wra-contnet mui-scroll-wrapper" ref="wra_contnet">
         <!-- 宝箱内部的是随机功能 -->
         <!-- 随机获得个人发布 -->
@@ -11,7 +10,7 @@
                   <!-- <span class="establish-text">创建</span> -->
                 </div>
                 <div class="community">
-                  <ul style="padding-top:2px;" v-if="communicator.length > 0">
+                  <ul style="padding-top:5px;" v-if="communicator.length > 0">
                     <!-- 好友聊天小头像-->
                     <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
                       <svg class="icon new-msg" v-if="item.newMsg" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="648"><path d="M960 512a448 448 0 1 0-896 0A448 448 0 0 0 960 512z m-672.00000001 0a44.8 44.8 0 1 1 89.53600001-0.064A44.8 44.8 0 0 1 287.99999999 512z m179.20000001 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 467.2 512z m179.2 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 646.4 512z" fill="#d81e06" p-id="649"></path></svg>
@@ -33,7 +32,7 @@
 const communicator = Array.from(
   require('@/js/data/testCommunity-user-center.json')
 );
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 export default {
   name: 'user-waveContnet',
   props: ['value', 'isShowMenuModal'],
@@ -67,24 +66,28 @@ export default {
       return (this.isShowFriendsListMenus = this.isShowMenuModal);
     },
     getRequestList: function() {
-      const requestNewFriendsList = app.globalService.getLoginUserInfo().requestList.map( item => {
-            app.getResourceUrl(item.headImg)
-            item.newMsg = true            
-            return item
-        } ) || []        // 在数据库里面的好友信息        
-      const NewFriendsList = (this.requestNewFriendsList && this.requestNewFriendsList.map( item => {
-        item.newMsg = true
-        return item
-      })) || [] // 请求的好友信息
-      return [...requestNewFriendsList,...NewFriendsList]
+      const requestNewFriendsList =
+        app.globalService.getLoginUserInfo().requestList.map(item => {
+          app.getResourceUrl(item.headImg);
+          item.newMsg = true;
+          return item;
+        }) || []; // 在数据库里面的好友信息
+      const NewFriendsList =
+        (this.requestNewFriendsList &&
+          this.requestNewFriendsList.map(item => {
+            item.newMsg = true;
+            return item;
+          })) ||
+        []; // 请求的好友信息
+      return [...requestNewFriendsList, ...NewFriendsList];
     }
   },
   watch: {
     '$store.state.appSocketIoSession.requestNewFriendsList': {
-      handler: function(now,old) {        
-        this.communicator = this.communicator.concat(now)
-    },
-      deep: true    //深度监听
+      handler: function(now, old) {
+        this.communicator = this.communicator.concat(now);
+      },
+      deep: true //深度监听
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -124,53 +127,65 @@ export default {
           isReFlashActivityInfoList: false
         }); // 清除缓存数据
       }
-      const friends = app.globalService.getLoginUserInfo().friends || []
-      const requestList = this.getRequestList || []      
-      this.communicator = [...friends,...requestList]
+      const friends = app.globalService.getLoginUserInfo().friends || [];
+      const requestList = this.getRequestList || [];
+      this.communicator = [...friends, ...requestList];
     });
   },
   methods: {
     // 后面处理忽略之后的操作
     chatOrgetNewFriend(item) {
       // 如果是新朋友提示消息
-      console.log(item)
-      if(item.newMsg) {
+      if (item.newMsg) {
         // 弹窗添加好友
-        const btnArray = ['是', '忽略'];
-        this.$layer.open({
-          content: `${item.nickName}请求添加好友`,
-          btn: btnArray,
-          shadeClose: false,
-          yes: () => {
-            item.isNew = false
-            this.$layer.open({
-              content: '添加成功'
-              ,time: 2
-              ,skin: 'msg'
-            });
-            
-          },
-          no: () =>{
-
-          }
-        });
+        const btnArray = ['忽略', '是'];
+        this.$layer
+          .dialog({
+            content: `${item.nickName}请求添加好友?`,
+            btn: btnArray,
+            shadeClose: false,
+            contentClass: 'layer-content'
+          }) // 如果有btn
+          .then(res => {
+            // res为0时是用户点击了左边  为1时用户点击了右边
+            if (res > 0) {
+              // 是
+              item.newMsg = false;
+              const allowableUserId = item._id
+              const userId = app.globalService.getLoginUserInfo()._id
+              const data = {allowableUserId,userId}
+              app.api.userFriends.addNewFriend({
+                data,
+                success: res => {
+                  if (res.message === 'success') {
+                    // 把更新好友关系的当前用户重新设置到缓存里去
+                    app.globalService.setUserInfo(res.relations.user)
+                    this.$socket.emit('updateBothRelations',res.relations)
+                  }
+                }
+              });
+            }
+          });
       } else {
         // 否则是旧好友，直接打开聊天窗口
         // 打开聊天窗
       }
     },
     checkHasMobileInfo() {
-      if(app.globalService.isLogin() && app.globalService.getLoginUserInfo().Mobile) {
-        return true
+      if (
+        app.globalService.isLogin() &&
+        app.globalService.getLoginUserInfo().Mobile
+      ) {
+        return true;
       }
-      return false
+      return false;
     },
     showFriendsListMenus() {
       if (this.checkHasMobileInfo()) {
         this.isShowFriendsListMenus = true;
         this.$emit('showFriendsListMenus', this.isShowFriendsListMenus);
       } else {
-        app.mui.toast('请先完善个人信息')
+        app.mui.toast('请先完善个人信息');
       }
     },
     // 浏览活动
@@ -189,9 +204,9 @@ export default {
             data.activityList.forEach(item => {
               item.bgBanner = app.getResourceUrl(
                 app.getResourceUrl(item.bgBanner)
-              ); 
+              );
               if (item.bgBanner.indexOf('src/imgs') > -1) {
-                console.log(item.bgBanner)
+                console.log(item.bgBanner);
                 item.bgBanner = require('../../../../src/imgs/test/bgbingxue.png');
               }
               this.rowData.push(item);
@@ -279,6 +294,7 @@ export default {
       .community-item {
         width: 39px;
         height: 39px;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
         background-color: blueviolet;
         display: inline-block;
         border-radius: 50%;
@@ -299,7 +315,7 @@ export default {
   .new-msg {
     position: absolute;
     right: 2px;
-    top: -3px;    
+    top: -3px;
   }
 }
 </style>

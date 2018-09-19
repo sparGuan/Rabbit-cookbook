@@ -24,16 +24,17 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
         const  { body }  = ctx.request;
         this.allowableUserId = body._id
         if (!global._.isEmpty(this.allowableUserId) && isValid(this.allowableUserId) && isValid(this.userId) && !global._.isEmpty(this.userId)) {
-          await User.findByIdAndUpdate(this.userId, { $push: {
+          const acceptUser: IUser = await User.findByIdAndUpdate(this.userId, { $push: {
             friends: this.allowableUserId
-            }}, {new: true})
+            }}, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
           // 如果id不为空
-          await User.findByIdAndUpdate(this.allowableUserId, { $push: {
+          const user: IUser = await User.findByIdAndUpdate(this.allowableUserId, { $push: {
           friends: this.userId
-          }}, {new: true})
+          }}, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
           // 通过验证保存双方数据
           ctx.body = {
-            message: statusCode
+            message: statusCode,
+            relations: {acceptUser, user}
           };
         }
       } catch (error) {

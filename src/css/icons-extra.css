@@ -156,6 +156,12 @@
 .mui-icon {
 	font-size: 18px;
 }
+/* layer.css */
+.layui-m-layerbtn span:nth-child(1) {
+	border-right: 1px solid #D0D0D0;
+	border-radius: 0 0 0 5px;
+}
+.layer-content.layui-m-layercont {padding:30px;}
 /* icomoon */
 @font-face {
 	font-family: 'icomoon';

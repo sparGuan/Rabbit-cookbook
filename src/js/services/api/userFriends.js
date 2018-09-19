@@ -20,17 +20,17 @@ define(() =>{
 		// 		)
 		// 	);
 		// },
-		// //查询用户基本信息
-		// queryUserCommunicator: ajaxOptions => {
-		// 	return app.ajax(
-		// 		window.app.mui.extend(
-		// 			{
-		// 				url: '/api/friend/queryUserCommunicator'
-		// 			},
-		// 			ajaxOptions
-		// 		)
-		// 	);
-		// }
+		//查询用户基本信息
+		addNewFriend: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/friend/addNewFriend'
+					},
+					ajaxOptions
+				)
+			);
+		},
 		searchNewFriends: ajaxOptions => {
 			return app.ajax(
 				window.app.mui.extend(
