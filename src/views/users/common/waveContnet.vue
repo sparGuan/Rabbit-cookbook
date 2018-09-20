@@ -13,7 +13,8 @@
                   <ul style="padding-top:5px;" v-if="communicator.length > 0">
                     <!-- 好友聊天小头像-->
                     <li class="community-item" v-for="(item,index) in communicator" :key="item.id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
-                      <svg class="icon new-msg" v-if="item.newMsg" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="648"><path d="M960 512a448 448 0 1 0-896 0A448 448 0 0 0 960 512z m-672.00000001 0a44.8 44.8 0 1 1 89.53600001-0.064A44.8 44.8 0 0 1 287.99999999 512z m179.20000001 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 467.2 512z m179.2 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 646.4 512z" fill="#d81e06" p-id="649"></path></svg>
+                      <svg class="icon new-msg" v-if="item.newMsg" style="font-size: 44px;width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="68147"><path d="M512 512m-174.40768 0a174.40768 174.40768 0 1 0 348.81536 0 174.40768 174.40768 0 1 0-348.81536 0Z" fill="#F08943" p-id="68148"></path><path d="M491.64288 416.11264h39.87456v75.50976h76.36992v40.7552h-76.36992v75.50976h-39.87456v-75.50976h-75.53024v-40.7552h75.53024v-75.50976z" fill="#FFFFFF" p-id="68149"></path></svg>
+                      <!-- <svg class="icon new-msg" v-if="item.newMsg" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="648"><path d="M960 512a448 448 0 1 0-896 0A448 448 0 0 0 960 512z m-672.00000001 0a44.8 44.8 0 1 1 89.53600001-0.064A44.8 44.8 0 0 1 287.99999999 512z m179.20000001 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 467.2 512z m179.2 0a44.8 44.8 0 1 1 89.536-0.064A44.8 44.8 0 0 1 646.4 512z" fill="#d81e06" p-id="649"></path></svg> -->
                     </li>
                   </ul>
                 </div>
@@ -29,10 +30,6 @@
 <style lang="less" scoped>
 </style>
 <script>
-// const communicator = Array.from(
-//   require('@/js/data/testCommunity-user-center.json')
-// );
-import { mapState } from 'vuex';
 export default {
   name: 'user-waveContnet',
   props: ['value', 'isShowMenuModal'],
@@ -61,33 +58,20 @@ export default {
     };
   },
   computed: {
-    ...mapState(['requestNewFriendsList']),
     isActive: function() {
       return (this.isShowFriendsListMenus = this.isShowMenuModal);
-    },
-    getRequestList: function() {
-      console.log(1111)
-      const requestNewFriendsList =
-        app.globalService.getLoginUserInfo().requestList.map(item => {
-          app.getResourceUrl(item.headImg);
-          item.newMsg = true;
-          return item;
-        }) || []; // 在数据库里面的好友信息
-      const NewFriendsList =
-        (this.requestNewFriendsList &&
-          this.requestNewFriendsList.map(item => {
-            item.newMsg = true;
-            return item;
-          })) ||
-        []; // 请求的好友信息
-      return [...requestNewFriendsList, ...NewFriendsList];
     }
   },
   watch: {
-    '$store.state.appSocketIoSession.requestNewFriendsList': {
+    '$store.state.appSocketIoSession.requestNewFriend': {
       handler: function(now, old) {
-        const communicator = this.communicator.slice()
-        this.communicator = communicator.concat(now);
+        // const communicator = this.communicator.slice()
+        // const newCommunicators = now.map( item => {
+        //     now.newMsg = true
+        // })
+        // this.communicator = communicator.concat(newCommunicators);
+        const newCommunicators = Object.assign(now,{newMsg:true})
+        this.communicator = this.communicator.concat(newCommunicators);
       },
       deep: true //深度监听
     }
@@ -130,19 +114,28 @@ export default {
         }); // 清除缓存数据
       }
       const friends = app.globalService.getLoginUserInfo().friends || [];
-      const requestList = this.getRequestList || [];
+      const requestList = this.getRequestList();
       this.communicator = [...friends, ...requestList];
     });
   },
   sockets: {
     // 发送请求消息的用户更新
     updateBothRelations_sent(acceptUser) {
-      console.log(acceptUser)
       app.globalService.setUserInfo(acceptUser)
       this.communicator.push(acceptUser)
     }
   },
   methods: {
+    getRequestList() {
+      const requestFriendsList =
+        app.globalService.getLoginUserInfo().requestList.map(item => {
+          app.getResourceUrl(item.headImg);
+          item.newMsg = true;
+          return item; // 刷新能拿到的数据
+        }) || []; // 在数据库里面的好友信息
+        // 获取从别得页面登录进来的数据
+      return requestFriendsList
+    },
     // 后面处理忽略之后的操作
     chatOrgetNewFriend(item) {
       // 如果是新朋友提示消息
@@ -170,9 +163,9 @@ export default {
                   if (res.message === 'success') {
                     // 把更新好友关系的当前用户重新设置到缓存里去
                     app.globalService.setUserInfo(res.relations.user)
-                    item.newMsg = false;
                     // 通知请求用户，好友添加完成
                     this.$socket.emit('updateBothRelations',res.relations.acceptUser)
+                    item.newMsg = false //从数据库中读回来的数据是没问题的
                   }
                 }
               });
@@ -231,6 +224,12 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
 .wra-contnet {
   width: calc(~'100% - 60px');
   margin-right: 10px;
@@ -303,10 +302,11 @@ export default {
       overflow: auto;
       white-space: nowrap;
       vertical-align: top;
+      width: calc(~'100% - 65px');
       .community-item {
         width: 39px;
         height: 39px;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 5px #eee;
         background-color: blueviolet;
         display: inline-block;
         border-radius: 50%;
@@ -326,8 +326,8 @@ export default {
   }
   .new-msg {
     position: absolute;
-    right: 2px;
-    top: -3px;
+    right: -15px;
+    top: -18px;
   }
 }
 </style>

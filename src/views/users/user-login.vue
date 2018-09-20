@@ -173,9 +173,7 @@ export default {
     */
     sockets: {
       isLogin_sent(val){
-        val.userInfo.token = val.token
-        console.log(val)
-        app.globalService.setUserInfo(val.userInfo)        
+        app.globalService.setUserInfo(val)        
         this.showModal = false
         console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
       }
@@ -210,7 +208,7 @@ export default {
                     success: res => {
                       if (res.message === 'success') {
                         app.mui.toast('已登录')
-                        this.$socket.emit('isLogin', res.user,res.token);
+                        this.$socket.emit('isLogin', res.user);
                       }
                     },
                     complete: () => {
@@ -274,7 +272,7 @@ export default {
           },
           success: res => {
             if (res.message === 'success') {
-              this.$socket.emit('isLogin', res.user,res.token);
+              this.$socket.emit('isLogin', res.user);
              // this.showModal = false
             }
           },

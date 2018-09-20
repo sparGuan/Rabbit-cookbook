@@ -3,7 +3,7 @@ export default {
 	state: {
 		connect: false,
 		message: null,
-		requestNewFriendsList: []
+		requestNewFriend: null
 	},
 	mutations: {
 		// commit该函数，自动触发
@@ -11,13 +11,12 @@ export default {
 			state.connect = true;
 		},
 		// 添加好友重要性比较强，所以使用了message
-		SOCKET_USER_MESSAGE: (state, message) => {
-			if (message.headImg) {
-				message.headImg = app.getResourceUrl(message.headImg)
+		SOCKET_USER_MESSAGE: (state, user) => {
+			if (user.headImg) {
+				user.headImg = app.getResourceUrl(user.headImg)
 			}
-			state.message = message;			
-			state.requestNewFriendsList.push(message)
-		}
+			state.requestNewFriend = user
+		},
 	},
 	actions: {
 		otherAction: (context, type) => {

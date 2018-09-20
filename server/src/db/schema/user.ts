@@ -13,6 +13,7 @@ export interface IUser extends mongoose.Document {
   requestList: IUser[] // 请求列表
   tenancyName: string
   nickName: string
+  token: string,
   openid: string
   passWord: string
   headImg: string
@@ -45,6 +46,10 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
     trim: true
   },
   nickName: {
+    type: String,
+    trim: true
+  },
+  token: {
     type: String,
     trim: true
   },

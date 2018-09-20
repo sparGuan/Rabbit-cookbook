@@ -11,7 +11,7 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
   constructor() {
     super();
   }
- /**
+  /**
    *  响应该好友请求，添加成功
    *  @param {string} acceptUserId 发起请求添加的id
    *  @param {string} userId 当前用户ID
@@ -20,34 +20,61 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
   public addNewFriend() {
     return async (ctx: any) => {
       // 让异步变同步
-      const  { body }  = ctx.request;
+      const { body } = ctx.request;
       try {
-        this.acceptUserId = body.acceptUserId
-        this.userId = body.userId
-        console.log(this.acceptUserId)
-        console.log(this.userId)
-        if (!global._.isEmpty(this.acceptUserId) && isValid(this.acceptUserId) && isValid(this.userId) && !global._.isEmpty(this.userId)) {
-          const acceptUser: IUser = await User.findByIdAndUpdate(this.userId, { $push: {
-            friends: this.acceptUserId
+        this.acceptUserId = body.acceptUserId;
+        this.userId = body.userId;
+        if (
+          !global._.isEmpty(this.acceptUserId) &&
+          isValid(this.acceptUserId) &&
+          isValid(this.userId) &&
+          !global._.isEmpty(this.userId)
+        ) {
+          const acceptUser: IUser = (await User.findByIdAndUpdate(
+            this.acceptUserId,
+            {
+              $push: {
+                friends: this.userId
+              },
+              $pull: {
+                requestList: this.userId
+              }
             },
-          $pull: {
-            requestList: this.acceptUserId
-          }  
-          }, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
+            { new: true }
+          )
+            .populate({
+              path: 'friends',
+              select: '-passWord -updateTime -logoutTime -createTime'
+            })
+            .populate({
+              path: 'socket',
+              select: 'id'
+            })) as IUser;
           // 如果id不为空
-          const user: IUser = await User.findByIdAndUpdate(this.acceptUserId, { $push: {
-              friends: this.userId
-           },
-            $pull: {
-              requestList: this.acceptUserId
-            } 
-        }, {new: true}).populate({ path: 'friends', select: '-passWord -updateTime -logoutTime -createTime' }) as IUser
+          const user: IUser = (await User.findByIdAndUpdate(
+            this.userId,
+            {
+              $push: {
+                friends: this.acceptUserId
+              },
+              $pull: {
+                requestList: this.acceptUserId
+              }
+            },
+            { new: true }
+          )
+            .populate({
+              path: 'friends',
+              select: '-passWord -updateTime -logoutTime -createTime'
+            })
+            .populate({
+              path: 'socket',
+              select: 'id'
+            })) as IUser;
           // 通过验证保存双方数据
-          console.log(`请求发送的好友有：------->${acceptUser}`)
-          console.log(`当前用户是：------->${user}`)
           ctx.body = {
             message: statusCode.success,
-            relations: {acceptUser, user}
+            relations: { acceptUser, user }
           };
         }
       } catch (error) {
@@ -61,22 +88,16 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
    */
   public searchNewFriends() {
     return async (ctx: any) => {
-      const  { body }  = ctx.request;
+      const { body } = ctx.request;
       if (!global._.isEmpty(body.Mobile)) {
-        this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
+        this.user = (await User.findOne({ Mobile: body.Mobile }).select(
+          '-passWord -updateTime -logoutTime -createTime '
+        )) as IUser;
         if (!global._.isEmpty(this.user)) {
           // 返回的数据只需要昵称，年龄，描述，头像
-         const user = {
-          _id: this.user._id,
-          nickName: this.user.nickName,
-          headImg: this.user.headImg,
-          sex: this.user.sex,
-          age: this.user.age,
-          descPerson: this.user.descPerson
-         }
           ctx.body = {
             message: statusCode.success,
-            user
+            user: this.user
           };
         } else {
           ctx.body = {
@@ -84,7 +105,7 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
           };
         }
       }
-    }
+    };
   }
 }
 export default new FriendsController();

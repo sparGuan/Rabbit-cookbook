@@ -113,7 +113,7 @@ export default {
 	}) {
 		if (expiredTime > 0) {
 			// 如果登录没有过期
-			const _site_local_storage = app. globalService.getSiteLocalStorage()
+			const _site_local_storage = app.globalService.getSiteLocalStorage()
 			if (
 				_site_local_storage.userInfo === null ||
 				typeof _site_local_storage.userInfo !== 'object'

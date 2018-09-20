@@ -21,7 +21,6 @@ export default {
   components: { Login },
   watch: {
     showModal(old, now) { 
-      console.log(app.globalService.isLogin())     
       if (app.globalService.isLogin()) {
         this.detals = '登出';
         this.icon = 'icon-shoujidenglu';
@@ -37,8 +36,7 @@ export default {
   },
   sockets: {
       isLogin_sent(val){
-        val.userInfo.token = val.token        
-        app.globalService.setUserInfo(val.userInfo)
+        app.globalService.setUserInfo(val)
         this.showModal = false        
         console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
       }
@@ -57,7 +55,7 @@ export default {
             },
             success: res => {
               if (res.message === 'success') {                
-                this.$socket.emit('isLogin', res.user,res.token);
+                this.$socket.emit('isLogin', res.user);
               }
             }
           });

@@ -124,10 +124,28 @@ class LoginController {
           };
           return;
         }
-        this.user = (await User.findOne({ openid: body.openid })) as IUser;
+        this.user = (await User.findOneAndUpdate({ openid: body.openid }, {$set: {
+          // 生成 token 返回给客户端
+          token: jwt.sign(
+            {
+              data: body.Mobile,
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+            },
+            'secret'
+          )
+        }}, {new: true})) as IUser;
         if (global._.isEmpty(this.user)) {
           const salt = await bcrypt.genSalt$(this.saltRounds);
           body.passWord = await bcrypt.hash$(body.openid, salt);
+          body.token = jwt.sign(
+            {
+              data: body.openid, // 但三方登录使用openid作为token
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+            },
+            'secret'
+          )
           this.user = new User(body);
           this.user = await this.user.save() as IUser;
         } else {
@@ -182,12 +200,23 @@ class LoginController {
     );
     return expiredTime;
   }
+  // 每次手机登录都生成token值
   public useMobileLogin() {
     return async (ctx: any, next: any) => {
       const { body } = ctx.request;
       // 不用用户名登录就是手机登录
       if (!global._.isEmpty(body.Mobile)) {
-        this.user = await User.findOne({ Mobile: body.Mobile }).select(' -updateTime -logoutTime -createTime ') as IUser;
+        this.user = await User.findOneAndUpdate({ Mobile: body.Mobile }, {$set: {
+          // 生成 token 返回给客户端
+          token: jwt.sign(
+            {
+              data: body.Mobile,
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+            },
+            'secret'
+          )
+        }}, {new: true}).select(' -updateTime -logoutTime -createTime ') as IUser;
       }
       // 如果找不到用户，就报401
       if (global._.isEmpty(this.user)) {
@@ -211,15 +240,6 @@ class LoginController {
         ctx.body = {
           message: statusCode.success,
           user: this.user,
-          // 生成 token 返回给客户端
-          token: jwt.sign(
-            {
-              data: this.user,
-              // 设置 token 过期时间
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-            },
-            'secret'
-          ),
           expiredTime
         };
       } else {
@@ -275,25 +295,18 @@ class LoginController {
         const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
-        this.userInfo = {
-          updateTime: new Date(), // 更新时间
-          currentPosition, // 更新当前位置
-          expiredTime: expiredtime // 更新报废时长
+        this.userInfo = { $set: {
+            updateTime: new Date(), // 更新时间
+            currentPosition, // 更新当前位置
+            expiredTime: expiredtime // 更新报废时长
+          }
         };
         this.user = await User.findByIdAndUpdate(userId, this.userInfo, {
           new: true
         }).select('-passWord -updateTime -logoutTime -createTime ') as IUser;
         ctx.body = {
           message: statusCode.success,
-          user: this.user,
-          token: jwt.sign(
-            {
-              data: this.user,
-              // 设置 token 过期时间
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-            },
-            'secret'
-          )
+          user: this.user
         };
       }
     };
@@ -336,15 +349,7 @@ class LoginController {
       if (!global._.isEmpty(this.user)) {
         ctx.body = {
           message: statusCode.success,
-          user: this.user,
-          token: jwt.sign(
-            {
-              data: this.user,
-              // 设置 token 过期时间
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-            },
-            'secret'
-          )
+          user: this.user
         };
       } else {
         ctx.body = {

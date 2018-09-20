@@ -37,8 +37,9 @@ const initVue = () => {
 			// 把它写在vuex里面去吧，然后监听vuex的数据变化，更新请求好友列表
 			// 每次有新信息来的时候把它放进vuex里面去，让每个页面可以监听到
 			message(val){
-				val.newMsg = true
+				// 重新更新用户信息
 				console.log(val)
+				window.app.globalService.setUserInfo(val)
 				this.$store.commit('SOCKET_USER_MESSAGE',val)
 			}
 		}
