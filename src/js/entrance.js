@@ -39,8 +39,8 @@ const initVue = () => {
 			message(val){
 				// 重新更新用户信息
 				console.log(val)
-				window.app.globalService.setUserInfo(val)
-				this.$store.commit('SOCKET_USER_MESSAGE',val)
+				window.app.globalService.setUserInfo(val.acceptUser)
+				this.$store.commit('SOCKET_USER_MESSAGE',val.sentUser)
 			}
 		}
 	}).$mount(

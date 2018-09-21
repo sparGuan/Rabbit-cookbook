@@ -36,6 +36,7 @@ export default {
   },
   sockets: {
       isLogin_sent(val){
+        console.log(val)
         app.globalService.setUserInfo(val)
         this.showModal = false        
         console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')

@@ -327,6 +327,8 @@ export default {
       this.busying = true;
       if (this.menuWrapperClassList.contains('mui-active')) {
         this.$refs['friendsListViewMenu'].classList.remove('menu-open');
+        this.newFirendsList = []
+        this.Mobile = ''
         this.menuWrapper.className = 'menu-wrapper fade-out-up animated';
         this.menu.className = 'menu bounce-out-up animated';
         setTimeout(() => {

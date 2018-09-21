@@ -47,6 +47,10 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
               select: '-passWord -updateTime -logoutTime -createTime'
             })
             .populate({
+              path: 'requestList',
+              select: '-passWord -updateTime -logoutTime -createTime'
+            })
+            .populate({
               path: 'socket',
               select: 'id'
             })) as IUser;
@@ -65,6 +69,10 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
           )
             .populate({
               path: 'friends',
+              select: '-passWord -updateTime -logoutTime -createTime'
+            })
+            .populate({
+              path: 'requestList',
               select: '-passWord -updateTime -logoutTime -createTime'
             })
             .populate({

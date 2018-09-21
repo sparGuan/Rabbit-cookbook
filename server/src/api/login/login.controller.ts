@@ -303,7 +303,11 @@ class LoginController {
         };
         this.user = await User.findByIdAndUpdate(userId, this.userInfo, {
           new: true
-        }).select('-passWord -updateTime -logoutTime -createTime ') as IUser;
+        }).select('-passWord -updateTime -logoutTime -createTime ')
+        .populate({
+          path: 'requestList',
+          select: '-passWord -updateTime -logoutTime -createTime'
+        }) as IUser;
         ctx.body = {
           message: statusCode.success,
           user: this.user

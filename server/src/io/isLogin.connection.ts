@@ -20,9 +20,11 @@ export default (socket: any) => {
       socket: socket_schema,
       updateTime: new Date()
     }}, {new: true}).select('-passWord -updateTime -logoutTime -createTime ')
-    .populate({ path: 'requestList', select: ' headImg nickName descPerson sex _id' })
-    .populate({ path: 'friends', select: ' headImg nickName descPerson sex _id' })
+    .populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
+    .populate({ path: 'friends', select: ' headImg nickName descPerson sex ' })
     .exec() as IUser
+    console.log('测试该处返回的是否为旧数据................')
+    console.log(userInfo)
     // console.log(`here is isLogin.conn 23 page ${userInfo}`)
     // 返回去的token码是不带socket值的
     socket.emit(`isLogin_${emit}`, userInfo);
