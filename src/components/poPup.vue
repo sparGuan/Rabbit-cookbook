@@ -69,7 +69,7 @@ export default{
 	},
 	methods:{
 		hidePopup(){
-			if(this.maskClose){
+			if(this.maskClose){				
 				this.$emit('hideFun');
 				//this.show = false;
 			}

@@ -5,14 +5,10 @@
 }
 
 .chat-window {
-	width: 310px;
 	margin: 0 auto;
 	overflow: hidden;
-	border: 0px solid #36383a;
-	border-width: 50px 15px;
-	color: #474c57;
-	border-radius: 20px;
-	font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	border: 0px solid #36383a;	
+	color: #474c57;		
 }
 
 @media screen and (max-width:380px) {
@@ -125,6 +121,9 @@
 	border: none;
 	padding: 0 0.75em;
 	color: inherit;
+	& > i {
+		font-size: 26px;
+	}
 }
 
 .chat-input {
@@ -140,7 +139,7 @@
 }
 
 .chat-input:empty::before {
-	content: "Write something...";
+	content: "请输入...";
 	color: #2B8EC2;
 }
 
@@ -165,6 +164,7 @@
 
 .chat-send>i {
 	position: relative;
+	font-size: 26px;
 }
 
 .chat-effect-container {

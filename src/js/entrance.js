@@ -37,10 +37,16 @@ const initVue = () => {
 			// 把它写在vuex里面去吧，然后监听vuex的数据变化，更新请求好友列表
 			// 每次有新信息来的时候把它放进vuex里面去，让每个页面可以监听到
 			message(val){
-				// 重新更新用户信息
-				console.log(val)
+				// 重新更新用户信息				
 				window.app.globalService.setUserInfo(val.acceptUser)
 				this.$store.commit('SOCKET_USER_MESSAGE',val.sentUser)
+			},
+			// 接收请求的频道，加入频道进行通讯
+			onChatOne_sent(chatOne,user) {
+				// icon-huaban
+				// 给setUser的头像增加一个new
+				// user.isOnChat = true
+				this.$store.commit('SOCKET_USER_MESSAGE',user)
 			}
 		}
 	}).$mount(

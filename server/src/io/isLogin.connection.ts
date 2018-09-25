@@ -23,8 +23,6 @@ export default (socket: any) => {
     .populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
     .populate({ path: 'friends', select: ' headImg nickName descPerson sex ' })
     .exec() as IUser
-    console.log('测试该处返回的是否为旧数据................')
-    console.log(userInfo)
     // console.log(`here is isLogin.conn 23 page ${userInfo}`)
     // 返回去的token码是不带socket值的
     socket.emit(`isLogin_${emit}`, userInfo);

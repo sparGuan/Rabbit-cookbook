@@ -57,6 +57,8 @@
                      </div><user-waveContnet 
                      :isShowMenuModal="isShowMenuModal"
                      @showFriendsListMenus="showFriendsListMenus" 
+                     @openChatcallBack="openChatcallBack"
+                     @changeChatList="changeChatList"
                      ></user-waveContnet>
                 </div>     			
               </div>
@@ -89,12 +91,14 @@
     </div>
     <user-friendsListMenu v-model="isShowMenuModal">
     </user-friendsListMenu>
+    <user-friendsChat v-model="isOpenChat" :title="friendTitle" :chatList="chatList"></user-friendsChat>
 	</div>
 </template>
 <script>
 import userDynamic from './user-dynamic';
 import userAuthentication from './user-authentication';
 import waveContnet from './common/waveContnet';
+import friendsChat from './common/friendsChat';
 import friendsListMenu from './common/friendsListMenu';
 import takeH5Photos from '../../js/utils/takeH5Photos';
 export default {
@@ -103,7 +107,8 @@ export default {
     'user-dynamic': userDynamic,
     'user-authentication': userAuthentication,
     'user-waveContnet': waveContnet,
-    'user-friendsListMenu':friendsListMenu
+    'user-friendsListMenu':friendsListMenu,
+    'user-friendsChat': friendsChat
   },
   beforeRouteEnter(to, from, next) {
     // 在渲染该组件的对应路由被 confirm 前调用
@@ -162,7 +167,9 @@ export default {
       isStartAuthentication: false,
       toolIndex: 0,
       dataBase64: '',
-      takeH5Photos: null
+      takeH5Photos: null,
+      isOpenChat: false,
+      friendTitle:'Spar'
     };
   },
   mounted() {
@@ -171,6 +178,12 @@ export default {
     });
   },
   methods: {
+    changeChatList(chatList) {
+      this.chatList = chatList
+    },
+    openChatcallBack (status) {
+      this.isOpenChat = status
+    },
     showFriendsListMenus(isShow) {
       this.isShowMenuModal = isShow
     },
