@@ -5,7 +5,7 @@
           <div class="chat-window">
             <div class="chat-messages">
               <ol class="chat-messages-list">
-                <li class="chat-message chat-message-friend" v-for=" (item,index) in chatList" :key="index">
+                <li class="chat-message chat-message-friend" v-for=" (item,index) in chatList.Meta" :key="index">
                   <div class="chat-message-bubble" v-html="item.Meta.message">  </div>                  
                 </li>
               </ol>

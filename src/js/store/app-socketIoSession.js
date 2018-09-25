@@ -12,6 +12,7 @@ export default {
 		},
 		// 添加好友重要性比较强，所以使用了message
 		SOCKET_USER_MESSAGE: (state, user) => {
+			console.log(user)
 			if (user.headImg) {
 				user.headImg = app.getResourceUrl(user.headImg)
 			}

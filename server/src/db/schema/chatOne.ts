@@ -1,5 +1,5 @@
 import mongoose = require('mongoose');
-import { IUser } from './user'
+import { IUser } from './user';
 /**
  * 用户模型
  * @param {IUser} acceptUser 被请求的用户
@@ -17,27 +17,31 @@ export interface IChatOne extends mongoose.Document {
   // 最后修改日期
   update_at: Date;
 }
-export interface IMeta {  
+export interface IMeta {
   user: IUser;
   message: any;
-  UserMsgDate: Date
+  UserMsgDate: Date;
 }
 const chatOne_schema: mongoose.Schema = new mongoose.Schema({
   acceptUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  Meta: [{
-      user: {  
-      type: mongoose.Schema.Types.ObjectId,
-      trim: true,
-      ref: 'User'}, // 发送信息的用户
+  Meta: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }, // 发送信息的用户
       message: { type: Object, default: '' }, // 发送的消息
       UserMsgDate: { type: Date, default: Date.now } // 时间
-  }],
+    }
+  ],
   create_at: {
-    type: Date, default: Date.now
+    type: Date,
+    default: Date.now
   },
   update_at: {
-    type: Date, default: Date.now
+    type: Date,
+    default: Date.now
   }
 });
 // 转化成普通 JavaScript 对象

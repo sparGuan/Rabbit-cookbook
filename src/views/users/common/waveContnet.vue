@@ -124,8 +124,8 @@ export default {
       // 给setUser的头像增加一个new
       // user.isOnChat = true
       // this.$store.commit('SOCKET_USER_MESSAGE',user)
-      chatOne.forEach(element => {
-        element.Meta.user.headImg = app.getResourceUrl(element.Meta.user.headImg)
+      chatOne.Meta.forEach(element => {
+        element.user.headImg = app.getResourceUrl(element.user.headImg)
       });
       this.$emit('changeChatList',chatOne)
     }

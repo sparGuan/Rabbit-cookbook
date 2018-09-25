@@ -169,7 +169,8 @@ export default {
       dataBase64: '',
       takeH5Photos: null,
       isOpenChat: false,
-      friendTitle:'Spar'
+      friendTitle:'Spar',
+      chatList: []
     };
   },
   mounted() {
