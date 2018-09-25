@@ -91,7 +91,7 @@
     </div>
     <user-friendsListMenu v-model="isShowMenuModal">
     </user-friendsListMenu>
-    <user-friendsChat v-model="isOpenChat" :title="friendTitle" :chatList="chatList"></user-friendsChat>
+    <user-friendsChat v-model="isOpenChat" :title="friendTitle" :chatList="chatList" @changeChatList="changeChatList"></user-friendsChat>
 	</div>
 </template>
 <script>

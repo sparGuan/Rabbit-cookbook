@@ -35,8 +35,7 @@ export default (socket: any) => {
 				// 创建channel表
 				const body = {
 					acceptUser,
-					user,
-					Meta: { user }
+					user					
 				};
 				let chatOne: IChatOne = new ChatOne (
 					body

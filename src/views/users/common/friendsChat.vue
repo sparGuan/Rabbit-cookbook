@@ -4,9 +4,9 @@
       <div data-page="friends-chat" >
           <div class="chat-window">
             <div class="chat-messages">
-              <ol class="chat-messages-list">
-                <li class="chat-message chat-message-friend" v-for=" (item,index) in chatList.Meta" :key="index">
-                  <div class="chat-message-bubble" v-html="item.Meta.message">  </div>                  
+              <ol class="chat-messages-list" >
+                <li class="chat-message chat-message-friend" v-if="Object.keys(chatList).length > 0 && chatList.Meta.length > 0" v-for=" (item,index) in chatList.Meta" :key="index">
+                  <div class="chat-message-bubble" v-if="item.message !== ''" v-html="item.message">  </div>                  
                 </li>
               </ol>
             </div>
@@ -21,7 +21,7 @@
                 <button class="chat-input-tool">
                   <i class="iconfont icon-camerarotate"></i>
                 </button>
-                <div class="chat-input" contenteditable @input="listenForUpdateHeight" ></div>
+                <div class="chat-input" contenteditable  ></div>
                 <button class="chat-send" @click="clickSendButton($event)" @keydown="keydown($event)">
                   <i class="iconfont icon-fasong1"></i>
                 </button>
@@ -80,6 +80,16 @@ export default {
     },
     bottomShow(now, old) {
       this.$emit('input', now);
+    },
+    chatList(now, old) {      
+     this.initDom()
+    }
+  },
+  sockets:{
+    updateChatList_sent(chatList) {
+      if (Object.keys(chatList).length > 0) {
+        this.emit('changeChatList',chatList)
+      }
     }
   },
   methods: {
@@ -87,9 +97,9 @@ export default {
       this.$input = $('.chat-input');
       this.$sendButton = $('.chat-send');
       this.$messagesContainer = $('.chat-messages');
-      this.$messagesList = $('.chat-messages-list');
       this.$effectContainer = $('.chat-effect-container');
       this.$infoContainer = $('.chat-info-container');
+      this.$messagesList = $('.chat-messages-list');
     },
     gooOn() {
       this.setFilter('url(#goo)');
@@ -104,15 +114,15 @@ export default {
         filter: value
       });
     },
-    addMessage(message, self) {
+    addMessage(message, self) {      
       let $messageContainer = $('<li/>')
         .addClass(
           'chat-message ' + (self ? 'chat-message-self' : 'chat-message-friend')
         )
-        .appendTo(this.$messagesList);
+        .appendTo(this.$messagesList);        
       let $messageBubble = $('<div/>')
         .addClass('chat-message-bubble')
-        .appendTo($messageContainer);
+        .appendTo($messageContainer);        
       $messageBubble.text(message);
       let oldScroll = this.$messagesContainer.scrollTop();
       this.$messagesContainer.scrollTop(9999999);
@@ -129,19 +139,21 @@ export default {
           ease: Quint.easeOut
         }
       );
-
       return {
         $container: $messageContainer,
         $bubble: $messageBubble
       };
     },
+    // 实现每发送一条信息，往数据库表里面添加对应数据
     sendMessage() {
       let message = this.$input.text();
-      if (message == '') return;
+      if (message === '') {
+        return;
+      }
       this.lastMessage = message;
-      let messageElements = this.addMessage(message, true),
+      const messageElements = this.addMessage(message, true),
         $messageContainer = messageElements.$container,
-        $messageBubble = messageElements.$bubble;
+        $messageBubble = messageElements.$bubble;        
       let oldInputHeight = $('.chat-input-bar').height();
       this.$input.text('');
       this.updateChatHeight();
@@ -154,7 +166,7 @@ export default {
         .css({
           left: this.$input.position().left - 12,
           top: this.$input.position().top + this.bleeding + inputHeightDiff
-        });
+        });        
       let messagePos = $messageBubble.offset();
       let effectPos = $messageEffect.offset();
       let pos = {
@@ -167,7 +179,7 @@ export default {
         y: -30,
         force3D: true,
         ease: Quad.easeOut,
-        onComplete: function() {
+        onComplete: () => {
           TweenMax.fromTo(
             $sendIcon,
             0.15,
@@ -181,7 +193,7 @@ export default {
               force3D: true,
               ease: Quad.easeOut
             }
-          );
+          );          
         }
       });
       this.gooOn();
@@ -240,6 +252,11 @@ export default {
           if (!this.isFriendTyping){
             this.gooOff();
           } 
+          // 此处应该是最后阶段了，开始向服务器发送数据，刷新列表数据
+          if (this.chatList.Meta._id !== '') {
+            // 更新好友双方数据列表
+            this.$socket.emit('updateChatList',app.globalService.getLoginUserInfo()._id,this.chatList._id,message)
+          }
         }
       });
       this.messages++;
@@ -248,7 +265,7 @@ export default {
         this.lastMessage.indexOf('?') > -1 ||
         this.messages == 1
       )
-        this.getReply();
+      this.getReply();
     },
     getReply() {
       if (this.incomingMessages > 2) return;
@@ -263,7 +280,7 @@ export default {
       let end = start + length;
       if (end >= source.length) {
         end = source.length - 1;
-        length = nd - start;
+        length = end - start;
       }
       let message = '';
       for (let i = 0; i < length; i++) {
@@ -367,8 +384,9 @@ export default {
       });
     },
     updateChatHeight() {
+      console.log($('.chat-input-bar').outerHeight(true))
       this.$messagesContainer.css({
-        height: window.innerHeight * .8 - $('.chat-input-bar').height()
+        height: window.innerHeight * .8 - $('.chat-input-bar').outerHeight(true)
       });
     },
     keydown(event) {
@@ -380,15 +398,13 @@ export default {
     clickSendButton(event) {
       event.preventDefault();
       this.sendMessage();
-    },
-    listenForUpdateHeight() {
-      this.updateChatHeight();
     }
   }
 };
 </script>
 <style lang="less" scoped>
-@import url('./chat.less');
+@import url('./chat.css');
 [data-page='friends-chat'] {
 }
+
 </style>
