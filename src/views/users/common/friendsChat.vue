@@ -5,8 +5,16 @@
           <div class="chat-window">
             <div class="chat-messages">
               <ol class="chat-messages-list" >
-                <li class="chat-message chat-message-friend" v-if="Object.keys(chatList).length > 0 && chatList.Meta.length > 0" v-for=" (item,index) in chatList.Meta" :key="index">
-                  <div class="chat-message-bubble" v-if="item.message !== ''" v-html="item.message">  </div>                  
+                <li class="chat-message " v-if="Object.keys(chatList).length > 0 && chatList.Meta.length > 0" v-for=" (item,index) in chatList.Meta" :key="index" :class="checkMySelf(item.userId) ? 'chat-message-self':'chat-message-friend'" >
+                  <div class="user-info">
+                    <span class="nick-name" v-text="item.nickName" v-if="checkMySelf(item.userId)"></span>
+                    <div class="head-img" :style="'background-image:url('+item.headImg+')'"></div>
+                    <span class="nick-name" v-text="item.nickName" v-if="!checkMySelf(item.userId)"></span>
+                  </div>
+                  <div class="chat-message-bubble" v-if="item.message !== ''" > 
+                    <div class="arrow"></div>
+                    <div class="bubble" v-html="item.message"></div>
+                  </div>                  
                 </li>
               </ol>
             </div>
@@ -94,6 +102,9 @@ export default {
     }
   },
   methods: {
+    checkMySelf(userId) {
+      return app.globalService.getLoginUserInfo()._id === userId
+    },
     initDom() {
       this.$input = $('.chat-input');
       this.$sendButton = $('.chat-send');
@@ -121,10 +132,18 @@ export default {
           'chat-message ' + (self ? 'chat-message-self' : 'chat-message-friend')
         )
         .appendTo(this.$messagesList);
-      let $messageBubble = $('<div/>')
+      let $userContent = $(
+                            '<div class="user-info">'+
+                              '<span class="nick-name">'+app.globalService.getLoginUserInfo().nickName+'</span>'+
+                              '<div class="head-img" style="background-image:url('+app.globalService.getLoginUserInfo().headImg+')"></div>'+
+                            '</div>').appendTo($messageContainer);   
+      let $messageBubble = $('<div>'+
+                            '<div class="arrow" style="top: -3px;right: -8px;"></div>'+
+                            '<div class="bubble"></div>'+
+                            '</div>')
         .addClass('chat-message-bubble')
         .appendTo($messageContainer);
-      $messageBubble.text(message);
+      $messageBubble.find('.bubble').html(message);
       let oldScroll = this.$messagesContainer.scrollTop();
       this.$messagesContainer.scrollTop(9999999);
       let newScroll = this.$messagesContainer.scrollTop();
@@ -141,6 +160,7 @@ export default {
         }
       );
       return {
+        $userContent: $userContent,
         $container: $messageContainer,
         $bubble: $messageBubble
       };
@@ -157,7 +177,7 @@ export default {
         $messageBubble = messageElements.$bubble;
       let oldInputHeight = $('.chat-input-bar').height();
       this.$input.text('');
-      this.updateChatHeight();
+      // this.updateChatHeight();
       let newInputHeight = $('.chat-input-bar').height();
       let inputHeightDiff = newInputHeight - oldInputHeight;
       let $messageEffect = $('<div/>')
@@ -266,15 +286,19 @@ export default {
         }
       });
       this.messages++;
-      if (
-        Math.random() < 0.65 ||
-        this.lastMessage.indexOf('?') > -1 ||
-        this.messages == 1
-      )
-        this.getReply();
+      // 此处是判断对方是否回复
+      // if (
+      //   Math.random() < 0.65 ||
+      //   this.lastMessage.indexOf('?') > -1 ||
+      //   this.messages == 1
+      // ) {
+      //   this.getReply();
+      // }
     },
     getReply() {
-      if (this.incomingMessages > 2) return;
+      if (this.incomingMessages > 2) {
+        return;
+      }
       this.incomingMessages++;
       let typeStartDelay =
         1000 + this.lastMessage.length * 40 + Math.random() * 1000;
@@ -353,7 +377,6 @@ export default {
     friendStoppedTyping() {
       if (!this.isFriendTyping) return;
       this.isFriendTyping = false;
-
       let $dots = this.$effectContainer.find('.chat-effect-dots');
       TweenMax.to($dots, 0.3, {
         y: 40,
@@ -414,5 +437,6 @@ export default {
 <style lang="less" scoped>
 @import url('./chat.css');
 [data-page='friends-chat'] {
+  
 }
 </style>

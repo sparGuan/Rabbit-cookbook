@@ -26,10 +26,17 @@ export default (socket: any) => {
         .populate({ path: 'socket', select: 'id' })
         .select('-passWord -updateTime -logoutTime -createTime ')
         .exec()) as IUser; // 需要请求的用户
-      const chat: IChatOne = (await ChatOne.findOne({
+      let chat: IChatOne = (await ChatOne.findOne({
         acceptUser,
         user
       })) as IChatOne;
+      // 如果搜不到，反过来再搜一次
+      if (global._.isEmpty(chat)) {
+        chat = (await ChatOne.findOne({
+          acceptUser: user,
+          user: acceptUser
+        })) as IChatOne;
+      }
       // 获取所有的频道，判断是否在对应的频道上
       // 新需求，创建一张频道表，将聊天双方存入信息存入数据库，，读取双方数据发送双方聊天窗口
       if (global._.isEmpty(chat)) {
