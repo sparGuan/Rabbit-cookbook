@@ -49,9 +49,9 @@ export default {
   components: {
     Popup
   },
-  props: ['value','friendTitle','chatList'],
+  props: ['value', 'friendTitle', 'chatList'],
   data() {
-    return {      
+    return {
       bottomShow: false,
       $input: null,
       $sendButton: null,
@@ -81,14 +81,15 @@ export default {
     bottomShow(now, old) {
       this.$emit('input', now);
     },
-    chatList(now, old) {      
-     this.initDom()
+    chatList(now, old) {
+      this.initDom();
     }
   },
-  sockets:{
-    updateChatList_sent(chatList) {
+  sockets: {
+    chatOne_sent(chatList) {
+      console.log(chatList);
       if (Object.keys(chatList).length > 0) {
-        this.emit('changeChatList',chatList)
+        this.$emit('changeChatList', chatList);
       }
     }
   },
@@ -114,15 +115,15 @@ export default {
         filter: value
       });
     },
-    addMessage(message, self) {      
+    addMessage(message, self) {
       let $messageContainer = $('<li/>')
         .addClass(
           'chat-message ' + (self ? 'chat-message-self' : 'chat-message-friend')
         )
-        .appendTo(this.$messagesList);        
+        .appendTo(this.$messagesList);
       let $messageBubble = $('<div/>')
         .addClass('chat-message-bubble')
-        .appendTo($messageContainer);        
+        .appendTo($messageContainer);
       $messageBubble.text(message);
       let oldScroll = this.$messagesContainer.scrollTop();
       this.$messagesContainer.scrollTop(9999999);
@@ -153,7 +154,7 @@ export default {
       this.lastMessage = message;
       const messageElements = this.addMessage(message, true),
         $messageContainer = messageElements.$container,
-        $messageBubble = messageElements.$bubble;        
+        $messageBubble = messageElements.$bubble;
       let oldInputHeight = $('.chat-input-bar').height();
       this.$input.text('');
       this.updateChatHeight();
@@ -166,7 +167,7 @@ export default {
         .css({
           left: this.$input.position().left - 12,
           top: this.$input.position().top + this.bleeding + inputHeightDiff
-        });        
+        });
       let messagePos = $messageBubble.offset();
       let effectPos = $messageEffect.offset();
       let pos = {
@@ -193,7 +194,7 @@ export default {
               force3D: true,
               ease: Quad.easeOut
             }
-          );          
+          );
         }
       });
       this.gooOn();
@@ -246,17 +247,22 @@ export default {
         delay: 0.65,
         opacity: 0,
         ease: Quad.easeInOut,
-        onComplete: () =>{
+        onComplete: () => {
           TweenMax.killTweensOf($messageEffect);
           $messageEffect.remove();
-          if (!this.isFriendTyping){
+          if (!this.isFriendTyping) {
             this.gooOff();
-          } 
-          // 此处应该是最后阶段了，开始向服务器发送数据，刷新列表数据
-          if (this.chatList.Meta._id !== '') {
-            // 更新好友双方数据列表
-            this.$socket.emit('updateChatList',app.globalService.getLoginUserInfo()._id,this.chatList._id,message)
           }
+          // 此处应该是最后阶段了，开始向服务器发送数据，刷新列表数据
+          // 更新好友双方数据列表
+          console.log(message);
+          console.log(this.chatList);
+          this.$socket.emit(
+            'chatOne',
+            this.chatList.acceptUser,
+            this.chatList.user,
+            message
+          );
         }
       });
       this.messages++;
@@ -265,7 +271,7 @@ export default {
         this.lastMessage.indexOf('?') > -1 ||
         this.messages == 1
       )
-      this.getReply();
+        this.getReply();
     },
     getReply() {
       if (this.incomingMessages > 2) return;
@@ -304,7 +310,9 @@ export default {
       }, typeDelay + typeStartDelay);
     },
     friendIsTyping() {
-      if (this.isFriendTyping) return;
+      if (this.isFriendTyping) {
+        return;
+      }
       this.isFriendTyping = true;
       let $dots = $('<div/>')
         .addClass('chat-effect-dots')
@@ -384,9 +392,10 @@ export default {
       });
     },
     updateChatHeight() {
-      console.log($('.chat-input-bar').outerHeight(true))
+      console.log($('.chat-input-bar').outerHeight(true));
       this.$messagesContainer.css({
-        height: window.innerHeight * .8 - $('.chat-input-bar').outerHeight(true)
+        height:
+          window.innerHeight * 0.8 - $('.chat-input-bar').outerHeight(true)
       });
     },
     keydown(event) {
@@ -406,5 +415,4 @@ export default {
 @import url('./chat.css');
 [data-page='friends-chat'] {
 }
-
 </style>

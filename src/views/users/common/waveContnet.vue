@@ -125,7 +125,7 @@ export default {
       // user.isOnChat = true
       // this.$store.commit('SOCKET_USER_MESSAGE',user)
       chatOne.Meta.forEach(element => {
-        element.user.headImg = app.getResourceUrl(element.user.headImg)
+        element.headImg = app.getResourceUrl(element.headImg)
       });
       this.$emit('changeChatList',chatOne)
     }
@@ -189,6 +189,7 @@ export default {
         // 打开聊天窗
         // 点击之后先把他们拉到同一个组里面去
         // 发起新建组请求
+        // chatID应该是在item里面的id
         this.$socket.emit('chatOne',item._id,app.globalService.getLoginUserInfo()._id)
         this.$emit('openChatcallBack', true)
       }
@@ -228,7 +229,6 @@ export default {
                 app.getResourceUrl(item.bgBanner)
               );
               if (item.bgBanner.indexOf('src/imgs') > -1) {
-                console.log(item.bgBanner);
                 item.bgBanner = require('../../../../src/imgs/test/bgbingxue.png');
               }
               this.rowData.push(item);

@@ -18,7 +18,9 @@ export interface IChatOne extends mongoose.Document {
   update_at: Date;
 }
 export interface IMeta {
-  user: IUser;
+  userId: string, // 发送信息的用户
+  nickName: string,
+  headImg: string,
   message: any;
   UserMsgDate: Date;
 }
@@ -27,10 +29,9 @@ const chatOne_schema: mongoose.Schema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   Meta: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      }, // 发送信息的用户
+      userId: { type: String , require: true}, // 发送信息的用户
+      nickName: {type: String, require: true},
+      headImg: {type: mongoose.Schema.Types.Mixed, require: true},
       message: { type: Object, default: '' }, // 发送的消息
       UserMsgDate: { type: Date, default: Date.now } // 时间
     }

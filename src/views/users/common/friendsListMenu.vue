@@ -244,14 +244,18 @@ export default {
           this.setGooNoComp();
           this.sendIcon.style.display = 'none';
           // 这里开始发送sockiet请求
-          this.$socket.emit('addFriendRequest', this.Mobile,app.globalService.getLoginUserInfo()._id);
+          this.$socket.emit(
+            'addFriendRequest',
+            this.Mobile,
+            app.globalService.getLoginUserInfo()._id
+          );
         }
       });
       TweenMax.to(this.sendButton, 0.6, {
         scale: 0.5,
         ease: Back.easeOut
       });
-      mui('.send-button,.send-indicator-dot').each((i, item) => {        
+      mui('.send-button,.send-indicator-dot').each((i, item) => {
         this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
       });
       setTimeout(() => {
@@ -287,7 +291,7 @@ export default {
           TweenMax.to(this.sendButton, 0.3, {
             scale: 1,
             ease: Back.easeOut
-          });          
+          });
         }, 1000);
       }, 3000 + Math.random() * 3000);
     },
@@ -313,7 +317,10 @@ export default {
       if (status) {
         this.$refs['searchFriends'].focus();
         this.activeSearchToClass = status;
-      } else if (this.$refs['searchFriends'] && this.$refs['searchFriends'].value !== '') {
+      } else if (
+        this.$refs['searchFriends'] &&
+        this.$refs['searchFriends'].value !== ''
+      ) {
         this.$refs['searchFriends'].focus();
         this.activeSearchToClass = true;
       } else {
@@ -327,8 +334,8 @@ export default {
       this.busying = true;
       if (this.menuWrapperClassList.contains('mui-active')) {
         this.$refs['friendsListViewMenu'].classList.remove('menu-open');
-        this.newFirendsList = []
-        this.Mobile = ''
+        this.newFirendsList = [];
+        this.Mobile = '';
         this.menuWrapper.className = 'menu-wrapper fade-out-up animated';
         this.menu.className = 'menu bounce-out-up animated';
         setTimeout(() => {
