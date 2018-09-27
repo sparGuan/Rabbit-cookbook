@@ -94,6 +94,7 @@
 </template>
 <script>
 import Publish from './common/publish';
+const echarts = require('echarts');
 export default {
   components: { Publish },
   props: ['headImg', 'nickName', 'descPerson'],
@@ -165,7 +166,6 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // 基于准备好的dom，初始化echarts实例
-      const echarts = require('echarts');
       const myChart = echarts.init(this.$refs['sixStart']);
       myChart.setOption(this.optionChar);
       this.queryUserAndFriendsDynamic();

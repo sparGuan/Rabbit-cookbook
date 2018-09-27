@@ -3,9 +3,9 @@
    <Popup ref='bottom' :show='bottomShow' :title="friendTitle" :maskClose="true" @hideFun="bottomShow = false">
       <div data-page="friends-chat" >
           <div class="chat-window">
-            <div class="chat-messages">
-              <ol class="chat-messages-list" >
-                <li class="chat-message " v-if="Object.keys(chatList).length > 0 && chatList.Meta.length > 0" v-for=" (item,index) in chatList.Meta" :key="index" :class="checkMySelf(item.userId) ? 'chat-message-self':'chat-message-friend'" >
+            <div class="chat-messages mui-scroll-wrapper" ref="chat-messages">
+              <ul class="chat-messages-list mui-scroll" >
+                <li class="chat-message " v-if="Object.keys(chatList).length > 0 && chatList.Meta.length > 0" v-for=" item in chatList.Meta" :key="item._id" :class="checkMySelf(item.userId) ? 'chat-message-self':'chat-message-friend'" >
                   <div class="user-info">
                     <span class="nick-name" v-text="item.nickName" v-if="checkMySelf(item.userId)"></span>
                     <div class="head-img" :style="'background-image:url('+item.headImg+')'"></div>
@@ -16,7 +16,7 @@
                     <div class="bubble" v-html="item.message"></div>
                   </div>                  
                 </li>
-              </ol>
+              </ul>
             </div>
             <!-- 输入展示内容   -->
             <div class="chat-input-bar">
@@ -67,6 +67,7 @@ export default {
       $messagesList: null,
       $effectContainer: null,
       $infoContainer: null,
+      $lastMessageContainer: null,
       messages: 0,
       bleeding: 100,
       isFriendTyping: false,
@@ -81,21 +82,38 @@ export default {
     this.initDom();
     this.gooOff();
     this.updateChatHeight();
+    mui(this.$refs['chat-messages']).scroll({
+        deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        indicators: true // 是否显示滚动条
+      });
   },
   watch: {
     value(now, old) {
+      // 如何做到先清除，再渲染
+      // $('.chat-messages-list').html('')
       this.bottomShow = now;
     },
     bottomShow(now, old) {
       this.$emit('input', now);
+      if (!now && this.$lastMessageContainer) {
+        this.$lastMessageContainer.remove()
+      }
     },
-    chatList(now, old) {
-      this.initDom();
+    'chatList': {
+      handler: function(newVal,oldVal) {
+        mui(this.$refs['chat-messages']).scroll().refresh(); 
+        mui(this.$refs['chat-messages']).scroll().scrollToBottom(10);// 100毫秒滚动到顶
+      },
+      deep: true    //深度监听
     }
   },
   sockets: {
-    chatOne_sent(chatList) {
-      console.log(chatList);
+    onChatOne_sent(chatList) {
+      if (this.$lastMessageContainer) {
+         mui(this.$refs['chat-messages']).scroll().refresh(); 
+          mui(this.$refs['chat-messages']).scroll().scrollToBottom(10);// 100毫秒滚动到顶
+          this.$lastMessageContainer.remove()
+      }
       if (Object.keys(chatList).length > 0) {
         this.$emit('changeChatList', chatList);
       }
@@ -135,10 +153,10 @@ export default {
       let $userContent = $(
                             '<div class="user-info">'+
                               '<span class="nick-name">'+app.globalService.getLoginUserInfo().nickName+'</span>'+
-                              '<div class="head-img" style="background-image:url('+app.globalService.getLoginUserInfo().headImg+')"></div>'+
+                              '<div class="head-img" style="background-image:url('+app.globalService.getLoginUserInfo().headImg+');margin-left: 3px;"></div>'+
                             '</div>').appendTo($messageContainer);   
       let $messageBubble = $('<div>'+
-                            '<div class="arrow" style="top: -3px;right: -8px;"></div>'+
+                            '<div class="arrow" style="top: 0px;right: -12px;"></div>'+
                             '<div class="bubble"></div>'+
                             '</div>')
         .addClass('chat-message-bubble')
@@ -275,14 +293,19 @@ export default {
           }
           // 此处应该是最后阶段了，开始向服务器发送数据，刷新列表数据
           // 更新好友双方数据列表
-          console.log(message);
-          console.log(this.chatList);
-          this.$socket.emit(
+          const acceptUserId = this.chatList.acceptUser === app.globalService.getLoginUserInfo()._id ? this.chatList.user: this.chatList.acceptUser;
+          this.$lastMessageContainer = $messageContainer
+          setTimeout( () => {
+            // mui(this.$refs['chat-messages']).scroll().refresh(); 
+            // mui(this.$refs['chat-messages']).scroll().scrollToBottom(10);//100毫秒滚动到顶
+            // $messageContainer.remove()
+            this.$socket.emit(
             'chatOne',
-            this.chatList.acceptUser,
-            this.chatList.user,
+            acceptUserId,
+            app.globalService.getLoginUserInfo()._id,
             message
-          );
+            );
+          },300)
         }
       });
       this.messages++;
@@ -415,7 +438,6 @@ export default {
       });
     },
     updateChatHeight() {
-      console.log($('.chat-input-bar').outerHeight(true));
       this.$messagesContainer.css({
         height:
           window.innerHeight * 0.8 - $('.chat-input-bar').outerHeight(true)

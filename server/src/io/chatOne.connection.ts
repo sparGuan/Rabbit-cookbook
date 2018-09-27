@@ -70,7 +70,8 @@ export default (socket: any) => {
                   message
                 }
               }
-            }
+            },
+            {new: true}
           )) as IChatOne;
           socket.nsp.sockets[user.socket.id].emit(`onChatOne_${emit}`, chatOne);
           socket.nsp.sockets[acceptUser.socket.id].emit(

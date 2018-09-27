@@ -170,7 +170,7 @@ export default {
       takeH5Photos: null,
       isOpenChat: false,
       friendTitle:'Spar',
-      chatList: []
+      chatList: {}
     };
   },
   mounted() {
@@ -180,7 +180,7 @@ export default {
   },
   methods: {
     changeChatList(chatList) {
-      this.chatList = chatList
+      this.chatList = chatList 
     },
     openChatcallBack (status) {
       this.isOpenChat = status
