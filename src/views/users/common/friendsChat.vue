@@ -29,7 +29,7 @@
                 <button class="chat-input-tool">
                   <i class="iconfont icon-camerarotate"></i>
                 </button>
-                <div class="chat-input" contenteditable  ></div>
+                <div class="chat-input" contenteditable  @input="doingWrite($event)"></div>
                 <button class="chat-send" @click="clickSendButton($event)" @keydown="keydown($event)">
                   <i class="iconfont icon-fasong1"></i>
                 </button>
@@ -52,6 +52,7 @@
 import Popup from '@/components/Popup';
 let $ = require('jquery');
 import { TweenMax } from 'gsap';
+import { setTimeout } from 'timers';
 export default {
   // 从底部弹出显示
   components: {
@@ -60,6 +61,7 @@ export default {
   props: ['value', 'friendTitle', 'chatList'],
   data() {
     return {
+      chatId: '',
       bottomShow: false,
       $input: null,
       $sendButton: null,
@@ -74,6 +76,7 @@ export default {
       incomingMessages: 0,
       KEY_ENTER: 13,
       lastMessage: '',
+      wordLen: 0,
       lipsum:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
     };
@@ -83,9 +86,9 @@ export default {
     this.gooOff();
     this.updateChatHeight();
     mui(this.$refs['chat-messages']).scroll({
-        deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-        indicators: true // 是否显示滚动条
-      });
+      deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+      indicators: true // 是否显示滚动条
+    });
   },
   watch: {
     value(now, old) {
@@ -96,23 +99,39 @@ export default {
     bottomShow(now, old) {
       this.$emit('input', now);
       if (!now && this.$lastMessageContainer) {
-        this.$lastMessageContainer.remove()
+        this.$lastMessageContainer.remove();
       }
     },
-    'chatList': {
-      handler: function(newVal,oldVal) {
-        mui(this.$refs['chat-messages']).scroll().refresh(); 
-        mui(this.$refs['chat-messages']).scroll().scrollToBottom(10);// 100毫秒滚动到顶
+    chatList: {
+      handler: function(newVal, oldVal) {
+        mui(this.$refs['chat-messages'])
+          .scroll()
+          .refresh();
+        mui(this.$refs['chat-messages'])
+          .scroll()
+          .scrollToBottom(10); // 100毫秒滚动到顶
+        this.chatId = newVal._id;
       },
-      deep: true    //深度监听
+      deep: true //深度监听
     }
   },
   sockets: {
+    friendIsTyping_sent(startOrEnd) {
+      console.log(111111)
+      if (startOrEnd) {
+        this.friendIsTyping();
+        setTimeout(this.friendStoppedTyping,300)
+      }
+    },
     onChatOne_sent(chatList) {
       if (this.$lastMessageContainer) {
-         mui(this.$refs['chat-messages']).scroll().refresh(); 
-          mui(this.$refs['chat-messages']).scroll().scrollToBottom(10);// 100毫秒滚动到顶
-          this.$lastMessageContainer.remove()
+        mui(this.$refs['chat-messages'])
+          .scroll()
+          .refresh();
+        mui(this.$refs['chat-messages'])
+          .scroll()
+          .scrollToBottom(10); // 100毫秒滚动到顶
+        this.$lastMessageContainer.remove();
       }
       if (Object.keys(chatList).length > 0) {
         this.$emit('changeChatList', chatList);
@@ -120,8 +139,25 @@ export default {
     }
   },
   methods: {
+    doingWrite(e) {
+      console.log($(e.target))
+      console.log($(e.target).text().length)
+      console.log(this.wordLen !== $(e.target).text().length)
+      // 判断服务端返回来的数据是否正在输入
+      setTimeout(() => {
+          if (this.wordLen !== $(e.target).text().length) {
+          this.$socket.emit(
+            'friendIsTyping',
+            this.chatId,
+            app.globalService.getLoginUserInfo()._id,
+            true
+          );
+          this.wordLen = $(e).text().length;
+        }
+      },300)
+    },
     checkMySelf(userId) {
-      return app.globalService.getLoginUserInfo()._id === userId
+      return app.globalService.getLoginUserInfo()._id === userId;
     },
     initDom() {
       this.$input = $('.chat-input');
@@ -151,14 +187,21 @@ export default {
         )
         .appendTo(this.$messagesList);
       let $userContent = $(
-                            '<div class="user-info">'+
-                              '<span class="nick-name">'+app.globalService.getLoginUserInfo().nickName+'</span>'+
-                              '<div class="head-img" style="background-image:url('+app.globalService.getLoginUserInfo().headImg+');margin-left: 3px;"></div>'+
-                            '</div>').appendTo($messageContainer);   
-      let $messageBubble = $('<div>'+
-                            '<div class="arrow" style="top: 0px;right: -12px;"></div>'+
-                            '<div class="bubble"></div>'+
-                            '</div>')
+        '<div class="user-info">' +
+          '<span class="nick-name">' +
+          app.globalService.getLoginUserInfo().nickName +
+          '</span>' +
+          '<div class="head-img" style="background-image:url(' +
+          app.globalService.getLoginUserInfo().headImg +
+          ');margin-left: 3px;"></div>' +
+          '</div>'
+      ).appendTo($messageContainer);
+      let $messageBubble = $(
+        '<div>' +
+          '<div class="arrow" style="top: 0px;right: -12px;"></div>' +
+          '<div class="bubble"></div>' +
+          '</div>'
+      )
         .addClass('chat-message-bubble')
         .appendTo($messageContainer);
       $messageBubble.find('.bubble').html(message);
@@ -255,7 +298,6 @@ export default {
             if (scrollDiff > 0) {
               curScrollDiff += scrollDiff;
               startingScroll = curScroll;
-
               let time = effectYTransition.time();
               effectYTransition.kill();
               effectYTransition = setEffectYTransition(
@@ -293,19 +335,23 @@ export default {
           }
           // 此处应该是最后阶段了，开始向服务器发送数据，刷新列表数据
           // 更新好友双方数据列表
-          const acceptUserId = this.chatList.acceptUser === app.globalService.getLoginUserInfo()._id ? this.chatList.user: this.chatList.acceptUser;
-          this.$lastMessageContainer = $messageContainer
-          setTimeout( () => {
-            // mui(this.$refs['chat-messages']).scroll().refresh(); 
+          const acceptUserId =
+            this.chatList.acceptUser ===
+            app.globalService.getLoginUserInfo()._id
+              ? this.chatList.user
+              : this.chatList.acceptUser;
+          this.$lastMessageContainer = $messageContainer;
+          setTimeout(() => {
+            // mui(this.$refs['chat-messages']).scroll().refresh();
             // mui(this.$refs['chat-messages']).scroll().scrollToBottom(10);//100毫秒滚动到顶
             // $messageContainer.remove()
             this.$socket.emit(
-            'chatOne',
-            acceptUserId,
-            app.globalService.getLoginUserInfo()._id,
-            message
+              'chatOne',
+              acceptUserId,
+              app.globalService.getLoginUserInfo()._id,
+              message
             );
-          },300)
+          }, 300);
         }
       });
       this.messages++;
@@ -318,44 +364,46 @@ export default {
       //   this.getReply();
       // }
     },
-    getReply() {
-      if (this.incomingMessages > 2) {
-        return;
-      }
-      this.incomingMessages++;
-      let typeStartDelay =
-        1000 + this.lastMessage.length * 40 + Math.random() * 1000;
-      setTimeout(this.friendIsTyping, typeStartDelay);
-      let source = this.lipsum.toLowerCase();
-      source = source.split(' ');
-      let start = Math.round(Math.random() * (source.length - 1));
-      let length = Math.round(Math.random() * 13) + 1;
-      let end = start + length;
-      if (end >= source.length) {
-        end = source.length - 1;
-        length = end - start;
-      }
-      let message = '';
-      for (let i = 0; i < length; i++) {
-        message += source[start + i] + (i < length - 1 ? ' ' : '');
-      }
-      message += Math.random() < 0.4 ? '?' : '';
-      message += Math.random() < 0.2 ? ' :)' : Math.random() < 0.2 ? ' :(' : '';
-      let typeDelay = 300 + message.length * 50 + Math.random() * 1000;
-      setTimeout(() => {
-        this.receiveMessage(message);
-      }, typeDelay + typeStartDelay);
+    // getReply() {
+    //   if (this.incomingMessages > 2) {
+    //     return;
+    //   }
+    //   this.incomingMessages++;
+    //   //
+    //   let typeStartDelay =
+    //     1000 + this.lastMessage.length * 40 + Math.random() * 1000;
+    //   setTimeout(this.friendIsTyping, typeStartDelay);
+    //   //
+    //   let source = this.lipsum.toLowerCase();
+    //   source = source.split(' ');
+    //   let start = Math.round(Math.random() * (source.length - 1));
+    //   let length = Math.round(Math.random() * 13) + 1;
+    //   let end = start + length;
+    //   if (end >= source.length) {
+    //     end = source.length - 1;
+    //     length = end - start;
+    //   }
+    //   let message = '';
+    //   for (let i = 0; i < length; i++) {
+    //     message += source[start + i] + (i < length - 1 ? ' ' : '');
+    //   }
+    //   message += Math.random() < 0.4 ? '?' : '';
+    //   message += Math.random() < 0.2 ? ' :)' : Math.random() < 0.2 ? ' :(' : '';
+    //   let typeDelay = 300 + message.length * 50 + Math.random() * 1000;
+    //   setTimeout(() => {
+    //     this.receiveMessage(message);
+    //   }, typeDelay + typeStartDelay);
 
-      setTimeout(() => {
-        this.incomingMessages--;
-        if (Math.random() < 0.1) {
-          this.getReply();
-        }
-        if (this.incomingMessages <= 0) {
-          this.friendStoppedTyping();
-        }
-      }, typeDelay + typeStartDelay);
-    },
+    //   setTimeout(() => {
+    //     this.incomingMessages--;
+    //     if (Math.random() < 0.1) {
+    //       this.getReply();
+    //     }
+    //     if (this.incomingMessages <= 0) {
+    //       this.friendStoppedTyping();
+    //     }
+    //   }, typeDelay + typeStartDelay);
+    // },
     friendIsTyping() {
       if (this.isFriendTyping) {
         return;
@@ -386,7 +434,7 @@ export default {
 
       let $info = $('<div/>')
         .addClass('chat-info-typing')
-        .text('Your friend is typing...')
+        .text('对方正在输入...')
         .css({
           transform: 'translate3d(0,30px,0)'
         })
@@ -418,25 +466,25 @@ export default {
         }
       });
     },
-    receiveMessage(message) {
-      let messageElements = this.addMessage(message, false),
-        $messageContainer = messageElements.$container,
-        $messageBubble = messageElements.$bubble;
+    // receiveMessage(message) {
+    //   let messageElements = this.addMessage(message, false),
+    //     $messageContainer = messageElements.$container,
+    //     $messageBubble = messageElements.$bubble;
 
-      TweenMax.set($messageBubble, {
-        transformOrigin: '60px 50%'
-      });
-      TweenMax.from($messageBubble, 0.4, {
-        scale: 0,
-        force3D: true,
-        ease: Back.easeOut
-      });
-      TweenMax.from($messageBubble, 0.4, {
-        x: -100,
-        force3D: true,
-        ease: Quint.easeOut
-      });
-    },
+    //   TweenMax.set($messageBubble, {
+    //     transformOrigin: '60px 50%'
+    //   });
+    //   TweenMax.from($messageBubble, 0.4, {
+    //     scale: 0,
+    //     force3D: true,
+    //     ease: Back.easeOut
+    //   });
+    //   TweenMax.from($messageBubble, 0.4, {
+    //     x: -100,
+    //     force3D: true,
+    //     ease: Quint.easeOut
+    //   });
+    // },
     updateChatHeight() {
       this.$messagesContainer.css({
         height:
@@ -459,6 +507,5 @@ export default {
 <style lang="less" scoped>
 @import url('./chat.css');
 [data-page='friends-chat'] {
-  
 }
 </style>

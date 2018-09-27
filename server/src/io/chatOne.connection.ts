@@ -26,20 +26,21 @@ export default (socket: any) => {
         .populate({ path: 'socket', select: 'id' })
         .select('-passWord -updateTime -logoutTime -createTime ')
         .exec()) as IUser; // 需要请求的用户
-      let chat: IChatOne = (await ChatOne.findOne({
+      let chat = await ChatOne.find({
         acceptUser,
         user
-      })) as IChatOne;
+      }, { Meta: { $slice: [ 0, 6 ] }})
       // 如果搜不到，反过来再搜一次
       if (global._.isEmpty(chat)) {
-        chat = (await ChatOne.findOne({
+        chat = await ChatOne.find({
           acceptUser: user,
           user: acceptUser
-        })) as IChatOne;
+        }, { Meta: { $slice: [ 0, 6 ] }})
       }
+      console.log(chat)
       // 获取所有的频道，判断是否在对应的频道上
       // 新需求，创建一张频道表，将聊天双方存入信息存入数据库，，读取双方数据发送双方聊天窗口
-      if (global._.isEmpty(chat)) {
+      if (global._.isEmpty(chat[0])) {
         // 创建channel表
         const body = {
           acceptUser,
@@ -59,8 +60,8 @@ export default (socket: any) => {
         console.log(message);
         if (!global._.isEmpty(message)) {
           console.log(user);
-          const chatOne: IChatOne = (await ChatOne.findByIdAndUpdate(
-            { _id: chat._id },
+          const chatOne = await ChatOne.findByIdAndUpdate(
+            { _id: chat[0]._id },
             {
               $push: {
                 Meta: {
@@ -71,18 +72,21 @@ export default (socket: any) => {
                 }
               }
             },
-            {new: true}
-          )) as IChatOne;
+            {
+              new: true ,
+              select: { Meta: { $slice: [ 0, 6 ] }}
+            }
+          );
           socket.nsp.sockets[user.socket.id].emit(`onChatOne_${emit}`, chatOne);
           socket.nsp.sockets[acceptUser.socket.id].emit(
             `onChatOne_${emit}`,
             chatOne
           );
         } else {
-          socket.nsp.sockets[user.socket.id].emit(`onChatOne_${emit}`, chat);
+          socket.nsp.sockets[user.socket.id].emit(`onChatOne_${emit}`, chat[0]);
           socket.nsp.sockets[acceptUser.socket.id].emit(
             `onChatOne_${emit}`,
-            chat
+            chat[0]
           );
         }
       }
