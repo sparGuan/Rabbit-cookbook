@@ -15,7 +15,6 @@ import store from './store/'
 import touch from 'vue-directive-touch'
 import 'vue-layer-mobile/need/layer.css'
 import layer from 'vue-layer-mobile';
-import socketio from 'socket.io-client';
 import VueSocketio from 'vue-socket.io';
 Object.assign(app.Config, config);// 非常重要的合并，我去
 window.app = Object.assign({}, app, { log, utils, mui, globalService, api })
@@ -69,7 +68,6 @@ window.mui = mui.init({
 	},
 	statusBarBackground: '#1981D8' //设置状态栏颜色,仅iOS可用
 })
-
 if (mui.os.plus) {
 	app.Config.isApp = true
 	mui.plusReady(() => {
@@ -93,6 +91,7 @@ if (mui.os.plus) {
 } else {
 	mui.ready(() => {
 		initVue()
+		
 	})
 }
 

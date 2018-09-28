@@ -1,184 +1,407 @@
-(function($, document, undefined) {
-  var CLASS_PULL_TOP_POCKET = $.className('pull-top-pocket');
-  var CLASS_PULL_BOTTOM_POCKET = $.className('pull-bottom-pocket');
-  var CLASS_PULL = $.className('pull');
-  var CLASS_PULL_LOADING = $.className('pull-loading');
-  var CLASS_PULL_CAPTION = $.className('pull-caption');
-  var CLASS_PULL_CAPTION_DOWN = $.className('pull-caption-down');
-  var CLASS_PULL_CAPTION_REFRESH = $.className('pull-caption-refresh');
-  var CLASS_PULL_CAPTION_NOMORE = $.className('pull-caption-nomore');
+(function($, window, document) {
+	var STATE_BEFORECHANGEOFFSET = 'beforeChangeOffset';
+	var STATE_AFTERCHANGEOFFSET = 'afterChangeOffset';
 
-  var CLASS_ICON = $.className('icon');
-  var CLASS_SPINNER = $.className('spinner');
-  var CLASS_ICON_PULLDOWN = $.className('icon-pulldown');
+	var EVENT_PULLSTART = 'pullstart';
+	var EVENT_PULLING = 'pulling';
+	var EVENT_BEFORECHANGEOFFSET = STATE_BEFORECHANGEOFFSET;
+	var EVENT_AFTERCHANGEOFFSET = STATE_AFTERCHANGEOFFSET;
+	var EVENT_DRAGENDAFTERCHANGEOFFSET = 'dragEndAfterChangeOffset';
 
-  var CLASS_BLOCK = $.className('block');
-  var CLASS_HIDDEN = $.className('hidden');
-  var CLASS_VISIBILITY = $.className('visibility');
+	var CLASS_TRANSITIONING = $.className('transitioning');
+	var CLASS_PULL_TOP_TIPS = $.className('pull-top-tips');
+	var CLASS_PULL_BOTTOM_TIPS = $.className('pull-bottom-tips');
+	var CLASS_PULL_LOADING = $.className('pull-loading');
+	var CLASS_SCROLL = $.className('scroll');
 
-  var CLASS_LOADING_UP = CLASS_PULL_LOADING + ' ' + CLASS_ICON + ' ' + CLASS_ICON_PULLDOWN;
-  var CLASS_LOADING_DOWN = CLASS_PULL_LOADING + ' ' + CLASS_ICON + ' ' + CLASS_ICON_PULLDOWN;
-  var CLASS_LOADING = CLASS_PULL_LOADING + ' ' + CLASS_ICON + ' ' + CLASS_SPINNER;
+	var CLASS_PULL_TOP_ARROW = $.className('pull-loading') + ' ' + $.className('icon') + ' ' + $.className('icon-pulldown');
+	var CLASS_PULL_TOP_ARROW_REVERSE = CLASS_PULL_TOP_ARROW + ' ' + $.className('reverse');
+	var CLASS_PULL_TOP_SPINNER = $.className('pull-loading') + ' ' + $.className('spinner');
+	var CLASS_HIDDEN = $.className('hidden');
 
-  var pocketHtml = ['<div class="' + CLASS_PULL + '">', '<div class="{icon}"></div>', '<div class="' + CLASS_PULL_CAPTION + '">{contentrefresh}</div>', '</div>'].join('');
+	var SELECTOR_PULL_LOADING = '.' + CLASS_PULL_LOADING;
+	$.PullToRefresh = $.Class.extend({
+		init: function(element, options) {
+			this.element = element;
+			this.options = $.extend(true, {
+				down: {
+					height: 75,
+					callback: false,
+				},
+				up: {
+					auto: false,
+					offset: 100, //璺濈搴曢儴楂樺害(鍒拌揪璇ラ珮搴﹀嵆瑙﹀彂)
+					show: true,
+					contentinit: '',
+					contentdown: '',
+					contentrefresh: '',
+					contentnomore: '',
+					callback: false
+				},
+				preventDefaultException: {
+					tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/
+				}
+			}, options);
+			this.stopped = this.isNeedRefresh = this.isDragging = false;
+			this.state = STATE_BEFORECHANGEOFFSET;
+			this.isInScroll = this.element.classList.contains(CLASS_SCROLL);
+			this.initPullUpTips();
 
-  var PullRefresh = {
-      init: function(element, options) {
-          this._super(element, $.extend(true, {
-              scrollY: true,
-              scrollX: false,
-              indicators: true,
-              deceleration: 0.003,
-              down: {
-                  height: 50,
-                  contentinit: '下拉可以刷新',
-                  contentdown: '下拉可以刷新',
-                  contentover: '释放立即刷新',
-                  contentrefresh: '正在刷新...'
-              },
-              up: {
-                  height: 50,
-                  auto: false,
-                  contentinit: '上拉显示更多',
-                  contentdown: '上拉显示更多',
-                  contentrefresh: '正在加载...',
-                  contentnomore: '没有更多数据了',
-                  duration: 300
-              }
-          }, options));
-      },
-      _init: function() {
-          this._super();
-          this._initPocket();
-      },
-      _initPulldownRefresh: function() {
-          this.pulldown = true;
-          if (this.topPocket) {
-              this.pullPocket = this.topPocket;
-              this.pullPocket.classList.add(CLASS_BLOCK);
-              this.pullPocket.classList.add(CLASS_VISIBILITY);
-              this.pullCaption = this.topCaption;
-              this.pullLoading = this.topLoading;
-          }
-      },
-      _initPullupRefresh: function() {
-          this.pulldown = false;
-          if (this.bottomPocket) {
-              this.pullPocket = this.bottomPocket;
-              this.pullPocket.classList.add(CLASS_BLOCK);
-              this.pullPocket.classList.add(CLASS_VISIBILITY);
-              this.pullCaption = this.bottomCaption;
-              this.pullLoading = this.bottomLoading;
-          }
-      },
-      _initPocket: function() {
-          var options = this.options;
-          if (options.down && options.down.hasOwnProperty('callback')) {
-              this.topPocket = this.scroller.querySelector('.' + CLASS_PULL_TOP_POCKET);
-              if (!this.topPocket) {
-                  this.topPocket = this._createPocket(CLASS_PULL_TOP_POCKET, options.down, CLASS_LOADING_DOWN);
-                  this.wrapper.insertBefore(this.topPocket, this.wrapper.firstChild);
-              }
-              this.topLoading = this.topPocket.querySelector('.' + CLASS_PULL_LOADING);
-              this.topCaption = this.topPocket.querySelector('.' + CLASS_PULL_CAPTION);
-          }
-          if (options.up && options.up.hasOwnProperty('callback')) {
-              this.bottomPocket = this.scroller.querySelector('.' + CLASS_PULL_BOTTOM_POCKET);
-              if (!this.bottomPocket) {
-                  this.bottomPocket = this._createPocket(CLASS_PULL_BOTTOM_POCKET, options.up, CLASS_LOADING);
-                  this.scroller.appendChild(this.bottomPocket);
-              }
-              this.bottomLoading = this.bottomPocket.querySelector('.' + CLASS_PULL_LOADING);
-              this.bottomCaption = this.bottomPocket.querySelector('.' + CLASS_PULL_CAPTION);
-              //TODO only for h5
-              this.wrapper.addEventListener('scrollbottom', this);
-          }
-      },
-      _createPocket: function(clazz, options, iconClass) {
-          var pocket = document.createElement('div');
-          pocket.className = clazz;
-          pocket.innerHTML = pocketHtml.replace('{contentrefresh}', options.contentinit).replace('{icon}', iconClass);
-          return pocket;
-      },
-      _resetPullDownLoading: function() {
-          var loading = this.pullLoading;
-          if (loading) {
-              this.pullCaption.innerHTML = this.options.down.contentdown;
-              loading.style.webkitTransition = "";
-              loading.style.webkitTransform = "";
-              loading.style.webkitAnimation = "";
-              loading.className = CLASS_LOADING_DOWN;
-          }
-      },
-      _setCaptionClass: function(isPulldown, caption, title) {
-          if (!isPulldown) {
-              switch (title) {
-                  case this.options.up.contentdown:
-                      caption.className = CLASS_PULL_CAPTION + ' ' + CLASS_PULL_CAPTION_DOWN;
-                      break;
-                  case this.options.up.contentrefresh:
-                      caption.className = CLASS_PULL_CAPTION + ' ' + CLASS_PULL_CAPTION_REFRESH
-                      break;
-                  case this.options.up.contentnomore:
-                      caption.className = CLASS_PULL_CAPTION + ' ' + CLASS_PULL_CAPTION_NOMORE;
-                      break;
-              }
-          }
-      },
-      _setCaption: function(title, reset) {
-          if (this.loading) {
-              return;
-          }
-          var options = this.options;
-          var pocket = this.pullPocket;
-          var caption = this.pullCaption;
-          var loading = this.pullLoading;
-          var isPulldown = this.pulldown;
-          var self = this;
-          if (pocket) {
-              if (reset) {
-                  setTimeout(function() {
-                      caption.innerHTML = self.lastTitle = title;
-                      if (isPulldown) {
-                          loading.className = CLASS_LOADING_DOWN;
-                      } else {
-                          self._setCaptionClass(false, caption, title);
-                          loading.className = CLASS_LOADING;
-                      }
-                      loading.style.webkitAnimation = "";
-                      loading.style.webkitTransition = "";
-                      loading.style.webkitTransform = "";
-                  }, 100);
-              } else {
-                  if (title !== this.lastTitle) {
-                      caption.innerHTML = title;
-                      if (isPulldown) {
-                          if (title === options.down.contentrefresh) {
-                              loading.className = CLASS_LOADING;
-                              loading.style.webkitAnimation = "spinner-spin 1s step-end infinite";
-                          } else if (title === options.down.contentover) {
-                              loading.className = CLASS_LOADING_UP;
-                              loading.style.webkitTransition = "-webkit-transform 0.3s ease-in";
-                              loading.style.webkitTransform = "rotate(180deg)";
-                          } else if (title === options.down.contentdown) {
-                              loading.className = CLASS_LOADING_DOWN;
-                              loading.style.webkitTransition = "-webkit-transform 0.3s ease-in";
-                              loading.style.webkitTransform = "rotate(0deg)";
-                          }
-                      } else {
-                          if (title === options.up.contentrefresh) {
-                              loading.className = CLASS_LOADING + ' ' + CLASS_VISIBILITY;
-                          } else {
-                              loading.className = CLASS_LOADING + ' ' + CLASS_HIDDEN;
-                          }
-                          self._setCaptionClass(false, caption, title);
-                      }
-                      this.lastTitle = title;
-                  }
-              }
-
-          }
-      }
-  };
-  $.PullRefresh = PullRefresh;
-})(mui, document);
+			this.initEvent();
+		},
+		_preventDefaultException: function(el, exceptions) {
+			for (var i in exceptions) {
+				if (exceptions[i].test(el[i])) {
+					return true;
+				}
+			}
+			return false;
+		},
+		initEvent: function() {
+			if ($.isFunction(this.options.down.callback)) {
+				this.element.addEventListener($.EVENT_START, this);
+				this.element.addEventListener('drag', this);
+				this.element.addEventListener('dragend', this);
+			}
+			if (this.pullUpTips) {
+				this.element.addEventListener('dragup', this);
+				if (this.isInScroll) {
+					this.element.addEventListener('scrollbottom', this);
+				} else {
+					window.addEventListener('scroll', this);
+				}
+			}
+		},
+		handleEvent: function(e) {
+			switch (e.type) {
+				case $.EVENT_START:
+					this.isInScroll && this._canPullDown() && e.target && !this._preventDefaultException(e.target, this.options.preventDefaultException) && e.preventDefault();
+					break;
+				case 'drag':
+					this._drag(e);
+					break;
+				case 'dragend':
+					this._dragend(e);
+					break;
+				case 'webkitTransitionEnd':
+					this._transitionEnd(e);
+					break;
+				case 'dragup':
+				case 'scroll':
+					this._dragup(e);
+					break;
+				case 'scrollbottom':
+					if (e.target === this.element) {
+						this.pullUpLoading(e);
+					}
+					break;
+			}
+		},
+		initPullDownTips: function() {
+			var self = this;
+			if ($.isFunction(self.options.down.callback)) {
+				self.pullDownTips = (function() {
+					var element = document.querySelector('.' + CLASS_PULL_TOP_TIPS);
+					if (element) {
+						element.parentNode.removeChild(element);
+					}
+					if (!element) {
+						element = document.createElement('div');
+						element.classList.add(CLASS_PULL_TOP_TIPS);
+						element.innerHTML = '<div class="mui-pull-top-wrapper"><span class="mui-pull-loading mui-icon mui-icon-pulldown"></span></div>';
+						element.addEventListener('webkitTransitionEnd', self);
+					}
+					self.pullDownTipsIcon = element.querySelector(SELECTOR_PULL_LOADING);
+					document.body.appendChild(element);
+					return element;
+				}());
+			}
+		},
+		initPullUpTips: function() {
+			var self = this;
+			if ($.isFunction(self.options.up.callback)) {
+				self.pullUpTips = (function() {
+					var element = self.element.querySelector('.' + CLASS_PULL_BOTTOM_TIPS);
+					if (!element) {
+						element = document.createElement('div');
+						element.classList.add(CLASS_PULL_BOTTOM_TIPS);
+						if (!self.options.up.show) {
+							element.classList.add(CLASS_HIDDEN);
+						}
+						element.innerHTML = '<div class="mui-pull-bottom-wrapper"><span class="mui-pull-loading">' + self.options.up.contentinit + '</span></div>';
+						self.element.appendChild(element);
+					}
+					self.pullUpTipsIcon = element.querySelector(SELECTOR_PULL_LOADING);
+					return element;
+				}());
+			}
+		},
+		_transitionEnd: function(e) {
+			if (e.target === this.pullDownTips && this.removing) {
+				this.removePullDownTips();
+			}
+		},
+		_dragup: function(e) {
+			var self = this;
+			if (self.loading) {
+				return;
+			}
+			if (e && e.detail && $.gestures.session.drag) {
+				self.isDraggingUp = true;
+			} else {
+				if (!self.isDraggingUp) { //scroll event
+					return;
+				}
+			}
+			if (!self.isDragging) {
+				if (self._canPullUp()) {
+					self.pullUpLoading(e);
+				}
+			}
+		},
+		_canPullUp: function() {
+			if (this.removing) {
+				return false;
+			}
+			if (this.isInScroll) {
+				var scrollId = this.element.parentNode.getAttribute('data-scroll');
+				if (scrollId) {
+					var scrollApi = $.data[scrollId];
+					return scrollApi.y === scrollApi.maxScrollY;
+				}
+			}
+			return window.pageYOffset + window.innerHeight + this.options.up.offset >= document.documentElement.scrollHeight;
+		},
+		_canPullDown: function() {
+			if (this.removing) {
+				return false;
+			}
+			if (this.isInScroll) {
+				var scrollId = this.element.parentNode.getAttribute('data-scroll');
+				if (scrollId) {
+					var scrollApi = $.data[scrollId];
+					return scrollApi.y === 0;
+				}
+			}
+			return document.body.scrollTop === 0;
+		},
+		_drag: function(e) {
+			if (this.loading || this.stopped) {
+				e.stopPropagation();
+				e.detail.gesture.preventDefault();
+				return;
+			}
+			var detail = e.detail;
+			if (!this.isDragging) {
+				if (detail.direction === 'down' && this._canPullDown()) {
+					if (document.querySelector('.' + CLASS_PULL_TOP_TIPS)) {
+						e.stopPropagation();
+						e.detail.gesture.preventDefault();
+						return;
+					}
+					this.isDragging = true;
+					this.removing = false;
+					this.startDeltaY = detail.deltaY;
+					$.gestures.session.lockDirection = true; //閿佸畾鏂瑰悜
+					$.gestures.session.startDirection = detail.direction;
+					this._pullStart(this.startDeltaY);
+				}
+			}
+			if (this.isDragging) {
+				e.stopPropagation();
+				e.detail.gesture.preventDefault();
+				var deltaY = detail.deltaY - this.startDeltaY;
+				deltaY = Math.min(deltaY, 1.5 * this.options.down.height);
+				this.deltaY = deltaY;
+				this._pulling(deltaY);
+				var state = deltaY > this.options.down.height ? STATE_AFTERCHANGEOFFSET : STATE_BEFORECHANGEOFFSET;
+				if (this.state !== state) {
+					this.state = state;
+					if (this.state === STATE_AFTERCHANGEOFFSET) {
+						this.removing = false;
+						this.isNeedRefresh = true;
+					} else {
+						this.removing = true;
+						this.isNeedRefresh = false;
+					}
+					this['_' + state](deltaY);
+				}
+				if ($.os.ios && parseFloat($.os.version) >= 8) {
+					var clientY = detail.gesture.touches[0].clientY;
+					if ((clientY + 10) > window.innerHeight || clientY < 10) {
+						this._dragend(e);
+						return;
+					}
+				}
+			}
+		},
+		_dragend: function(e) {
+			var self = this;
+			if (self.isDragging) {
+				self.isDragging = false;
+				self._dragEndAfterChangeOffset(self.isNeedRefresh);
+			}
+			if (self.isPullingUp) {
+				if (self.pullingUpTimeout) {
+					clearTimeout(self.pullingUpTimeout);
+				}
+				self.pullingUpTimeout = setTimeout(function() {
+					self.isPullingUp = false;
+				}, 1000);
+			}
+		},
+		_pullStart: function(startDeltaY) {
+			this.pullStart(startDeltaY);
+			$.trigger(this.element, EVENT_PULLSTART, {
+				api: this,
+				startDeltaY: startDeltaY
+			});
+		},
+		_pulling: function(deltaY) {
+			this.pulling(deltaY);
+			$.trigger(this.element, EVENT_PULLING, {
+				api: this,
+				deltaY: deltaY
+			});
+		},
+		_beforeChangeOffset: function(deltaY) {
+			this.beforeChangeOffset(deltaY);
+			$.trigger(this.element, EVENT_BEFORECHANGEOFFSET, {
+				api: this,
+				deltaY: deltaY
+			});
+		},
+		_afterChangeOffset: function(deltaY) {
+			this.afterChangeOffset(deltaY);
+			$.trigger(this.element, EVENT_AFTERCHANGEOFFSET, {
+				api: this,
+				deltaY: deltaY
+			});
+		},
+		_dragEndAfterChangeOffset: function(isNeedRefresh) {
+			this.dragEndAfterChangeOffset(isNeedRefresh);
+			$.trigger(this.element, EVENT_DRAGENDAFTERCHANGEOFFSET, {
+				api: this,
+				isNeedRefresh: isNeedRefresh
+			});
+		},
+		removePullDownTips: function() {
+			if (this.pullDownTips) {
+				try {
+					this.pullDownTips.parentNode && this.pullDownTips.parentNode.removeChild(this.pullDownTips);
+					this.pullDownTips = null;
+					this.removing = false;
+				} catch (e) {}
+			}
+		},
+		pullStart: function(startDeltaY) {
+			this.initPullDownTips(startDeltaY);
+		},
+		pulling: function(deltaY) {
+			this.pullDownTips.style.webkitTransform = 'translate3d(0,' + deltaY + 'px,0)';
+		},
+		beforeChangeOffset: function(deltaY) {
+			this.pullDownTipsIcon.className = CLASS_PULL_TOP_ARROW;
+		},
+		afterChangeOffset: function(deltaY) {
+			this.pullDownTipsIcon.className = CLASS_PULL_TOP_ARROW_REVERSE;
+		},
+		dragEndAfterChangeOffset: function(isNeedRefresh) {
+			if (isNeedRefresh) {
+				this.pullDownTipsIcon.className = CLASS_PULL_TOP_SPINNER;
+				this.pullDownLoading();
+			} else {
+				this.pullDownTipsIcon.className = CLASS_PULL_TOP_ARROW;
+				this.endPullDownToRefresh();
+			}
+		},
+		pullDownLoading: function() {
+			if (this.loading) {
+				return;
+			}
+			if (!this.pullDownTips) {
+				this.initPullDownTips();
+				this.dragEndAfterChangeOffset(true);
+				return;
+			}
+			this.loading = true;
+			this.pullDownTips.classList.add(CLASS_TRANSITIONING);
+			this.pullDownTips.style.webkitTransform = 'translate3d(0,' + this.options.down.height + 'px,0)';
+			this.options.down.callback.apply(this);
+		},
+		pullUpLoading: function(e) {
+			if (this.loading || this.finished) {
+				return;
+			}
+			this.loading = true;
+			this.isDraggingUp = false;
+			this.pullUpTips.classList.remove(CLASS_HIDDEN);
+			e && e.detail && e.detail.gesture && e.detail.gesture.preventDefault();
+			this.pullUpTipsIcon.innerHTML = this.options.up.contentrefresh;
+			this.options.up.callback.apply(this);
+		},
+		endPullDownToRefresh: function() {
+			this.loading = false;
+			this.pullUpTips && this.pullUpTips.classList.remove(CLASS_HIDDEN);
+			this.pullDownTips.classList.add(CLASS_TRANSITIONING);
+			this.pullDownTips.style.webkitTransform = 'translate3d(0,0,0)';
+			if (this.deltaY <= 0) {
+				this.removePullDownTips();
+			} else {
+				this.removing = true;
+			}
+			if (this.isInScroll) {
+				$(this.element.parentNode).scroll().refresh();
+			}
+		},
+		endPullUpToRefresh: function(finished) {
+			if (finished) {
+				this.finished = true;
+				this.pullUpTipsIcon.innerHTML = this.options.up.contentnomore;
+				this.element.removeEventListener('dragup', this);
+				window.removeEventListener('scroll', this);
+			} else {
+				this.pullUpTipsIcon.innerHTML = this.options.up.contentdown;
+			}
+			this.loading = false;
+			if (this.isInScroll) {
+				$(this.element.parentNode).scroll().refresh();
+			}
+		},
+		setStopped: function(stopped) {
+			if (stopped != this.stopped) {
+				this.stopped = stopped;
+				this.pullUpTips && this.pullUpTips.classList[stopped ? 'add' : 'remove'](CLASS_HIDDEN);
+			}
+		},
+		refresh: function(isReset) {
+			if (isReset && this.finished && this.pullUpTipsIcon) {
+				this.pullUpTipsIcon.innerHTML = this.options.up.contentdown;
+				this.element.addEventListener('dragup', this);
+				window.addEventListener('scroll', this);
+				this.finished = false;
+			}
+		}
+	});
+	$.fn.pullToRefresh = function(options) {
+		var pullRefreshApis = [];
+		options = options || {};
+		this.each(function() {
+			var self = this;
+			var pullRefreshApi = null;
+			var id = self.getAttribute('data-pullToRefresh');
+			if (!id) {
+				id = ++$.uuid;
+				$.data[id] = pullRefreshApi = new $.PullToRefresh(self, options);
+				self.setAttribute('data-pullToRefresh', id);
+			} else {
+				pullRefreshApi = $.data[id];
+			}
+			if (options.up && options.up.auto) { //濡傛灉璁剧疆浜哸uto锛屽垯鑷姩涓婃媺涓€娆�
+				pullRefreshApi.pullUpLoading();
+			}
+			pullRefreshApis.push(pullRefreshApi);
+		});
+		return pullRefreshApis.length === 1 ? pullRefreshApis[0] : pullRefreshApis;
+	}
+})(mui, window, document);

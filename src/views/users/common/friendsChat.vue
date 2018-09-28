@@ -52,7 +52,8 @@
 import Popup from '@/components/Popup';
 let $ = require('jquery');
 import { TweenMax } from 'gsap';
-import { setTimeout } from 'timers';
+require('@/js/lib/mui.pullToRefresh.js')
+require('@/js/lib/mui.pullToRefresh.material.js')
 export default {
   // 从底部弹出显示
   components: {
@@ -65,6 +66,7 @@ export default {
       page: 1,
       readSecond: 0,
       bottomShow: false,
+      pullToRefresh: null,
       $input: null,
       $sendButton: null,
       $messagesContainer: null,
@@ -88,38 +90,21 @@ export default {
     this.gooOff();
     this.updateChatHeight();
     const _this = this
-    mui(this.$refs['chat-messages']).pullToRefresh({
-      container: '#chat_messages',
-					// down: {
-					// 	callback: pulldownRefresh
-					// },
-					up: {
-            height: 50,//可选.默认50.触发上拉加载拖动距离
-            auto: true,// 可选,默认false.自动上拉加载一次
-            contentrefresh : "Loading...",// 可选，正在加载状态时，上拉加载控件上显示的标题内容
-            contentnomore:'没有更多数据了',// 可选，请求完毕若没有更多数据时显示的提醒内容；
-            callback : _this.pullupRefresh // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-          }
-    })
-    // mui.init({
-		// 		pullRefresh: {
-		// 			container: '#chat_messages',
-		// 			// down: {
-		// 			// 	callback: pulldownRefresh
-		// 			// },
-		// 			up: {
-    //         height: 50,//可选.默认50.触发上拉加载拖动距离
-    //         auto: true,// 可选,默认false.自动上拉加载一次
-    //         contentrefresh : "Loading...",// 可选，正在加载状态时，上拉加载控件上显示的标题内容
-    //         contentnomore:'没有更多数据了',// 可选，请求完毕若没有更多数据时显示的提醒内容；
-    //         callback : _this.pullupRefresh // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-    //       }
-		// 		}
-		// 	});
     mui(this.$refs['chat-messages']).scroll({
-      deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+      deceleration: mui.os.ios? 0.003 : 0.0009, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
       indicators: true // 是否显示滚动条
-    });
+    });    
+    this.pullToRefresh =  mui(this.$refs['chat-messages']).pullToRefresh(
+      {
+         up: {
+            callback: _this.pullupRefresh, //上拉回调，必填；
+            auto: false, // 自动执行一次上拉加载，可选；
+            show: true, // 显示底部上拉加载提示信息，可选；
+            contentrefresh: 'Loading...', //上拉进行中提示信息
+            contentnomore: 'no More' // 上拉无更多信息时提示信息
+        }
+      }
+    )
   },
   watch: {
     value(now, old) {
@@ -134,12 +119,12 @@ export default {
     },
     chatList: {
       handler: function(newVal, oldVal) {
-        mui(this.$refs['chat-messages'])
-          .scroll()
-          .refresh();
-        mui(this.$refs['chat-messages'])
-          .scroll()
-          .scrollToBottom(10); // 100毫秒滚动到顶
+        // mui(this.$refs['chat-messages'])
+        //   .scroll()
+        //   .refresh();
+        // mui(this.$refs['chat-messages'])
+        //   .scroll()
+        //   .scrollToBottom(10); // 100毫秒滚动到顶
         this.chatId = newVal._id;
       },
       deep: true //深度监听
@@ -148,7 +133,12 @@ export default {
   sockets: {
     loadHistory_sent(chatList) {
       this.$emit('changeChatList', chatList);
-      mui(this.$refs['chat-messages']).pullRefresh().endPullupToRefresh(true); // 参数为true代表没有更多数据了。
+      console.log(1111)
+      this.pullToRefresh.endPullUpToRefresh()
+      this.pullToRefresh.refresh(true)
+      // this.pullToRefresh.enablePullupToRefresh();
+      // mui(this.$refs['chat-messages']).setStopped(true);
+       // 参数为true代表没有更多数据了。
     },
     friendIsTyping_sent(startOrEnd) {
       if (startOrEnd) {
@@ -172,13 +162,18 @@ export default {
     }
   },
   methods: {
-    pullupRefresh() {
-      console.log(11111)
-      setTimeout(() => {
-        // 从socket.io获取数据然后设置值为false
-        // 参数是页数
-        this.$socket.emit('loadHistory', this.page++, this.chatId)
-      }, 1500);
+    pullupRefresh() {    
+      console.log(mui(this.$refs['chat-messages']).scroll().y)
+      if (mui(this.$refs['chat-messages']).scroll().y <= 10 && mui(this.$refs['chat-messages']).scroll().y > 0 ) {
+        console.log(11111)
+        // 没有更多数据的时候要
+        // this.pullToRefresh.disablePullupToRefresh()
+        setTimeout(() => {
+          // 从socket.io获取数据然后设置值为false
+          // 参数是页数
+          this.$socket.emit('loadHistory', this.page++, this.chatId,app.globalService.getLoginUserInfo()._id)
+        }, 1500);
+      }
     },
     doingWrite(e) {
       // 判断服务端返回来的数据是否正在输入

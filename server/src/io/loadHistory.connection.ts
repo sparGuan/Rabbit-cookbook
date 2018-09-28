@@ -10,13 +10,14 @@ export default (socket: any) => {
       { _id: chatId },
       { Meta: { $slice: [( -6 * page ), (6 * page)] } }
     ).select('user acceptUser')
-    .populate({ path: 'user', populate: { path: 'socket', select: 'id' } })
+    .populate({ path: 'user' , select:'socket', populate: { path: 'socket', select: 'id' } })
     .populate({
       path: 'acceptUser',
+      select:'socket',
       populate: { path: 'socket', select: 'id' }
     })
     .exec()) as IChatOne[];
-    console.log(chat[0])
+    console.log(chat)
     if (Object.is(chat[0].user._id.toString(), userId)) {
       socket.nsp.sockets[chat[0].user.socket.id].emit(
         `loadHistory_${emit}`,
