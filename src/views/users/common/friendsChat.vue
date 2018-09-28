@@ -1,9 +1,9 @@
 
 <template>
    <Popup ref='bottom' :show='bottomShow' :title="friendTitle" :maskClose="true" @hideFun="bottomShow = false">
-      <div data-page="friends-chat" >
+      <div data-page="friends-chat">
           <div class="chat-window">
-            <div class="chat-messages mui-scroll-wrapper" ref="chat-messages">
+            <div class="chat-messages mui-scroll-wrapper" id="chat_messages"  ref="chat-messages">
               <ul class="chat-messages-list mui-scroll" >
                 <li class="chat-message " v-if="Object.keys(chatList).length > 0 && chatList.Meta.length > 0" v-for=" item in chatList.Meta" :key="item._id" :class="checkMySelf(item.userId) ? 'chat-message-self':'chat-message-friend'" >
                   <div class="user-info">
@@ -62,6 +62,8 @@ export default {
   data() {
     return {
       chatId: '',
+      page: 1,
+      readSecond: 0,
       bottomShow: false,
       $input: null,
       $sendButton: null,
@@ -85,6 +87,35 @@ export default {
     this.initDom();
     this.gooOff();
     this.updateChatHeight();
+    const _this = this
+    mui(this.$refs['chat-messages']).pullToRefresh({
+      container: '#chat_messages',
+					// down: {
+					// 	callback: pulldownRefresh
+					// },
+					up: {
+            height: 50,//可选.默认50.触发上拉加载拖动距离
+            auto: true,// 可选,默认false.自动上拉加载一次
+            contentrefresh : "Loading...",// 可选，正在加载状态时，上拉加载控件上显示的标题内容
+            contentnomore:'没有更多数据了',// 可选，请求完毕若没有更多数据时显示的提醒内容；
+            callback : _this.pullupRefresh // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+          }
+    })
+    // mui.init({
+		// 		pullRefresh: {
+		// 			container: '#chat_messages',
+		// 			// down: {
+		// 			// 	callback: pulldownRefresh
+		// 			// },
+		// 			up: {
+    //         height: 50,//可选.默认50.触发上拉加载拖动距离
+    //         auto: true,// 可选,默认false.自动上拉加载一次
+    //         contentrefresh : "Loading...",// 可选，正在加载状态时，上拉加载控件上显示的标题内容
+    //         contentnomore:'没有更多数据了',// 可选，请求完毕若没有更多数据时显示的提醒内容；
+    //         callback : _this.pullupRefresh // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+    //       }
+		// 		}
+		// 	});
     mui(this.$refs['chat-messages']).scroll({
       deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
       indicators: true // 是否显示滚动条
@@ -93,7 +124,6 @@ export default {
   watch: {
     value(now, old) {
       // 如何做到先清除，再渲染
-      // $('.chat-messages-list').html('')
       this.bottomShow = now;
     },
     bottomShow(now, old) {
@@ -116,11 +146,14 @@ export default {
     }
   },
   sockets: {
+    loadHistory_sent(chatList) {
+      this.$emit('changeChatList', chatList);
+      mui(this.$refs['chat-messages']).pullRefresh().endPullupToRefresh(true); // 参数为true代表没有更多数据了。
+    },
     friendIsTyping_sent(startOrEnd) {
-      console.log(111111)
       if (startOrEnd) {
-        this.friendIsTyping();
-        setTimeout(this.friendStoppedTyping,300)
+        this.friendIsTyping()
+        setTimeout(this.friendStoppedTyping,4000)
       }
     },
     onChatOne_sent(chatList) {
@@ -139,13 +172,24 @@ export default {
     }
   },
   methods: {
-    doingWrite(e) {
-      console.log($(e.target))
-      console.log($(e.target).text().length)
-      console.log(this.wordLen !== $(e.target).text().length)
-      // 判断服务端返回来的数据是否正在输入
+    pullupRefresh() {
+      console.log(11111)
       setTimeout(() => {
-          if (this.wordLen !== $(e.target).text().length) {
+        // 从socket.io获取数据然后设置值为false
+        // 参数是页数
+        this.$socket.emit('loadHistory', this.page++, this.chatId)
+      }, 1500);
+    },
+    doingWrite(e) {
+      // 判断服务端返回来的数据是否正在输入
+      setInterval(() => {
+        this.readSecond++
+      }, 50)
+      if(this.readSecond < 10) {
+        return 
+      } else {
+        if (this.wordLen !== $(e.target).text().length) {
+          this.readSecond  = 0
           this.$socket.emit(
             'friendIsTyping',
             this.chatId,
@@ -153,8 +197,10 @@ export default {
             true
           );
           this.wordLen = $(e).text().length;
+        } else {
+          return 
         }
-      },300)
+      }
     },
     checkMySelf(userId) {
       return app.globalService.getLoginUserInfo()._id === userId;
@@ -405,6 +451,7 @@ export default {
     //   }, typeDelay + typeStartDelay);
     // },
     friendIsTyping() {
+      console.log(this.isFriendTyping)
       if (this.isFriendTyping) {
         return;
       }

@@ -16,6 +16,6 @@ socket.on('addFriendRequest', async (Mobile: string, userId: string) => {
    // console.log(`here is addFriendRequest.nect >>>>>>>${sentUser}`)
    // 将自己的个人信息发送到好友
    // 第一个蚕食是要发送的好友，第二个参数是当前用户
-   socket.nsp.sockets[acceptUser.socket.id].emit('message', {sentUser,acceptUser} )
+   socket.nsp.sockets[acceptUser.socket.id].emit('message', {sentUser,  acceptUser} )
 });
 };

@@ -29,15 +29,14 @@ export default (socket: any) => {
       let chat = await ChatOne.find({
         acceptUser,
         user
-      }, { Meta: { $slice: [ 0, 6 ] }})
+      }, { Meta: { $slice: [ -6 , 6 ] }})
       // 如果搜不到，反过来再搜一次
       if (global._.isEmpty(chat)) {
         chat = await ChatOne.find({
           acceptUser: user,
           user: acceptUser
-        }, { Meta: { $slice: [ 0, 6 ] }})
+        }, { Meta: { $slice: [ -6, 6 ] }})
       }
-      console.log(chat)
       // 获取所有的频道，判断是否在对应的频道上
       // 新需求，创建一张频道表，将聊天双方存入信息存入数据库，，读取双方数据发送双方聊天窗口
       if (global._.isEmpty(chat[0])) {
@@ -57,9 +56,7 @@ export default (socket: any) => {
         );
       } else {
         // 将chat列表发送到客户端
-        console.log(message);
         if (!global._.isEmpty(message)) {
-          console.log(user);
           const chatOne = await ChatOne.findByIdAndUpdate(
             { _id: chat[0]._id },
             {
@@ -74,7 +71,7 @@ export default (socket: any) => {
             },
             {
               new: true ,
-              select: { Meta: { $slice: [ 0, 6 ] }}
+              select: { Meta: { $slice: [ -6, 6 ] }}
             }
           );
           socket.nsp.sockets[user.socket.id].emit(`onChatOne_${emit}`, chatOne);
