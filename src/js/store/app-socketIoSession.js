@@ -3,7 +3,8 @@ export default {
 	state: {
 		connect: false,
 		message: null,
-		requestNewFriend: null
+		requestNewFriend: null,
+		newChatUser: []
 	},
 	mutations: {
 		// commit该函数，自动触发
@@ -12,12 +13,26 @@ export default {
 		},
 		// 添加好友重要性比较强，所以使用了message
 		SOCKET_USER_MESSAGE: (state, user) => {
-			console.log(user)
 			if (user.headImg) {
 				user.headImg = app.getResourceUrl(user.headImg)
 			}
 			state.requestNewFriend = user
 		},
+		// 取消掉需要点击的提醒红点 || 增加一个需要打开聊天窗口的红点
+		SOCKET_USER_HASNEWS: (state,NewChating) => {
+			if (NewChating.isHasNewChating) {
+				NewChating.user.headImg = app.getResourceUrl(NewChating.user.headImg)
+				NewChating.user.isHasNewChating = NewChating.isHasNewChating
+				state.newChatUser.push(NewChating.user)
+			} else {
+				NewChating.user.isHasNewChating = NewChating.isHasNewChating
+				state.newChatUser.forEach((item , index) => {
+						if (item._id === NewChating.user._id && !NewChating.user.isHasNewChating) {
+							state.newChatUser[index] = NewChating.user
+						}
+				});
+			}
+		}
 	},
 	actions: {
 		otherAction: (context, type) => {

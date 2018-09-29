@@ -5,7 +5,7 @@ export default (socket: any) => {
   // 实现需求，好友双方添加到共同的组里面去
   // 尝试使用不分频道的方式去做
   // 更改需求，直接读取数据库里面的元信息，然后渲染列表
-  // 判断双方是否在线通讯中，如果是就不必发提示信息了， 如果不是就发送提示信息
+  // 同时发送双方客户端，只要打开或者关闭就取消该发送信息的状态
   socket.on(
     'chatOne',
     async (
@@ -20,12 +20,12 @@ export default (socket: any) => {
       // 用户没发送一条数据，往chat表里面添加数据
       // 转发到发送者
       const user: IUser = (await User.findById(userId)
-        .select('-passWord -updateTime -logoutTime -createTime ')
+        .select('descPerson headImg nickName sex socket')
         .populate({ path: 'socket', select: 'id' })
         .exec()) as IUser; // 当前用户
       const acceptUser: IUser = (await User.findById(acceptUserId)
         .populate({ path: 'socket', select: 'id' })
-        .select('-passWord -updateTime -logoutTime -createTime ')
+        .select('descPerson headImg nickName sex socket')
         .exec()) as IUser; // 需要请求的用户
       let chat = await ChatOne.find({
         acceptUser,
@@ -80,6 +80,24 @@ export default (socket: any) => {
             `onChatOne_${emit}`,
             chatOne
           );
+          // 发送你有新消息的io
+            if (Object.is(user._id.toString(), userId)) {
+            socket.nsp.sockets[acceptUser.socket.id].emit(
+              `hasNewChating_${emit}`,
+              {
+                user ,
+                isHasNewChating: true
+              }
+            );
+          } else if (Object.is(acceptUser._id.toString(), userId)) {
+            socket.nsp.sockets[user.socket.id].emit(
+              `hasNewChating_${emit}`,
+              {
+                user ,
+                isHasNewChating: true
+              }
+            );
+          }
         } else {
           socket.nsp.sockets[user.socket.id].emit(`onChatOne_${emit}`, chat[0]);
           socket.nsp.sockets[acceptUser.socket.id].emit(

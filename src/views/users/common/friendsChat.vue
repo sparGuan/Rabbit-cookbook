@@ -120,12 +120,6 @@ export default {
     chatList: {
       handler: function(newVal, oldVal) {
         console.log(newVal)
-        // mui(this.$refs['chat-messages'])
-        //   .scroll()
-        //   .refresh();
-        // mui(this.$refs['chat-messages'])
-        //   .scroll()
-        //   .scrollToBottom(10); // 100毫秒滚动到顶
         this.chatId = newVal._id;
       },
       deep: true //深度监听
@@ -136,9 +130,6 @@ export default {
       this.$emit('changeChatList', chatList);
       console.log(1111)
       this.pullToRefresh.endPullUpToRefresh()
-     // this.pullToRefresh.refresh(true)
-      // this.pullToRefresh.enablePullupToRefresh();
-      // mui(this.$refs['chat-messages']).setStopped(true);
        // 参数为true代表没有更多数据了。
     },
     friendIsTyping_sent(startOrEnd) {
@@ -386,9 +377,6 @@ export default {
               : this.chatList.acceptUser;
           this.$lastMessageContainer = $messageContainer;
           setTimeout(() => {
-            // mui(this.$refs['chat-messages']).scroll().refresh();
-            // mui(this.$refs['chat-messages']).scroll().scrollToBottom(10);//100毫秒滚动到顶
-            // $messageContainer.remove()
             this.$socket.emit(
               'chatOne',
               acceptUserId,
@@ -399,55 +387,7 @@ export default {
         }
       });
       this.messages++;
-      // 此处是判断对方是否回复
-      // if (
-      //   Math.random() < 0.65 ||
-      //   this.lastMessage.indexOf('?') > -1 ||
-      //   this.messages == 1
-      // ) {
-      //   this.getReply();
-      // }
     },
-    // getReply() {
-    //   if (this.incomingMessages > 2) {
-    //     return;
-    //   }
-    //   this.incomingMessages++;
-    //   //
-    //   let typeStartDelay =
-    //     1000 + this.lastMessage.length * 40 + Math.random() * 1000;
-    //   setTimeout(this.friendIsTyping, typeStartDelay);
-    //   //
-    //   let source = this.lipsum.toLowerCase();
-    //   source = source.split(' ');
-    //   let start = Math.round(Math.random() * (source.length - 1));
-    //   let length = Math.round(Math.random() * 13) + 1;
-    //   let end = start + length;
-    //   if (end >= source.length) {
-    //     end = source.length - 1;
-    //     length = end - start;
-    //   }
-    //   let message = '';
-    //   for (let i = 0; i < length; i++) {
-    //     message += source[start + i] + (i < length - 1 ? ' ' : '');
-    //   }
-    //   message += Math.random() < 0.4 ? '?' : '';
-    //   message += Math.random() < 0.2 ? ' :)' : Math.random() < 0.2 ? ' :(' : '';
-    //   let typeDelay = 300 + message.length * 50 + Math.random() * 1000;
-    //   setTimeout(() => {
-    //     this.receiveMessage(message);
-    //   }, typeDelay + typeStartDelay);
-
-    //   setTimeout(() => {
-    //     this.incomingMessages--;
-    //     if (Math.random() < 0.1) {
-    //       this.getReply();
-    //     }
-    //     if (this.incomingMessages <= 0) {
-    //       this.friendStoppedTyping();
-    //     }
-    //   }, typeDelay + typeStartDelay);
-    // },
     friendIsTyping() {
       console.log(this.isFriendTyping)
       if (this.isFriendTyping) {
@@ -511,25 +451,6 @@ export default {
         }
       });
     },
-    // receiveMessage(message) {
-    //   let messageElements = this.addMessage(message, false),
-    //     $messageContainer = messageElements.$container,
-    //     $messageBubble = messageElements.$bubble;
-
-    //   TweenMax.set($messageBubble, {
-    //     transformOrigin: '60px 50%'
-    //   });
-    //   TweenMax.from($messageBubble, 0.4, {
-    //     scale: 0,
-    //     force3D: true,
-    //     ease: Back.easeOut
-    //   });
-    //   TweenMax.from($messageBubble, 0.4, {
-    //     x: -100,
-    //     force3D: true,
-    //     ease: Quint.easeOut
-    //   });
-    // },
     updateChatHeight() {
       this.$messagesContainer.css({
         height:

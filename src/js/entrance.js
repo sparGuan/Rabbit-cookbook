@@ -39,14 +39,11 @@ const initVue = () => {
 				// 重新更新用户信息				
 				window.app.globalService.setUserInfo(val.acceptUser)
 				this.$store.commit('SOCKET_USER_MESSAGE',val.sentUser)
-			}// ,
-			// 接收请求的频道，加入频道进行通讯
-			// onChatOne_sent(chatOne,user) {
-			// 	// icon-huaban
-			// 	// 给setUser的头像增加一个new
-			// 	// user.isOnChat = true
-			// 	this.$store.commit('SOCKET_USER_MESSAGE',user)
-			// }
+			},
+			hasNewChating_sent(NewChating) {
+				console.log(NewChating)
+				this.$store.commit('SOCKET_USER_HASNEWS',NewChating )
+			}
 		}
 	}).$mount(
 		'#app'

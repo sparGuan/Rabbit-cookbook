@@ -13,9 +13,13 @@
                   <ul style="padding-top:5px;" v-if="communicator.length > 0">
                     <!-- 好友聊天小头像-->
                     <li class="community-item" v-for="(item,index) in communicator" :key="item._id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
+                      <!-- 新好友请求-->
                       <svg class="icon new-msg" v-if="item.newMsg" style="font-size: 44px;width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="68147"><path d="M512 512m-174.40768 0a174.40768 174.40768 0 1 0 348.81536 0 174.40768 174.40768 0 1 0-348.81536 0Z" fill="#F08943" p-id="68148"></path><path d="M491.64288 416.11264h39.87456v75.50976h76.36992v40.7552h-76.36992v75.50976h-39.87456v-75.50976h-75.53024v-40.7552h75.53024v-75.50976z" fill="#FFFFFF" p-id="68149"></path></svg>
                       <!-- 有新消息时 -->
-                      <svg class="icon new-msg" v-if="item.channel" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3280"><path d="M778.24 174.08H546.133333c-95.573333 0-170.666667 75.093333-170.666666 170.666667s75.093333 170.666667 170.666666 170.666666h232.106667c95.573333 0 170.666667-75.093333 170.666667-170.666666s-78.506667-170.666667-170.666667-170.666667z m-211.626667 228.693333H546.133333l-61.44-88.746666v88.746666h-20.48V279.893333h20.48l61.44 88.746667V279.893333h20.48v122.88z m116.053334 0h-92.16V279.893333h88.746666v17.066667h-68.266666v34.133333h64.853333v17.066667h-64.853333v37.546667H682.666667v17.066666z m133.12 0h-20.48l-23.893334-92.16-23.893333 92.16h-20.48l-34.133333-122.88h23.893333l23.893333 92.16 23.893334-92.16h20.48l23.893333 92.16 23.893333-92.16h23.893334l-40.96 122.88z" fill="#FE493F" p-id="3281"></path><path d="M484.693333 279.893333l61.44 88.746667V279.893333h20.48v122.88H546.133333l-61.44-88.746666v88.746666h-20.48V279.893333h20.48zM679.253333 279.893333v17.066667h-68.266666v34.133333h64.853333v17.066667h-64.853333v37.546667H682.666667v17.066666h-92.16V279.893333h88.746666zM709.973333 279.893333l23.893334 92.16 23.893333-92.16h20.48l23.893333 92.16 23.893334-92.16h23.893333l-34.133333 122.88h-20.48l-23.893334-92.16-23.893333 92.16h-20.48l-34.133333-122.88h17.066666z" fill="#FFFFFF" p-id="3282"></path><path d="M778.24 515.413333h-6.826667c10.24 13.653333 17.066667 30.72 17.066667 47.786667v34.133333c0 47.786667-37.546667 85.333333-85.333333 85.333334H682.666667l13.653333 92.16-71.68-92.16H580.266667c-40.96 0-75.093333-27.306667-81.92-64.853334l-3.413334-13.653333h-30.72l-30.72 30.72 3.413334 10.24c20.48 64.853333 78.506667 105.813333 146.773333 105.813333h13.653333l71.68 68.266667c10.24 10.24 23.893333 13.653333 37.546667 13.653333 6.826667 0 13.653333 0 20.48-3.413333 20.48-6.826667 30.72-27.306667 30.72-47.786667v-40.96c61.44-20.48 102.4-78.506667 102.4-143.36v-34.133333c0-20.48-3.413333-40.96-13.653333-61.44-27.306667 6.826667-47.786667 13.653333-68.266667 13.653333zM556.373333 515.413333h-13.653333c-27.306667 0-51.2-6.826667-75.093333-17.066666-6.826667 3.413333-17.066667 3.413333-23.893334 3.413333h-40.96l-71.68 95.573333 10.24-95.573333h-17.066666c-47.786667 0-85.333333-37.546667-85.333334-85.333333v-34.133334c0-47.786667 37.546667-85.333333 85.333334-85.333333h58.026666c6.826667-23.893333 20.48-47.786667 37.546667-68.266667H324.266667C238.933333 232.106667 170.666667 296.96 170.666667 382.293333v34.133334c0 64.853333 40.96 122.88 102.4 143.36v40.96c0 20.48 13.653333 37.546667 30.72 47.786666 6.826667 3.413333 13.653333 3.413333 20.48 3.413334 13.653333 0 27.306667-6.826667 37.546666-13.653334l71.68-68.266666h10.24c44.373333-3.413333 85.333333-23.893333 112.64-54.613334z" fill="" p-id="3283"></path></svg>
+                      <svg class="icon" v-if="item.isHasNewChating" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;position: absolute;
+                      right: 0;
+                      top: 0;
+                      font-size: 12px;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3914"><path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#FF2E24" p-id="3915"></path></svg>
                     </li>
                   </ul>
                 </div>
@@ -36,6 +40,7 @@ export default {
   props: ['value', 'isShowMenuModal'],
   data() {
     return {
+      byChatUser: null,
       isShowFriendsListMenus: false,
       communicator: [], // 好友和请求列表
       rowData: [
@@ -64,12 +69,30 @@ export default {
     }
   },
   watch: {
+    isShowMenuModal(now,old) {
+      if (!now) {
+         this.$store.commit('SOCKET_USER_HASNEWS',{user: this.byChatUser, isHasNewChating : false})
+      }
+    },
     '$store.state.appSocketIoSession.requestNewFriend': {
       handler: function(now, old) {
         const newCommunicators = Object.assign(now,{newMsg:true})
         this.communicator.push(newCommunicators);
       },
-      deep: true //深度监听
+      deep: true // 深度监听
+    },
+    '$store.state.appSocketIoSession.newChatUser': {
+      handler: function(now, old) {
+        this.communicator.forEach( (item,index) => {
+          now.forEach( elem => {
+            if (item._id === elem._id) {
+              this.$set(this.communicator, index, elem)
+              // this.communicator[index] = elem
+            }
+          })
+        })
+      },
+      deep: true // 深度监听
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -120,10 +143,7 @@ export default {
     },
     // 接收请求的频道，加入频道进行通讯
     onChatOne_sent(chatOne) {
-      // icon-huaban
       // 给setUser的头像增加一个new
-      // user.isOnChat = true
-      // this.$store.commit('SOCKET_USER_MESSAGE',user)
       chatOne.Meta.forEach(element => {
         element.headImg = app.getResourceUrl(element.headImg)
       });
@@ -134,6 +154,17 @@ export default {
     // 重新筛选数据结构
     getCommunicator() {
       const friends = app.globalService.getLoginUserInfo().friends || [];
+      if (friends.length > 0) {
+          friends.forEach( (item,index) => {
+            if (this.$store.state.appSocketIoSession.newChatUser.length > 0) {
+                this.$store.state.appSocketIoSession.newChatUser.forEach( elem => {
+                  if (item._id === elem._id && elem.isHasNewChating) {
+                    friends[index] = elem
+                  }
+              })
+            }
+          })
+      }
       const requestList = this.getRequestList();
       this.communicator = [...friends, ...requestList];
     },
@@ -190,6 +221,10 @@ export default {
         // 点击之后先把他们拉到同一个组里面去
         // 发起新建组请求
         // chatID应该是在item里面的id
+        // 去除消息提醒
+        this.byChatUser = item
+        this.$store.commit('SOCKET_USER_HASNEWS',{user: item, isHasNewChating : false})
+        // this.$set(item,'isHasNewChating',false);
         this.$socket.emit('chatOne',item._id,app.globalService.getLoginUserInfo()._id)
         this.$emit('openChatcallBack', true)
       }
@@ -323,7 +358,7 @@ export default {
       .community-item {
         width: 39px;
         height: 39px;
-        box-shadow: 0 0 5px #eee;
+        box-shadow: 0 0px 10px 5px #f3f3f3;
         background-color: blueviolet;
         display: inline-block;
         border-radius: 50%;
