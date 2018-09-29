@@ -32,7 +32,7 @@
 					auto: false,
 					offset: 100, //璺濈搴曢儴楂樺害(鍒拌揪璇ラ珮搴﹀嵆瑙﹀彂)
 					show: true,
-					contentinit: '',
+					contentinit: '历史记录',
 					contentdown: '',
 					contentrefresh: '',
 					contentnomore: '',

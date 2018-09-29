@@ -131,7 +131,7 @@
 	color: #fff;
 	text-align: left;
 }
-
+.mui-pull-bottom-tips {text-align: center;}
 .chat-input-bar {
 	position: relative;
 	background: #32a8e6;

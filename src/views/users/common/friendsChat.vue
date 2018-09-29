@@ -119,6 +119,7 @@ export default {
     },
     chatList: {
       handler: function(newVal, oldVal) {
+        console.log(newVal)
         // mui(this.$refs['chat-messages'])
         //   .scroll()
         //   .refresh();
@@ -135,7 +136,7 @@ export default {
       this.$emit('changeChatList', chatList);
       console.log(1111)
       this.pullToRefresh.endPullUpToRefresh()
-      this.pullToRefresh.refresh(true)
+     // this.pullToRefresh.refresh(true)
       // this.pullToRefresh.enablePullupToRefresh();
       // mui(this.$refs['chat-messages']).setStopped(true);
        // 参数为true代表没有更多数据了。
@@ -171,8 +172,10 @@ export default {
         setTimeout(() => {
           // 从socket.io获取数据然后设置值为false
           // 参数是页数
-          this.$socket.emit('loadHistory', this.page++, this.chatId,app.globalService.getLoginUserInfo()._id)
+          this.$socket.emit('loadHistory', ++this.page, this.chatId,app.globalService.getLoginUserInfo()._id)
         }, 1500);
+      } else {
+         this.pullToRefresh.endPullUpToRefresh()
       }
     },
     doingWrite(e) {
@@ -549,5 +552,6 @@ export default {
 <style lang="less" scoped>
 @import url('./chat.css');
 [data-page='friends-chat'] {
+  
 }
 </style>
