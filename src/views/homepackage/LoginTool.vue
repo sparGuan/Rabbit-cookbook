@@ -52,7 +52,7 @@ export default {
          app.api.user.updateLoginInfo({
             data: {
               userId: app.globalService.getLoginUserInfo()._id,
-              currentPosition: { longitude: '113.0071691637521' , latitude :'22.98209228868979' }
+              location: [Number(113.0071691637521) , Number(22.98209228868979)]
             },
             success: res => {
               if (res.message === 'success') {                
@@ -61,13 +61,13 @@ export default {
             }
           });
           // 正式手机测试
-        // app.utils.getCurrentPosition(position => {
+        // app.utils.getlocation(position => {
         //   const longitude = position.coords.longitude; //获取经度
         //   const latitude = position.coords.latitude;
         //   app.api.user.updateLoginInfo({
         //     data: {
         //       userId: app.globalService.getLoginUserInfo()._id,
-        //       currentPosition: { longitude, latitude }
+        //       location: [Number(longitude), Number(latitude)]
         //     },
         //     success: res => {
         //       if (res.message === 'success') {

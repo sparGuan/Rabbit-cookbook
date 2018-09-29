@@ -194,7 +194,7 @@ export default {
                 let name = auth.userInfo.nickname || auth.userInfo.name
                 // 因为是微信登录所有没有账户，先帮他注册一个账户
                 // 如果有账户了就不注册了直接登录
-                app.utils.getCurrentPosition(position => {
+                app.utils.getlocation(position => {
                   const longitude = position.coords.longitude; //获取经度
                   const latitude = position.coords.latitude;
                     app.api.user.useWxOrQQLogin({
@@ -203,7 +203,7 @@ export default {
                       nickName: name, // 昵称
                       openid: auth.userInfo.openid, // opid
                       headImg: auth.userInfo.headimgurl, // 头像图片
-                      currentPosition: { longitude, latitude }
+                      location: { longitude, latitude }
                     },
                     success: res => {
                       if (res.message === 'success') {

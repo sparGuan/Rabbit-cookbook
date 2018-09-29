@@ -154,9 +154,11 @@ class LoginController {
           );
           this.user = await User.update(
             { _id: this.user._id },
-            {
+            {              
               $set: {
-                currentPosition: body.currentPosition,
+                location: body.location.map( (element: string) => {
+                  return Number(element)
+                }),
                 updateTime: new Date(),
                 expiredTime
               }
@@ -286,18 +288,21 @@ class LoginController {
   // 更新登录日志信息
   /**
    * @param {string} userId 用户Id
-   * @param {object} currentPosition 当前用户位置
+   * @param {object} location 当前用户位置
    */
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
-      const { userId, currentPosition } = ctx.request.body;
+      const { userId, location } = ctx.request.body;
       if (!global._.isEmpty(userId) && isValid(userId)) {
         const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
+        
         this.userInfo = { $set: {
             updateTime: new Date(), // 更新时间
-            currentPosition, // 更新当前位置
+            location: location.map( (element: string) => {
+              return Number(element)
+            }), // 更新当前位置
             expiredTime: expiredtime // 更新报废时长
           }
         };
@@ -308,6 +313,7 @@ class LoginController {
           path: 'requestList',
           select: '-passWord -updateTime -logoutTime -createTime'
         }) as IUser;
+        console.log(this.user)
         ctx.body = {
           message: statusCode.success,
           user: this.user

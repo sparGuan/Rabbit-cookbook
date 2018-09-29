@@ -214,10 +214,10 @@ export default {
 	}
 	 * @param {Function} MapPoint 回调函数，返回position
 	 */
-getCurrentPosition(MapPoint) {
+getlocation(MapPoint) {
 	mui.plusReady(() => {
 		// 成功进入第一个回调，失败进入第二个回调
-    plus.geolocation.getCurrentPosition(MapPoint, (e) => {
+    plus.geolocation.getlocation(MapPoint, (e) => {
         mui.toast("error:" + e.message);
     })
 })
