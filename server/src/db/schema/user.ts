@@ -31,8 +31,8 @@ export interface IUser extends mongoose.Document {
   socket: ISocket, // 用户自己的socket，判断是否在线 -->socket为空代表已经不在线了
 }
 interface ICurrentPosition {
-  longitude: string,
-  latitude: string
+  longitude: number,
+  latitude: number
 }
 const user_schema: mongoose.Schema = new mongoose.Schema({
   friends: [
@@ -86,8 +86,8 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
     trim: true
   },
   currentPosition: {
-    longitude: { type: String, trim: true },
-    latitude: { type: String, trim: true }
+    longitude: { type: Number, trim: true },
+    latitude: { type: Number, trim: true }
   },
   socket: {
     type: mongoose.Schema.Types.ObjectId,

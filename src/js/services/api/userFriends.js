@@ -7,19 +7,16 @@ import app from '../../app';
 define(() =>{
 	return {
 		//上传更新活动业务
-		// saveOrUpdate: ajaxOptions => {
-		// 	return app.ajax(
-		// 		window.app.mui.extend(
-		// 			{
-		// 				url: '/api/activity/saveOrUpdate',
-		// 				cache: false,
-		// 				processData: false,
-		// 				contentType: false
-		// 			},
-		// 			ajaxOptions
-		// 		)
-		// 	);
-		// },
+		loadPeopleNearBy: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/friend/loadPeopleNearBy'
+					},
+					ajaxOptions
+				)
+			);
+		},
 		//查询用户基本信息
 		addNewFriend: ajaxOptions => {
 			return app.ajax(

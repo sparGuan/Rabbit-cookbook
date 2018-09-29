@@ -8,6 +8,7 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
   private user: IUser;
   private acceptUserId: string;
   private userId: string;
+  private userList: IUser[];
   constructor() {
     super();
   }
@@ -106,6 +107,48 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
           ctx.body = {
             message: statusCode.success,
             user: this.user
+          };
+        } else {
+          ctx.body = {
+            message: statusCode.noOne
+          };
+        }
+      }
+    };
+  }
+  // 从附近的人查找好友数据，以年龄段为排序
+  public loadPeopleNearBy() {
+    return async (ctx: any) => {
+      const { body } = ctx.request;
+      if (!global._.isEmpty(body.userId)) {
+        this.user = (await User.findById(body.userId).select(
+          ' currentPosition '
+        )) as IUser;
+        console.log(this.user)
+        // 查找附近的人
+        // 返回的数据只需要昵称，年龄，描述，头像
+        if (!global._.isEmpty(this.user)) {
+            this.userList = await User.find(
+              {
+                currentPosition: {
+                  longitude: {
+                    $gte: this.user.currentPosition.longitude + 0.1,
+                    $lte: this.user.currentPosition.longitude - 0.1
+                  },
+                  latitude: {
+                    $gte: this.user.currentPosition.latitude + 0.1,
+                    $lte: this.user.currentPosition.latitude - 0.1
+                  }
+                }
+              },
+              ' nickName age headImg sex descPerson'
+            ).limit(10).skip(body.page || 1).sort({updateTime: -1, age: -1}) as IUser[];
+            console.log(this.userList)
+        }
+        if (this.userList.length > 0) {
+          ctx.body = {
+            message: statusCode.success,
+            userList: this.userList
           };
         } else {
           ctx.body = {

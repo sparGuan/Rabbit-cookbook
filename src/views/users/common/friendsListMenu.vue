@@ -89,7 +89,7 @@
               </div>
             </li>
             <li class="mui-table-view-cell mui-collapse" v-for="item in friendsListDefault" :key="item.id">
-              <a class="mui-navigate-right" href="javascript:void(0)">
+              <a class="mui-navigate-right" href="javascript:void(0)" >
                 <span> {{item.title}} </span>
               </a>
               <div class="mui-collapse-content">
@@ -170,8 +170,31 @@ export default {
     this.menu = this.$refs['menu'];
     this.menuWrapperClassList = this.menuWrapper.classList;
     this.backdrop = this.$refs['menu-backdrop'];
+    mui.collapseOpenBack = this.collapseOpenBack
   },
   methods: {
+    collapseOpenBack(index) {
+      if (index === 2) {
+        console.log(index)
+        this.loadPeopleNearBy()
+      }
+    },
+    loadPeopleNearBy() {
+      if (app.globalService.getLoginUserInfo()._id) {
+        // 请求后台获取附近的人的信息，已年龄作为分界线，16-22岁的排前
+        const data = {userId: app.globalService.getLoginUserInfo()._id}
+        app.api.userFriends.loadPeopleNearBy({
+          data,
+          success: res => {
+            if (res.message === 'success') {
+              console.log(res)
+            } else {
+              // 没有搜到用户
+            }
+          }
+        })
+      }
+    },
     setGoo() {
       this.setFilter('url(#goo)');
     },

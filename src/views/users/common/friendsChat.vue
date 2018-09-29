@@ -155,9 +155,7 @@ export default {
   },
   methods: {
     pullupRefresh() {    
-      console.log(mui(this.$refs['chat-messages']).scroll().y)
       if (mui(this.$refs['chat-messages']).scroll().y <= 10 && mui(this.$refs['chat-messages']).scroll().y > 0 ) {
-        console.log(11111)
         // 没有更多数据的时候要
         // this.pullToRefresh.disablePullupToRefresh()
         setTimeout(() => {
