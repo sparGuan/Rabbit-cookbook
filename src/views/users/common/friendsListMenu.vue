@@ -93,16 +93,16 @@
                 <span> {{item.title}} </span>
               </a>
               <div class="mui-collapse-content">
-                <div v-if="item.id === 0">
+                <div v-if="item.id === '0'">
                   <ul>
-                    <li v-for="elem in geoNearFriends" :key="elem._id">
+                    <li v-for="elem in geoNearFriends" :key="elem._id" class="geoNearfriends-item">
                       <div class="geonear-head-img" :style="'background-image:url('+elem.headImg+');'"></div>
                       <div class="geonear-content">
                           <p class="geonear-nick" v-html="elem.nickName"></p>
                           <p class="geonear-desc" v-html="elem.descPerson"></p>
+                          <!-- 添加 -->
+                          <div class="add-new-geonearfriend" @click="sendToAdd(elem._id)"></div>
                       </div>
-                      <!-- 添加 -->
-                      <div class="add-new-geonearfriend" @click="sendToAdd(elem._id)"></div>
                     </li>
                   </ul>
                 </div>
@@ -178,10 +178,10 @@ export default {
     mui.collapseOpenBack = this.collapseOpenBack
   },
   methods: {
-    sendToAdd() {
+    sendToAdd(acceptUserId) {
       this.$socket.emit(
-            'addFriendRequest',
-            this.Mobile,
+            'addFriendRequestById',
+            acceptUserId,
             app.globalService.getLoginUserInfo()._id
           );
     },
@@ -199,7 +199,8 @@ export default {
           data,
           success: res => {
             if (res.message === 'success') {
-              console.log(res)
+              this.geoNearFriends = res.userList
+              console.log(console.log(res))
             } else {
               // 没有搜到用户
             }
@@ -395,4 +396,32 @@ export default {
 <style lang="less" scoped>
 @import url('./send.less');
 @import url('./friendsListViewMenu.less');
+.geoNearfriends-item {
+  text-align: left;
+  display: block;
+  position: relative;
+}
+.geonear-head-img {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.geonear-content {
+    display: inline-block;
+    width: calc(~'100% - 40px');
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 10px;
+    border-bottom: 1px solid #eee
+}
+.add-new-geonearfriend {
+  width: 43px;
+    height: 43px;
+    right: 0;
+    position: absolute;
+    top: -1px;
+}
 </style>
