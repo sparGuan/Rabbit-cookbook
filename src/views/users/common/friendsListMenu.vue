@@ -52,34 +52,8 @@
                             <button class="send-button" ref="sendButton" @click="requestToAddOne">
                               <div class="sent-bg" ref="sentBg"></div>
                               <svg ref="sendIcon" class="icon send-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="45406"><path d="M768 0H256C115.2 0 0 115.2 0 256v512c0 140.8 115.2 256 256 256h512c140.8 0 256-115.2 256-256V256c0-140.8-115.2-256-256-256zM182.4 246.4c-28.8 0-51.2-22.4-51.2-51.2 0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 27.2-24 51.2-51.2 51.2z m555.2 316.8H563.2V736c0 28.8-24 51.2-51.2 51.2s-51.2-24-51.2-51.2V563.2H286.4c-28.8 0-51.2-24-51.2-51.2s24-51.2 51.2-51.2h172.8V286.4c0-28.8 24-51.2 51.2-51.2s51.2 24 51.2 51.2v172.8h172.8c28.8 0 51.2 24 51.2 51.2s-20.8 52.8-48 52.8z" fill="#FF943F" p-id="45407"></path></svg>
-                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
-                                <defs>
-                                  <filter id="goo">
-                                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
-                                    <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
-                                  </filter>
-                                  <filter id="goo-no-comp">
-                                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
-                                  </filter>
-                                </defs>
-                              </svg>
                               <i class="iconfont icon-icon-test1 sent-icon" ref="sentIcon"></i>
-                            </button>
-                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
-                                  <defs>
-                                    <filter id="goo">
-                                      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
-                                      <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
-                                    </filter>
-                                    <filter id="goo-no-comp">
-                                      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
-                                    </filter>
-                                  </defs>
-                                </svg>
+                            </button >
                             </div>
                         </li>
                       </ul>
@@ -101,7 +75,19 @@
                           <p class="geonear-nick" v-html="elem.nickName"></p>
                           <p class="geonear-desc" v-html="elem.descPerson"></p>
                           <!-- 添加 -->
-                          <div class="add-new-geonearfriend" @click="sendToAdd(elem._id)"></div>
+                          <div :class="'filter-'+elem._id">
+                            <div class="send-indicator">
+                                <div :class="'send-indicator-dot'+elem._id"></div>
+                                <div :class="'send-indicator-dot'+elem._id"></div>
+                                <div :class="'send-indicator-dot'+elem._id"></div>
+                                <div :class="'send-indicator-dot'+elem._id"></div>
+                            </div>
+                            <button class="add-new-geonearfriend" :class="'send-button'+elem._id" @click="sendToAdd($event,elem._id)" >
+                                  <div class="sent-bg"></div>
+                                  <svg  class="icon send-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="45406"><path d="M768 0H256C115.2 0 0 115.2 0 256v512c0 140.8 115.2 256 256 256h512c140.8 0 256-115.2 256-256V256c0-140.8-115.2-256-256-256zM182.4 246.4c-28.8 0-51.2-22.4-51.2-51.2 0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 27.2-24 51.2-51.2 51.2z m555.2 316.8H563.2V736c0 28.8-24 51.2-51.2 51.2s-51.2-24-51.2-51.2V563.2H286.4c-28.8 0-51.2-24-51.2-51.2s24-51.2 51.2-51.2h172.8V286.4c0-28.8 24-51.2 51.2-51.2s51.2 24 51.2 51.2v172.8h172.8c28.8 0 51.2 24 51.2 51.2s-20.8 52.8-48 52.8z" fill="#FF943F" p-id="45407"></path></svg>
+                                  <i class="iconfont icon-icon-test1 sent-icon" ref="sentIcon"></i>
+                            </button>
+                          </div>
                       </div>
                     </li>
                   </ul>
@@ -111,6 +97,19 @@
           </ul>
         </div>
       </div>
+       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" style="position: fixed;top: -1000px;left: -1000px;z-index:-100;">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+          </filter>
+          <filter id="goo-no-comp">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+          </filter>
+        </defs>
+      </svg>
       <div ref="menu-backdrop" class="menu-backdrop" style="opacity: 0;" @click="toggleMenu" ></div>
 	</div>
 </template>
@@ -150,9 +149,6 @@ export default {
       backdrop: null,
       busying: false,
       locked: false,
-      sendButton: null,
-      sendIcon: null,
-      sentIcon: null,
       sentBg: null,
       indicatorDots: null,
       circle: []
@@ -175,48 +171,63 @@ export default {
     this.menu = this.$refs['menu'];
     this.menuWrapperClassList = this.menuWrapper.classList;
     this.backdrop = this.$refs['menu-backdrop'];
-    mui.collapseOpenBack = this.collapseOpenBack
+    mui.collapseOpenBack = this.collapseOpenBack;
   },
   methods: {
-    sendToAdd(acceptUserId) {
-      this.$socket.emit(
+    sendToAdd(event,acceptUserId) {
+      this.sentAni({
+        ClassId: acceptUserId,
+        sendButton: mui(event.target),
+        sendIcon: event.target.childNodes[1],
+        sentIcon: event.target.childNodes[2],
+        sentBg: event.target.firstChild,
+        socketEmit: () => {
+          _this.$socket.emit(
             'addFriendRequestById',
             acceptUserId,
             app.globalService.getLoginUserInfo()._id
           );
+        }
+      });
     },
     collapseOpenBack(index) {
       if (index === 2) {
-        console.log(index)
-        this.loadPeopleNearBy()
+        this.loadPeopleNearBy();
       }
     },
     loadPeopleNearBy() {
       if (app.globalService.getLoginUserInfo()._id) {
         // 请求后台获取附近的人的信息，已年龄作为分界线，16-22岁的排前
-        const data = {userId: app.globalService.getLoginUserInfo()._id}
+        const data = { userId: app.globalService.getLoginUserInfo()._id };
         app.api.userFriends.loadPeopleNearBy({
           data,
           success: res => {
             if (res.message === 'success') {
-              this.geoNearFriends = res.userList
-              console.log(console.log(res))
+              this.geoNearFriends = res.userList;
+              console.log(console.log(res));
             } else {
               // 没有搜到用户
             }
           }
-        })
+        });
       }
     },
     setGoo() {
       this.setFilter('url(#goo)');
     },
-    setFilter(filter) {
-      this.$refs['send'][0].style.cssText +=
+    setFilter(filter,classId='',isOne=false) {
+      if (isOne) {
+        this.$refs['send'][0].style.cssText +=
         'webkitFilter: filter; mozFilter: filter;filter: filter';
+      } else {
+        console.log(mui('.filter-'+classId))
+        mui('.filter-'+classId)[0].style.cssText +=
+        'webkitFilter: filter; mozFilter: filter;filter: filter';
+      }
+      
     },
-    setGooNoComp() {
-      this.setFilter('url(#goo-no-comp)');
+    setGooNoComp(isOne,ClassId) {
+      this.setFilter('url(#goo-no-comp)',ClassId,isOne);
     },
     setupCircle($obj, index) {
       if (typeof this.circle[index] === 'undefined') {
@@ -260,47 +271,49 @@ export default {
         }
       });
     },
-    // 调用接口给双方增加一个备用的ID字段，存储发送增加好友请求
-    requestToAddOne() {
-      this.sendButton = this.$refs['sendButton'];
-      this.sendIcon = this.$refs['sendIcon'][0];
-      this.sentIcon = this.$refs['sentIcon'][0];
-      this.sentBg = this.$refs['sentBg'];
-      // this.indicatorDots = mui('.send-button,.send-indicator-dot');
-      // console.log(this.indicatorDots)
+    // 执行动画的方法
+    sentAni({isOne=false, ClassId='',sendButton, sendIcon,sentIcon, sentBg, socketEmit = () => {} }) {
       if (this.locked) {
         return;
       }
       this.locked = true;
-      TweenMax.to(this.sendIcon, 0.3, {
+      TweenMax.to(sendIcon, 0.3, {
         x: 100,
         y: -100,
         ease: Quad.easeIn,
         onComplete: () => {
-          this.setGooNoComp();
-          this.sendIcon.style.display = 'none';
+          this.setGooNoComp(isOne,ClassId);
+          sendIcon.style.display = 'none';
           // 这里开始发送sockiet请求
-          this.$socket.emit(
-            'addFriendRequest',
-            this.Mobile,
-            app.globalService.getLoginUserInfo()._id
-          );
+          socketEmit();
         }
       });
-      TweenMax.to(this.sendButton, 0.6, {
+      TweenMax.to(sendButton, 0.6, {
         scale: 0.5,
         ease: Back.easeOut
       });
-      mui('.send-button,.send-indicator-dot').each((i, item) => {
-        this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
-      });
+      if (isOne) {
+         mui('.send-button,.send-indicator-dot').each((i, item) => {
+          this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
+        });
+      } else {
+        mui('.send-button-'+ClassId+',.send-indicator-dot-'+ClassId+'').each((i, item) => {
+          this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
+        });
+      }
       setTimeout(() => {
         // success anim start
         // close circle
-        mui('.send-button,.send-indicator-dot').each((i, item) => {
-          this.stopCircleAnim(item, i, 0.8 + i * 0.1);
-        });
-        TweenMax.to(this.sentBg, 0.7, {
+        if (isOne) {
+          mui('.send-button,.send-indicator-dot').each((i, item) => {
+            this.stopCircleAnim(item, i, 0.8 + i * 0.1);
+          });
+        } else {
+          mui('.send-button-'+ClassId+',.send-indicator-dot-'+ClassId+'').each((i, item) => {
+            this.stopCircleAnim(item, i, 0.8 + i * 0.1);
+          });
+        }
+        TweenMax.to(sentBg, 0.7, {
           delay: 0.7,
           opacity: 1
         });
@@ -308,7 +321,7 @@ export default {
         setTimeout(() => {
           this.setGoo();
           TweenMax.fromTo(
-            this.sentIcon,
+            sentIcon,
             1.5,
             {
               display: 'inline-block',
@@ -320,16 +333,34 @@ export default {
               ease: Elastic.easeOut
             }
           );
-          TweenMax.to(this.sentIcon, 0.5, {
+          TweenMax.to(sentIcon, 0.5, {
             delay: 0,
             opacity: 1
           });
-          TweenMax.to(this.sendButton, 0.3, {
+          TweenMax.to(sendButton, 0.3, {
             scale: 1,
             ease: Back.easeOut
           });
         }, 1000);
       }, 3000 + Math.random() * 3000);
+    },
+    // 调用接口给双方增加一个备用的ID字段，存储发送增加好友请求
+    requestToAddOne() {
+      const _this = this;
+      this.sentAni({
+        isOne: true,
+        sendButton: this.$refs['sendButton'][0],
+        sendIcon: this.$refs['sendIcon'][0],
+        sentIcon: this.$refs['sentIcon'][0],
+        sentBg: this.$refs['sentBg'][0],
+        socketEmit: () => {
+          _this.$socket.emit(
+            'addFriendRequest',
+            _this.Mobile,
+            app.globalService.getLoginUserInfo()._id
+          );
+        }
+      });
     },
     searchNewFriends() {
       if (this.Mobile !== '') {
@@ -402,26 +433,40 @@ export default {
   position: relative;
 }
 .geonear-head-img {
-    width: 35px;
-    height: 35px;
-    background-size: cover;
-    border-radius: 50%;
-    display: inline-block;
-    vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  background-size: cover;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
 }
 .geonear-content {
-    display: inline-block;
-    width: calc(~'100% - 40px');
-    vertical-align: middle;
-    text-align: left;
-    padding-left: 10px;
-    border-bottom: 1px solid #eee
+  display: inline-block;
+  width: calc(~'100% - 40px');
+  vertical-align: middle;
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid #eee;
+}
+.geonear-nick {
+  font-size: 13px;
+}
+.geonear-desc {
+  font-size: 12px;
 }
 .add-new-geonearfriend {
   width: 43px;
-    height: 43px;
-    right: 0;
-    position: absolute;
-    top: -1px;
+  height: 43px;
+  right: 0;
+  position: absolute;
+  top: -5px;
+  left: auto;
+  bottom: auto;
+  margin-top: 0;
+  margin-left: 0;
+  border-radius: 0;
+  background-color: transparent;
+  border: 0;
 }
+
 </style>

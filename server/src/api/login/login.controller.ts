@@ -124,17 +124,23 @@ class LoginController {
           };
           return;
         }
-        this.user = (await User.findOneAndUpdate({ openid: body.openid }, {$set: {
-          // 生成 token 返回给客户端
-          token: jwt.sign(
-            {
-              data: body.Mobile,
-              // 设置 token 过期时间
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-            },
-            'secret'
-          )
-        }}, {new: true})) as IUser;
+        this.user = (await User.findOneAndUpdate(
+          { openid: body.openid },
+          {
+            $set: {
+              // 生成 token 返回给客户端
+              token: jwt.sign(
+                {
+                  data: body.Mobile,
+                  // 设置 token 过期时间
+                  exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+                },
+                'secret'
+              )
+            }
+          },
+          { new: true }
+        )) as IUser;
         if (global._.isEmpty(this.user)) {
           const salt = await bcrypt.genSalt$(this.saltRounds);
           body.passWord = await bcrypt.hash$(body.openid, salt);
@@ -145,19 +151,19 @@ class LoginController {
               exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
             },
             'secret'
-          )
+          );
           this.user = new User(body);
-          this.user = await this.user.save() as IUser;
+          this.user = (await this.user.save()) as IUser;
         } else {
           expiredTime = Date.parse(
             getDateAfter('', statusCode.expiredTime, '/')
           );
           this.user = await User.update(
             { _id: this.user._id },
-            {              
+            {
               $set: {
-                location: body.location.map( (element: string) => {
-                  return Number(element)
+                location: body.location.map((element: string) => {
+                  return Number(element);
                 }),
                 updateTime: new Date(),
                 expiredTime
@@ -208,17 +214,23 @@ class LoginController {
       const { body } = ctx.request;
       // 不用用户名登录就是手机登录
       if (!global._.isEmpty(body.Mobile)) {
-        this.user = await User.findOneAndUpdate({ Mobile: body.Mobile }, {$set: {
-          // 生成 token 返回给客户端
-          token: jwt.sign(
-            {
-              data: body.Mobile,
-              // 设置 token 过期时间
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-            },
-            'secret'
-          )
-        }}, {new: true}).select(' -updateTime -logoutTime -createTime ') as IUser;
+        this.user = (await User.findOneAndUpdate(
+          { Mobile: body.Mobile },
+          {
+            $set: {
+              // 生成 token 返回给客户端
+              token: jwt.sign(
+                {
+                  data: body.Mobile,
+                  // 设置 token 过期时间
+                  exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+                },
+                'secret'
+              )
+            }
+          },
+          { new: true }
+        ).select(' -updateTime -logoutTime -createTime ')) as IUser;
       }
       // 如果找不到用户，就报401
       if (global._.isEmpty(this.user)) {
@@ -297,23 +309,25 @@ class LoginController {
         const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
-        
-        this.userInfo = { $set: {
+
+        this.userInfo = {
+          $set: {
             updateTime: new Date(), // 更新时间
-            location: location.map( (element: string) => {
-              return Number(element)
+            location: location.map((element: string) => {
+              return Number(element);
             }), // 更新当前位置
             expiredTime: expiredtime // 更新报废时长
           }
         };
-        this.user = await User.findByIdAndUpdate(userId, this.userInfo, {
+        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {
           new: true
-        }).select('-passWord -updateTime -logoutTime -createTime ')
-        .populate({
-          path: 'requestList',
-          select: '-passWord -updateTime -logoutTime -createTime'
-        }) as IUser;
-        console.log(this.user)
+        })
+          .select('-passWord -updateTime -logoutTime -createTime ')
+          .populate({
+            path: 'requestList',
+            select: '-passWord -updateTime -logoutTime -createTime'
+          })) as IUser;
+        console.log(this.user);
         ctx.body = {
           message: statusCode.success,
           user: this.user
@@ -349,9 +363,11 @@ class LoginController {
           const _id: string = this.userInfo.userId;
           if (!global._.isEmpty(_id) && isValid(_id)) {
             // 有ID就update
-            this.user = await User.findByIdAndUpdate(_id, this.userInfo, {
+            this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {
               new: true
-            }).select('-passWord -updateTime -logoutTime -createTime ') as IUser;
+            }).select(
+              '-passWord -updateTime -logoutTime -createTime '
+            )) as IUser;
             reslove();
           }
         });

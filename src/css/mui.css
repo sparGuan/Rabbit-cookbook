@@ -1083,7 +1083,6 @@ input[type='submit']:enabled:active,
 input[type='submit'].mui-active:enabled,
 input[type='reset']:enabled:active,
 input[type='reset'].mui-active:enabled,
-button:enabled:active,
 button.mui-active:enabled,
 .mui-btn:enabled:active,
 .mui-btn.mui-active:enabled {
