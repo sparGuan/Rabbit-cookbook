@@ -6,6 +6,12 @@
   position: absolute;
   right: 30px;
     top: 6px;
+    &.send-filter {
+      width: 45px;
+      height: 37px;
+      right: 0px;
+    top: -4px;
+    }
 }
 
 .send-button {
@@ -23,6 +29,21 @@
   font-size: 18px;
   padding: 0;
   overflow: hidden;
+  &.add-new-geonearfriend {
+    width: 45px;
+    height: 33px;
+    right: 0;
+    position: absolute;
+    top: 6px;
+    left: auto;
+    bottom: auto;
+    margin-top: 0;
+    margin-left: 0;
+    border-radius: 0;
+    background-color: #fff;
+    border: 0;
+    
+  }
 }
 
 .sent-bg{
@@ -33,6 +54,12 @@
     width: 100%;
     height: 100%;
     opacity: 0;
+    &.bg-around {
+      width: 33px;
+      height: 33px;
+      border-radius: 50%;
+      margin-left: 6px;
+    }
 }
 
 .send-icon {
@@ -49,14 +76,16 @@
   font-size: 26px;
   padding-top: 3px;
 }
-
+.sent-icon-near {
+  display: none;
+}
 .send-indicator {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 }
 
-.send-indicator-dot {
+.send-indicator-dot, [class ^= 'send-indicator-dot']{
 	position: absolute;
 	background: #5af158;
 	width: 30px;
@@ -66,25 +95,25 @@
   border-radius: 50%;
 }
 
-.send-indicator-dot:nth-child(1) {
+.send-indicator-dot:nth-child(1),[class ^= 'send-indicator-dot']:nth-child(1) {
 	background: #03a9f4;
 	-webkit-transform: scale(0.8, 0.8);
 	transform: scale(0.8, 0.8);
 }
 
-.send-indicator-dot:nth-child(2) {
+.send-indicator-dot:nth-child(2),[class ^= 'send-indicator-dot']:nth-child(2) {
 	background: #5af158;
 	-webkit-transform: scale(0.85, 0.85);
 	transform: scale(0.85, 0.85);
 }
 
-.send-indicator-dot:nth-child(3) {
+.send-indicator-dot:nth-child(3),[class ^= 'send-indicator-dot']:nth-child(3) {
 	background: #ffc107;
 	-webkit-transform: scale(0.9, 0.9);
 	transform: scale(0.9, 0.9);
 }
 
-.send-indicator-dot:nth-child(4) {
+.send-indicator-dot:nth-child(4),[class ^= 'send-indicator-dot']:nth-child(4) {
 	background: #ff5722;
 	-webkit-transform: scale(0.7, 0.7);
 	transform: scale(0.7, 0.7);

@@ -21,11 +21,12 @@
 // - selected: True if item has been selected
 // - unselected: True if item has been unselected
 
-function PathSlider(path, items, options) {
+export default function PathSlider(path, items, options) {
     this.path = is.str(path) ? document.querySelector(path) : path;
     this.pathLength = this.path.getTotalLength();
     this.items = is.str(items) ? document.querySelectorAll(items) : items;
     this.itemsLength = this.items.length;
+    this.anime = options.anime
     this.init(options);
 }
 
@@ -189,7 +190,7 @@ PathSlider.prototype = {
 
                     that.animations.push({
                         index: i,
-                        anime: anime({
+                        anime: that.anime({
                             targets: target,
                             position: newPosition,
                             duration: that.duration,

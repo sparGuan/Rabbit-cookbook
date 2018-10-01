@@ -75,20 +75,44 @@
                           <p class="geonear-nick" v-html="elem.nickName"></p>
                           <p class="geonear-desc" v-html="elem.descPerson"></p>
                           <!-- 添加 -->
-                          <div :class="'filter-'+elem._id">
+                          <div :class="'send send-filter filter-'+elem._id ">
                             <div class="send-indicator">
                                 <div :class="'send-indicator-dot'+elem._id"></div>
                                 <div :class="'send-indicator-dot'+elem._id"></div>
                                 <div :class="'send-indicator-dot'+elem._id"></div>
                                 <div :class="'send-indicator-dot'+elem._id"></div>
                             </div>
-                            <button class="add-new-geonearfriend" :class="'send-button'+elem._id" @click="sendToAdd($event,elem._id)" >
-                                  <div class="sent-bg"></div>
-                                  <svg  class="icon send-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="45406"><path d="M768 0H256C115.2 0 0 115.2 0 256v512c0 140.8 115.2 256 256 256h512c140.8 0 256-115.2 256-256V256c0-140.8-115.2-256-256-256zM182.4 246.4c-28.8 0-51.2-22.4-51.2-51.2 0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 27.2-24 51.2-51.2 51.2z m555.2 316.8H563.2V736c0 28.8-24 51.2-51.2 51.2s-51.2-24-51.2-51.2V563.2H286.4c-28.8 0-51.2-24-51.2-51.2s24-51.2 51.2-51.2h172.8V286.4c0-28.8 24-51.2 51.2-51.2s51.2 24 51.2 51.2v172.8h172.8c28.8 0 51.2 24 51.2 51.2s-20.8 52.8-48 52.8z" fill="#FF943F" p-id="45407"></path></svg>
-                                  <i class="iconfont icon-icon-test1 sent-icon" ref="sentIcon"></i>
+                            <button class="add-new-geonearfriend send-button" :id="'sendBtn'+elem._id" @click="sendToAdd($event,elem._id)" >
+                                  <div class="sent-bg bg-around" :id="'sent_bg'+elem._id"></div>
+                                  <svg  class="icon send-icon" :id="'send_icon'+elem._id" style="width: 1em; height: 1em;fill: currentColor;overflow: hidden;margin:0;font-size:29px;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="45406"><path d="M768 0H256C115.2 0 0 115.2 0 256v512c0 140.8 115.2 256 256 256h512c140.8 0 256-115.2 256-256V256c0-140.8-115.2-256-256-256zM182.4 246.4c-28.8 0-51.2-22.4-51.2-51.2 0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 27.2-24 51.2-51.2 51.2z m555.2 316.8H563.2V736c0 28.8-24 51.2-51.2 51.2s-51.2-24-51.2-51.2V563.2H286.4c-28.8 0-51.2-24-51.2-51.2s24-51.2 51.2-51.2h172.8V286.4c0-28.8 24-51.2 51.2-51.2s51.2 24 51.2 51.2v172.8h172.8c28.8 0 51.2 24 51.2 51.2s-20.8 52.8-48 52.8z" fill="#FF943F" p-id="45407"></path></svg>
+                                  <i class="iconfont icon-icon-test1 sent-icon-near" :id="'sent_icon'+elem._id" ></i>
                             </button>
                           </div>
                       </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- 好友列表 -->
+                <div v-if="item.id === '1'">
+                  <ul class="communicators-container">
+                    <li v-for="elem in communicators" :key="elem._id" class="communicators-item">
+                        <div class="communicators-item-head" :style="'background-image:url('+elem.headImg+')'">
+                        </div>
+                        <div class="communicators-item-content">
+                          <p class="communicators-item-content-name" v-html="elem.nickName"></p>
+                          <p class="communicators-item-content-desc" v-html="elem.descPerson"></p>
+                          <div class="heard">
+                              <!-- 好 -->
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50%" height="100%" 
+                              style="display:inline-block;"
+                              class="heard-face"
+                              viewBox="0 0 24 24"><path class="good" d="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8C16.3,8 17,8.7 17,9.5M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.23 12,15.23C13.25,15.23 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50%" height="100%" 
+                              class="heard-face"
+                              style="display:inline-block;" viewBox="0 0 24 24"><path class="bad" d="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M15.5,8C16.3,8 17,8.7 17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M12,14C13.75,14 15.29,14.72 16.19,15.81L14.77,17.23C14.32,16.5 13.25,16 12,16C10.75,16 9.68,16.5 9.23,17.23L7.81,15.81C8.71,14.72 10.25,14 12,14Z"></path></svg>
+                              <!-- 不好 -->
+                              
+                          </div>
+                        </div>
                     </li>
                   </ul>
                 </div>
@@ -116,7 +140,7 @@
 <script>
 import { TweenMax } from 'gsap';
 export default {
-  props: ['value'],
+  props: ['value','communicators'],
   data() {
     return {
       geoNearFriends: [],
@@ -175,12 +199,13 @@ export default {
   },
   methods: {
     sendToAdd(event,acceptUserId) {
+      const _this = this
       this.sentAni({
         ClassId: acceptUserId,
-        sendButton: mui(event.target),
-        sendIcon: event.target.childNodes[1],
-        sentIcon: event.target.childNodes[2],
-        sentBg: event.target.firstChild,
+        sendButton: mui('#sendBtn'+acceptUserId)[0],
+        sendIcon: mui('#send_icon'+acceptUserId)[0],
+        sentIcon: mui('#sent_icon'+acceptUserId)[0],
+        sentBg: mui('#sent_bg'+acceptUserId)[0],
         socketEmit: () => {
           _this.$socket.emit(
             'addFriendRequestById',
@@ -203,8 +228,7 @@ export default {
           data,
           success: res => {
             if (res.message === 'success') {
-              this.geoNearFriends = res.userList;
-              console.log(console.log(res));
+              this.geoNearFriends = res.userList;              
             } else {
               // 没有搜到用户
             }
@@ -212,21 +236,21 @@ export default {
         });
       }
     },
-    setGoo() {
-      this.setFilter('url(#goo)');
+    setGoo(ClassId,isOne=false) {
+      this.setFilter('url(#goo)',ClassId,isOne);
     },
-    setFilter(filter,classId='',isOne=false) {
+    setFilter(filter,ClassId='',isOne=false) {      
       if (isOne) {
         this.$refs['send'][0].style.cssText +=
-        'webkitFilter: filter; mozFilter: filter;filter: filter';
+        'webkitFilter: '+filter+'; mozFilter: '+filter+';filter: '+filter;
       } else {
-        console.log(mui('.filter-'+classId))
-        mui('.filter-'+classId)[0].style.cssText +=
-        'webkitFilter: filter; mozFilter: filter;filter: filter';
+        console.log(mui('.filter-'+ClassId)[0])
+        mui('.filter-'+ClassId)[0].style.cssText +=
+        'webkitFilter: '+filter+'; mozFilter: '+filter+';filter: '+filter;
       }
       
     },
-    setGooNoComp(isOne,ClassId) {
+    setGooNoComp(ClassId,isOne) {
       this.setFilter('url(#goo-no-comp)',ClassId,isOne);
     },
     setupCircle($obj, index) {
@@ -276,18 +300,18 @@ export default {
       if (this.locked) {
         return;
       }
-      this.locked = true;
+      this.locked = true;      
       TweenMax.to(sendIcon, 0.3, {
         x: 100,
         y: -100,
         ease: Quad.easeIn,
         onComplete: () => {
-          this.setGooNoComp(isOne,ClassId);
+          this.setGooNoComp(ClassId,isOne);
           sendIcon.style.display = 'none';
           // 这里开始发送sockiet请求
           socketEmit();
         }
-      });
+      });      
       TweenMax.to(sendButton, 0.6, {
         scale: 0.5,
         ease: Back.easeOut
@@ -297,7 +321,8 @@ export default {
           this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
         });
       } else {
-        mui('.send-button-'+ClassId+',.send-indicator-dot-'+ClassId+'').each((i, item) => {
+        console.log(mui('.send-button'+ClassId+',.send-indicator-dot'+ClassId+''))
+        mui('.send-button'+ClassId+',.send-indicator-dot'+ClassId+'').each((i, item) => {
           this.startCircleAnim(item, i, 30, 0.1, 1 + i * 0.2, 1.1 + i * 0.3);
         });
       }
@@ -309,17 +334,20 @@ export default {
             this.stopCircleAnim(item, i, 0.8 + i * 0.1);
           });
         } else {
-          mui('.send-button-'+ClassId+',.send-indicator-dot-'+ClassId+'').each((i, item) => {
+          console.log(mui('.send-button'+ClassId+',.send-indicator-dot'+ClassId+''))
+          mui('.send-button'+ClassId+',.send-indicator-dot'+ClassId+'').each((i, item) => {
             this.stopCircleAnim(item, i, 0.8 + i * 0.1);
           });
         }
+        console.log(sentBg)
         TweenMax.to(sentBg, 0.7, {
           delay: 0.7,
           opacity: 1
         });
         // show icon
+        console.log(sentIcon)
         setTimeout(() => {
-          this.setGoo();
+          this.setGoo(ClassId,isOne);
           TweenMax.fromTo(
             sentIcon,
             1.5,
@@ -467,6 +495,53 @@ export default {
   border-radius: 0;
   background-color: transparent;
   border: 0;
+}
+.communicators-item {
+  display: block;
+  .communicators-item-head {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .communicators-item-content {
+        text-align: left;
+        width: calc(~'100% - 50px');
+        display: inline-block;
+        vertical-align: middle;
+        border-bottom: 1px solid #eee;
+        padding-left: 15px;
+        position: relative;
+      .heard {
+        height: 32px;
+        width: 80px;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;        
+        padding: 2px;
+        border-radius: 25px;
+        background-color: rgba(0, 0, 16, 0.6);
+        .heard-face {
+          fill: rgb(242, 242, 242);                              
+        }
+        .heard-face:hover .good{
+          fill: rgb(0, 204, 79);
+        }
+        .heard-face:hover .bad{
+          fill: rgb(229, 132, 0);
+        }
+      }
+      .communicators-item-content-name {
+        font-size: 13px;
+      }
+      .communicators-item-content-desc {
+        font-size: 12px;
+      }
+    }
 }
 
 </style>

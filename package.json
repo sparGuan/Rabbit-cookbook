@@ -41,7 +41,8 @@
 		"vue-resource": "^1.0.3",
 		"vue-router": "^2.0.1",
 		"vue-socket.io": "^2.1.1-b",
-		"vuex": "^2.0.0"
+		"vuex": "^2.0.0",
+		"weixin-js-sdk": "^1.4.0-test"
 	},
 	"devDependencies": {
 		"vue-template-compiler": "^2.1.0",

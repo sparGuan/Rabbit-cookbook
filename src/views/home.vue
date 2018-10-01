@@ -40,14 +40,11 @@ export default {
 <style lang="less" scoped>
 [data-page='home'] {
 .panel {
-  font-family: 'League Gothic', Impact, sans-serif;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 14px;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to bottom,#dadfe2 10%, #fff 50%);
+    background: -moz-linear-gradient(top, #c8c7cc 0%, rgba(89, 93, 154, 0) 100%);
+    background: -webkit-linear-gradient(top, #c8c7cc 0%, rgba(89, 93, 154, 0) 100%);
+    background: linear-gradient(to bottom, #c8c7cc 0%, rgba(89, 93, 154, 0) 100%);
+    height: 100%;
+    overflow:hidden;
 }
 }
 </style>

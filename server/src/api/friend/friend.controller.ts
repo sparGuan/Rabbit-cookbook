@@ -122,24 +122,25 @@ class FriendsController extends BASE_OPEN_SOURCE_API {
       const { body } = ctx.request;
       if (!global._.isEmpty(body.userId)) {
         this.user = (await User.findById(body.userId).select(
-          ' location '
+          ' location friends '
         )) as IUser;
         console.log(this.user);
         // 查找附近的人
         // 返回的数据只需要昵称，年龄，描述，头像
         if (!global._.isEmpty(this.user)) {
+          const friendsQuery = this.user.friends || []
           this.userList = (await User.find({
             location: {
               $within: {
                 $center: [this.user.location, 1]
               }
-            }
+            },            
+            friends: {$nin: friendsQuery}
           })
             .select('-passWord -updateTime -logoutTime -createTime  ')
             .limit(10)
             .sort({ updateTime: -1 })
-            .skip(body.page || 1)) as IUser[];
-          console.log(this.userList);
+            .skip(body.page || 1)) as IUser[];          
         }
         if (this.userList.length > 0) {
           ctx.body = {

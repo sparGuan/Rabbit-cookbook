@@ -5,7 +5,7 @@
 // - controlSep: Bigger values of this parameter will add more curvature, and vice versa
 // - curves: Number of curves (iterations) to draw
 
-function getSinPath(options) {
+export function getSinPath(options) {
     var _options = options || {};
     var _width = _options.width || window.innerWidth;
     var _height = _options.height || window.innerHeight;

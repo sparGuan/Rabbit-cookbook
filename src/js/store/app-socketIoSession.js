@@ -20,6 +20,7 @@ export default {
 		},
 		// 取消掉需要点击的提醒红点 || 增加一个需要打开聊天窗口的红点
 		SOCKET_USER_HASNEWS: (state,NewChating) => {
+			console.log(NewChating)
 			if (NewChating.isHasNewChating) {
 				NewChating.user.headImg = app.getResourceUrl(NewChating.user.headImg)
 				NewChating.user.isHasNewChating = NewChating.isHasNewChating
@@ -27,8 +28,12 @@ export default {
 			} else {
 				NewChating.user.isHasNewChating = NewChating.isHasNewChating
 				state.newChatUser.forEach((item , index) => {
-						if (item._id === NewChating.user._id && !NewChating.user.isHasNewChating) {
-							state.newChatUser[index] = NewChating.user
+						if (item._id === NewChating.user._id && !NewChating.user.isHasNewChating) {							
+							if (NewChating.Vue) {								
+								NewChating.Vue.$set(state.newChatUser,index,NewChating.user)
+							} else {
+								state.newChatUser[index] = NewChating.user
+							}
 						}
 				});
 			}

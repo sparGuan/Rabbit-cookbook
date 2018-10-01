@@ -1,5 +1,5 @@
 const $ = require('jquery');
-import {  TimelineMax } from 'gsap';
+import { TimelineMax } from 'gsap';
 var AnimateInteractive = function($main) {
 	this.svgContainer = $main.find('#interactive-skill');
 
@@ -68,8 +68,7 @@ var AnimateInteractive = function($main) {
 };
 
 var AnimateHTML = function($main) {
-	this.svgContainer = $main.find('#html5-skill');
-  console.log(this.svgContainer)
+	this.svgContainer = $main.find('#html5-skill');	
 	if (this.svgContainer.length === 0) {
 		return;
 	}
@@ -513,10 +512,10 @@ function setSkillAnimation($main) {
 	if (!is_firefox) {
 		new AnimateBrand($main);
 	}
-// console.log($main
-//   .find('#skills li'))
+	// console.log($main
+	//   .find('#skills li'))
 	$main
-		.on('mouseenter touchstart','.toolbar .toolbar-icon', function(e) {
+		.on('mouseenter touchstart', '.toolbar .toolbar-icon', function(e) {
 			if (e.type == 'touchstart') {
 				$('.toolbar .toolbar-icon')
 					.find('svg')

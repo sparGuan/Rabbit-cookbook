@@ -25,12 +25,17 @@
               <div class="chat-effect-container">
                 <div class="chat-effect-bar"></div>
               </div>
-              <div class="chat-input-wrapper">
-                <button class="chat-input-tool">
-                  <i class="iconfont icon-camerarotate"></i>
+              <div class="chat-input-wrapper"> 
+                <button class="voice-chat chat-input-tool" @click="voiceInsert">
+                  <svg class="icon " style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;    font-size: 24px;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18553"><path d="M512 629.62688c118.5024 0 214.59968-92.25216 214.59968-206.09536V286.2592c0-113.75104-96.1024-206.09536-214.59968-206.09536S297.29792 172.41088 297.29792 286.2592v137.3696c0.1024 113.74592 96.19968 205.99808 214.70208 205.99808z" fill="#A0D8FD" p-id="18554"></path><path d="M834.00192 372.07552c-19.70176 0-35.79904 15.36-35.79904 34.36544v17.18272c0 151.76704-128.1024 274.72896-286.19776 274.72896S225.80736 575.3856 225.80736 423.62368v-17.18272c0-19.00544-16-34.36544-35.79904-34.36544s-35.79904 15.36-35.79904 34.36544v17.18272c0 178.06336 141.19936 324.4544 322.00192 341.7344v104.7296H404.59776c-19.79904 0-35.79904 15.36-35.79904 34.36544s16 34.36544 35.79904 34.36544h214.59968c19.79904 0 35.79904-15.36 35.79904-34.36544s-16-34.36544-35.79904-34.36544h-71.5008v-104.82688c180.79744-17.28 322.00192-163.67104 322.00192-341.73952v-17.18272c0-18.90304-16-34.26304-35.69664-34.26304z" fill="#FFF" p-id="18555"></path></svg>
                 </button>
-                <div class="chat-input" contenteditable  @input="doingWrite($event)"></div>
-                <button class="chat-send" @click="clickSendButton($event)" @keydown="keydown($event)">
+                <button class="chat-input-tool chat-input-tool-ani-menus">
+                  <i class="iconfont icon-camerarotate" style="font-size: 22px;"></i>                  
+                </button>
+                <button type="text" v-if="voiceFlag" class="chat-voice">按住说话</button>
+                <div class="chat-input" contenteditable  @input="doingWrite($event)" v-else></div>
+                <div style="width:50px;" v-if="voiceFlag"></div>
+                <button class="chat-send" @click="clickSendButton($event)" @keydown="keydown($event)" v-else>
                   <i class="iconfont icon-fasong1"></i>
                 </button>
               </div>
@@ -81,8 +86,7 @@ export default {
       KEY_ENTER: 13,
       lastMessage: '',
       wordLen: 0,
-      lipsum:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      voiceFlag: false
     };
   },
   mounted() {
@@ -154,6 +158,9 @@ export default {
     }
   },
   methods: {
+    voiceInsert() {
+      this.voiceFlag = !this.voiceFlag
+    },
     pullupRefresh() {    
       if (mui(this.$refs['chat-messages']).scroll().y <= 10 && mui(this.$refs['chat-messages']).scroll().y > 0 ) {
         // 没有更多数据的时候要
@@ -471,6 +478,27 @@ export default {
 <style lang="less" scoped>
 @import url('./chat.css');
 [data-page='friends-chat'] {
-  
+  .voice-chat {
+    display: inline-block;
+  }
+  .chat-input-tool {
+    display: inline-block;
+    vertical-align: bottom;
+    text-align: left;
+  }
+  .chat-input-tool-ani-menus {
+    width: 45px;
+    padding-top: 8px;
+    padding-left: 0;
+  }
+  .chat-voice {
+    -webkit-flex: 1;
+    flex: 1;
+    text-align: center;
+    &:active {
+      color: #fff;
+      background-color: #ccc;
+    }
+  }
 }
 </style>

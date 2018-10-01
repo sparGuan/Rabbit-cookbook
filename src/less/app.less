@@ -52,11 +52,16 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 
 .views, .view, .pages {
     height: 100%;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
 }
 
 .views .view .pages {
     height: 100%;
-    
     [data-page] {
         height: 100%;
         
@@ -146,8 +151,15 @@ footer.toolbar {
     .toolbar-link{
         &.router-link-active {
             color: rgba(0, 122, 255, 0.9);
-            &>i{
+            & svg{
                 transform: scale(1.5);
+                fill: rgba(0, 122, 255, 0.9);
+                & path {
+                    fill: rgba(0, 122, 255, 0.9);
+                    &.smart {
+                        fill: #FFF;
+                    }
+                }
             }
         }
         

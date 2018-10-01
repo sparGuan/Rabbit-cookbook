@@ -69,9 +69,11 @@ export default {
     }
   },
   watch: {
-    isShowMenuModal(now,old) {
-      if (!now) {
-         this.$store.commit('SOCKET_USER_HASNEWS',{user: this.byChatUser, isHasNewChating : false})
+    value(now,old) {
+      console.log(this.byChatUser)
+      if (!now && this.byChatUser) {
+        const _this = this
+         this.$store.commit('SOCKET_USER_HASNEWS',{user: this.byChatUser, isHasNewChating : false, Vue: _this, })
       }
     },
     '$store.state.appSocketIoSession.requestNewFriend': {
@@ -82,7 +84,7 @@ export default {
       deep: true // 深度监听
     },
     '$store.state.appSocketIoSession.newChatUser': {
-      handler: function(now, old) {
+      handler: function(now, old) {        
         this.communicator.forEach( (item,index) => {
           now.forEach( elem => {
             if (item._id === elem._id) {
@@ -167,6 +169,7 @@ export default {
       }
       const requestList = this.getRequestList();
       this.communicator = [...friends, ...requestList];
+      this.$emit('getCommunicatorList',this.communicator)
     },
     getRequestList() {  
       const requestFriendsList =

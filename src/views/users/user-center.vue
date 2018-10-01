@@ -59,6 +59,8 @@
                      @showFriendsListMenus="showFriendsListMenus" 
                      @openChatcallBack="openChatcallBack"
                      @changeChatList="changeChatList"
+                     @getCommunicatorList="getCommunicatorList"
+                     v-model="isOpenChat"
                      ></user-waveContnet>
                 </div>     			
               </div>
@@ -89,7 +91,7 @@
         </ul>
 			</div>
     </div>
-    <user-friendsListMenu v-model="isShowMenuModal">
+    <user-friendsListMenu v-model="isShowMenuModal" :communicators="communicators">
     </user-friendsListMenu>
     <user-friendsChat v-model="isOpenChat" :title="friendTitle" :chatList="chatList" @changeChatList="changeChatList"></user-friendsChat>
 	</div>
@@ -170,7 +172,8 @@ export default {
       takeH5Photos: null,
       isOpenChat: false,
       friendTitle:'Spar',
-      chatList: {}
+      chatList: {},
+      communicators: ''// 所有好友
     };
   },
   mounted() {
@@ -179,6 +182,9 @@ export default {
     });
   },
   methods: {
+    getCommunicatorList(communicators) {
+      this.communicators = communicators
+    },
     changeChatList(chatList) {
       this.chatList = chatList 
     },
