@@ -20,6 +20,7 @@ export const statusCode = {
 // 导出服务器端口必须要0.0.0.1
 // /usr/local/etc/nginx/nginx.conf
 // 必须先下载ImageMagick brew => ImageMagick gm是基于ImageMagick剪裁图片
+// 49001 是jenkins的服务器端口
 export const processingImagePosition = {
   // 剪裁图片的位置配置
   NorthWest: 'NorthWest',

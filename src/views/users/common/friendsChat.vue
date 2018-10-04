@@ -14,6 +14,7 @@
                   <div class="chat-message-bubble" v-if="item.message !== ''" > 
                     <div class="arrow"></div>
                     <div class="bubble" v-html="item.message"></div>
+                    <audio ref="player" src=""  controls></audio>
                   </div>                  
                 </li>
               </ul>
@@ -29,10 +30,10 @@
                 <button class="voice-chat chat-input-tool" @click="voiceInsert">
                   <svg class="icon " style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;    font-size: 24px;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18553"><path d="M512 629.62688c118.5024 0 214.59968-92.25216 214.59968-206.09536V286.2592c0-113.75104-96.1024-206.09536-214.59968-206.09536S297.29792 172.41088 297.29792 286.2592v137.3696c0.1024 113.74592 96.19968 205.99808 214.70208 205.99808z" fill="#A0D8FD" p-id="18554"></path><path d="M834.00192 372.07552c-19.70176 0-35.79904 15.36-35.79904 34.36544v17.18272c0 151.76704-128.1024 274.72896-286.19776 274.72896S225.80736 575.3856 225.80736 423.62368v-17.18272c0-19.00544-16-34.36544-35.79904-34.36544s-35.79904 15.36-35.79904 34.36544v17.18272c0 178.06336 141.19936 324.4544 322.00192 341.7344v104.7296H404.59776c-19.79904 0-35.79904 15.36-35.79904 34.36544s16 34.36544 35.79904 34.36544h214.59968c19.79904 0 35.79904-15.36 35.79904-34.36544s-16-34.36544-35.79904-34.36544h-71.5008v-104.82688c180.79744-17.28 322.00192-163.67104 322.00192-341.73952v-17.18272c0-18.90304-16-34.26304-35.69664-34.26304z" fill="#FFF" p-id="18555"></path></svg>
                 </button>
-                <button class="chat-input-tool chat-input-tool-ani-menus">
+                <button class="chat-input-tool chat-input-tool-ani-menus " >
                   <i class="iconfont icon-camerarotate" style="font-size: 22px;"></i>                  
                 </button>
-                <button type="text" v-if="voiceFlag" class="chat-voice">按住说话</button>
+                <button type="text" v-if="voiceFlag" class="chat-voice record" @touchstart="startRecord" @touchend="stopRecord" >按住说话</button>
                 <div class="chat-input" contenteditable  @input="doingWrite($event)" v-else></div>
                 <div style="width:50px;" v-if="voiceFlag"></div>
                 <button class="chat-send" @click="clickSendButton($event)" @keydown="keydown($event)" v-else>
@@ -55,6 +56,7 @@
 </template>
 <script>
 import Popup from '@/components/Popup';
+import wx from 'weixin-js-sdk'
 let $ = require('jquery');
 import { TweenMax } from 'gsap';
 require('@/js/lib/mui.pullToRefresh.js')
@@ -109,6 +111,16 @@ export default {
         }
       }
     )
+    // 调用微信录音功能
+    //假设已引入微信jssdk。【支持使用 AMD/CMD 标准模块加载方法加载】
+wx.config({
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: 'wx4ce2bba9bbd4278e', // 必填，公众号的唯一标识
+    timestamp: Date.now(), // 必填，生成签名的时间戳
+    nonceStr: app.utils.generateGuid(), // 必填，生成签名的随机串
+    signature: '',// 必填，签名，见附录1
+    jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+});
   },
   watch: {
     value(now, old) {
@@ -158,6 +170,57 @@ export default {
     }
   },
   methods: {
+    startRecord: function (event) {
+        const _this = this
+        if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
+          // 移动端 取消浏览器长按事件 （否则在录音时会有弹出框）
+          document.oncontextmenu = _this.touchmoveDefault
+          //禁止滑动事件 防止在长按时 下拉窗口不能触发stopRecord
+          document.body.addEventListener('touchmove', _this.touchmoveDefault, {passive: false})
+        }
+        if(localStorage.rainAllowRecord !== 'true' && _this.oRecordInfo.useWxRecord !== 2 && _this.oRecordInfo.useWxRecord !== 3){
+          //  首次进入 弹出是否授权框
+          wx.startRecord({
+            success: function(){
+              //  授权录音
+              localStorage.rainAllowRecord = 'true'
+              _this.oRecordInfo.useWxRecord = 3
+              _this.oRecordInfo.bShowRecording = false  //  控制正在录音gif显示
+              wx.stopRecord()
+              return
+            },
+            cancel: function () {
+              // 用户拒绝授权录音
+              _this.oRecordInfo.bShowRecording = false
+              _this.oRecordInfo.useWxRecord = 0
+              if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
+                document.body.removeEventListener('touchmove', _this.touchmoveDefault)
+              }
+              return
+            }
+          })
+          if (_this.oRecordInfo.useWxRecord === 1) {
+            //  使用假录音功能
+            _this.oRecordInfo.useWxRecord = 2
+          }
+        }
+        _this.oRecordInfo.bShowRecording = true
+        _this.oRecordInfo.timer = new Date()
+        //  防止因为js 加载时间过长导致调用录音接口失败问题 实现假按钮效果
+        if ((_this.oRecordInfo.useWxRecord === 1 || _this.oRecordInfo.useWxRecord === 3) && localStorage.rainAllowRecord === 'true') {
+          _this.oRecordInfo.recordTimer = setTimeout(function () {
+          wx.startRecord({
+            success: function(){
+              console.log('wx.startRecord success')
+              localStorage.rainAllowRecord = 'true'
+            },
+            cancel: function () {
+              _this.oRecordInfo.bShowRecording = false
+            }
+          })
+        }, 300)
+        }
+    },
     voiceInsert() {
       this.voiceFlag = !this.voiceFlag
     },

@@ -21,12 +21,11 @@
       </div>    
 </template>
 <script>
-import Rollers from './Rollers.vue'
 import PathSlider from '@/js/lib/path-slider'
 const { getSinPath } = require('@/js/lib/get-sin-path')
 const anime = require('@/js/lib/anime.min')
 export default {
-  components: { Rollers },
+  components: {  },
   data() {
     return {
       slider: null,

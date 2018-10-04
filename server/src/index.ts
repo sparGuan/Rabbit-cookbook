@@ -13,6 +13,7 @@ import path = require('path');
 import IO = require('koa-socket');
 import Socket, { ISocket } from './db/schema/socket';
 import User, { IUser } from './db/schema/user';
+
 // 中间件导入
 const ioLoader = require('./io/index');
 const catchError = require('./middlewares/catchErrors');
