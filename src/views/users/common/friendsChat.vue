@@ -56,7 +56,6 @@
 </template>
 <script>
 import Popup from '@/components/Popup';
-import wx from 'weixin-js-sdk'
 let $ = require('jquery');
 import { TweenMax } from 'gsap';
 require('@/js/lib/mui.pullToRefresh.js')
@@ -111,16 +110,7 @@ export default {
         }
       }
     )
-    // 调用微信录音功能
-    //假设已引入微信jssdk。【支持使用 AMD/CMD 标准模块加载方法加载】
-wx.config({
-    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    appId: 'wx4ce2bba9bbd4278e', // 必填，公众号的唯一标识
-    timestamp: Date.now(), // 必填，生成签名的时间戳
-    nonceStr: app.utils.generateGuid(), // 必填，生成签名的随机串
-    signature: '',// 必填，签名，见附录1
-    jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-});
+    
   },
   watch: {
     value(now, old) {
@@ -180,13 +170,13 @@ wx.config({
         }
         if(localStorage.rainAllowRecord !== 'true' && _this.oRecordInfo.useWxRecord !== 2 && _this.oRecordInfo.useWxRecord !== 3){
           //  首次进入 弹出是否授权框
-          wx.startRecord({
+          app.wx.startRecord({
             success: function(){
               //  授权录音
               localStorage.rainAllowRecord = 'true'
               _this.oRecordInfo.useWxRecord = 3
               _this.oRecordInfo.bShowRecording = false  //  控制正在录音gif显示
-              wx.stopRecord()
+              app.wx.stopRecord()
               return
             },
             cancel: function () {
@@ -209,7 +199,7 @@ wx.config({
         //  防止因为js 加载时间过长导致调用录音接口失败问题 实现假按钮效果
         if ((_this.oRecordInfo.useWxRecord === 1 || _this.oRecordInfo.useWxRecord === 3) && localStorage.rainAllowRecord === 'true') {
           _this.oRecordInfo.recordTimer = setTimeout(function () {
-          wx.startRecord({
+          app.wx.startRecord({
             success: function(){
               console.log('wx.startRecord success')
               localStorage.rainAllowRecord = 'true'

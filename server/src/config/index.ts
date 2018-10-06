@@ -5,6 +5,11 @@ export const secret = 'jwt_secret';
 export const webServerDoMain = 'localhost';
 export const limit = '10';
 export const emit = 'sent';
+// 微信js-sdk服务
+export const wx = {
+appId: 'wx42b982ad407ac631',
+secret: 'd58ed25a0d470f1bc6d861dc846e1768'
+}
 export const qsms = {
   appid: 1400106290,
   appkey: '53977389a4ef6a7fce4b916881e583a2'

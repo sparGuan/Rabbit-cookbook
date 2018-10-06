@@ -3,11 +3,12 @@ import * as jwt from 'jsonwebtoken';
 const bluebird = require('bluebird');
 const { isValid } = require('mongoose').Types.ObjectId;
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
-import { statusCode, qsms } from '../../config/index';
+import { statusCode, qsms,wx } from '../../config/index';
 import getDateAfter from '../../utils/getDateAfter';
 import Qsms = require('qcloudsms_js');
 import DirExistUtils from '../../utils/DirExistUtils';
 import formidable = require('formidable');
+import getWxConfigUtil from '../../utils/getWxConfigUtil';
 class LoginController {
   private qsms: any;
   private user: IUser;
@@ -304,6 +305,14 @@ class LoginController {
    */
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
+      console.log(ctx)
+      // 在这里生成token和ticket的签名,保存进数据库
+      const wxToken =  getWxConfigUtil.getToken()
+      const wxTicket = getWxConfigUtil.getTicket(wxToken)
+      const nonceStr = getWxConfigUtil.createNonceStr()
+      const timestamp = getWxConfigUtil.createTimeStamp()
+      const signature = getWxConfigUtil.calcSignature(wxTicket, nonceStr, timestamp, ctx.url) //获取签名
+      // 将微信服务的签名返回到前端展示
       const { userId, location } = ctx.request.body;
       if (!global._.isEmpty(userId) && isValid(userId)) {
         const expiredtime: number = Date.parse(
@@ -330,7 +339,13 @@ class LoginController {
         console.log(this.user);
         ctx.body = {
           message: statusCode.success,
-          user: this.user
+          user: this.user,
+          wxConfig: {
+            appId: wx.appId,
+            timestamp,
+            nonceStr,
+            signature
+          }
         };
       }
     };

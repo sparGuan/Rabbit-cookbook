@@ -55,7 +55,28 @@ export default {
               location: [Number(113.0071691637521) , Number(22.98209228868979)]
             },
             success: res => {
-              if (res.message === 'success') {                
+              if (res.message === 'success') {
+                if (app.wx) {
+                     // 加载微信配置文件
+                    // 调用微信录音功能
+                    //假设已引入微信jssdk。【支持使用 AMD/CMD 标准模块加载方法加载】
+                    app.wx.config({
+                      debug: true,
+                      appId: res.wxConfig.appId,
+                      timestamp: res.wxConfig.timestamp,
+                      nonceStr: res.wxConfig.nonceStr,
+                      signature: res.wxConfig.signature,
+                      jsApiList: [
+                          'checkJsApi',
+                          'onMenuShareTimeline',
+                          'onMenuShareAppMessage',
+                          'onMenuShareQQ',
+                          'onMenuShareWeibo',
+                          'hideMenuItems',
+                          'chooseImage'
+                      ]
+                    });
+                }
                 this.$socket.emit('isLogin', res.user);
               }
             }

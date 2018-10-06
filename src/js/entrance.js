@@ -16,8 +16,9 @@ import touch from 'vue-directive-touch'
 import 'vue-layer-mobile/need/layer.css'
 import layer from 'vue-layer-mobile';
 import VueSocketio from 'vue-socket.io';
+import wx from 'weixin-js-sdk'
 Object.assign(app.Config, config);// 非常重要的合并，我去
-window.app = Object.assign({}, app, { log, utils, mui, globalService, api })
+window.app = Object.assign({}, app, { log, utils, mui, globalService, api,wx })
 const initVue = () => {
 	Vue.use(Vuex)
 	Vue.use(VueRouter)
