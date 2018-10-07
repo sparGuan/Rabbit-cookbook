@@ -143,6 +143,10 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
             message: statusCode.noOne            
           };
         }
+      } else {
+        ctx.body = {
+          message: statusCode.noOne            
+        };
       }
     };
   }

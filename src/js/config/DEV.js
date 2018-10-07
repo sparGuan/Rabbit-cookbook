@@ -5,15 +5,16 @@
  */
 module.exports = {
 	//M站点的接口地址
-	webapiDomain: 'http://localhost:3011', //'http://193.112.125.250:27017/',
+	webapiDomain: 'https://www.jingz100.com', //'http://localhost:3011', //'https://www.jingz100.com',
+	/**'http://localhost:3011', 'http://193.112.125.250:27017/',*/
 	//M站点的地址
 	msiteDomain: '',
 	//支付服务器地址
 	payDomain: '',
 	//获取资源服务器地址
-	imageDomain: 'http://localhost:3306/',
+	imageDomain: 'https://www.jingz100.com/upload', //'http://localhost:3306/', //,
 	//上传资源服务器地址
-	resourceUploadUrl: 'http://localhost:3011/',
+	resourceUploadUrl: 'https://www.jingz100.com', //'http://localhost:3011/',// ,
 	//无线H5服务器地址
 	h5ServiceHost: '',
 	//公共服务站点地址

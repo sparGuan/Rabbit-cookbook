@@ -171,6 +171,9 @@ svg {
   transition: 0.5s transform, 0.5s -webkit-transform;
   border: 20px solid rgb(227, 226, 229);
   box-shadow: 0 0 0 50px rgba(255, 255, 255, 0.3);
+   background-position: -3px 4px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .path-slider__current-item {
   z-index: 2;
@@ -180,9 +183,6 @@ svg {
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
           transform: scale(1);                  
-    background-position: -3px 4px;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .path-slider__item--1 .item__circle {
@@ -199,6 +199,9 @@ svg {
 
 .path-slider__item--4 .item__circle {
   background-image: url('../../imgs/NR/video.png');
+      background-size: 100px 100px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 }
