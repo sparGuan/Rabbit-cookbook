@@ -83,7 +83,7 @@ export default {
       showModal: false,
       tenancyName: 'default',
       Mobile: '15099883651',
-      passWord: '462A06C1C5E581F319EDB0B4732A48DA',
+      passWord: '123456',
       focusName: '',
       socketId:''
     }
