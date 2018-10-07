@@ -21,7 +21,7 @@
   </div>
 </template>
 <style lang="less" scoped>
-[data-page="register"] {
+[data-page='register'] {
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -31,7 +31,7 @@
       background-color 99999999999s ease-out;
   }
   .valid-inser {
-    width: calc(~"100% - 60px");
+    width: calc(~'100% - 60px');
     height: 30px;
     margin-left: 30px;
     background: transparent;
@@ -54,28 +54,30 @@
 </style>
 <script>
 export default {
-  props: ["checkValidCode","validCodeTxt"],
+  props: ['checkValidCode', 'validCodeTxt'],
   data() {
     return {
-      Mobile: "",
-      validCode: "",      
-      passWord: ""
+      Mobile: '',
+      validCode: '',
+      passWord: ''
     };
   },
   methods: {
     toRegister() {
-      if (this.passWord === "") {
-        app.mui.toast("请输入密码!");
+      if (this.passWord === '') {
+        app.mui.toast('请输入密码!');
         return;
-      } else if (this.Mobile === "") {
-        app.mui.toast("请输入手机号!");
+      } else if (this.Mobile === '') {
+        app.mui.toast('请输入手机号!');
         return;
-      } else if (this.validCode === "") {
-        app.mui.toast("请输入验证码!");
+      } else if (this.validCode === '') {
+        app.mui.toast('请输入验证码!');
         return;
       }
       // 判断都正确进入
-      if (this.passWord !== "" && this.Mobile !== "" && this.validCode !== "") {        
+      if (this.passWord !== '' && this.Mobile !== '' && this.validCode !== '') {
+        console.log(this.checkValidCode)
+        console.log(this.validCode)
         if (this.checkValidCode === Number(this.validCode)) {
           app.api.user.register({
             data: {
@@ -83,22 +85,20 @@ export default {
               passWord: this.passWord
             },
             success: res => {
-              if (res.message === "success") {
-                this.$emit("close", false);
-                app.mui.toast("注册成功!");
-                app.globalService.setUserInfo({
-                  token: res.token,
-                  Mobile: this.Mobile,
-                  expiredTime: res.expiredTime // 失效时间
-                });
+              if (res.message === 'success') {
+                this.$emit('close', false);
+                app.mui.toast('注册成功!');
+                console.log(res.UserModel)
+                this.$socket.emit('isLogin', res.UserModel);
+                // app.globalService.setUserInfo(res.UserModel);
               }
             },
             complete: () => {
-              // 这里进行倒数             
+              // 这里进行倒数
             }
           });
         } else {
-          app.mui.toast("验证码输入不正确!");
+          app.mui.toast('验证码输入不正确!');
         }
       } else {
         return;

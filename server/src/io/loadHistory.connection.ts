@@ -5,7 +5,7 @@ export default (socket: any) => {
   socket.on(
     'loadHistory',
     async (page: number, chatId: string, userId: string) => {
-      console.log(page);
+    //  console.log(page);
       // 登录之后把user放进socket对象，然后完事
       // console.log(`>>>>>>>> here is updateBothRelations ${acceptUser}`)
       //  socket.nsp.sockets[acceptUser.socket.id].emit(`updateBothRelations_${emit}`, acceptUser )
@@ -25,7 +25,7 @@ export default (socket: any) => {
           populate: { path: 'socket', select: 'id' }
         })
         .exec()) as IChatOne[];
-      console.log(chat);
+     // console.log(chat);
       if (Object.is(chat[0].user._id.toString(), userId)) {
         socket.nsp.sockets[chat[0].user.socket.id].emit(
           `loadHistory_${emit}`,

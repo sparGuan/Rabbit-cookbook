@@ -1,12 +1,14 @@
 export default {
 	// 该vuex使用全部使用大写，因为数据内容重要
+	// 所有用到socket的全局数据管理
 	state: {
 		connect: false,
 		message: null,
 		requestNewFriend: null,
-		newChatUser: []
+		newChatUser: [],
 	},
 	mutations: {
+
 		// commit该函数，自动触发
 		SOCKET_CONNECT: (state, status) => {
 			state.connect = true;

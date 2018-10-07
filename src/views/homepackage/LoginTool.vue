@@ -20,7 +20,7 @@ import Login from '../users/user-login';
 export default {
   components: { Login },
   watch: {
-    showModal(old, now) { 
+    showModal(old, now) {
       if (app.globalService.isLogin()) {
         this.detals = '登出';
         this.icon = 'icon-shoujidenglu';
@@ -35,53 +35,59 @@ export default {
     };
   },
   sockets: {
-      isLogin_sent(val){
-        console.log(val)
-        app.globalService.setUserInfo(val)
-        this.showModal = false        
-        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
+    isLogin_sent({userInfo,wxConfig}) {
+      app.globalService.setUserInfo(userInfo);
+      this.detals = '登出';
+      this.showModal = false;
+      console.log(
+        'this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)'
+      );
+      if (app.wx) {
+        // 加载微信配置文件
+        // 调用微信录音功能
+        // 假设已引入微信jssdk。【支持使用 AMD/CMD 标准模块加载方法加载】
+        console.log(app.wx);
+        app.wx.config({
+          debug: true,
+          appId: wxConfig.appId,
+          timestamp: wxConfig.timestamp,
+          nonceStr: wxConfig.nonceStr,
+          signature: wxConfig.signature,
+          jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'chooseImage'
+          ]
+        });
+        app.wx.wxConfig = wxConfig
       }
-    },
-  mounted() {    
+    }
+  },
+  mounted() {
     this.updateLoginInfo();
   },
   methods: {
     updateLoginInfo() {
       // pc测试
       if (app.globalService.isLogin()) {
-         app.api.user.updateLoginInfo({
-            data: {
-              userId: app.globalService.getLoginUserInfo()._id,
-              location: [Number(113.0071691637521) , Number(22.98209228868979)]
-            },
-            success: res => {
-              if (res.message === 'success') {
-                if (app.wx) {
-                     // 加载微信配置文件
-                    // 调用微信录音功能
-                    //假设已引入微信jssdk。【支持使用 AMD/CMD 标准模块加载方法加载】
-                    app.wx.config({
-                      debug: true,
-                      appId: res.wxConfig.appId,
-                      timestamp: res.wxConfig.timestamp,
-                      nonceStr: res.wxConfig.nonceStr,
-                      signature: res.wxConfig.signature,
-                      jsApiList: [
-                          'checkJsApi',
-                          'onMenuShareTimeline',
-                          'onMenuShareAppMessage',
-                          'onMenuShareQQ',
-                          'onMenuShareWeibo',
-                          'hideMenuItems',
-                          'chooseImage'
-                      ]
-                    });
-                }
+        app.api.user.updateLoginInfo({
+          data: {
+            userId: app.globalService.getLoginUserInfo()._id,
+            location: [Number(113.0071691637521), Number(22.98209228868979)]
+          },
+          success: res => {
+            if (res.message === 'success') {
+              if (res.user) {
                 this.$socket.emit('isLogin', res.user);
               }
             }
-          });
-          // 正式手机测试
+          }
+        });
+        // 正式手机测试
         // app.utils.getlocation(position => {
         //   const longitude = position.coords.longitude; //获取经度
         //   const latitude = position.coords.latitude;
@@ -109,7 +115,7 @@ export default {
             app.globalService.logOut();
             this.detals = '登录';
           } else {
-            this.showModal = false
+            this.showModal = false;
           }
         });
       }

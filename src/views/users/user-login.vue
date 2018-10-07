@@ -172,7 +172,7 @@ export default {
     QQ直接登录
     */
     sockets: {
-      isLogin_sent(val){
+      isLogin_sent({userInfo, wxConfig}){
         app.globalService.setUserInfo(val)        
         this.showModal = false
         console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')

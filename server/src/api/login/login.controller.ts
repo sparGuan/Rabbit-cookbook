@@ -3,12 +3,11 @@ import * as jwt from 'jsonwebtoken';
 const bluebird = require('bluebird');
 const { isValid } = require('mongoose').Types.ObjectId;
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
-import { statusCode, qsms,wx } from '../../config/index';
+import { statusCode, qsms } from '../../config/index';
 import getDateAfter from '../../utils/getDateAfter';
 import Qsms = require('qcloudsms_js');
 import DirExistUtils from '../../utils/DirExistUtils';
 import formidable = require('formidable');
-import getWxConfigUtil from '../../utils/getWxConfigUtil';
 class LoginController {
   private qsms: any;
   private user: IUser;
@@ -66,6 +65,14 @@ class LoginController {
       const { body } = ctx.request;
       const salt = await bcrypt.genSalt$(this.saltRounds);
       body.passWord = await bcrypt.hash$(body.passWord, salt);
+      body.token = jwt.sign(
+        {
+          data: body.Mobile,
+          // 设置 token 过期时间
+          exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+        },
+        'secret'
+      )
       this.user = new User(body);
       const UserModel = await this.user.save();
       await LoginController.resetExpiredTime(UserModel.get('_id'));
@@ -305,20 +312,11 @@ class LoginController {
    */
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
-      console.log(ctx)
-      // 在这里生成token和ticket的签名,保存进数据库
-      const wxToken =  getWxConfigUtil.getToken()
-      const wxTicket = getWxConfigUtil.getTicket(wxToken)
-      const nonceStr = getWxConfigUtil.createNonceStr()
-      const timestamp = getWxConfigUtil.createTimeStamp()
-      const signature = getWxConfigUtil.calcSignature(wxTicket, nonceStr, timestamp, ctx.url) //获取签名
-      // 将微信服务的签名返回到前端展示
       const { userId, location } = ctx.request.body;
       if (!global._.isEmpty(userId) && isValid(userId)) {
         const expiredtime: number = Date.parse(
           getDateAfter('', statusCode.expiredTime, '/')
         );
-
         this.userInfo = {
           $set: {
             updateTime: new Date(), // 更新时间
@@ -336,16 +334,9 @@ class LoginController {
             path: 'requestList',
             select: '-passWord -updateTime -logoutTime -createTime'
           })) as IUser;
-        console.log(this.user);
         ctx.body = {
           message: statusCode.success,
-          user: this.user,
-          wxConfig: {
-            appId: wx.appId,
-            timestamp,
-            nonceStr,
-            signature
-          }
+          user: this.user
         };
       }
     };
