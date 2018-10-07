@@ -2,17 +2,17 @@
       <div  class="mirror" ref="mirror">
         <div class="path-slider">
           <!-- Slider items -->
-           <router-link :to="{name: 'cloud'}"  class="path-slider__item path-slider__item--1" exact >
+           <router-link :to="{name: 'cloud'}"  class="path-slider__item path-slider__item--1" exact>
              <div class="item__circle"></div>
           </router-link>
-          <router-link :to="{name: 'cloud'}"  class="path-slider__item path-slider__item--2" exact >
-              <div class="item__circle"></div>
+          <router-link :to="{name: 'games'}"  class="path-slider__item path-slider__item--2" exact >
+              <div class="item__circle" ></div>
           </router-link>
           <router-link :to="{name: 'games'}"  class="path-slider__item path-slider__item--3" exact >
               <div class="item__circle"></div>
           </router-link>
           <router-link :to="{name: 'plan'}"  class="path-slider__item path-slider__item--4" exact >
-              <div class="item__circle"></div>
+              <div class="item__circle" ></div>
           </router-link> 
           <router-link :to="{name: 'cloud'}"  class="path-slider__item path-slider__item--4" exact >
               <div class="item__circle"></div>
@@ -66,8 +66,8 @@ export default {
       const setImage =  (index) => {
           if (imgAnimation) {
               imgAnimation.pause();
-              sliderContainer.style['background-image'] = images[lastIndex];
-              sliderContainerBackground.style['opacity'] = 0;
+              // sliderContainer.style['background-image'] = images[lastIndex];
+              // sliderContainerBackground.style['opacity'] = 0;
           }
           lastIndex = index;
           sliderContainerBackground.style['background-image'] = images[index];
@@ -169,7 +169,7 @@ svg {
   transition: 0.5s -webkit-transform;
   transition: 0.5s transform;
   transition: 0.5s transform, 0.5s -webkit-transform;
-  border: 20px solid rgba(0, 0, 0, 0.5);
+  border: 20px solid rgb(227, 226, 229);
   box-shadow: 0 0 0 50px rgba(255, 255, 255, 0.3);
 }
 .path-slider__current-item {
@@ -179,27 +179,26 @@ svg {
 .path-slider__current-item .item__circle {
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
-          transform: scale(1);
+          transform: scale(1);                  
+    background-position: -3px 4px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .path-slider__item--1 .item__circle {
-  
+  background-image: url('../../imgs/NR/activities.png');
 }
 
 .path-slider__item--2 .item__circle {
-  
+  background-image: url('../../imgs/NR/agent.png');
 }
 
 .path-slider__item--3 .item__circle {
-  
+  background-image: url('../../imgs/NR/radio.png');
 }
 
 .path-slider__item--4 .item__circle {
-  
-}
-
-.path-slider__item--5 .item__circle {
-  
+  background-image: url('../../imgs/NR/video.png');
 }
 
 }
