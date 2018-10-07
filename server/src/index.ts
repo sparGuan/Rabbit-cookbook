@@ -101,7 +101,7 @@ mongoosePaginate.paginate.options = {
     return;
   }
   // 监听服务器
-  app.listen(port,  () => {
+  app.listen(port,  '127.0.0.1', () => {
       console.log(`${webServerDoMain} ${port} server listen`);
     });
 })();
