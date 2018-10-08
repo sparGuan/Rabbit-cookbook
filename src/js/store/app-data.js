@@ -14,12 +14,17 @@ export default {
 		isShowFoot: true, //是否显示foot栏
 		isShowBack: true, //是否显示返回按钮
 		isConnectionHub: false, //是否连接hubs
+		rainAllowRecord: false, //是否首次进入 弹出是否授权框--微信
 		locationInfo: {},
 		keepLivesConfig: {
 			isReFlashActivityInfoList: true
 		} // 缓存列表---》用于是否已经被访问过
 	},
 	mutations: {
+		// 更新首次进入微信录音提示
+		updateRainAllowRecord(state, rainAllowRecord) {
+			state.rainAllowRecord = rainAllowRecord
+		},
 		updateKeepLivesConfig(state, keepLivesConfig) {
 			state.keepLivesConfig = app.mui.extend(state.updateKeepLivesConfig,keepLivesConfig)
 			console.log(state.keepLivesConfig)
@@ -62,6 +67,9 @@ export default {
 		}
 	},
 	actions: {
+		updateRainAllowRecord ({ commit }, rainAllowRecord) {
+			commit('updateRainAllowRecord', rainAllowRecord)
+		},
 		updateKeepLivesConfig({ commit }, keepLivesConfig) {
 			commit('updateKeepLivesConfig', keepLivesConfig)
 		},

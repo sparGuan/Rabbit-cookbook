@@ -169,6 +169,8 @@ export default {
       }
       const requestList = this.getRequestList();
       this.communicator = [...friends, ...requestList];
+      console.log(11111111111)
+      console.log(this.communicator )
       this.$emit('getCommunicatorList',this.communicator)
     },
     getRequestList() {  

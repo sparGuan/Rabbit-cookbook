@@ -120,6 +120,16 @@ export default {
 			) {
 				_site_local_storage.userInfo = {}
 			}
+			if (friends) {
+				friends.forEach( item => {
+					item.headImg = app.getResourceUrl(item.headImg)
+				})
+			}
+			if (requestList) {
+				requestList.forEach(element => {
+					element.headImg = app.getResourceUrl(element.headImg )
+				});
+			}
 			expiredTime = new Date().getTime() + (expiredTime - 60) * 1000 // 重新设置一个登录过期时间
 			const userInfo = _site_local_storage.userInfo = Object.assign(_site_local_storage.userInfo, {
 				_id,
@@ -140,6 +150,7 @@ export default {
 				headImg: app.getResourceUrl(headImg),
 				version: app.Config.innerVersion // 版本号
 			})
+			console.log(userInfo)
 			app.utils.localStorage(
 				'siteLocalStorage',
 				JSON.stringify(_site_local_storage)

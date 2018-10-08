@@ -160,17 +160,19 @@ export default {
   },
   methods: {
     startRecord: function (event) {
-        const _this = this
+        const _this = this // this指向了点击事件
+        event.preventDefault();
+        console.log(event.preventDefault)
         if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
           // 移动端 取消浏览器长按事件 （否则在录音时会有弹出框）
-          document.oncontextmenu = _this.touchmoveDefault
+          document.oncontextmenu = event.preventDefault;
           //禁止滑动事件 防止在长按时 下拉窗口不能触发stopRecord
-          document.body.addEventListener('touchmove', _this.touchmoveDefault, {passive: false})
+          document.body.addEventListener('touchmove', event.preventDefault, {passive: false})
         }
-        if(localStorage.rainAllowRecord !== 'true' && _this.oRecordInfo.useWxRecord !== 2 && _this.oRecordInfo.useWxRecord !== 3){
+        if(!$status.appData.rainAllowRecord && _this.oRecordInfo.useWxRecord !== 2 && _this.oRecordInfo.useWxRecord !== 3){
           //  首次进入 弹出是否授权框
           app.wx.startRecord({
-            success: function(){
+            success: () => {
               //  授权录音
               localStorage.rainAllowRecord = 'true'
               _this.oRecordInfo.useWxRecord = 3
@@ -197,18 +199,67 @@ export default {
         _this.oRecordInfo.timer = new Date()
         //  防止因为js 加载时间过长导致调用录音接口失败问题 实现假按钮效果
         if ((_this.oRecordInfo.useWxRecord === 1 || _this.oRecordInfo.useWxRecord === 3) && localStorage.rainAllowRecord === 'true') {
-          _this.oRecordInfo.recordTimer = setTimeout(function () {
+          _this.oRecordInfo.recordTimer = setTimeout( () => {
           app.wx.startRecord({
-            success: function(){
+            success: () => {
               console.log('wx.startRecord success')
               localStorage.rainAllowRecord = 'true'
             },
-            cancel: function () {
+            cancel:  () => {
               _this.oRecordInfo.bShowRecording = false
             }
           })
         }, 300)
         }
+    },
+    stopRecord: function(event) {
+        var _this = this
+        console.log(this)
+        console.log('stopRecord')
+    //  回复滑动事件
+        if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
+          document.body.removeEventListener('touchmove', _this.touchmoveDefault)
+        }
+        _this.oRecordInfo.bShowRecording = false
+        var t = new Date()
+        if (t - _this.oRecordInfo.timer < 300) {
+          //  少于300毫秒 不执行startRecord
+          clearTimeout(_this.oRecordInfo.recordTimer)
+        } else if (t - _this.oRecordInfo.timer < 2000) {
+          if (_this.toastInstance) {
+            _this.toastInstance.close()
+          }
+          _this.toastInstance = this.$toast({
+            message: '时间太短啦 重新试一次吧',
+            position: 'bottom',
+            duration: 1000
+          })
+          if (_this.oRecordInfo.useWxRecord !== 2) {
+            setTimeout(function() {
+              wx.stopRecord({
+                success: function(res) {
+                  console.log('updataRecord success')
+                },
+                fail: function(res) {
+                  console.log(JSON.stringify(res))
+                }
+              })
+            }, 500)
+          }
+        } else {
+          aap.wx.stopRecord({
+            success: (res) => {
+              console.log('updataRecord success')
+            },
+            fail: (res) => {
+              console.log(JSON.stringify(res))
+            }
+          })
+          if (_this.oRecordInfo.timer) {
+            _this.show_upload_next_button = true
+          }
+        }
+      _this.oRecordInfo.timer = null
     },
     voiceInsert() {
       this.voiceFlag = !this.voiceFlag
@@ -223,7 +274,7 @@ export default {
           this.$socket.emit('loadHistory', ++this.page, this.chatId,app.globalService.getLoginUserInfo()._id)
         }, 1500);
       } else {
-         this.pullToRefresh.endPullUpToRefresh()
+          this.pullToRefresh.endPullUpToRefresh()
       }
     },
     doingWrite(e) {
