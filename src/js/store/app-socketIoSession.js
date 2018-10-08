@@ -22,7 +22,6 @@ export default {
 		},
 		// 取消掉需要点击的提醒红点 || 增加一个需要打开聊天窗口的红点
 		SOCKET_USER_HASNEWS: (state,NewChating) => {
-			console.log(NewChating)
 			if (NewChating.isHasNewChating) {
 				NewChating.user.headImg = app.getResourceUrl(NewChating.user.headImg)
 				NewChating.user.isHasNewChating = NewChating.isHasNewChating

@@ -1,4 +1,4 @@
-export const port =  3011;
+export const port =  process.env.PORT || 3011;
 export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';

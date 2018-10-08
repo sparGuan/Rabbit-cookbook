@@ -25,7 +25,8 @@ const enhanceContext = require('./middlewares/enhanceContext');
 // 初始化应用
 global._ = require('lodash');
 const app = new Koa();
-const io = new IO({});
+const io = new IO({
+});
 const router = new Router({
   prefix: baseApi
 });
@@ -101,7 +102,7 @@ mongoosePaginate.paginate.options = {
     return;
   }
   // 监听服务器
-  app.listen(port,  '127.0.0.1', () => {
+  app.listen(port, () => {
       console.log(`${webServerDoMain} ${port} server listen`);
     });
 })();
