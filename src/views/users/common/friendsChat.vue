@@ -93,8 +93,7 @@ export default {
         bShowRecording: false,
         recordTimer: null,
         timer:null
-      },
-      toastInstance: null,
+      },      
       show_upload_next_button: false
     };
   },
@@ -129,8 +128,7 @@ export default {
       }
     },
     chatList: {
-      handler: function(newVal, oldVal) {
-        console.log(newVal);
+      handler: function(newVal, oldVal) {        
         this.chatId = newVal._id;
       },
       deep: true //深度监听
@@ -138,8 +136,7 @@ export default {
   },
   sockets: {
     loadHistory_sent(chatList) {
-      this.$emit('changeChatList', chatList);
-      console.log(1111);
+      this.$emit('changeChatList', chatList);      
       this.pullToRefresh.endPullUpToRefresh();
       // 参数为true代表没有更多数据了。
     },
@@ -166,8 +163,7 @@ export default {
   },
   methods: {
     startRecord(event) {
-      event.preventDefault();
-      console.log(event.preventDefault);
+      event.preventDefault();      
       if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
         // 移动端 取消浏览器长按事件 （否则在录音时会有弹出框）
         document.oncontextmenu = event.preventDefault;
@@ -181,6 +177,7 @@ export default {
         this.oRecordInfo.useWxRecord !== 2 &&
         this.oRecordInfo.useWxRecord !== 3
       ) {
+        alert(1111)
         //  首次进入 弹出是否授权框
         // 首次进入有授权弹窗，所以先退出
         app.wx.startRecord({
@@ -221,9 +218,10 @@ export default {
       ) {
         this.oRecordInfo.recordTimer = setTimeout(() => {
           app.wx.startRecord({
-            success: () => {
-              console.log('wx.startRecord success');
+            success: (res) => {              
+              alert('wx.startRecord success');
               this.$store.dispatch('updateRainAllowRecord', true)
+              
               clearTimeout(this.oRecordInfo.recordTimer)
             },
             cancel: () => {
@@ -235,21 +233,17 @@ export default {
       }
     },
     stopRecord(event) {
-      console.log('stopRecord');
+      alert('stopRecord');
       //  回复滑动事件
       if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
         document.body.removeEventListener('touchmove', event.preventDefault);
       }
       this.oRecordInfo.bShowRecording = false;
-      const t = new Date();
-      console.log(t - this.oRecordInfo.timer)
+      const t = new Date();      
       if (t - this.oRecordInfo.timer < 300) {
         //  少于300毫秒 不执行startRecord
         clearTimeout(this.oRecordInfo.recordTimer);
       } else if (t - this.oRecordInfo.timer < 1000) {
-        if (this.toastInstance) {
-          this.toastInstance.close();
-        }
         this.$layer.toast({
           content: '时间太短啦 重新试一次吧',
           time: 1000 // 自动消失时间 toast类型默认消失时间为2000毫秒
@@ -257,8 +251,8 @@ export default {
         if (this.oRecordInfo.useWxRecord !== 2) {
           setTimeout(() => {
             app.wx.stopRecord({
-              success: (res) => {
-                console.log('updataRecord success');
+              success: (res) => {                
+                alert('updataRecord success');
               },
               fail: (res) => {
                 console.log(JSON.stringify(res));
@@ -267,8 +261,11 @@ export default {
           }, 500);
         }
       } else {
+        alert(app.wx.stopRecord)
         app.wx.stopRecord({
           success: res => {
+                alert(3333333) 
+            this.uploadVoice(res.localId);
             console.log('updataRecord success');
           },
           fail: res => {
@@ -280,6 +277,32 @@ export default {
         }
       }
       this.oRecordInfo.timer = null;
+    },
+    uploadVoice(localId) {
+      console.log(111111111)
+      console.log(localId)
+      //调用微信的上传录音接口把本地录音先上传到微信的服务器
+      //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
+      app.wx.uploadVoice({
+          localId: localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+          isShowProgressTips: 1, // 默认为1，显示进度提示
+          success:  data => {
+            //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+            // 在此处使用socket.io进行通信
+            const acceptUserId =
+            this.chatList.acceptUser ===
+            app.globalService.getLoginUserInfo()._id
+              ? this.chatList.user
+              : this.chatList.acceptUser;
+              console.log(acceptUserId)
+            this.$socket.emit(
+              'chatOne',
+              acceptUserId,
+              app.globalService.getLoginUserInfo()._id,
+              data
+            );
+          }
+      });
     },
     voiceInsert() {
       this.voiceFlag = !this.voiceFlag;
