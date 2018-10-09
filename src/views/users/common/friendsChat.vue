@@ -33,7 +33,7 @@
                 <button class="chat-input-tool chat-input-tool-ani-menus " >
                   <i class="iconfont icon-camerarotate" style="font-size: 22px;"></i>                  
                 </button>
-                <button type="text" v-if="voiceFlag" class="chat-voice record" @touchstart="startRecord" @touchend="stopRecord" >按住说话</button>
+                <button type="text" v-if="voiceFlag" class="chat-voice record" @touchstart="startRecord($event)" @touchend="stopRecord($event)" >按住说话</button>
                 <div class="chat-input" contenteditable  @input="doingWrite($event)" v-else></div>
                 <div style="width:50px;" v-if="voiceFlag"></div>
                 <button class="chat-send" @click="clickSendButton($event)" @keydown="keydown($event)" v-else>
@@ -58,8 +58,8 @@
 import Popup from '@/components/Popup';
 let $ = require('jquery');
 import { TweenMax } from 'gsap';
-require('@/js/lib/mui.pullToRefresh.js')
-require('@/js/lib/mui.pullToRefresh.material.js')
+require('@/js/lib/mui.pullToRefresh.js');
+require('@/js/lib/mui.pullToRefresh.material.js');
 export default {
   // 从底部弹出显示
   components: {
@@ -87,29 +87,35 @@ export default {
       KEY_ENTER: 13,
       lastMessage: '',
       wordLen: 0,
-      voiceFlag: false
+      voiceFlag: false,
+      oRecordInfo: {
+        useWxRecord: 1, // 0拒绝 1使用假录音 2开启录音 3首次进入
+        bShowRecording: false,
+        recordTimer: null,
+        timer:null
+      },
+      toastInstance: null,
+      show_upload_next_button: false
     };
   },
   mounted() {
     this.initDom();
     this.gooOff();
     this.updateChatHeight();
-    const _this = this
+    const _this = this;
     mui(this.$refs['chat-messages']).scroll({
-      deceleration: mui.os.ios? 0.003 : 0.0009, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+      deceleration: mui.os.ios ? 0.003 : 0.0009, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
       indicators: true // 是否显示滚动条
-    });    
-    this.pullToRefresh =  mui(this.$refs['chat-messages']).pullToRefresh(
-      {
-         up: {
-            callback: _this.pullupRefresh, //上拉回调，必填；
-            auto: false, // 自动执行一次上拉加载，可选；
-            show: true, // 显示底部上拉加载提示信息，可选；
-            contentrefresh: 'Loading...', //上拉进行中提示信息
-            contentnomore: 'no More' // 上拉无更多信息时提示信息
-        }
+    });
+    this.pullToRefresh = mui(this.$refs['chat-messages']).pullToRefresh({
+      up: {
+        callback: _this.pullupRefresh, //上拉回调，必填；
+        auto: false, // 自动执行一次上拉加载，可选；
+        show: true, // 显示底部上拉加载提示信息，可选；
+        contentrefresh: 'Loading...', //上拉进行中提示信息
+        contentnomore: 'no More' // 上拉无更多信息时提示信息
       }
-    )
+    });
   },
   watch: {
     value(now, old) {
@@ -124,7 +130,7 @@ export default {
     },
     chatList: {
       handler: function(newVal, oldVal) {
-        console.log(newVal)
+        console.log(newVal);
         this.chatId = newVal._id;
       },
       deep: true //深度监听
@@ -133,14 +139,14 @@ export default {
   sockets: {
     loadHistory_sent(chatList) {
       this.$emit('changeChatList', chatList);
-      console.log(1111)
-      this.pullToRefresh.endPullUpToRefresh()
-       // 参数为true代表没有更多数据了。
+      console.log(1111);
+      this.pullToRefresh.endPullUpToRefresh();
+      // 参数为true代表没有更多数据了。
     },
     friendIsTyping_sent(startOrEnd) {
       if (startOrEnd) {
-        this.friendIsTyping()
-        setTimeout(this.friendStoppedTyping,4000)
+        this.friendIsTyping();
+        setTimeout(this.friendStoppedTyping, 4000);
       }
     },
     onChatOne_sent(chatList) {
@@ -159,134 +165,156 @@ export default {
     }
   },
   methods: {
-    startRecord: function (event) {
-        const _this = this // this指向了点击事件
-        event.preventDefault();
-        console.log(event.preventDefault)
-        if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
-          // 移动端 取消浏览器长按事件 （否则在录音时会有弹出框）
-          document.oncontextmenu = event.preventDefault;
-          //禁止滑动事件 防止在长按时 下拉窗口不能触发stopRecord
-          document.body.addEventListener('touchmove', event.preventDefault, {passive: false})
-        }
-        if(!$status.appData.rainAllowRecord && _this.oRecordInfo.useWxRecord !== 2 && _this.oRecordInfo.useWxRecord !== 3){
-          //  首次进入 弹出是否授权框
-          app.wx.startRecord({
-            success: () => {
-              //  授权录音
-              localStorage.rainAllowRecord = 'true'
-              _this.oRecordInfo.useWxRecord = 3
-              _this.oRecordInfo.bShowRecording = false  //  控制正在录音gif显示
-              app.wx.stopRecord()
-              return
-            },
-            cancel: function () {
-              // 用户拒绝授权录音
-              _this.oRecordInfo.bShowRecording = false
-              _this.oRecordInfo.useWxRecord = 0
-              if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
-                document.body.removeEventListener('touchmove', _this.touchmoveDefault)
-              }
-              return
+    startRecord(event) {
+      event.preventDefault();
+      console.log(event.preventDefault);
+      if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
+        // 移动端 取消浏览器长按事件 （否则在录音时会有弹出框）
+        document.oncontextmenu = event.preventDefault;
+        //禁止滑动事件 防止在长按时 下拉窗口不能触发stopRecord
+        document.body.addEventListener('touchmove', event.preventDefault, {
+          passive: false
+        });
+      }
+      if (
+        !this.$store.state.appData.rainAllowRecord &&
+        this.oRecordInfo.useWxRecord !== 2 &&
+        this.oRecordInfo.useWxRecord !== 3
+      ) {
+        //  首次进入 弹出是否授权框
+        // 首次进入有授权弹窗，所以先退出
+        app.wx.startRecord({
+          success: () => {
+            //  授权录音
+            this.$store.dispatch('updateRainAllowRecord', true)
+            this.oRecordInfo.useWxRecord = 3;
+            this.oRecordInfo.bShowRecording = false; //  控制正在录音gif显示
+            app.wx.stopRecord();
+            return;
+          },
+          cancel: () => {
+            // 用户拒绝授权录音
+            this.oRecordInfo.bShowRecording = false;
+            this.oRecordInfo.useWxRecord = 0;
+            if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
+              document.body.removeEventListener(
+                'touchmove',
+                event.preventDefault
+              );
             }
-          })
-          if (_this.oRecordInfo.useWxRecord === 1) {
-            //  使用假录音功能
-            _this.oRecordInfo.useWxRecord = 2
+            return;
           }
+        });
+        if (this.oRecordInfo.useWxRecord === 1) {
+          //  使用假录音功能
+          this.oRecordInfo.useWxRecord = 2;
         }
-        _this.oRecordInfo.bShowRecording = true
-        _this.oRecordInfo.timer = new Date()
-        //  防止因为js 加载时间过长导致调用录音接口失败问题 实现假按钮效果
-        if ((_this.oRecordInfo.useWxRecord === 1 || _this.oRecordInfo.useWxRecord === 3) && localStorage.rainAllowRecord === 'true') {
-          _this.oRecordInfo.recordTimer = setTimeout( () => {
+      }
+      // 以上判断都没问题的情况下
+      this.oRecordInfo.bShowRecording = true;
+      this.oRecordInfo.timer = new Date();
+      //  防止因为js 加载时间过长导致调用录音接口失败问题 实现假按钮效果
+      if (
+        (this.oRecordInfo.useWxRecord === 1 ||
+          this.oRecordInfo.useWxRecord === 3) &&
+        this.$store.state.appData.rainAllowRecord
+      ) {
+        this.oRecordInfo.recordTimer = setTimeout(() => {
           app.wx.startRecord({
             success: () => {
-              console.log('wx.startRecord success')
-              localStorage.rainAllowRecord = 'true'
+              console.log('wx.startRecord success');
+              this.$store.dispatch('updateRainAllowRecord', true)
+              clearTimeout(this.oRecordInfo.recordTimer)
             },
-            cancel:  () => {
-              _this.oRecordInfo.bShowRecording = false
+            cancel: () => {
+              this.oRecordInfo.bShowRecording = false;
+              clearTimeout(this.oRecordInfo.recordTimer)
             }
-          })
-        }, 300)
-        }
+          });
+        }, 300);
+      }
     },
-    stopRecord: function(event) {
-        var _this = this
-        console.log(this)
-        console.log('stopRecord')
-    //  回复滑动事件
-        if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
-          document.body.removeEventListener('touchmove', _this.touchmoveDefault)
+    stopRecord(event) {
+      console.log('stopRecord');
+      //  回复滑动事件
+      if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
+        document.body.removeEventListener('touchmove', event.preventDefault);
+      }
+      this.oRecordInfo.bShowRecording = false;
+      const t = new Date();
+      console.log(t - this.oRecordInfo.timer)
+      if (t - this.oRecordInfo.timer < 300) {
+        //  少于300毫秒 不执行startRecord
+        clearTimeout(this.oRecordInfo.recordTimer);
+      } else if (t - this.oRecordInfo.timer < 1000) {
+        if (this.toastInstance) {
+          this.toastInstance.close();
         }
-        _this.oRecordInfo.bShowRecording = false
-        var t = new Date()
-        if (t - _this.oRecordInfo.timer < 300) {
-          //  少于300毫秒 不执行startRecord
-          clearTimeout(_this.oRecordInfo.recordTimer)
-        } else if (t - _this.oRecordInfo.timer < 2000) {
-          if (_this.toastInstance) {
-            _this.toastInstance.close()
-          }
-          _this.toastInstance = this.$toast({
-            message: '时间太短啦 重新试一次吧',
-            position: 'bottom',
-            duration: 1000
-          })
-          if (_this.oRecordInfo.useWxRecord !== 2) {
-            setTimeout(function() {
-              wx.stopRecord({
-                success: function(res) {
-                  console.log('updataRecord success')
-                },
-                fail: function(res) {
-                  console.log(JSON.stringify(res))
-                }
-              })
-            }, 500)
-          }
-        } else {
-          aap.wx.stopRecord({
-            success: (res) => {
-              console.log('updataRecord success')
-            },
-            fail: (res) => {
-              console.log(JSON.stringify(res))
-            }
-          })
-          if (_this.oRecordInfo.timer) {
-            _this.show_upload_next_button = true
-          }
+        this.$layer.toast({
+          content: '时间太短啦 重新试一次吧',
+          time: 1000 // 自动消失时间 toast类型默认消失时间为2000毫秒
+        })
+        if (this.oRecordInfo.useWxRecord !== 2) {
+          setTimeout(() => {
+            app.wx.stopRecord({
+              success: (res) => {
+                console.log('updataRecord success');
+              },
+              fail: (res) => {
+                console.log(JSON.stringify(res));
+              }
+            });
+          }, 500);
         }
-      _this.oRecordInfo.timer = null
+      } else {
+        app.wx.stopRecord({
+          success: res => {
+            console.log('updataRecord success');
+          },
+          fail: res => {
+            console.log(JSON.stringify(res));
+          }
+        });
+        if (this.oRecordInfo.timer) {
+          this.show_upload_next_button = true;
+        }
+      }
+      this.oRecordInfo.timer = null;
     },
     voiceInsert() {
-      this.voiceFlag = !this.voiceFlag
+      this.voiceFlag = !this.voiceFlag;
     },
-    pullupRefresh() {    
-      if (mui(this.$refs['chat-messages']).scroll().y <= 10 && mui(this.$refs['chat-messages']).scroll().y > 0 ) {
+    pullupRefresh() {
+      if (
+        mui(this.$refs['chat-messages']).scroll().y <= 10 &&
+        mui(this.$refs['chat-messages']).scroll().y > 0
+      ) {
         // 没有更多数据的时候要
         // this.pullToRefresh.disablePullupToRefresh()
         setTimeout(() => {
           // 从socket.io获取数据然后设置值为false
           // 参数是页数
-          this.$socket.emit('loadHistory', ++this.page, this.chatId,app.globalService.getLoginUserInfo()._id)
+          this.$socket.emit(
+            'loadHistory',
+            ++this.page,
+            this.chatId,
+            app.globalService.getLoginUserInfo()._id
+          );
         }, 1500);
       } else {
-          this.pullToRefresh.endPullUpToRefresh()
+        this.pullToRefresh.endPullUpToRefresh();
       }
     },
     doingWrite(e) {
       // 判断服务端返回来的数据是否正在输入
       setInterval(() => {
-        this.readSecond++
-      }, 50)
-      if(this.readSecond < 10) {
-        return 
+        this.readSecond++;
+      }, 50);
+      if (this.readSecond < 10) {
+        return;
       } else {
         if (this.wordLen !== $(e.target).text().length) {
-          this.readSecond  = 0
+          this.readSecond = 0;
           this.$socket.emit(
             'friendIsTyping',
             this.chatId,
@@ -295,7 +323,7 @@ export default {
           );
           this.wordLen = $(e).text().length;
         } else {
-          return 
+          return;
         }
       }
     },
@@ -497,7 +525,7 @@ export default {
       this.messages++;
     },
     friendIsTyping() {
-      console.log(this.isFriendTyping)
+      console.log(this.isFriendTyping);
       if (this.isFriendTyping) {
         return;
       }
