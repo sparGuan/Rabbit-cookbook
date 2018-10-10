@@ -58,6 +58,7 @@ export default (socket: any) => {
       } else {
         // 将chat列表发送到客户端
         if (!global._.isEmpty(message)) {
+          console.log(message)
           const chatOne = await ChatOne.findByIdAndUpdate(
             { _id: chat[0]._id },
             {
