@@ -83,11 +83,8 @@ class WxConfigUtil {
       ts +
       '&url=' +
       url;
-      // const shaObj = await new jsSHA(str, 'TEXT');
-      // return shaObj.getHash('SHA-1', 'HEX');
-      const signature = await this.sha1(str)
-      console.log(signature)
-      return signature
+      const shaObj = await new jsSHA(str, 'TEXT');
+      return shaObj.getHash('SHA-1', 'HEX');
   }
   public async sha1(str: string) {
     const md5sum = await crypto.createHash("sha1");
