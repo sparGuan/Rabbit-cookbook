@@ -107,7 +107,7 @@
         "popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
         "runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
         "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-        "distribute": {"plugins":{"maps":{"baidu":{"appkey_ios":"2oIjpGUGwQ7wrkYl3y0KCQI3FDIuFXgW","appkey_android":"17dcebdd07991ffe456dddff17b9363b","appkey":"","description":""}},"share":{"qq":{"appid":"1107749441","description":"QQ分享"},"weixin":{"appid":"wx4ce2bba9bbd4278e","appsecret":"17dcebdd07991ffe456dddff17b9363b","description":"可选，微信分享"}},"oauth":{"weixin":{"appid":"wx4ce2bba9bbd4278e","appsecret":"9a8dc76e938d116c0bea6d09f940bc24","description": "微信登录"},"qq": {
+        "distribute": {"plugins":{"maps":{"baidu":{"appkey_ios":"2oIjpGUGwQ7wrkYl3y0KCQI3FDIuFXgW","appkey_android":"17dcebdd07991ffe456dddff17b9363b","appkey":"","description":""}},"share":{"qq":{"appid":"1107749441","description":"QQ分享"},"weixin":{"appid":"wx26fea37fd3a656f2","appsecret":"0b70076eca4f17839d205f6a352aa9af","description":"可选，微信分享"}},"oauth":{"weixin":{"appid":"wx26fea37fd3a656f2","appsecret":"0b70076eca4f17839d205f6a352aa9af","description": "微信登录"},"qq": {
                         "appid": "1107749441",
                         "description": "QQ登录"
                     }}},

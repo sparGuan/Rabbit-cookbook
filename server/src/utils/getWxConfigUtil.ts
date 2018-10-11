@@ -18,7 +18,7 @@ class WxConfigUtil {
         }&secret=${wx.secret}`
       )
       .then((res: any) => {        
-        this.access_token = res.data.access_token;
+        this.access_token = res.data.access_token;        
         resolve();
         // 这个异步回调里可以获取access_token
       })
@@ -83,8 +83,11 @@ class WxConfigUtil {
       ts +
       '&url=' +
       url;
-      const shaObj = await new jsSHA(str, 'TEXT');
-      return shaObj.getHash('SHA-1', 'HEX');
+      // const shaObj = await new jsSHA(str, 'TEXT');
+      // return shaObj.getHash('SHA-1', 'HEX');
+      const signature = await this.sha1(str)
+      console.log(signature)
+      return signature
   }
   public async sha1(str: string) {
     const md5sum = await crypto.createHash("sha1");
@@ -115,7 +118,7 @@ class WxConfigUtil {
       // 返回铭文
       return echostr
     } else {
-        return `error and ${signature}`
+        return signature
     }
   }
 }

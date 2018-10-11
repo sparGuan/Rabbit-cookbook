@@ -48,10 +48,10 @@ export default {
         // 假设已引入微信jssdk。【支持使用 AMD/CMD 标准模块加载方法加载】
         app.wx.config({
           debug: true,
-          appId: 'wx42b982ad407ac631',//wxConfig.appId,
-          timestamp: 1539262905,// wxConfig.timestamp,
-          nonceStr: '8sfs0pofvy',//wxConfig.nonceStr,
-          signature: 'c5a16d94a5f56eca81aae17d73334fcdc9085f43',//wxConfig.signature,
+          appId: wxConfig.appId,
+          timestamp: 1539269246 ,//wxConfig.timestamp,
+          nonceStr: '2lpjotmugtf' ,// wxConfig.nonceStr,
+          signature: '9234a9a85e9335182cb7a28d04d4f01c6afad269',//  wxConfig.signature,
           jsApiList: [
             'checkJsApi',
             'onMenuShareTimeline',
