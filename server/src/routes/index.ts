@@ -14,7 +14,7 @@ export default (Router: any) => {
   })*/
   router.get('/wxToken', async (ctx: any, next: any) => {
     const { query } = ctx.request;
-    const echo = GetWxConfigUtil.validateToken(query) 
+    const echo = await GetWxConfigUtil.validateToken(query) 
      if (!global._.isEmpty(echo)) {
       ctx.body = echo
      }  else {
