@@ -39,10 +39,13 @@ export default (socket: any) => {
         wxTicket,
         nonceStr,
         timestamp,
-        `${domain}/${socket.request.url}` // 这个socketId代替url
+        `${domain}${socket.request.url}` // 这个socketId代替url
         // ctx.request.url
-      ); // 获取签名
-      console.log(signature)
+      ); // 获取签名       
+      console.log(wxTicket)   
+      console.log(nonceStr)  
+      console.log(timestamp)
+      console.log(`${domain}${socket.request.url}`)
       // 将微信服务的签名返回到前端展示
       // console.log(`here is isLogin.conn 23 page ${userInfo}`)
       // 返回去的token码是不带socket值的

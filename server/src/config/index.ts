@@ -1,5 +1,5 @@
 export const port =  process.env.PORT || 3011;
-export const domain = 'https//www.jingz100.com';
+export const domain =  '192.168.0.103' // 'https//www.jingz100.com';
 export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';
@@ -8,6 +8,7 @@ export const limit = '10';
 export const emit = 'sent';
 // 微信js-sdk服务
 export const wx = {
+token:'weixinToken',  
 appId: 'wx42b982ad407ac631',
 secret: 'd58ed25a0d470f1bc6d861dc846e1768'
 }
