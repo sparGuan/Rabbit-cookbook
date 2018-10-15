@@ -76,7 +76,7 @@
                         " viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="826"><path d="M679.5264 862.1056l-155.0848 89.4976v-227.4816l155.0848-89.4976z m0 0" fill="#F95450" p-id="827"></path><path d="M861.9008 386.1504L680.96 281.6l-90.8288 83.7632-90.5728-188.416-181.1456-104.6016L227.84 201.216 499.5584 757.76 680.96 862.208l271.36-242.688z m0 0" fill="#F95450" p-id="828"></path><path d="M162.0992 161.792l156.3136-89.4464 181.1456 104.6016L343.04 266.24z m0 0" fill="#FF9797" p-id="829"></path><path d="M705.5872 475.5456l-181.1456-104.6016-90.5728 83.8656L343.04 266.24 162.0992 161.792 71.68 290.6624l271.36 556.3904 181.1456 104.5504 271.7696-242.6368z m0 0" fill="#FF7171" p-id="830"></path><path d="M524.4416 370.944L680.96 281.6l181.1456 104.6016-156.5184 89.344z m0 0" fill="#FF9797" p-id="831"></path><path d="M952.32 619.52l-156.16 89.4976-271.7696 242.6368L680.96 862.208z m0 0" fill="#EA5050" p-id="832"></path><path d="M500.7872 543.744l-64.8704-37.4784-32.4096 30.0032-32.4608-67.4816-64.8704-37.4272-32.4096 46.08 97.28 199.2704 64.8704 37.4784 97.28-87.04z m0 0" fill="#FFFFFF" p-id="833"></path></svg>
                     </a>
                     <a href="#"  class="button green"><i class="iconfont icon-jiaoya"></i></a>
-                    <a href="#" title="Reddit" style="padding: 3px 11px;display: inline-block;vertical-align: top;" class="button blue serif back xl glass">
+                    <a href="#" title="Reddit"  @click="shareAction" style="padding: 3px 11px;display: inline-block;vertical-align: top;" class="button blue serif back xl glass">
                       <i class="iconfont icon-pengyouwang" style="font-size: 14px;"></i>
                     </a>
                   </div>
@@ -100,6 +100,7 @@ export default {
   props: ['headImg', 'nickName', 'descPerson'],
   data() {
     return {
+      shares: {},
       dynamicId: '',
       showModal: false,
       optionChar: {
@@ -173,9 +174,82 @@ export default {
         deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
         indicators: false // 是否显示滚动条
       });
+      mui.plusReady(() => {
+          plus.share.getServices((s) => {
+            console.log('进入分享服务。。。。')
+            if (s && s.length > 0) {
+              for (var i = 0; i < s.length; i++) {
+                var t = s[i];
+                shares[t.id] = t;
+              }
+            }
+          }, () => {
+            console.log("获取分享服务列表失败");
+          });
+      });
     });
   },
   methods: {
+    shareAction() {
+        const  ids = [{
+					id: "weixin",
+					ex: "WXSceneSession"
+				}, {
+					id: "weixin",
+					ex: "WXSceneTimeline"
+				}, {
+					id: "qq"
+				}],
+				bts = [{
+					title: "发送给微信好友"
+				}, {
+					title: "分享到微信朋友圈"
+				}, {
+					title: "分享到QQ"
+        }];
+        plus.nativeUI.actionSheet({
+          cancel: "取消",
+          buttons: bts
+        }, (e) => {
+          const i = e.index;
+          if (i > 0) {
+            const s_id = ids[i - 1].id;
+            const share = shares[s_id];
+            if (share.authenticated) {
+              this.shareMessage(share, ids[i - 1].ex);
+            } else {
+              share.authorize(() => {
+                this.shareMessage(share, ids[i - 1].ex);
+              }, (e) => {
+                console.log("认证授权失败：" + e.code + " - " + e.message);
+              });
+            }
+          }
+      });
+    },
+    shareMessage(share, ex) {
+      var msg = {
+        extra: {
+          scene: ex
+        }
+      };
+      // 分享出去之后，给一个href能够打开该分享页面的
+      // 打开的是在服务器上跑的一个页面
+      // 服务器上返回一个链接
+      // 分享出去的是数据页
+      msg.href = "http://www.dcloud.io/hellomui/";
+      msg.title = "最接近原生APP体验的高性能前端框架";
+      msg.content = "我正在体验HelloMUI，果然很流畅，基本看不出和原生App的差距";
+      if (~share.id.indexOf('weibo')) {
+        msg.content += "；体验地址：http://www.dcloud.io/hellomui/";
+      }
+      msg.thumbs = ["_www/images/logo.png"];
+      share.send(msg, () => {
+        console.log("分享到\"" + share.description + "\"成功！ ");
+      }, (e) => {
+        console.log("分享到\"" + share.description + "\"失败: " + e.code + " - " + e.message);
+      });
+		},
     sendLeaveMsg(dynamicId) {
       this.showModal = true;
       this.dynamicId = dynamicId;
@@ -387,6 +461,7 @@ export default {
     margin-right: 1px;
     position: relative;
     display: block;
+    overflow: hidden;
     .dumming {
       padding-top: 100%;
       position: relative;
@@ -394,8 +469,11 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
+        bottom: 0;
+        right: 0;
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
       }
     }
   }

@@ -8,7 +8,7 @@ export const limit = '10';
 export const emit = 'sent';
 // 微信js-sdk服务
 export const wx = {
-token:'weixinToken',  
+token: 'weixinToken',
 appId: 'wx26fea37fd3a656f2', // 'wx42b982ad407ac631',
 secret: '0b70076eca4f17839d205f6a352aa9af'// 'd58ed25a0d470f1bc6d861dc846e1768'
 }

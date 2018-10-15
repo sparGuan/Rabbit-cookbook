@@ -251,7 +251,7 @@ export default {
         if (this.oRecordInfo.useWxRecord !== 2) {
           setTimeout(() => {
             app.wx.stopRecord({
-              success: (res) => {                
+              success: (res) => {                 
                 alert('updataRecord success');
               },
               fail: (res) => {
@@ -262,13 +262,19 @@ export default {
         }
       } else {
         alert(app.wx.stopRecord)
+        // 不调用
         app.wx.stopRecord({
           success: res => {
                 alert(3333333) 
             this.uploadVoice(res.localId);
             console.log('updataRecord success');
           },
+          complete: res => {
+            alert(res)
+            alert(877777777777777)
+          },
           fail: res => {
+            alert(6666666666666)
             console.log(JSON.stringify(res));
           }
         });
