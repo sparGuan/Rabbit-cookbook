@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AppRegistry, Text, View, StatusBar, Button } from "react-native";
-export default class BlinkApp extends Component {
+import DrawerNav from "./main/Navigator";
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +14,7 @@ export default class BlinkApp extends Component {
     this.handle;
   }
   toggleBlinkState() {
-    if (this.state.buttonText == "blink") {
+    if (this.state.buttonText === "blink") {
       this.handle = setInterval(() => {
         this.setState(previousState => {
           return { showText: !previousState.showText };
@@ -27,11 +28,11 @@ export default class BlinkApp extends Component {
       this.setState({ buttonText: "blink", showText: true });
     }
   }
-
   render() {
     let display = this.state.showText ? this.state.text : " ";
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <DrawerNav />
         <StatusBar hidden={true} />
         <Text>{display} </Text>
         <Button onPress={this.toggleBlinkState} title={this.state.buttonText} />
