@@ -2,14 +2,50 @@ const webpack = require('webpack');
 const path = require('path');
 const AssetsPlugin = require('assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const appDirectory = path.resolve(__dirname, './src');
 // const WpPluginWatchOffset = require('wp-plugin-watch-offset');
-
+const babelLoaderConfiguration = {
+    test: /\.js$/,
+    // Add every directory that needs to be compiled by Babel during the build
+   /* include: [
+      path.resolve(__dirname, 'src'),
+      path.resolve(__dirname, 'node_modules/react-native-uncompiled')
+    ],*/
+    include: [
+        appDirectory,
+        path.resolve(__dirname, 'node_modules/react-native-uncompiled'),
+        path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
+        path.resolve(__dirname, 'node_modules/react-navigation'),
+        path.resolve(__dirname, 'node_modules/react-native-drawer-layout'),
+        path.resolve(__dirname, 'node_modules/react-native-dismiss-keyboard'),
+        path.resolve(__dirname, 'node_modules/react-native-safe-area-view'),
+        path.resolve(__dirname, 'node_modules/react-native-tab-view')
+      ],
+    use: {
+      loader: 'babel-loader',
+      options: {
+        cacheDirectory: true,
+        // This aliases 'react-native' to 'react-native-web' and includes only
+        // the modules needed by the app
+        plugins: [
+            'babel-polyfill',
+            'react-native-web',
+            // needed to support async/await
+            'transform-runtime'
+        ],
+        // The 'react-native' preset is recommended (or use your own .babelrc)
+        presets: ['react-native']
+      }
+    }
+  };
+  
 module.exports = {
     stats: { assets: true, children: false, chunks: false, modules: false, source: false },
     mode: "development",
-    entry: {
-        bundle: path.join(__dirname, './src/index.js'),
-    },
+    entry: [
+        "babel-polyfill",
+        path.resolve(appDirectory, 'index.js')
+    ],
     plugins: [
         // new AssetsPlugin({ filename: 'build/manifest.json', prettyPrint: true }),
         new webpack.DefinePlugin({
@@ -26,7 +62,38 @@ module.exports = {
     ],
     resolve: {
         extensions: ['.js', '.json'],
-        alias: { 'react-native': 'react-native-web' },
+        alias: Object.assign(
+            { 
+           // 'react-native': 'react-native-web' 
+           'react-native$': 'react-native-web/dist/cjs'
+        },
+        // mock haste resolver
+        [
+            'ActivityIndicator',
+            'Alert',
+            'AsyncStorage',
+            'Button',
+            'DeviceInfo',
+            'Modal',
+            'NativeModules',
+            'Platform',
+            'SafeAreaView',
+            'SectionList',
+            'StyleSheet',
+            'Switch',
+            'Text',
+            'TextInput',
+            'TouchableHighlight',
+            'TouchableWithoutFeedback',
+            'View',
+            'ViewPropTypes'
+        ].reduce(
+            (acc, curr) => {
+            acc[curr] = `react-native-web/dist/cjs/exports/${curr}`;
+            return acc;
+            }
+        )
+        ),
         modules: ['web_modules', 'node_modules'],
     },
     module: {
@@ -57,14 +124,21 @@ module.exports = {
               test: /\.less/,
               exclude: /^node_modules$/,
             },
-            {
-              test: /\.(js|jsx)$/,
-              exclude: /node_modules/,
-              include: [
-                path.resolve(__dirname, "./src"),                
-              ],
-              loader: 'babel-loader'
-            },
+            babelLoaderConfiguration,
+            // {
+            //     loader: 'babel-loader',
+            //     test: /\.js$/,                
+            //     query: {
+            //         presets: ['es2015', 'react','stage-0']
+            //     }
+            //   }, 
+              {
+                test: /\.jsx$/,
+                loader: 'babel-loader!jsx-loader?harmony',
+                query: {
+                    presets: ['es2015', 'react','stage-0']
+                  }
+              },
             {
                 test: /\.json$/,
                 use: 'json-loader',

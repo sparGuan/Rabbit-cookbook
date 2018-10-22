@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AppRegistry, Text, View, StatusBar, Button } from "react-native";
-import DrawerNav from "./main/Navigator";
+import DrawerNav from "./vendor/Navigator";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +32,7 @@ export default class App extends Component {
     let display = this.state.showText ? this.state.text : " ";
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <DrawerNav />
-        <StatusBar hidden={true} />
-        <Text>{display} </Text>
-        <Button onPress={this.toggleBlinkState} title={this.state.buttonText} />
+        <DrawerNav />      
       </View>
     );
   }
