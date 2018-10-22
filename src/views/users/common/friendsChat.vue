@@ -60,6 +60,7 @@ let $ = require('jquery');
 import { TweenMax } from 'gsap';
 require('@/js/lib/mui.pullToRefresh.js');
 require('@/js/lib/mui.pullToRefresh.material.js');
+import  HZRecorder from 'HZRecorder';
 export default {
   // 从底部弹出显示
   components: {
@@ -172,65 +173,14 @@ export default {
           passive: false
         });
       }
-      if (
-        !this.$store.state.appData.rainAllowRecord &&
-        this.oRecordInfo.useWxRecord !== 2 &&
-        this.oRecordInfo.useWxRecord !== 3
-      ) {
-        alert(1111)
-        //  首次进入 弹出是否授权框
-        // 首次进入有授权弹窗，所以先退出
-        app.wx.startRecord({
-          success: () => {
-            //  授权录音
-            this.$store.dispatch('updateRainAllowRecord', true)
-            this.oRecordInfo.useWxRecord = 3;
-            this.oRecordInfo.bShowRecording = false; //  控制正在录音gif显示
-            app.wx.stopRecord();
-            return;
-          },
-          cancel: () => {
-            // 用户拒绝授权录音
-            this.oRecordInfo.bShowRecording = false;
-            this.oRecordInfo.useWxRecord = 0;
-            if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
-              document.body.removeEventListener(
-                'touchmove',
-                event.preventDefault
-              );
-            }
-            return;
-          }
-        });
-        if (this.oRecordInfo.useWxRecord === 1) {
-          //  使用假录音功能
-          this.oRecordInfo.useWxRecord = 2;
-        }
-      }
-      // 以上判断都没问题的情况下
-      this.oRecordInfo.bShowRecording = true;
-      this.oRecordInfo.timer = new Date();
-      //  防止因为js 加载时间过长导致调用录音接口失败问题 实现假按钮效果
-      if (
-        (this.oRecordInfo.useWxRecord === 1 ||
-          this.oRecordInfo.useWxRecord === 3) &&
-        this.$store.state.appData.rainAllowRecord
-      ) {
-        this.oRecordInfo.recordTimer = setTimeout(() => {
-          app.wx.startRecord({
-            success: (res) => {              
-              alert('wx.startRecord success');
-              this.$store.dispatch('updateRainAllowRecord', true)
-              
-              clearTimeout(this.oRecordInfo.recordTimer)
-            },
-            cancel: () => {
-              this.oRecordInfo.bShowRecording = false;
-              clearTimeout(this.oRecordInfo.recordTimer)
-            }
-          });
-        }, 300);
-      }
+      HZRecorder.get(function (rec) {
+          recorder = rec;
+          recorder.start();
+          // setTimeout(function(){
+          //     recorder.stop();
+          //     setTimeout(saveAudio(),500);    
+          // },45000);
+      });
     },
     stopRecord(event) {
       alert('stopRecord');
@@ -238,77 +188,11 @@ export default {
       if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
         document.body.removeEventListener('touchmove', event.preventDefault);
       }
-      this.oRecordInfo.bShowRecording = false;
-      const t = new Date();      
-      if (t - this.oRecordInfo.timer < 300) {
-        //  少于300毫秒 不执行startRecord
-        clearTimeout(this.oRecordInfo.recordTimer);
-      } else if (t - this.oRecordInfo.timer < 1000) {
-        this.$layer.toast({
-          content: '时间太短啦 重新试一次吧',
-          time: 1000 // 自动消失时间 toast类型默认消失时间为2000毫秒
-        })
-        if (this.oRecordInfo.useWxRecord !== 2) {
-          setTimeout(() => {
-            app.wx.stopRecord({
-              success: (res) => {                 
-                alert('updataRecord success');
-              },
-              fail: (res) => {
-                console.log(JSON.stringify(res));
-              }
-            });
-          }, 500);
-        }
-      } else {
-        alert(app.wx.stopRecord)
-        // 不调用
-        app.wx.stopRecord({
-          success: res => {
-                alert(3333333) 
-            this.uploadVoice(res.localId);
-            console.log('updataRecord success');
-          },
-          complete: res => {
-            alert(res)
-            alert(877777777777777)
-          },
-          fail: res => {
-            alert(6666666666666)
-            console.log(JSON.stringify(res));
-          }
-        });
-        if (this.oRecordInfo.timer) {
-          this.show_upload_next_button = true;
-        }
-      }
-      this.oRecordInfo.timer = null;
+
     },
+    // 上传录音
     uploadVoice(localId) {
-      console.log(111111111)
-      console.log(localId)
-      //调用微信的上传录音接口把本地录音先上传到微信的服务器
-      //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
-      app.wx.uploadVoice({
-          localId: localId, // 需要上传的音频的本地ID，由stopRecord接口获得
-          isShowProgressTips: 1, // 默认为1，显示进度提示
-          success:  data => {
-            //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-            // 在此处使用socket.io进行通信
-            const acceptUserId =
-            this.chatList.acceptUser ===
-            app.globalService.getLoginUserInfo()._id
-              ? this.chatList.user
-              : this.chatList.acceptUser;
-              console.log(acceptUserId)
-            this.$socket.emit(
-              'chatOne',
-              acceptUserId,
-              app.globalService.getLoginUserInfo()._id,
-              data
-            );
-          }
-      });
+      
     },
     voiceInsert() {
       this.voiceFlag = !this.voiceFlag;

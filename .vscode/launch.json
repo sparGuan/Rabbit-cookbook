@@ -4,18 +4,30 @@
   // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
+    
+    // {
+    //   "name": "Flutter",
+    //   "type": "dart",
+    //   "request": "launch",
+    //   "program": "${workspaceFolder}/src/views/homepackage/screenshop/lib/main.dart"
+    // },
     {
-      "type": "node",
+      "name": "Dart",
+      "type": "dart",
       "request": "launch",
-      "name": "启动程序",
-      "program": "${file}",
-      // "program": "${workspaceFolder}/server/dist/index.js",// 需要调试的js代码
-      "outFiles": [
-        //"${workspaceFolder}/**/*.js",
-        "${workspaceFolder}/**/*.dart"
-      ]
-    }
+      "program": "${workspaceFolder}/src/views/homepackage/screenshop/lib/main.dart"
+    },
+    // {
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "启动程序",
+    //   "program": "${file}",
+    //   // "program": "${workspaceFolååder}/server/dist/index.js",// 需要调试的js代码
+    //   "outFiles": [
+    //     //"${workspaceFolder}/**/*.js",
+    //     "${workspaceFolder}/**/*.dart"
+    //   ]
+    // }
   ]
 }
 // {

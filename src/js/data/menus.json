@@ -7,9 +7,5 @@
         "name": "旅行玩家",
         "router": "games"
     },
-    "2": {
-        "name": "即卖秀",
-        "router": "sellingShow"
-    },
-    "length": 3
+    "length": 2
 }
