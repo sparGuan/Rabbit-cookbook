@@ -13,11 +13,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Avatar from '@material-ui/core/Avatar';
-import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
 const styles = theme => ({
   text: {
     paddingTop: theme.spacing.unit * 2,
@@ -108,14 +105,14 @@ function BottomAppBar(props) {
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <IconButton color="inherit" aria-label="Open drawer">
-            <MenuIcon />
+             
           </IconButton>
           <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
             <AddIcon />
           </Button>
           <div>
             <IconButton color="inherit">
-              <SearchIcon />
+              
             </IconButton>
             <IconButton color="inherit">
               <MoreIcon />

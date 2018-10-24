@@ -7,6 +7,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import tileData from './tileData';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -39,7 +40,7 @@ const styles = theme => ({
       <GridList  spacing={1} className={classes.gridList}>
           {tileData.map(tile => (
             <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-              <img src={tile.img} alt={tile.title} class={classes.test}/>
+              <img src={tile.img} alt={tile.title} className={classes.test}/>
               <GridListTileBar
                 title={tile.title}
                 titlePosition="top"
