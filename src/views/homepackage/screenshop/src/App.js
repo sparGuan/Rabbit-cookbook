@@ -6,29 +6,24 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
-  Text,
-  View,
-  FlatList
+  View
 } from 'react-native';
 // 先去制作头部导航
-import AppBar from './vendor/AppBar';
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu.\n' +
-    'Hello World Android!'
-    ,
-});
-
+import AppHeadBar from './vendor/AppHeadBar';
+import AppGridList from './vendor/AppGridList';
+import AppBottomBar from './vendor/AppBottomBar';
 
 export default class App extends React.Component {
+  constructor(props, context) {
+    super(props, context)
+  }
   render() {
     return (
       <View style={styles.container}>
-        <AppBar />
+        <AppHeadBar />
+        <AppGridList />
+        <AppBottomBar />
       </View>
     );
   }

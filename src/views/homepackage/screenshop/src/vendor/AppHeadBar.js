@@ -3,24 +3,25 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import {LefButton ,RightButton, MiddleTabs} from './HeadMenu'
- console.log(LeftButton)
+import Typography from '@material-ui/core/Typography';
+
 const styles = {
   root: {
+    width:'100%',
     flexGrow: 1,
   },
 };
 
- const SimpleAppBar = (props) => {
+function SimpleAppBar(props) {
   const { classes } = props;
 
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <Toolbar>
-            {/* <LeftButton />
-            <MiddleTabs />
-            <RightButton /> */}
+          <Typography variant="h6" color="inherit">
+            Photos
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>
