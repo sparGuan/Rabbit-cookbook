@@ -40,21 +40,16 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "babel-plugin-react-native-web": "^0.9.3",
+    "@material-ui/core": "^3.3.0",
+    "@material-ui/icons": "^3.0.1",
     "react": "^16.0.0",
     "react-art": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-native": "^0.57.3",
     "react-native-cli": "^2.0.1",
-    "react-native-screens": "^1.0.0-alpha.15",
     "react-native-web": "^0.9.3",
-    "react-navigation": "^2.18.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "transform-runtime": "0.0.0"
-  },
-  "sources": {
-    "react-native-v1": "lib-rn/react-navigation.js",
-    "web": "lib-rn/react-navigation.js"
-  },
-  "module": "lib-rn/react-navigation.js",
-  "webpack": "lib-rn/react-navigation.js"
+  }
 }

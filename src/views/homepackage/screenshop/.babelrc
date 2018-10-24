@@ -1,6 +1,6 @@
 {
-  "presets": ["babel-preset-expo","react",
-    "react-native","es2015","stage-0"],
+  "presets": ["es2015","stage-0","react",
+    "react-native","babel-preset-expo"],
   "env": {
     "development": {
       "presets": ["react-hmre"],
