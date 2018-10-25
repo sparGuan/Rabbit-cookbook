@@ -8,10 +8,10 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 // 先去制作头部导航
 import AppHeadBar from './vendor/AppHeadBar';
+// import TabNavigatorBar from './vendor/TabNavigatorBar';
 import AppGridList from './vendor/AppGridList';
 import AppBottomBar from './vendor/AppBottomBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -54,6 +54,7 @@ export default class App extends React.Component {
 			<MuiThemeProvider theme={theme}>
 				<View style={styles.container}>
 					<AppHeadBar />
+					{/* <TabNavigatorBar /> */}
 					<AppGridList />
 					<AppBottomBar />
 				</View>

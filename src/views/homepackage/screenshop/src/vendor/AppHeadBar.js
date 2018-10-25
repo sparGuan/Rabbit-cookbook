@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import TextField from '@material-ui/core/TextField';
 import classNames from 'classnames';
-
+import MoreIcon from '@material-ui/icons/MoreVert';
+import TabNavigatorBar from './TabNavigatorBar';
+import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -91,16 +91,9 @@ const  SearchAppBar = (props) => {
             <ArrowBackIcon />
           </IconButton>  
           <div className={classes.search}>
-            {/* <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            /> */}
             <TextField
               id="standard-dense"
-              label="Dense"
+              label="请输出搜索内容..."
               className={classNames(classes.textField, classes.dense)}
               margin="dense"
             />
@@ -109,9 +102,14 @@ const  SearchAppBar = (props) => {
             </div>
           </div>
           <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer">
-            <MenuIcon />
+           <MoreIcon />
           </IconButton>  
         </Toolbar>
+        <Grid container spacing={24}>
+            <Grid item xs={12}>
+                <TabNavigatorBar />
+            </Grid>
+          </Grid>
       </AppBar>
     </div>
   );

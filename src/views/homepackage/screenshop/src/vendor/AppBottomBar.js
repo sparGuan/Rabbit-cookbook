@@ -4,17 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Avatar from '@material-ui/core/Avatar';
-import AddIcon from '@material-ui/icons/Add';
-import MoreIcon from '@material-ui/icons/MoreVert';
+
+import FavoriteIcon from '@material-ui/icons/Favorite';
 const styles = theme => ({
   text: {
     paddingTop: theme.spacing.unit * 2,
@@ -108,14 +101,11 @@ function BottomAppBar(props) {
              
           </IconButton>
           <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
-            <AddIcon />
+            <FavoriteIcon />
           </Button>
           <div>
             <IconButton color="inherit">
-              
-            </IconButton>
-            <IconButton color="inherit">
-              <MoreIcon />
+             
             </IconButton>
           </div>
         </Toolbar>
