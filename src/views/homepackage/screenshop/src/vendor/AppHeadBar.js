@@ -109,7 +109,7 @@ const  SearchAppBar = (props) => {
             <Grid item xs={12}>
                 <TabNavigatorBar />
             </Grid>
-          </Grid>
+        </Grid>
       </AppBar>
     </div>
   );
