@@ -7,16 +7,20 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import tileData from './tileData';
-
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import InfoIcon from '@material-ui/icons/Info';
 const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
     overflow: 'hidden',
+    justifyContent: 'space-around',   
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
+    width: '100vw',
+    height: 'calc(100vh - 150px)',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
   },
@@ -27,17 +31,13 @@ const styles = theme => ({
   },
   icon: {
     color: 'white',
-  },
-  test: {
-    top: 0,
-    transform:'unset'
   }
 });
  const AppGridList = (props) => {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <GridList  spacing={1} className={classes.gridList}>
+      <GridList  spacing={5} className={classes.gridList}>
           {tileData.map(tile => (
             <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
               <img src={tile.img} alt={tile.title} className={classes.test}/>
@@ -52,6 +52,15 @@ const styles = theme => ({
                 actionPosition="left"
                 className={classes.titleBar}
               />
+               <GridListTileBar
+                  title={tile.title}
+                  subtitle={<span>by: {tile.author}</span>}
+                  actionIcon={
+                    <IconButton className={classes.icon}>
+                      <InfoIcon />
+                    </IconButton>
+                  }
+                />
             </GridListTile>
           ))}
         </GridList>

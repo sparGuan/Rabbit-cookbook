@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Paper } from "@material-ui/core";
@@ -13,21 +12,21 @@ import AppGridList from './AppGridList';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
+    marginTop: theme.spacing.unit * 1,
     width: '100%'
   }
 });
-// function TabContainer({ children, dir }) {
-//   return (
-//     <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
-//       {children}
-//     </Typography>
-//   );
-// }
+function TabContainer({ children, dir }) {
+  return (
+    <Typography component="div" dir={dir} style={{ padding: 5 }}>
+      {children}
+    </Typography>
+  );
+}
 
-// TabContainer.propTypes = {
-//   children: PropTypes.node.isRequired,
-//   dir: PropTypes.string.isRequired
-// };
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 const PageShell = (Page, previous) => {
   return props => (
@@ -48,7 +47,7 @@ const PageShell = (Page, previous) => {
 
 function ItemOne(theme) {
   return (
-    <AppGridList />
+      <AppGridList />    
   );
 }
 
@@ -73,24 +72,64 @@ class FullWidthTabs extends React.Component {
     this.setState({ value: index });
   };
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
+    const { value } = this.state;
     return (
       <BrowserRouter>
         <div className={classes.root}>
             <Tabs
               value={this.state.value}
               onChange={this.handleChange}
-              indicatorColor="primary"
-              textColor="primary"
+              indicatorColor="secondary"
+              textColor="secondary"
               fullWidth
+              scrollable
+              scrollButtons="auto"
             >
               <Tab label="Item One" component={Link} to="/one" />
               <Tab label="Item Two" component={Link} to="/two" />
+              <Tab label="Item Three" component={Link} to="/three"/>
+              <Tab label="Item Four" component={Link} to="/four"/>
+              <Tab label="Item Five" component={Link} to="/five"/>
+              <Tab label="Item Six" component={Link} to="/six"/>
+              <Tab label="Item Seven" component={Link} to="/seven"/>
             </Tabs>
 
           <Switch>
-            <Route path="/one" component={PageShell(ItemOne)} />
-            <Route path="/two" component={PageShell(ItemTwo)} />
+            {value === 0 &&
+            <TabContainer>
+                <Route path="/one" component={PageShell(ItemOne)} />
+            </TabContainer>}
+
+            {value === 1 &&
+            <TabContainer>
+                <Route path="/two" component={PageShell(ItemTwo)} />
+            </TabContainer>}
+
+            {value === 2 &&
+            <TabContainer>
+                <Route path="/two" component={PageShell(ItemOne)} />
+            </TabContainer>}
+
+            {value === 3 &&
+            <TabContainer>
+                <Route path="/two" component={PageShell(ItemOne)} />
+            </TabContainer>}
+
+             {value === 4 &&
+            <TabContainer>
+                <Route path="/two" component={PageShell(ItemOne)} />
+            </TabContainer>}
+
+             {value === 5 &&
+            <TabContainer>
+                <Route path="/two" component={PageShell(ItemOne)} />
+            </TabContainer>}
+
+            {value === 6 &&
+            <TabContainer>
+                <Route path="/two" component={PageShell(ItemOne)} />
+            </TabContainer>}
           </Switch>
         </div>
       </BrowserRouter>
@@ -99,27 +138,7 @@ class FullWidthTabs extends React.Component {
 }
 
 FullWidthTabs.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
-
-
-
-// const PageShell = (Page, previous) => {
-//   return props => (
-//     <div className="page">
-//       <ReactCSSTransitionGroup
-//         transitionAppear={true}
-//         transitionAppearTimeout={600}
-//         transitionEnterTimeout={600}
-//         transitionLeaveTimeout={600}
-//         transitionName={props.match.path === "/one" ? "SlideIn" : "SlideOut"}
-//       >
-//         {console.log(props)}
-//         <Page {...props} />
-//       </ReactCSSTransitionGroup>
-//     </div>
-//   );
-// };
 
 export default withStyles(styles, { withTheme: true })(FullWidthTabs);

@@ -8,12 +8,8 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 // 先去制作头部导航
 import AppHeadBar from './vendor/AppHeadBar';
-// import TabNavigatorBar from './vendor/TabNavigatorBar';
-// import AppGridList from './vendor/AppGridList';
 import AppBottomBar from './vendor/AppBottomBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import { Paper } from "@material-ui/core";
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -47,20 +43,6 @@ const theme = createMuiTheme({
 		}
 	}
 });
-// function ItemOne(theme) {
-// 	console.log(theme)
-//   return (
-// 		<AppGridList />
-//   );
-// }
-
-// function ItemTwo(theme) {
-//   return (
-//     <Paper>
-//       <div>Item two</div>
-//     </Paper>
-//   );
-// }
 
 export default class App extends React.Component {
 	constructor(props, context) {
@@ -71,7 +53,6 @@ export default class App extends React.Component {
 			<MuiThemeProvider theme={theme}>
 				<View style={styles.container}>
 					<AppHeadBar />
-					{/* <TabNavigatorBar /> */}
 					<AppBottomBar />
 				</View>
 			</MuiThemeProvider>

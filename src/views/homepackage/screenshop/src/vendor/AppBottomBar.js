@@ -6,6 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
+import Typography from '@material-ui/core/Typography';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 const styles = theme => ({
@@ -30,6 +32,7 @@ const styles = theme => ({
   toolbar: {
     alignItems: 'center',
     justifyContent: 'space-between',
+    padding:'0 10px',
   },
   fabButton: {
     position: 'absolute',
@@ -38,6 +41,9 @@ const styles = theme => ({
     right: 0,
     margin: '0 auto',
   },
+  GoShopUp: {
+    position:'relative',
+  }
 });
 
 const messages = [
@@ -103,10 +109,13 @@ function BottomAppBar(props) {
           <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
             <FavoriteIcon />
           </Button>
-          <div>
+          <div className={classes.GoShopUp}>
             <IconButton color="inherit">
-             
+              <StoreMallDirectoryIcon />
             </IconButton>
+            <Typography component="span" gutterBottom  >
+                去上架
+            </Typography>
           </div>
         </Toolbar>
       </AppBar>
