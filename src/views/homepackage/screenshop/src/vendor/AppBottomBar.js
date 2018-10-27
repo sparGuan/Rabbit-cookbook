@@ -7,9 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
-import Typography from '@material-ui/core/Typography';
-
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import BottomNavigation from './SmallBottomNavigation';
 const styles = theme => ({
   text: {
     paddingTop: theme.spacing.unit * 2,
@@ -32,7 +31,7 @@ const styles = theme => ({
   toolbar: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding:'0 10px',
+    padding:'0',
   },
   fabButton: {
     position: 'absolute',
@@ -103,20 +102,19 @@ function BottomAppBar(props) {
       
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <IconButton color="inherit" aria-label="Open drawer">
-             
-          </IconButton>
           <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
             <FavoriteIcon />
           </Button>
-          <div className={classes.GoShopUp}>
-            <IconButton color="inherit">
-              <StoreMallDirectoryIcon />
+          <BottomNavigation />
+          {/* <IconButton color="inherit" aria-label="Open drawer">
+             
+          </IconButton> */}
+          {/* <div className={classes.GoShopUp}>
+            <IconButton color="inherit" >
+              <StoreMallDirectoryIcon  color="error" label="去上架"/>
             </IconButton>
-            <Typography component="span" gutterBottom  >
-                去上架
-            </Typography>
-          </div>
+          </div> */}
+
         </Toolbar>
       </AppBar>
     </React.Fragment>
