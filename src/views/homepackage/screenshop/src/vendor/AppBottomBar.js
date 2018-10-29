@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,9 +6,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import BottomNavigation from './SmallBottomNavigation';
+import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
+import Typography from "@material-ui/core/Typography";
 const styles = theme => ({
   text: {
     paddingTop: theme.spacing.unit * 2,
@@ -17,6 +18,15 @@ const styles = theme => ({
   },
   paper: {
     paddingBottom: 50,
+  },
+  shopcararea: {
+    border: '1px solid #f5f5f5',
+    transform: 'translate3d(15px,-15px,0)',
+    backgroundColor: '#f3f3f3',
+    boxShadow: '0 0 2px 2px rgba(224, 224, 224, 0.6) inset',
+    '&:hover': {
+      backgroundColor: '#f3f3f3'
+    }
   },
   list: {
     marginBottom: theme.spacing.unit * 2,
@@ -42,6 +52,18 @@ const styles = theme => ({
   },
   GoShopUp: {
     position:'relative',
+  },
+  sellnum: {
+    borderRadius:'50%',
+    width:15,
+    height:15,
+    borderRadius: '50%',
+    position: 'absolute',
+    right: -5,
+    bottom: 0,
+    backgroundColor: theme.palette.secondary.main,
+    color: '#fff',
+    lineHeight: '15px',    
   }
 });
 
@@ -99,22 +121,21 @@ function BottomAppBar(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
             <FavoriteIcon />
           </Button>
           <BottomNavigation />
-          {/* <IconButton color="inherit" aria-label="Open drawer">
-             
-          </IconButton> */}
-          {/* <div className={classes.GoShopUp}>
-            <IconButton color="inherit" >
-              <StoreMallDirectoryIcon  color="error" label="去上架"/>
-            </IconButton>
-          </div> */}
 
+          <IconButton color="inherit" aria-label="Open drawer" className={classes.shopcararea}
+          >
+            <RemoveShoppingCartIcon />
+            <Typography  component="div"
+              className={classes.sellnum} color="inherit">
+              1
+            </Typography>
+          </IconButton>
         </Toolbar>
       </AppBar>
     </React.Fragment>

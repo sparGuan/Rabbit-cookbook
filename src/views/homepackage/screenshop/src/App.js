@@ -10,12 +10,13 @@ import { StyleSheet, View } from 'react-native';
 import AppHeadBar from './vendor/AppHeadBar';
 import AppBottomBar from './vendor/AppBottomBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import MembershipMenu from "./vendor/MembershipMenu";
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
 	},
 	palette: {
-		common: { black: '#000', white: '#fff' },
+		common: { black: '#000', white: 'rgba(255,255,255,1)' },
 		background: { paper: 'rgba(255, 255, 255, 1)', default: '#fafafa' },
 		primary: {
 			light: 'rgba(154, 79, 220, 0.69)',
@@ -37,9 +38,9 @@ const theme = createMuiTheme({
 		},
 		text: {
 			primary: 'rgba(3, 3, 3, 0.77)',
-			secondary: 'rgba(0, 0, 0, 0.54)',
-			disabled: 'rgba(0, 0, 0, 0.38)',
-			hint: 'rgba(0, 0, 0, 0.38)'
+			secondary: '#666',
+			disabled: '#999',
+			hint: '#f8f8f8'
 		}
 	}
 });
@@ -51,6 +52,8 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<MuiThemeProvider theme={theme}>
+				{/* 查看会员信息 */}
+				<MembershipMenu />
 				<View style={styles.container}>
 					<AppHeadBar />
 					<AppBottomBar />

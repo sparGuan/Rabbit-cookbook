@@ -7,9 +7,9 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import tileData from './tileData';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import InfoIcon from '@material-ui/icons/Info';
+import { Link, Route, BrowserRouter, Switch } from "react-router-dom";
+// import InfoIcon from '@material-ui/icons/Info';
+import GridBuyAndAddCar from './GridBuyAndAddCar'
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -33,13 +33,22 @@ const styles = theme => ({
     color: 'white',
   }
 });
+/**
+ * 打开对应详情页
+ * @param {id} 详情页id
+ * 先到后台获取详情页数据，跳转到对应路由
+ */
+ const openDetilPage = (productId) => {
+  // 跳转到详情页
+
+ } 
  const AppGridList = (props) => {
   const { classes } = props;
   return (
     <div className={classes.root}>
       <GridList  spacing={5} className={classes.gridList}>
           {tileData.map(tile => (
-            <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
+            <GridListTile key={tile.productId} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
               <img src={tile.img} alt={tile.title} className={classes.test}/>
               <GridListTileBar
                 title={tile.title}
@@ -55,10 +64,14 @@ const styles = theme => ({
                <GridListTileBar
                   title={tile.title}
                   subtitle={<span>by: {tile.author}</span>}
+                  onClick={
+                    openDetilPage(tile.productId)
+                  }
                   actionIcon={
-                    <IconButton className={classes.icon}>
-                      <InfoIcon />
-                    </IconButton>
+                    <GridBuyAndAddCar />
+                    // <IconButton className={classes.icon}>
+                    //   <InfoIcon />
+                    // </IconButton>
                   }
                 />
             </GridListTile>
