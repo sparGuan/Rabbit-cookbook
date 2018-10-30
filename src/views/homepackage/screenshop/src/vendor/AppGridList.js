@@ -38,47 +38,52 @@ const styles = theme => ({
  * @param {id} 详情页id
  * 先到后台获取详情页数据，跳转到对应路由
  */
- const openDetilPage = (productId) => {
-  // 跳转到详情页
-
- } 
- const AppGridList = (props) => {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <GridList  spacing={5} className={classes.gridList}>
-          {tileData.map(tile => (
-            <GridListTile key={tile.productId} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-              <img src={tile.img} alt={tile.title} className={classes.test}/>
-              <GridListTileBar
-                title={tile.title}
-                titlePosition="top"
-                actionIcon={
-                  <IconButton className={classes.icon}>
-                    <StarBorderIcon />
-                  </IconButton>
-                }
-                actionPosition="left"
-                className={classes.titleBar}
-              />
-               <GridListTileBar
-                  title={tile.title}
-                  subtitle={<span>by: {tile.author}</span>}
-                  onClick={
-                    openDetilPage(tile.productId)
-                  }
-                  actionIcon={
-                    <GridBuyAndAddCar />
-                    // <IconButton className={classes.icon}>
-                    //   <InfoIcon />
-                    // </IconButton>
-                  }
-                />
-            </GridListTile>
-          ))}
-        </GridList>
-    </div>
-  );
+export default class AppGridList extends React.Component {
+  // const { classes } = props;
+  openDetilPage = productId => {
+      // 跳转到详情页
+      
+   } 
+  render() {
+   const { classes } = this.props;
+    return (
+      <BrowserRouter>
+        <div className={classes.root}>
+          <GridList  spacing={5} className={classes.gridList}>
+              {tileData.map(tile => (
+                <GridListTile key={tile.productId} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
+                  <img src={tile.img} alt={tile.title} className={classes.test}/>
+                  <GridListTileBar
+                    title={tile.title}
+                    titlePosition="top"
+                    actionIcon={
+                      <IconButton className={classes.icon}>
+                        <StarBorderIcon />
+                      </IconButton>
+                    }
+                    actionPosition="left"
+                    className={classes.titleBar}
+                  />
+                  <GridListTileBar
+                      title={tile.title}
+                      subtitle={<span>by: {tile.author}</span>}
+                      onClick={
+                        this.openDetilPage(tile.productId)
+                      }
+                      actionIcon={
+                        <GridBuyAndAddCar />
+                        // <IconButton className={classes.icon}>
+                        //   <InfoIcon />
+                        // </IconButton>
+                      }
+                    />
+                </GridListTile>
+              ))}
+            </GridList>
+          </div>
+        </BrowserRouter>
+    );
+  }
 }
 
 AppGridList.propTypes = {
