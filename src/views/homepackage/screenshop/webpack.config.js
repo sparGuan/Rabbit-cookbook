@@ -3,7 +3,6 @@ const path = require('path');
 const AssetsPlugin = require('assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const WpPluginWatchOffset = require('wp-plugin-watch-offset');
-console.log(__dirname)
 module.exports = {
     stats: { assets: true, children: false, chunks: false, modules: false, source: false },
     mode: "development",
@@ -15,8 +14,15 @@ module.exports = {
         new webpack.DefinePlugin({
           // __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
           'process.env':{
-            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-          }
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('production')
+          },
+          // ================================
+          // 配置开发全局常量
+          // ================================
+          __DEV__: env === 'development',
+          __PROD__: env === 'production',
+          __COMPONENT_DEVTOOLS__: false, // 是否使用组件形式的 Redux DevTools
+          __WHY_DID_YOU_UPDATE__: false // 是否检测不必要的组件重渲染
         }),
         new HtmlWebpackPlugin({
             title: 'screenShop'
