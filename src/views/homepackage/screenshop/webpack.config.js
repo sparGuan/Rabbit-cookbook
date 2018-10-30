@@ -3,6 +3,8 @@ const path = require('path');
 const AssetsPlugin = require('assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const WpPluginWatchOffset = require('wp-plugin-watch-offset');
+const rootPath = path.resolve(__dirname, '..'), // 项目根目录
+  src = path.join(rootPath, 'src');// 开发源码目录
 module.exports = {
     stats: { assets: true, children: false, chunks: false, modules: false, source: false },
     mode: "development",
@@ -32,7 +34,17 @@ module.exports = {
     ],
     resolve: {
         extensions: ['.js', '.json'],
-        alias: { 'react-native': 'react-native-web' },
+        alias: { 
+            'react-native': 'react-native-web' ,
+             // ================================
+             // 自定义路径别名
+             // ================================
+             UTIL: path.join(src, 'utils'),
+             ACTION: path.join(src, 'redux/actions'),
+             REDUCER: path.join(src, 'redux/reducers'),
+             STORE: path.join(src, 'redux/store'),
+             ROUTE: path.join(src, 'routes'),
+        },
         modules: ['web_modules', 'node_modules'],
     },
     module: {

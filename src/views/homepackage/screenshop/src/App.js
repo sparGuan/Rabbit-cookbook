@@ -3,14 +3,17 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+// 挂载app
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-// 先去制作头部导航
 import AppHeadBar from './vendor/AppHeadBar';
 import AppBottomBar from './vendor/AppBottomBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MembershipMenu from "./vendor/MembershipMenu";
+import { Provider } from 'react-redux'
+import store, { history } from 'STORE'
+import { Router } from 'react-router'
+import routes from 'ROUTE'
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -44,25 +47,6 @@ const theme = createMuiTheme({
 		}
 	}
 });
-
-export default class App extends React.Component {
-	constructor(props, context) {
-		super(props, context);
-	}
-	render() {
-		return (
-			<MuiThemeProvider theme={theme}>
-				{/* 查看会员信息 */}
-				<MembershipMenu />
-				<View style={styles.container}>
-					<AppHeadBar />
-					<AppBottomBar />
-				</View>
-			</MuiThemeProvider>
-		);
-	}
-}
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -81,3 +65,24 @@ const styles = StyleSheet.create({
 		marginBottom: 5
 	}
 });
+
+export default class App extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+	}
+	render() {
+		return (
+			<Provider store={store}>
+				<Router history={history} children={routes} />
+			</Provider>,
+			<MuiThemeProvider theme={theme}>
+				{/* 查看会员信息 */}
+				<MembershipMenu />
+				<View style={styles.container}>
+					<AppHeadBar />
+					<AppBottomBar />
+				</View>
+			</MuiThemeProvider>
+		);
+	}
+}

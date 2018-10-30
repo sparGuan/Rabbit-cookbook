@@ -8,7 +8,7 @@ import userReducer from 'REDUCER/user'
 // ================================
 const syncReducers = {
   router: routerReducer,
-  userData: userReducer
+  userData: userReducer // 注入userData ====>必须的情况下
 }
 
 // ================================

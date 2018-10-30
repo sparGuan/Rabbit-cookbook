@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-import { createRootReducer } from 'REDUCER'
+import { createRootReducer } from 'REDUCER' // 注入reducers
 import middlewares from './middlewares'
 import enhancers from './enhancers'
 import syncHistoryWithStore from './syncHistoryWithStore'
