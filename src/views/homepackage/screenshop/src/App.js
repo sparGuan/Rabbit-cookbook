@@ -10,10 +10,6 @@ import AppHeadBar from './vendor/AppHeadBar';
 import AppBottomBar from './vendor/AppBottomBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MembershipMenu from "./vendor/MembershipMenu";
-import { Provider } from 'react-redux'
-import store, { history } from 'STORE'
-import { Router } from 'react-router'
-import routes from 'ROUTE'
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -72,9 +68,6 @@ export default class App extends React.Component {
 	}
 	render() {
 		return (
-			<Provider store={store}>
-				<Router history={history} children={routes} />
-			</Provider>,
 			<MuiThemeProvider theme={theme}>
 				{/* 查看会员信息 */}
 				<MembershipMenu />
