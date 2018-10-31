@@ -1,7 +1,6 @@
 
-import App from './App';
 import React from 'react';
-import ReactNative, { AppRegistry } from 'react-native';
+import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
 import { Router } from 'react-router'

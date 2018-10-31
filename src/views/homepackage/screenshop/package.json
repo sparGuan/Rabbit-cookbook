@@ -31,7 +31,8 @@
     "webpack-dev-server": "^3.1.9",
     "redux-devtools": "^3.4.1",
     "redux-devtools-log-monitor": "^1.4.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -52,7 +53,7 @@
     "react": "^16.6.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-art": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "react-dom": "^16.6.0",
     "react-native": "^0.57.3",
     "react-native-cli": "^2.0.1",
     "react-native-web": "^0.9.3",
@@ -62,7 +63,6 @@
     "react-router-redux": "^4.0.8",
     "react-swipe": "^5.1.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
     "swipe-js-iso": "^2.0.4"
   }
 }

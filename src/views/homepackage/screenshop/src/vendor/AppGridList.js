@@ -38,7 +38,7 @@ const styles = theme => ({
  * @param {id} 详情页id
  * 先到后台获取详情页数据，跳转到对应路由
  */
-export default class AppGridList extends React.Component {
+class AppGridList extends React.Component {
   // const { classes } = props;
   openDetilPage = productId => {
       // 跳转到详情页
