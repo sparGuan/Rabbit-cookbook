@@ -31,7 +31,7 @@ function TabContainer({ children, dir }) {
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 };
-
+// todo 将此函数放置redux全局调用
 const PageShell = (Page, previous) => {
   return props => (
     <div className="page">
