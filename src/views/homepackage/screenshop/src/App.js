@@ -4,7 +4,7 @@
  * @flow
  */
 // 挂载app
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppHeadBar from './vendor/AppHeadBar';
 import AppBottomBar from './vendor/AppBottomBar';
@@ -61,7 +61,11 @@ const styles = StyleSheet.create({
 		marginBottom: 5
 	}
 });
-
+let DevTools
+if (__DEV__ && __COMPONENT_DEVTOOLS__) {
+  // 组件形式的 Redux DevTools
+  DevTools = require('./DevTools').default
+}
 export default class App extends React.Component {
 	constructor(props, context) {
 		super(props, context);
@@ -75,6 +79,7 @@ export default class App extends React.Component {
 					<AppHeadBar />
 					<AppBottomBar />
 				</View>
+				{ DevTools && <DevTools /> }
 			</MuiThemeProvider>
 		);
 	}

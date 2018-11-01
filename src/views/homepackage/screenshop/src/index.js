@@ -3,16 +3,17 @@ import React from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
-import { Router } from 'react-router'
-import routes from 'ROUTE'
+import App from './App'
 import "./index.css";
-console.log(routes)
+import { BrowserRouter, Route } from 'react-router-dom';
 // register the app
-function Main(props) {
+function Main(props) {  
 		return (
-    <Provider store={store}>
-      <Router history={history} routes={routes} />
-    </Provider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Route history={history} component={App} />
+        </BrowserRouter>
+      </Provider>
 		);
 }
 AppRegistry.registerComponent('App', () => Main);
