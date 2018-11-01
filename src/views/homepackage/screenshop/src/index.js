@@ -6,11 +6,12 @@ import store, { history } from 'STORE'
 import { Router } from 'react-router'
 import routes from 'ROUTE'
 import "./index.css";
+console.log(routes)
 // register the app
 function Main(props) {
 		return (
     <Provider store={store}>
-      <Router history={history} children={routes} />
+      <Router history={history} routes={routes} />
     </Provider>
 		);
 }

@@ -3,7 +3,6 @@ import { createRootReducer } from 'REDUCER' // 注入reducers
 import middlewares from './middlewares'
 import enhancers from './enhancers'
 import syncHistoryWithStore from './syncHistoryWithStore'
-import { createBrowserHistory } from 'history';
 // ======================================================
 // 实例化 Store
 // ======================================================
@@ -20,4 +19,5 @@ export default store
 // ======================================================
 // 增强版 history
 // ======================================================
-export const history = syncHistoryWithStore(createBrowserHistory(),store)
+console.log(store)
+export const history = syncHistoryWithStore(store)
