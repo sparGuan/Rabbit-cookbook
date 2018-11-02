@@ -39,11 +39,11 @@ const styles = theme => ({
  * 先到后台获取详情页数据，跳转到对应路由
  */
 class AppGridList extends React.Component {
-  // const { classes } = props;
-  openDetilPage = productId => {
-      // 跳转到详情页
-      
-   } 
+   // const { classes } = props;
+  // 传入产品ID获取跳转链接
+  linkToDetail(productId)  {
+    this.props.history.push(link);
+  }
   render() {
    const { classes } = this.props;
     return (
@@ -64,12 +64,10 @@ class AppGridList extends React.Component {
                     actionPosition="left"
                     className={classes.titleBar}
                   />
-                  <GridListTileBar
+                   <GridListTileBar
                       title={tile.title}
                       subtitle={<span>by: {tile.author}</span>}
-                      onClick={
-                        this.openDetilPage(tile.productId)
-                      }
+                      onClick={this.linkToDetail.bind(this, data.productId)}
                       actionIcon={
                         <GridBuyAndAddCar />
                         // <IconButton className={classes.icon}>
@@ -77,7 +75,9 @@ class AppGridList extends React.Component {
                         // </IconButton>
                       }
                     />
+                  
                 </GridListTile>
+                
               ))}
             </GridList>
           </div>

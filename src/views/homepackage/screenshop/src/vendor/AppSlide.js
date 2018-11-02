@@ -1,36 +1,20 @@
-import React, { Component, PropTypes } from 'react'
-import CSSModules from 'react-css-modules'
-import styles from './style.css'
+import React from 'react'
+import ReactDOM from 'react-dom';
+import ReactSwipe from 'react-swipe';
 
-const propTypes = {
-	link: PropTypes.string.isRequired,
-	src: PropTypes.string.isRequired
+class Carousel extends React.Component {
+    render() {
+        return (
+            <ReactSwipe className="carousel" swipeOptions={{continuous: false}}>
+                <div>PANE 1</div>
+                <div>PANE 2</div>
+                <div>PANE 3</div>
+            </ReactSwipe>
+        );
+    }
 }
 
-const defaultProps = {
-	link: "javascript:;"
-}
-
-class Sliders extends Component {
-	constructor(props) {
-		super(props)
-	}
-	render() {
-		var aStyles = {
-			width: document.documentElement.clientWidth + "px"
-		}
-		var picStyles = {
-			backgroundImage: "url(" + this.props.src + ")"
-		}
-		return (
-			<a href={this.props.link} styleName="slide-a" style={aStyles}>
-				<div styleName="slide-li" style={picStyles}></div>
-			</a>
-		)
-	}
-}
-
-Sliders.propTypes = propTypes
-Sliders.defaultProps = defaultProps
-
-export default CSSModules(Sliders, styles);
+ReactDOM.render(
+    <Carousel />, 
+    document.getElementById('app')
+);
