@@ -39,13 +39,17 @@ const styles = theme => ({
  * 先到后台获取详情页数据，跳转到对应路由
  */
 class AppGridList extends React.Component {
-   // const { classes } = props;
+  // 构造
+  constructor(props) {
+    super(props);
+  }
   // 传入产品ID获取跳转链接
   linkToDetail(productId)  {
-    this.props.history.push(link);
+    // 先去get数据
+    this.props.history.push({ pathname:'/appDetilPage',state:{productId} });
   }
   render() {
-   const { classes } = this.props;
+    const { classes } = this.props;
     return (
       <BrowserRouter>
         <div className={classes.root}>
@@ -67,12 +71,9 @@ class AppGridList extends React.Component {
                    <GridListTileBar
                       title={tile.title}
                       subtitle={<span>by: {tile.author}</span>}
-                      onClick={this.linkToDetail.bind(this, data.productId)}
+                      onClick={this.linkToDetail.bind(this, tile.productId)}
                       actionIcon={
                         <GridBuyAndAddCar />
-                        // <IconButton className={classes.icon}>
-                        //   <InfoIcon />
-                        // </IconButton>
                       }
                     />
                   

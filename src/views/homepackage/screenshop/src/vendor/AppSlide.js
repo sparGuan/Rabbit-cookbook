@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
+
+
 import ReactSwipe from 'react-swipe';
 
 class Carousel extends React.Component {
@@ -13,8 +14,4 @@ class Carousel extends React.Component {
         );
     }
 }
-
-ReactDOM.render(
-    <Carousel />, 
-    document.getElementById('app')
-);
+export default Carousel
