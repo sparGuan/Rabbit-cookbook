@@ -7,7 +7,6 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import tileData from './tileData';
-import { Link, Route, BrowserRouter, Switch } from "react-router-dom";
 // import InfoIcon from '@material-ui/icons/Info';
 import GridBuyAndAddCar from './GridBuyAndAddCar'
 const styles = theme => ({
@@ -40,18 +39,17 @@ const styles = theme => ({
  */
 class AppGridList extends React.Component {
   // 构造
-  constructor(props) {
-    super(props);
-  }
+  constructor(props, context) {
+    super(props, context);
+ }
   // 传入产品ID获取跳转链接
   linkToDetail(productId)  {
     // 先去get数据
     this.props.history.push({ pathname:'/appDetilPage',state:{productId} });
   }
-  render() {
-    const { classes } = this.props;
+  render() {    
+    const { classes,history } = this.props;    
     return (
-      <BrowserRouter>
         <div className={classes.root}>
           <GridList  spacing={5} className={classes.gridList}>
               {tileData.map(tile => (
@@ -76,19 +74,16 @@ class AppGridList extends React.Component {
                         <GridBuyAndAddCar />
                       }
                     />
-                  
                 </GridListTile>
-                
               ))}
             </GridList>
-          </div>
-        </BrowserRouter>
+          </div>        
     );
   }
 }
 
 AppGridList.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(AppGridList);

@@ -82,7 +82,7 @@ const styles = theme => ({
 });
 
 const  SearchAppBar = (props) => {
-  const { classes } = props;
+  const { classes,history } = props;
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -107,7 +107,7 @@ const  SearchAppBar = (props) => {
         </Toolbar>
         <Grid container spacing={24}>
             <Grid item xs={12}>
-                <TabNavigatorBar />
+                <TabNavigatorBar history={history}/>
             </Grid>
         </Grid>
       </AppBar>
