@@ -5,11 +5,9 @@ import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
@@ -18,7 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AppSlide from './AppSlide';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const styles = theme => ({
   card: {
     maxWidth: 400,
@@ -46,40 +44,61 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+  headUnit:{
+    padding:10,
+  }
 });
 
 class RecipeReviewCard extends React.Component {
-  state = { expanded: false };
-
+  state = { 
+    expanded: false,
+    sliding:1,
+   };
+  images = [
+    '/static/images/cards/paella.jpg',
+    '/static/images/cards/paella.jpg',
+    '/static/images/cards/paella.jpg',
+    '/static/images/cards/paella.jpg',
+    '/static/images/cards/paella.jpg',
+  ];
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
-
+  slideChangeTransitionStart = (swiper) => {
+    // 执行收缩    
+    Array.from(swiper.slides).forEach(item => {
+      item.firstChild.classList.add('scale-img-view')
+    }) 
+    console.log(swiper.realIndex)         
+  };
+  slideChangeTransitionEnd = (swiper) => {    
+    Array.from(swiper.slides)[swiper.activeIndex ].firstChild.classList.remove('scale-img-view')
+  } 
   render() {
     const { classes } = this.props;
-
     return (
       <Card className={classes.card}>
         <CardHeader
+          className={classes.headUnit}
           avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
-            </Avatar>
+            <ArrowBackIcon />
           }
           action={
             <IconButton>
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title="Shrimp and Chorizo Paella"          
         />
         {/* <CardMedia
           className={classes.media}
           image="/static/images/cards/paella.jpg"
           title="Contemplative Reptile"
         /> */}
-        <AppSlide />
+        <AppSlide images={this.images} 
+                  slideChangeTransitionStart={this.slideChangeTransitionStart}
+                  slideChangeTransitionEnd={this.slideChangeTransitionEnd}
+        />
         <CardContent>
           <Typography component="p">
             This impressive paella is a perfect party dish and a fun meal to cook together with your
