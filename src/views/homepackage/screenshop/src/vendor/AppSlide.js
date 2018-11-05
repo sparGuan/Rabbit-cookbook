@@ -9,8 +9,12 @@ const styles = theme => ({
     carousel: {
 
     },
-    slide:{
-         textAlign:'center'
+    slide: {
+         textAlign:'center',
+         '&>img': {
+            transition: 'all ease .3s',
+            transform: 'scale(0.8)',
+         }
     }
   });
 // 轮播插件
@@ -21,9 +25,10 @@ class Carousel extends React.Component {
         return (
             <ReactSwipe className={classes.carousel} swipeOptions={
                 {
-                    continuous: false,
+                    continuous: true,
                     speed:500,
-                    auto:1000
+                    stopPropagation: true,
+                    auto:false
                 }} >
                 <Typography component="div" className={classes.slide}>
                     <img src={'/static/images/cards/paella.jpg'}></img>

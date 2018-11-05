@@ -18,10 +18,13 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AppSlide from './AppSlide';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import classNames from 'classnames';
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    width: '100%',
+    boxShadow: 'unset',
+    height: '100vh'
   },
   media: {
     height: 0,
@@ -46,39 +49,32 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+  headpanel: {
+    padding:10,
+  }
 });
 
 class RecipeReviewCard extends React.Component {
   state = { expanded: false };
-
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
-
   render() {
     const { classes } = this.props;
-
     return (
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
-            </Avatar>
+            <ArrowBackIcon />
           }
           action={
             <IconButton>
               <MoreVertIcon />
             </IconButton>
           }
+          className={classNames(classes.headpanel)}
           title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
         />
-        {/* <CardMedia
-          className={classes.media}
-          image="/static/images/cards/paella.jpg"
-          title="Contemplative Reptile"
-        /> */}
         <AppSlide />
         <CardContent>
           <Typography component="p">
