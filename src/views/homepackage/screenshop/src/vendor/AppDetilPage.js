@@ -17,15 +17,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AppSlide from './AppSlide';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-<<<<<<< HEAD
-=======
-import classNames from 'classnames';
->>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
 const styles = theme => ({
   card: {
     width: '100%',
     boxShadow: 'unset',
-    height: '100vh'
+    height: '100vh',
+    'overflowY': 'auto'
   },
   media: {
     height: 0,
@@ -50,17 +47,33 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500],
   },
-<<<<<<< HEAD
   headUnit:{
-=======
-  headpanel: {
->>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
     padding:10,
+  },
+  unsetSpacing: {
+    padding:0
+  },
+  ariaTitle:{
+    position: 'absolute',
+    right: '45px',
+    fontSize: '12px'
+  },
+  relativeAuto: {
+    position:'relative',
+  },
+  reviewExpand: {
+    padding:'0 10px'
+  },
+  drawBorderBottom: {
+    borderBottom: '3px solid rgb(245, 245, 245)'
+  },
+  showPrice: {
+    position: 'absolute',
+    right: 45,
   }
 });
 
 class RecipeReviewCard extends React.Component {
-<<<<<<< HEAD
   state = { 
     expanded: false,
     sliding:1,
@@ -85,12 +98,6 @@ class RecipeReviewCard extends React.Component {
   slideChangeTransitionEnd = (swiper) => {    
     Array.from(swiper.slides)[swiper.activeIndex ].firstChild.classList.remove('scale-img-view')
   } 
-=======
-  state = { expanded: false };
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
-  };
->>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
   render() {
     const { classes } = this.props;
     return (
@@ -105,30 +112,23 @@ class RecipeReviewCard extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-<<<<<<< HEAD
           title="Shrimp and Chorizo Paella"          
         />
-        {/* <CardMedia
-          className={classes.media}
-          image="/static/images/cards/paella.jpg"
-          title="Contemplative Reptile"
-        /> */}
         <AppSlide images={this.images} 
                   slideChangeTransitionStart={this.slideChangeTransitionStart}
                   slideChangeTransitionEnd={this.slideChangeTransitionEnd}
         />
-=======
-          className={classNames(classes.headpanel)}
-          title="Shrimp and Chorizo Paella"
-        />
-        <AppSlide />
->>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
         <CardContent>
           <Typography component="p">
             This impressive paella is a perfect party dish and a fun meal to cook together with your
             guests. Add 1 cup of frozen peas along with the mussels, if you like.
           </Typography>
+          {
+            // 产品价格
+          }
+          <p className={classes.showPrice}>￥15</p>
         </CardContent>
+        
         <CardActions className={classes.actions} disableActionSpacing>
           <IconButton aria-label="Add to favorites">
             <FavoriteIcon />
@@ -136,41 +136,30 @@ class RecipeReviewCard extends React.Component {
           <IconButton aria-label="Share">
             <ShareIcon />
           </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
         </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+        <CardActions className={classnames(classes.actions,classes.unsetSpacing,classes.relativeAuto)} disableActionSpacing>
+              <span className={classes.ariaTitle}>参数列表</span>
+               <IconButton
+                  className={classnames(classes.expand, classes.reviewExpand,{
+                    [classes.expandOpen]: this.state.expanded,
+                  })}
+                  onClick={this.handleExpandClick}
+                  aria-expanded={this.state.expanded}
+                  aria-label="Show more"
+                >
+                  <ExpandMoreIcon />
+              </IconButton>
+        </CardActions>
+        {
+          // unmountOnExit
+          // 添加该参数组件不渲染
+        }
+        <Collapse in={this.state.expanded} timeout="auto"  collapsedHeight="3px" className={classes.drawBorderBottom}>
           <CardContent>
             <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
+            <Typography>
               Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
               minutes.
-            </Typography>
-            <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-              heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-              browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving
-              chicken and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion,
-              salt and pepper, and cook, stirring often until thickened and fragrant, about 10
-              minutes. Add saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph>
-              Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-              without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat
-              to medium-low, add reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is just tender, 5 to 7
-              minutes more. (Discard any mussels that don’t open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then serve.
             </Typography>
           </CardContent>
         </Collapse>
