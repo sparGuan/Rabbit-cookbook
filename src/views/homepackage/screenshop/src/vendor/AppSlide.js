@@ -24,12 +24,22 @@ const styles = theme => ({
             transform: 'scale(.8)'
         }
     },
+<<<<<<< HEAD
     pagination: {
         height:10
+=======
+    slide: {
+         textAlign:'center',
+         '&>img': {
+            transition: 'all ease .3s',
+            transform: 'scale(0.8)',
+         }
+>>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
     }
 });
 // 轮播插件
 class Carousel extends React.Component {
+<<<<<<< HEAD
 	constructor(props, context) {
 		super(props, context);
 	}
@@ -55,6 +65,7 @@ class Carousel extends React.Component {
             <div  className={classNames('swiper-pagination',classes.pagination)}></div>
         </div>
 		);
+        
 	}
 	componentDidMount() {  
         const { slideChangeTransitionStart ,slideChangeTransitionEnd, images } = this.props;      
@@ -91,5 +102,33 @@ class Carousel extends React.Component {
 			}
 		});
 	}
+=======
+    render() {
+        
+        const { classes } = this.props;         
+        return (
+            <ReactSwipe className={classes.carousel} swipeOptions={
+                {
+                    continuous: true,
+                    speed:500,
+                    stopPropagation: true,
+                    auto:false
+                }} >
+                <Typography component="div" className={classes.slide}>
+                    <img src={'/static/images/cards/paella.jpg'}></img>
+                </Typography>
+                <Typography component="div" className={classes.slide}>
+                    <img src={'/static/images/cards/paella.jpg'}></img>
+                </Typography>
+                <Typography component="div" className={classes.slide}>
+                    <img src={'/static/images/cards/paella.jpg'}></img>
+                </Typography>
+                <Typography component="div" className={classes.slide}>
+                    <img src={'/static/images/cards/paella.jpg'}></img>
+                </Typography>
+            </ReactSwipe>
+        );
+    }
+>>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
 }
 export default withStyles(styles)(Carousel);

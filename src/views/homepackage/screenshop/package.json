@@ -37,7 +37,7 @@
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "start": "NODE_ENV=dev webpack-dev-server --progress --colors",
+    "start": "set NODE_ENV=dev && webpack-dev-server --progress --colors",
     "build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -63,6 +63,10 @@
     "react-router-redux": "^4.0.8",
     "react-swipeable-views": "^0.13.0",
     "redux": "^4.0.1",
+<<<<<<< HEAD
     "swiper": "^4.4.2"
+=======
+    "swipe-js-iso": "^2.0.4"
+>>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
   }
 }

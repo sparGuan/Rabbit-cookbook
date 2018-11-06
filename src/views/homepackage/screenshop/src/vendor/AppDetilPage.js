@@ -17,9 +17,15 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AppSlide from './AppSlide';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+<<<<<<< HEAD
+=======
+import classNames from 'classnames';
+>>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    width: '100%',
+    boxShadow: 'unset',
+    height: '100vh'
   },
   media: {
     height: 0,
@@ -44,12 +50,17 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+<<<<<<< HEAD
   headUnit:{
+=======
+  headpanel: {
+>>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
     padding:10,
   }
 });
 
 class RecipeReviewCard extends React.Component {
+<<<<<<< HEAD
   state = { 
     expanded: false,
     sliding:1,
@@ -74,6 +85,12 @@ class RecipeReviewCard extends React.Component {
   slideChangeTransitionEnd = (swiper) => {    
     Array.from(swiper.slides)[swiper.activeIndex ].firstChild.classList.remove('scale-img-view')
   } 
+=======
+  state = { expanded: false };
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+  };
+>>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
   render() {
     const { classes } = this.props;
     return (
@@ -88,6 +105,7 @@ class RecipeReviewCard extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
+<<<<<<< HEAD
           title="Shrimp and Chorizo Paella"          
         />
         {/* <CardMedia
@@ -99,6 +117,12 @@ class RecipeReviewCard extends React.Component {
                   slideChangeTransitionStart={this.slideChangeTransitionStart}
                   slideChangeTransitionEnd={this.slideChangeTransitionEnd}
         />
+=======
+          className={classNames(classes.headpanel)}
+          title="Shrimp and Chorizo Paella"
+        />
+        <AppSlide />
+>>>>>>> 91c5169eaf21440dedc051dbb70ad3109a152a64
         <CardContent>
           <Typography component="p">
             This impressive paella is a perfect party dish and a fun meal to cook together with your
