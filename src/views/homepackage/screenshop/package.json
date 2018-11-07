@@ -37,7 +37,7 @@
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "start": "NODE_ENV=dev webpack-dev-server --progress --colors",
+    "start": "set NODE_ENV=dev && webpack-dev-server --progress --colors",
     "build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -54,6 +54,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-art": "^16.5.2",
     "react-dom": "^16.6.0",
+    "react-html5video": "^2.5.1",
     "react-loadable": "^5.5.0",
     "react-native": "^0.57.3",
     "react-native-web": "^0.9.3",
