@@ -154,6 +154,7 @@ class RecipeReviewCard extends React.Component {
           // unmountOnExit
           // 添加该参数组件不渲染
         }
+        
         <Collapse in={this.state.expanded} timeout="auto"  collapsedHeight="3px" className={classes.drawBorderBottom}>
           <CardContent>
             <Typography paragraph>Method:</Typography>
