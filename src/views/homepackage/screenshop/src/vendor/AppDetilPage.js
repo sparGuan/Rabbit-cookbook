@@ -25,6 +25,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 import AppBar from '@material-ui/core/AppBar';
+import Comment from './Comment';
 const styles = theme => ({
   card: {
     width: '100%',
@@ -141,7 +142,6 @@ class RecipeReviewCard extends React.Component {
     Array.from(swiper.slides).forEach(item => {
       item.firstChild.classList.add('scale-img-view')
     }) 
-    console.log(swiper.realIndex)         
   };
   slideChangeTransitionEnd = (swiper) => {    
     Array.from(swiper.slides)[swiper.activeIndex ].firstChild.classList.remove('scale-img-view')
@@ -165,6 +165,7 @@ class RecipeReviewCard extends React.Component {
         <AppSlide images={this.images} 
                   slideChangeTransitionStart={this.slideChangeTransitionStart}
                   slideChangeTransitionEnd={this.slideChangeTransitionEnd}
+                  pagination={true}
         />
 
         <CardContent className={classes.cellPanel}>
@@ -257,6 +258,7 @@ class RecipeReviewCard extends React.Component {
             </GridList>
           </Typography>
         </Collapse>
+        <Comment />
       </Card>
     );
   }
