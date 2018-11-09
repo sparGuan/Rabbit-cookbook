@@ -9,6 +9,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
+import { DefaultPlayer as Video } from 'react-html5video';
+import 'react-html5video/dist/styles.css';
+import classnames from 'classnames';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
 // 评论
 const styles = theme => ({
   root: {
@@ -21,6 +26,7 @@ const styles = theme => ({
     maxWidth: 345,
     height:200,
     margin:'0 auto'
+
   },
   media: {
     height: 140,
@@ -32,6 +38,20 @@ const styles = theme => ({
   participate: {
     fontSize:theme.typography.caption.fontSize,
     padding: `0 ${theme.spacing.unit * 2}px`,
+  },
+  cardExceptSpacing: {
+    padding:'0 !important'
+  },
+  videoHeight: {
+    height:205,
+    overflow:'hidden',
+    '& > video': {
+      objectFit: 'cover',
+      objectPosition: 'center center'
+    }
+  },
+  chip: {
+    backgroundColor:'transparent'
   }
 });
 // 评论功能
@@ -49,11 +69,38 @@ class Comment extends React.Component {
             <Typography className={classes.participate}>评论数</Typography>
         </Badge>
         {
-          // 图片淡入淡出评论
+          // 视频评论
+          // 完成飞出的字幕
         }
-        <Card className={classes.card}>
-            
-        </Card>
+        <Card  className={classnames(classes.card,classes.cardSmallSpacing,classes.disableVideoView)}>
+                <CardContent className={classes.cardExceptSpacing}>
+                    <CardMedia
+                      component={
+                        () => 
+                        (<Video autoPlay loop muted
+                            controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
+                            poster="http://sourceposter.jpg"
+                            className={classes.videoHeight}
+                            onCanPlayThrough={() => {
+                                // Do stuff
+                            }}>
+                            <source 
+                            src="https://tbm-auth.alicdn.com/VIIlksjrCptwSqsJDKZ/p4nNuYRovXp4xws8uZP@@hd_hq.mp4?auth_key=1541579090-0-0-8e4b66b2e5575957a526085ab4f7f6c9" type="video/webm" />
+                            <track label="English" kind="subtitles" srcLang="cn" src="http://source.vtt" default />
+                        </Video>)
+                      }
+                      className={classes.cover}
+                      title="Live from space album cover"
+                    />
+                </CardContent>
+            </Card>
+            <div>
+                <Chip
+                  avatar={<Avatar alt="Natacha" src="/static/images/uxceo-128.jpg" />}
+                  label="Deletable Chip"
+                  className={classes.chip}
+                />
+            </div>
       </div>  
   );
 }

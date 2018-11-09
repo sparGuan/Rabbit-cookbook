@@ -22,8 +22,6 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import CardMedia from '@material-ui/core/CardMedia';
-import { DefaultPlayer as Video } from 'react-html5video';
-import 'react-html5video/dist/styles.css';
 import AppBar from '@material-ui/core/AppBar';
 import Comment from './Comment';
 const styles = theme => ({
@@ -103,14 +101,6 @@ const styles = theme => ({
   disableVideoView:{
     borderRadius: 0,
     boxShadow: 'unset'
-  },
-  videoHeight: {
-    height:205,
-    overflow:'hidden',
-    '& > video': {
-      objectFit: 'cover',
-      objectPosition: 'center center'
-    }
   },
   detailGridListItem: {
     '&>div': {
@@ -223,28 +213,6 @@ class RecipeReviewCard extends React.Component {
           // 视频
           }
           <Typography component="div"  gutterBottom>
-            <Card  className={classnames(classes.cardSmallSpacing,classes.disableVideoView)}>
-                <CardContent className={classes.cardExceptSpacing}>
-                    <CardMedia
-                      component={
-                        () => 
-                        (<Video autoPlay loop muted
-                            controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
-                            poster="http://sourceposter.jpg"
-                            className={classes.videoHeight}
-                            onCanPlayThrough={() => {
-                                // Do stuff
-                            }}>
-                            <source 
-                            src="https://tbm-auth.alicdn.com/VIIlksjrCptwSqsJDKZ/p4nNuYRovXp4xws8uZP@@hd_hq.mp4?auth_key=1541579090-0-0-8e4b66b2e5575957a526085ab4f7f6c9" type="video/webm" />
-                            <track label="English" kind="subtitles" srcLang="cn" src="http://source.vtt" default />
-                        </Video>)
-                      }
-                      className={classes.cover}
-                      title="Live from space album cover"
-                    />
-                </CardContent>
-            </Card>
             {
               // 原图
             }
