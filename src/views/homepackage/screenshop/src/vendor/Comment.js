@@ -12,8 +12,8 @@ import Badge from '@material-ui/core/Badge';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 import classnames from 'classnames';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
+import Reel from 'classnames';
+
 // 评论
 const styles = theme => ({
   root: {
@@ -49,13 +49,11 @@ const styles = theme => ({
       objectFit: 'cover',
       objectPosition: 'center center'
     }
-  },
-  chip: {
-    backgroundColor:'transparent'
   }
 });
 // 评论功能
 // 一直滚动的评论区
+// 制作一个卷轴， 用来带动所有的评论进行滚动
 class Comment extends React.Component {
   // 构造
   constructor(props) {
@@ -94,13 +92,10 @@ class Comment extends React.Component {
                     />
                 </CardContent>
             </Card>
-            <div>
-                <Chip
-                  avatar={<Avatar alt="Natacha" src="/static/images/uxceo-128.jpg" />}
-                  label="Deletable Chip"
-                  className={classes.chip}
-                />
-            </div>
+            {
+              // 放置卷轴评论
+            }
+            <Reel/>
       </div>  
   );
 }
