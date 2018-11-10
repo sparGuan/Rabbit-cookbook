@@ -12,7 +12,7 @@ import Badge from '@material-ui/core/Badge';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 import classnames from 'classnames';
-import Reel from 'classnames';
+import Reel from './Reel';
 
 // 评论
 const styles = theme => ({
@@ -72,6 +72,10 @@ class Comment extends React.Component {
         }
         <Card  className={classnames(classes.card,classes.cardSmallSpacing,classes.disableVideoView)}>
                 <CardContent className={classes.cardExceptSpacing}>
+                    {
+                      // 放置卷轴评论
+                    }
+                    <Reel />
                     <CardMedia
                       component={
                         () => 
@@ -92,10 +96,6 @@ class Comment extends React.Component {
                     />
                 </CardContent>
             </Card>
-            {
-              // 放置卷轴评论
-            }
-            <Reel/>
       </div>  
   );
 }

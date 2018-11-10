@@ -7,30 +7,40 @@ import Chip from '@material-ui/core/Chip';
 // 只做渲染有渐变的svg图标
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: 500,
     height:'200px',
-    backgroundColor:'transparent'
+    backgroundColor:'transparent',
+    '&>ul>li': {
+      display:'block',
+      float: 'left'
+    }
   }
   ,
   chip: {
-    backgroundColor:'transparent'
+    backgroundColor:'transparent',
+    fontSize:theme.typography.caption.fontSize
   }
 });
 
 // 制作卷轴评论区
 function Reel(props) {
   const { classes } = props;
+  
   return (
-    <div className={classes.root}>
-        {
-          tileData.map(tile => (
-            <Chip
-              avatar={<Avatar alt="Natacha" src={tile.img} />}
-              label="Deletable Chip"
-              className={classes.chip}
-            />
-          ))
-        }
+    <div className={classes.root} >
+        <ul>
+            {
+              tileData.map(tile => (
+                <li>
+                  <Chip
+                    avatar={<Avatar alt="Natacha" src={tile.img} />}
+                    label="Deletable Chip"
+                    className={classes.chip}
+                  />
+                </li>
+              ))
+            }
+        </ul>
     </div>
   );
 }
