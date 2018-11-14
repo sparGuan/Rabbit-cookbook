@@ -24,6 +24,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import CardMedia from '@material-ui/core/CardMedia';
 import AppBar from '@material-ui/core/AppBar';
 import Comment from './Comment';
+import AppDetilBottom from './AppDetilBottom';
+
 const styles = theme => ({
   card: {
     width: '100%',
@@ -227,6 +229,7 @@ class RecipeReviewCard extends React.Component {
           </Typography>
         </Collapse>
         <Comment />
+        <AppDetilBottom />
       </Card>
     );
   }

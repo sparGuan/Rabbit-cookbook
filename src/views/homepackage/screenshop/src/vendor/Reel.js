@@ -65,7 +65,6 @@ class Reel extends React.Component {
     }
   }
   loopMove() {
-    
     // 传一个dom对象进来执行
     const chipItems = document.querySelectorAll('.chip-item')
     setInterval(() => {
