@@ -10,7 +10,16 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Button from '@material-ui/core/Button';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import blue from '@material-ui/core/colors/blue';
+import classNames from 'classnames';
 const styles = theme => ({
+  cssRoot: {
+    color: theme.palette.getContrastText(blue[500]),
+    backgroundColor: blue[500],
+    '&:hover': {
+      backgroundColor: blue[700],
+    },
+  },
   text: {
     paddingTop: theme.spacing.unit * 2,
     paddingLeft: theme.spacing.unit * 2,
@@ -27,6 +36,9 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  fabButton: {
+    height:'auto',
+  }
 });
 
 function BottomAppBar(props) {
@@ -43,9 +55,14 @@ function BottomAppBar(props) {
             <BottomNavigationAction label="客服" icon={<HeadsetMicIcon />} />
             <BottomNavigationAction label="订单" icon={<MonetizationOnIcon />} />
           </BottomNavigation>
-          <Button variant="extendedFab" size="small" aria-label="Delete" className={classes.button}>
-              <NavigationIcon className={classes.extendedIcon} />
+          <Button variant="extendedFab" size="small" className={classes.fabButton} aria-label="Delete" color="secondary">
+              {/* <NavigationIcon className={classes.extendedIcon} /> */}
                 加入购物车
+          </Button>
+
+          <Button variant="extendedFab" size="small" className={classes.fabButton} aria-label="Delete" color="primary"  className={classNames(classes.fabButton, classes.cssRoot)}>
+              {/* <NavigationIcon className={classes.extendedIcon} /> */}
+                立即购买
           </Button>
         </Toolbar>
       </AppBar>

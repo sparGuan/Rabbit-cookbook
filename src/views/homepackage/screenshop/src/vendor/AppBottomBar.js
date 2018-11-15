@@ -127,7 +127,6 @@ function BottomAppBar(props) {
             <FavoriteIcon />
           </Button>
           <BottomNavigation />
-
           <IconButton color="inherit" aria-label="Open drawer" className={classes.shopcararea}
           >
             <RemoveShoppingCartIcon />
