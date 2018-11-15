@@ -4,16 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
-import SearchIcon from '@material-ui/icons/Search';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Button from '@material-ui/core/Button';
+import NavigationIcon from '@material-ui/icons/Navigation';
 const styles = theme => ({
   text: {
     paddingTop: theme.spacing.unit * 2,
@@ -43,10 +39,14 @@ function BottomAppBar(props) {
             <BottomNavigation
             showLabels
             >
+            
             <BottomNavigationAction label="客服" icon={<HeadsetMicIcon />} />
-            <BottomNavigationAction label="Recents" icon={<SearchIcon />} />
-            <BottomNavigationAction label="Recents" icon={ <MoreIcon />} />
+            <BottomNavigationAction label="订单" icon={<MonetizationOnIcon />} />
           </BottomNavigation>
+          <Button variant="extendedFab" size="small" aria-label="Delete" className={classes.button}>
+              <NavigationIcon className={classes.extendedIcon} />
+                加入购物车
+          </Button>
         </Toolbar>
       </AppBar>
     </React.Fragment>
