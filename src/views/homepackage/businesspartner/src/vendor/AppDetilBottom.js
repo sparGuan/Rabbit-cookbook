@@ -53,9 +53,6 @@ function BottomAppBar(props) {
             >
             
             <BottomNavigationAction label="客服" icon={<HeadsetMicIcon />} />
-            {
-              // 点击订单跳到订单详情页
-            }
             <BottomNavigationAction label="订单" icon={<PhotoFilterIcon />} />
           </BottomNavigation>
           <Button variant="extendedFab" size="small" className={classes.fabButton} aria-label="Delete" color="secondary">

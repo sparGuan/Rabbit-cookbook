@@ -1,0 +1,10 @@
+{
+  "presets": ["es2015","stage-0","react",
+    "react-native","babel-preset-expo"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"],
+      "plugins": ["transform-react-jsx-source"]
+    }
+  }
+}
