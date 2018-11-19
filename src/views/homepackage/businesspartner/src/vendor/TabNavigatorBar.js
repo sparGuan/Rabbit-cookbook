@@ -32,7 +32,7 @@ function TabContainer({ children }) {
         transitionName={'SlideOut'}
       >
       <Typography component="div"  style={{ 
-        padding: '45px 20px 5px',backgroundColor:'#f5f5f5',height:'100vh' }}>
+        padding: '30px 30px 5px 15px',backgroundColor:'#eee',height:'100vh' }}>
           {children}
       </Typography>
     </ReactCSSTransitionGroup>

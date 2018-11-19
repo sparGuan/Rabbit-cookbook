@@ -1,19 +1,8 @@
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 // 返回react节点
-PageShell = Page => {
+// 传入一个组件，自带props
+const PageShell = Page => {
   return props => (
-    <div className="page">
-      <ReactCSSTransitionGroup
-        transitionAppear={true}
-        transitionAppearTimeout={600}
-        transitionEnterTimeout={600}
-        transitionLeaveTimeout={600}
-        // transitionName={props.match.path === "/one" ? "SlideIn" : "SlideOut"}
-      >
-        {console.log(props)}
-        <Page {...props} />
-      </ReactCSSTransitionGroup>
-    </div>
+    <Page {...props} />
   );
 };
 export default PageShell;

@@ -37,7 +37,7 @@
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "start": "NODE_ENV=dev webpack-dev-server --progress --colors",
+    "start": "set NODE_ENV=dev && webpack-dev-server --progress --colors",
     "build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

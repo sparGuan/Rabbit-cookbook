@@ -37,7 +37,6 @@ class Home extends React.Component {
 		return (
 			<View style={styles.container}>
 				{/* 查看会员信息 */}
-				<MembershipMenu />
 				<AppHeadBar history ={this.props.history} />
 				<AppBottomBar />
 			</View>
