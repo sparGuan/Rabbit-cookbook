@@ -61,6 +61,7 @@ class AppFoldingCard extends React.Component {
               // 每次拖拽删除当前数据
               // 不如简单点实现，循环10个数据，拖一个删掉一个
               <AppCardView cardMap={this.state.imgArr} handleCardMapChange ={this.handleCardMapChange.bind(this)}/>
+              
             }
 				</div>
 			</div>
