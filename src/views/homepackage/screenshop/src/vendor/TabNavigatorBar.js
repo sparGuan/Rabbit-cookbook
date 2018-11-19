@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import SwipeableViews from 'react-swipeable-views';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import { Link, Route, BrowserRouter, Switch } from "react-router-dom";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import AppGridList from './AppGridList';
 import menuData from './menuData';
@@ -22,80 +22,72 @@ const styles = theme => ({
 });
 function TabContainer({ children, dir }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 5 }}>
-      {children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired
-};
-// todo 将此函数放置redux全局调用
-const PageShell = (Page, previous) => {
-  return props => (
-    <div className="page">
-      <ReactCSSTransitionGroup
+    <ReactCSSTransitionGroup
         transitionAppear={true}
         transitionAppearTimeout={600}
         transitionEnterTimeout={600}
         transitionLeaveTimeout={600}
-        transitionName={props.match.path === "/one" ? "SlideIn" : "SlideOut"}
+        transitionName={'SlideOut'}
       >
-        {console.log(props)}
-        <Page {...props} />
-      </ReactCSSTransitionGroup>
-    </div>
+      <Typography component="div" dir={dir} style={{ padding: 5 }}>
+          {children}
+      </Typography>
+    </ReactCSSTransitionGroup>
   );
+}
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired
 };
+// todo 将此函数放置redux全局调用
 
 class FullWidthTabs extends React.Component {
   state = {
     value: 0
   };
-
   handleChange = (event, value) => {
     this.setState({ value });
   };
-
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+ 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-    return (
-      <BrowserRouter>
-        <div className={classes.root}>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              indicatorColor="secondary"
-              textColor="secondary"
-              fullWidth
-              scrollable
-              scrollButtons="auto"
-            >
+    const { classes, theme,history } = this.props;
+    console.log(this.props)
+    return (      
+      <div className={classes.root}>
+          <Tabs
+             value={this.state.value}
+             onChange={this.handleChange}
+             indicatorColor="secondary"
+             textColor="secondary"
+             fullWidth
+             scrollable
+             scrollButtons="auto"
+          >
             {
               menuData.map(item => (
-                <Tab label={item.name} component={Link} to={item.class} key={item.key} classes={{
+                <Tab label={item.name}  key={item.key} classes={{
                   labelContainer:classes.labelContainer
                 }}/>
               ))
             }
-            </Tabs>
-          <Switch>
+          </Tabs>
+          <SwipeableViews
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={this.state.value}
+            onChangeIndex={this.handleChangeIndex}
+          >
             {
               menuData.map(item => (
                 // 传入不用的路由，跳转后台获取所取数据
-                <TabContainer key={item.key}>
-                  <Route path={`/${item.class}`} component={PageShell(AppGridList)} />
+                <TabContainer key={item.key} dir={theme.direction}>      
+                  <AppGridList history={history}/>
                 </TabContainer>
               ))
             }
-          </Switch>
+          </SwipeableViews>
         </div>
-      </BrowserRouter>
     );
   }
 }

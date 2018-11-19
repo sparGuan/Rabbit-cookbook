@@ -3,10 +3,10 @@ const path = require('path');
 const AssetsPlugin = require('assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const WpPluginWatchOffset = require('wp-plugin-watch-offset');
-console.log(process.env.NODE_ENV)
-const rootPath = path.resolve(__dirname, '..'), // 项目根目录
+const rootPath = path.resolve(__dirname, './'), // 项目根目录
   src = path.join(rootPath, 'src'),// 开发源码目录
-  env = process.env.NODE_ENV.trim(); // 当前环境
+  env = process.env.NODE_ENV.trim(),// 当前环境
+  resolve = (dir) => path.join(__dirname, './', dir);
 module.exports = {
     stats: { assets: true, children: false, chunks: false, modules: false, source: false },
     mode: "development",
@@ -37,6 +37,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json'],
         alias: { 
+            '@': resolve('src'),
             'react-native': 'react-native-web' ,
              // ================================
              // 自定义路径别名
