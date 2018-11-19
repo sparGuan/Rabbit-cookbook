@@ -3,6 +3,7 @@ import { createRootReducer } from 'REDUCER' // 注入reducers
 import middlewares from './middlewares'
 import enhancers from './enhancers'
 import syncHistoryWithStore from './syncHistoryWithStore'
+
 // ======================================================
 // 实例化 Store
 // ======================================================
@@ -19,5 +20,4 @@ export default store
 // ======================================================
 // 增强版 history
 // ======================================================
-console.log(store)
 export const history = syncHistoryWithStore(store)

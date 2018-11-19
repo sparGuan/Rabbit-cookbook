@@ -1,72 +1,72 @@
 const menuData = [
   {
     key:'0',
-    route:'/',
+    class:'Recommend',
     name:'推荐',
   },
   {
     key:'1',
-    route:'/',
+    class:'Wear',
     name:'穿衣搭配',
   },
   {
     key:'2',
-    route:'/',
+    class:'Gift',
     name:'小萌宝',
   },
   {
     key:'3',
-    route:'/',
+    class:'Food',
     name:'美食',
   },
   {
     key:'4',
-    route:'/',
+    class:'Beauty',
     name:'美妆',
   },
   {
     key:'5',
-    route:'/',
+    class:'Travel',
     name:'旅行',
   },
   {
     key:'6',
-    route:'/',
+    class:'Intelligent',
     name:'智能物联',
   },
   {
     key:'7',
-    route:'/',
+    class:'Furnish',
     name:'家居装饰',
   },
   {
     key:'8',
-    route:'/',
+    class:'Gift',
     name:'科技',
   },
   {
     key:'9',
-    route:'/',
+    class:'Game',
     name:'游戏',
   },
   {
     key:'10',
-    route:'/',
+    class:'Sports',
     name:'运动',
   },
   {
     key:'11',
-    route:'/',
-    name:'学习',
+    class:'Recommend',
+    name:'知识',
   },
   {
     key:'12',
-    route:'/',
+    class:'Hire',
     name:'租聘',
   },
   {
     key:'13',
-    route:'/',
+    class:'Entertainment',
     name:'娱乐',
   }
 ];

@@ -6,7 +6,8 @@
 export default {
   /* 用户 session */
   // 调用默认函数，渲染路由页面
-  test: null
+  userData: null,
+  PageShell: null, // 页面工具===>路由跳转转发
   /*  留言板模块（按需加载） */
   
 }

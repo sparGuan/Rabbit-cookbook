@@ -7,6 +7,8 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import tileData from './tileData';
+import { Link, Route, BrowserRouter, Switch } from "react-router-dom";
+// import InfoIcon from '@material-ui/icons/Info';
 import GridBuyAndAddCar from './GridBuyAndAddCar'
 const styles = theme => ({
   root: {
@@ -36,19 +38,16 @@ const styles = theme => ({
  * @param {id} 详情页id
  * 先到后台获取详情页数据，跳转到对应路由
  */
-class AppGridList extends React.Component {
-  // 构造
-  constructor(props, context) {
-    super(props, context);
- }
-  // 传入产品ID获取跳转链接
-  linkToDetail(productId)  {
-    // 先去get数据
-    this.props.history.push({ pathname:'/appDetilPage',state:{productId} });
-  }
-  render() {    
-    const { classes,history } = this.props;    
+export default class AppGridList extends React.Component {
+  // const { classes } = props;
+  openDetilPage = productId => {
+      // 跳转到详情页
+      
+   } 
+  render() {
+   const { classes } = this.props;
     return (
+      <BrowserRouter>
         <div className={classes.root}>
           <GridList  spacing={5} className={classes.gridList}>
               {tileData.map(tile => (
@@ -65,24 +64,30 @@ class AppGridList extends React.Component {
                     actionPosition="left"
                     className={classes.titleBar}
                   />
-                   <GridListTileBar
+                  <GridListTileBar
                       title={tile.title}
                       subtitle={<span>by: {tile.author}</span>}
-                      onClick={this.linkToDetail.bind(this, tile.productId)}
+                      onClick={
+                        this.openDetilPage(tile.productId)
+                      }
                       actionIcon={
                         <GridBuyAndAddCar />
+                        // <IconButton className={classes.icon}>
+                        //   <InfoIcon />
+                        // </IconButton>
                       }
                     />
                 </GridListTile>
               ))}
             </GridList>
-          </div>        
+          </div>
+        </BrowserRouter>
     );
   }
 }
 
 AppGridList.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(AppGridList);

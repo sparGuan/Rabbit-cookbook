@@ -83,7 +83,7 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
     trim: true
   },
   location: {
-    type: [Number],
+    type: [Number], 
     index: '2dsphere'
   },
   socket: {
