@@ -25,9 +25,7 @@ class SmallBottomNavigation extends React.Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-
     return (
-      
       <BottomNavigation
         value={value}
         onChange={this.handleChange}
@@ -42,12 +40,11 @@ class SmallBottomNavigation extends React.Component {
           selected:classes.selected
         }
       }/>
-      <BottomNavigationAction label="发布" icon={<RenderSvgIcon path="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z" />} classes={
+      <BottomNavigationAction label="项目包" icon={<RenderSvgIcon path="M7,6H5V4H7V6M17,6H19V4H17V6M23,12V18H21V14H19V18H17V16H7V18H5V14H3V18H1V12H3V10H5V8H7V6H9V8H15V6H17V8H19V10H21V12H23M15,10V12H17V10H15M7,12H9V10H7V12M11,18H7V20H11V18M17,18H13V20H17V18Z" />} classes={
         {
           selected:classes.selected
         }
       }/>
-    
       </BottomNavigation>
     );
   }

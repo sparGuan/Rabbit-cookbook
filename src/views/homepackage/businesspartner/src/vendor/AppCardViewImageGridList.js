@@ -5,6 +5,11 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import tileData from './tileData';
 import Grid from '@material-ui/core/Grid';
+import PeopleIcon from '@material-ui/icons/People';
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -18,11 +23,34 @@ const styles = theme => ({
   },
   demand: {
     fontSize:12,
+    display: 'block',
+    textAlign: 'left'
   },
-  // gridList: {
-  //   width: 500,
-  //   height: 450,
-  // },
+  gridOneRow: {
+    textAlign:'left',
+    '&>p': {
+      marginBottom:0
+    }
+  },
+  axisIcos: {
+    display: 'inline-block',
+  },
+  badge: {
+    top: 1,
+    right: -15,
+    // The border color match the background color.
+    border: `2px solid ${
+      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
+    }`,
+  },
+  badgeThousand: {
+    top: 1,
+    right: -15
+  },
+  demandTxt: {
+    display: 'inline-block',
+    width: 'calc(100% - 110px)',
+  },
   subheader: {
     width: '100%',
   },
@@ -42,14 +70,36 @@ function ImageGridList(props) {
       {
         // 项目名称
       }
-      <Grid item xs={12}>
-          <span >项目名称：</span><p>睡够城市电商1期269号</p>
+      <Grid item xs={12} className={classes.gridOneRow}>
+          <p><span >项目名称：</span><span>睡够城市电商1期269号</span></p>
       </Grid>
-      <Grid item xs={12}>
-          <span> 编号：</span><p>52699421</p>
+      <Grid item xs={12} className={classes.gridOneRow}>
+          <p><span> 编号：</span><span>52699421</span></p>
       </Grid>
-      <Grid item xs={12}>
-      <span>项目需求：</span>
+      <Grid item xs={12} className={classes.gridOneRow}>
+          <div style={{
+            display:'block'
+          }}>
+              <span className={classes.demandTxt}>项目需求：</span> 
+              <div className={classes.axisIcos}>
+                {
+                  // 运营资金
+                }
+                <IconButton aria-label="people">
+                  <Badge badgeContent={`4万`} color="primary" classes={{ badge: classes.badgeThousand }}>
+                      <AttachMoneyIcon />
+                  </Badge>
+                </IconButton>
+                {
+                  // 项目人数
+                 }
+                <IconButton aria-label="people">
+                  <Badge badgeContent={4} color="primary" classes={{ badge: classes.badge }}>
+                      <PeopleIcon />
+                  </Badge>
+                </IconButton>
+              </div>
+          </div>
       </Grid>
       <Grid item xs={12} >
         <span className={classes.demand}>1。睡够致力于打造一个中国的雷宇美国costco超市经营理念的线上+线下平台。</span>

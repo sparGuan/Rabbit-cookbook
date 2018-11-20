@@ -10,7 +10,6 @@ import { StyleSheet, View } from 'react-native';
 import AppHeadBar from './vendor/AppHeadBar';
 import { withRouter } from 'react-router-dom';
 import AppBottomBar from './vendor/AppBottomBar';
-import MembershipMenu from "./vendor/MembershipMenu";
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,

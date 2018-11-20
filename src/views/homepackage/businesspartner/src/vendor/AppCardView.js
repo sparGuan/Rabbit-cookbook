@@ -207,16 +207,13 @@ class AppCardView extends React.Component {
               // 项目计划：时间轴
             }
             <div>
-							
             </div>
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
                 <LoyaltyIcon fontSize="large"/>
             </Button>
-
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.ForButton}>
                 <PhoneForwardedIcon fontSize="large"/>
             </Button>
-
       </Typography>
       )
     });
