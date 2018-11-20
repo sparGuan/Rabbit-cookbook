@@ -4,9 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import ShutterSpeedIcon from '@material-ui/icons/ShutterSpeed';
-import PhoneForwarded from '@material-ui/icons/PhoneForwarded';
-
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
+import AppCardViewImageGridList from './AppCardViewImageGridList'
 // import Scroll from 'react-bscroll'
 // import 'react-bscroll/lib/react-scroll.css'
 const styles = theme => ({
@@ -103,8 +103,7 @@ class AppCardView extends React.Component {
 		}, 300);
 	}
 	// 触摸开始
-	touchCardStart(e) {
-    console.log(11111)
+	touchCardStart(e) {    
 		if (!this.run) {
 			return;
 		}
@@ -113,8 +112,7 @@ class AppCardView extends React.Component {
 		this._y_start = ev.touches[0].pageY;
 	}
 	// 移位
-	touchCardMove(e) {
-    console.log(33333)
+	touchCardMove(e) {    
 		if (!this.run) {
 			return;
 		}
@@ -130,8 +128,7 @@ class AppCardView extends React.Component {
 		}px,0px)`;
 		act_el.style.transitionDuration = '0s';
 	}
-	touchCardEnd(e) {
-    console.log(4444444)
+	touchCardEnd(e) {    
 		if (!this.run) {
 			return;
 		}
@@ -198,10 +195,7 @@ class AppCardView extends React.Component {
             transitionDuration: '0s'
           }}
         >
-            <img src={item} style={{
-              widht:200,
-              height:200
-            }}/>
+            <AppCardViewImageGridList />
             {
               // 名称
               // 简介
@@ -213,14 +207,14 @@ class AppCardView extends React.Component {
               // 项目计划：时间轴
             }
             <div>
-
+							
             </div>
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
-                <ShutterSpeedIcon />
+                <LoyaltyIcon fontSize="large"/>
             </Button>
 
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.ForButton}>
-                <PhoneForwarded />
+                <PhoneForwardedIcon fontSize="large"/>
             </Button>
 
       </Typography>

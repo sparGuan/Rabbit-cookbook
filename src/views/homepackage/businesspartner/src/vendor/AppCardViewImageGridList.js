@@ -10,13 +10,17 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    overflow: 'hidden',    
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderRadius: 10,
+    width: 'calc(100% - 20px)',
+    margin: 10
   },
-  gridList: {
-    width: 500,
-    height: 450,
-  },
+  // gridList: {
+  //   width: 500,
+  //   height: 450,
+  // },
   subheader: {
     width: '100%',
   },
@@ -25,8 +29,9 @@ function ImageGridList(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <GridList cellHeight={160} className={classes.gridList} cols={3}>
-        {tileData.map(tile => (
+      <GridList cellHeight={80} className={classes.gridList} cols={3}>
+        {tileData.map((tile,index) => (
+          index < 5 && 
           <GridListTile key={tile.img} cols={tile.cols || 1}>
             <img src={tile.img} alt={tile.title} />
           </GridListTile>

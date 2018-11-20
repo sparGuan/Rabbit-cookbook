@@ -3,21 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
 import RenderSvgIcon from './RenderSvgIcon';
-import classNames from 'classnames';
 const styles = theme => ({
   root: {
-    position:'absolute',
-    right:0,
-    backgroundColor:'transparent'
+    width: '100vw'
   },
   selected : {
     color: theme.palette.text.secondary,
-  },
-  nopadding: {
-    paddingLeft:0,
-    paddingRight:0
   }
 });
 
@@ -35,27 +27,27 @@ class SmallBottomNavigation extends React.Component {
     const { value } = this.state;
 
     return (
+      
       <BottomNavigation
         value={value}
         onChange={this.handleChange}
         showLabels
         classes={{
-          root:classes.root
+          root:classes.root,
+          
         }}
       >
-      <BottomNavigationAction label="附近的" 
-        classes={{
-          label:classes.selected
-        }}
-        className={classNames(classes.nopadding)}
-        icon={<RenderSvgIcon path="M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z" />} />
-
-        <BottomNavigationAction label="商品上架" 
-        classes={{
-          label:classes.selected
-        }}
-        className={classNames(classes.nopadding)}
-        icon={<RenderSvgIcon path="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z" />} />
+      <BottomNavigationAction label="发现" icon={<RenderSvgIcon path="M2.53 19.65l1.34.56v-9.03l-2.43 5.86c-.41 1.02.08 2.19 1.09 2.61zm19.5-3.7L17.07 3.98c-.31-.75-1.04-1.21-1.81-1.23-.26 0-.53.04-.79.15L7.1 5.95c-.75.31-1.21 1.03-1.23 1.8-.01.27.04.54.15.8l4.96 11.97c.31.76 1.05 1.22 1.83 1.23.26 0 .52-.05.77-.15l7.36-3.05c1.02-.42 1.51-1.59 1.09-2.6zM7.88 8.75c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-2 11c0 1.1.9 2 2 2h1.45l-3.45-8.34v6.34z" />} classes={
+        {
+          selected:classes.selected
+        }
+      }/>
+      <BottomNavigationAction label="Favorites" icon={<RenderSvgIcon path="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z" />} classes={
+        {
+          selected:classes.selected
+        }
+      }/>
+    
       </BottomNavigation>
     );
   }

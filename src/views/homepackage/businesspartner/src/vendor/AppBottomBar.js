@@ -4,12 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import BottomNavigation from './SmallBottomNavigation';
-import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
-import Typography from "@material-ui/core/Typography";
 const styles = theme => ({
   text: {
     paddingTop: theme.spacing.unit * 2,
@@ -74,10 +69,8 @@ function BottomAppBar(props) {
       <CssBaseline />
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          {/* <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
-            <FavoriteIcon />
-          </Button> */}
           <BottomNavigation />
+
         </Toolbar>
       </AppBar>
     </React.Fragment>
