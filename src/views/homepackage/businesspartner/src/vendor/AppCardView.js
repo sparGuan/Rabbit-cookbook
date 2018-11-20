@@ -19,7 +19,7 @@ const styles = theme => ({
 		backgroundColor: theme.palette.background.paper,
 		borderRadius: 10,
 		textAlign: 'center',
-		height: 'calc(100vh - 250px)',
+		height: 'calc(100vh - 215px)',
     zIndex: 1,
 		'&.active': {
 			boxShadow:
@@ -197,13 +197,13 @@ class AppCardView extends React.Component {
         >
             <AppCardViewImageGridList />
             {
-              // 名称
-              // 简介
+              // 名称 --。编号
+              // 需求：
               // 附件
               // 标签
-              // 需求：
               // 盈利能力，回报周期，可能存在风险
-              // 参与人数
+							// 参与人数
+							// 详情：
               // 项目计划：时间轴
             }
             <div>

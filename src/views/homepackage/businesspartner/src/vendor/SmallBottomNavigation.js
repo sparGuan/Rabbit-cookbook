@@ -42,7 +42,7 @@ class SmallBottomNavigation extends React.Component {
           selected:classes.selected
         }
       }/>
-      <BottomNavigationAction label="Favorites" icon={<RenderSvgIcon path="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z" />} classes={
+      <BottomNavigationAction label="发布" icon={<RenderSvgIcon path="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z" />} classes={
         {
           selected:classes.selected
         }

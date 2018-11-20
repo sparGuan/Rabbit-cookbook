@@ -70,7 +70,6 @@ function BottomAppBar(props) {
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <BottomNavigation />
-
         </Toolbar>
       </AppBar>
     </React.Fragment>
