@@ -89,11 +89,11 @@ const  SearchAppBar = (props) => {
         <Toolbar>
          <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
             <ArrowBackIcon />
-          </IconButton>  
+         </IconButton>  
           <div className={classes.search}>
             <TextField
               id="standard-dense"
-              label="请输出搜索内容..."
+              label="请输入搜索内容..."
               className={classNames(classes.textField, classes.dense)}
               margin="dense"
             />

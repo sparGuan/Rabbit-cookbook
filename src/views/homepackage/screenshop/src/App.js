@@ -1,15 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-// 挂载app
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import AppHeadBar from './vendor/AppHeadBar';
-import AppBottomBar from './vendor/AppBottomBar';
+
+/*
+   Root, Router 配置
+   组件匹配
+*/
+import React from 'react';
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux'
+import store, { history } from 'STORE'
+import {rootRouters} from '@/router/router'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import MembershipMenu from "./vendor/MembershipMenu";
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -43,39 +42,35 @@ const theme = createMuiTheme({
 		}
 	}
 });
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF'
-	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10
-	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5
-	}
-});
 
-export default class App extends React.Component {
-	constructor(props, context) {
-		super(props, context);
-	}
-	render() {
-		return (
-			<MuiThemeProvider theme={theme}>
-				{/* 查看会员信息 */}
-				<MembershipMenu />
-				<View style={styles.container}>
-					<AppHeadBar />
-					<AppBottomBar />
-				</View>
-			</MuiThemeProvider>
-		);
-	}
+let DevTools
+if (__DEV__ && __COMPONENT_DEVTOOLS__) {
+  // 组件形式的 Redux DevTools
+  DevTools = require('./DevTools').default
 }
+const App = () => (
+  <MuiThemeProvider theme={theme}>
+    <Provider store={store}>
+        <BrowserRouter>
+            {/* 挂载所有路由  */}
+						<Switch>
+							{
+								rootRouters.map((route,index) => {									
+										return(
+												<Route 
+												history={history}
+												key={index}
+												path={route.path}
+												exact={route.exact}
+												component={route.component}/>
+										)
+								})
+							}
+							<Route render={() => <Redirect to="/" />} />
+						</Switch>
+        </BrowserRouter>
+    </Provider>
+    { DevTools && <DevTools /> }
+  </MuiThemeProvider>
+);
+export default App;

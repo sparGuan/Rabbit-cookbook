@@ -57,6 +57,7 @@ class FullWidthTabs extends React.Component {
   render() {
     const { classes, theme,history } = this.props;
     console.log(this.props)
+    
     return (      
       <div className={classes.root}>
           <Tabs

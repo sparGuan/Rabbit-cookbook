@@ -55,7 +55,7 @@ const App = () => (
             {/* 挂载所有路由  */}
 						<Switch>
 							{
-								rootRouters.map((route,index) => {									
+								rootRouters.map((route,index) => {	
 										return(
 												<Route 
 												history={history}
