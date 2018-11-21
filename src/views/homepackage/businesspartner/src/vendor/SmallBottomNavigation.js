@@ -19,11 +19,12 @@ class SmallBottomNavigation extends React.Component {
   };
 
   handleChange = (event, value) => {
+    this.props.history.location.pathname === '/' && value === 1 ? this.props.history.push({ pathname:'/AppReleasePage',state:{} }) : this.props.history.push({ pathname:'/',state:{} })
     this.setState({ value });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes , history} = this.props;
     const { value } = this.state;
     return (
       <BottomNavigation

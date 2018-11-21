@@ -15,9 +15,10 @@ const styles = theme => ({
 class AppReleasePage extends React.Component {
    
   render() {
+    console.log(111111)
     const { classes } = this.props;
     return (
-      <View style={styles.container}>
+      <View>
           <AppReleasePageTop />     
       </View>
     );

@@ -63,13 +63,13 @@ const styles = theme => ({
 });
 
 function BottomAppBar(props) {
-  const { classes } = props;
+  const { classes,history } = props;
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <BottomNavigation />
+          <BottomNavigation history={history}/>
         </Toolbar>
       </AppBar>
     </React.Fragment>
