@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import QueueIcon from '@material-ui/icons/Queue';
+import AppReleasePageTopTabs from './AppReleasePageTopTabs';
 
 const styles = theme => ({
   root: {
@@ -29,6 +29,9 @@ class AppReleasePageTop extends React.Component {
   state = {
     
   }
+  toPageStep(userId) {
+    // this.props.history.push({ pathname:'/appReleasePageStep',state:{} })
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -41,10 +44,11 @@ class AppReleasePageTop extends React.Component {
             <Typography component="div" align="center" color="inherit">
               我的项目
             </Typography>
-            <IconButton color="inherit" className={classes.releaseAddition}>
+            <IconButton color="inherit" className={classes.releaseAddition} onClick={this.toPageStep(1)}>
                 <QueueIcon />
             </IconButton>
           </Toolbar>
+          <AppReleasePageTopTabs />
         </AppBar>
       </div>
     );

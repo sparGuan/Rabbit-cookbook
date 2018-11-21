@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
 import {rootRouters} from '@/router/router'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import AppBottomBar from './vendor/AppBottomBar';
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -70,7 +71,8 @@ const App = () => (
 						</Switch>
         </BrowserRouter>
     </Provider>
-    { DevTools && <DevTools /> }
+		{ DevTools && <DevTools /> }
+		<AppBottomBar  history={history}/>
   </MuiThemeProvider>
 );
 export default App;
