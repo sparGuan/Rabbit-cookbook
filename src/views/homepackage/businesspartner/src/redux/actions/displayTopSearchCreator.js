@@ -13,7 +13,7 @@ const SHOW_SEARCH = 'SHOW_SEARCH'
  */
 const displayTopSearchCreator = (displayTopSearch) => ({
   type: SHOW_SEARCH,
-  displayTopSearch: displayTopSearch
+  payload: displayTopSearch
 })
 /* default 导出所有 Actions Creator */
 export default {
@@ -29,7 +29,7 @@ export default {
 // 故在此直接给出处理逻辑
 // ================================
 export const ACTION_HANDLERS = {
-  [SHOW_SEARCH]: (displayTopSearchControl, { displayTopSearch: displayTopSearch }) => (
+  [SHOW_SEARCH]: (displayTopSearchControl, { payload: displayTopSearch }) => (
     { ...displayTopSearchControl, displayTopSearch }
   ), // 测试输出的状态test
 }

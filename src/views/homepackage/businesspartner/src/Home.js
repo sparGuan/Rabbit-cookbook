@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 	}
 });
 class Home extends React.Component {
-	constructor(props, context) {
+	constructor(props, context) {		
 		super(props, context);
 	}
 	render() {	

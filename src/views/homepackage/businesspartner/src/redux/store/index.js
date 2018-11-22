@@ -19,5 +19,4 @@ export default store
 // ======================================================
 // 增强版 history
 // ======================================================
-console.log(store)
 export const history = syncHistoryWithStore(store)

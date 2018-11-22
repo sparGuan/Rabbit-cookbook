@@ -13,6 +13,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import TabNavigatorBar from './TabNavigatorBar';
 import Grid from '@material-ui/core/Grid';
 import Typography from "@material-ui/core/Typography";
+import createContainer from "UTIL/createContainer";
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -81,8 +83,10 @@ const styles = theme => ({
     },
   },
 });
-const displaySearchBar = props => {
-  const { classes, topText,store } = props;
+const displaySearchBar = (props, context) => {
+  console.log(context)
+  const { classes, topText } = props;
+  const { store } = context
   let displaySearch // 搜索框|文本
   if (store.displayTopSearch) {
     displaySearch = (
@@ -110,6 +114,19 @@ const displaySearchBar = props => {
   // 没有搜索框的情况下转用文字显示
   return displaySearch
 }
+const mapStateToProps = state => {
+  console.log('SHOW_SEARCH',state);
+   return {
+    displayTopSearch:state.displayTopSearchReducers,
+   }
+};
+const mapDispatchToProps = dispatch => {
+  return {
+      onDisplayTopSearch: data => {
+          dispatch({type:"SHOW_SEARCH",data});
+      }
+  }
+};
 /**
  * @param classes 样式表
  * @param history 路由跳转信息
@@ -124,15 +141,15 @@ class CommonAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-           <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
-              <ArrowBackIcon />
-           </IconButton> 
-            {
-              displaySearchBar(this.props)
-            }
-            <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer">
-             <MoreIcon />
-            </IconButton>  
+            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
+                <ArrowBackIcon />
+            </IconButton> 
+              {
+                displaySearchBar(this.props,this.context)
+              }
+              <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer">
+              <MoreIcon />
+              </IconButton>  
           </Toolbar>
           <Grid container spacing={24}>
               <Grid item xs={12}>
@@ -149,4 +166,4 @@ CommonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CommonAppBar);
+export default createContainer(mapStateToProps,mapDispatchToProps,withStyles(styles)(CommonAppBar)) ;
