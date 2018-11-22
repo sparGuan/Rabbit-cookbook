@@ -2,15 +2,22 @@
 // ================================
 // Action Type
 // ================================
-const TEST = 'this is test'
+const SHOW_SEARCH = 'SHOW_SEARCH'
 
 // ================================
 // Action Creator
 // ================================
-const test = () => null
+/**
+ * 
+ * @param {boolean} displayTopSearch // 是否展示头部搜索框
+ */
+const displayTopSearchCreator = (displayTopSearch) => ({
+  type: SHOW_SEARCH,
+  displayTopSearch: displayTopSearch
+})
 /* default 导出所有 Actions Creator */
 export default {
-  test
+  displayTopSearchCreator
 }
 
 
@@ -22,5 +29,7 @@ export default {
 // 故在此直接给出处理逻辑
 // ================================
 export const ACTION_HANDLERS = {
-  [TEST]: () => null, // 测试输出的状态test
+  [SHOW_SEARCH]: (displayTopSearchControl, { displayTopSearch: displayTopSearch }) => (
+    { ...displayTopSearchControl, displayTopSearch }
+  ), // 测试输出的状态test
 }

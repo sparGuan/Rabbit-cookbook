@@ -15,17 +15,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF'
-	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10
-	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5
 	}
 });
 class Home extends React.Component {
@@ -33,11 +22,14 @@ class Home extends React.Component {
 		super(props, context);
 	}
 	render() {	
+		const {children ,history} = this.props
 		return (
 			<View style={styles.container}>
-				{/* 查看会员信息 */}
-				<AppHeadBar history ={this.props.history} />
-				<AppBottomBar  history={this.props.history}/>
+				{children}
+				{/* 公共头部、公共底部 */}
+				<AppHeadBar history = {history} />
+        <AppBottomBar history = {history}/> 
+				{/* <AppBottomBar  history={this.props.history}/> */}
 			</View>
 		);
 	}

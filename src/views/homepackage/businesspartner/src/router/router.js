@@ -15,22 +15,22 @@ console.log(loadable('AppReleasePage'))
  * 根路由集合
  */
 const rootRouters = [
-    {
-        //根路由匹配
-        path:'/',
-        exact:true,
-        component:require('../Home').default
-    },
+    // {
+    //     //根路由匹配
+    //     path:'/',
+    //     exact:true,
+    //     component:require('../Home').default
+    // },
     {
       // React Route 路由的基本配置 以及 实现路由的模糊匹配（动态路由）
       path:'/appReleasePage',
       component:loadable('AppReleasePage')// require('@/vendor/AppReleasePage').default //
     },
-    {
-        // React Route 路由的基本配置 以及 实现路由的模糊匹配（动态路由）
-        path:'/appReleasePageStep',
-        component:loadable('AppReleasePageStep')// require('@/vendor/AppReleasePage').default //
-      },
+    // {
+    //     // React Route 路由的基本配置 以及 实现路由的模糊匹配（动态路由）
+    //     path:'/appReleasePageStep',
+    //     component:loadable('AppReleasePageStep')// require('@/vendor/AppReleasePage').default //
+    //   },
     {
         // 404 匹配
         path:'*',

@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import TabNavigatorBar from './TabNavigatorBar';
 import Grid from '@material-ui/core/Grid';
+import Typography from "@material-ui/core/Typography";
 const styles = theme => ({
   root: {
     width: '100%',
@@ -80,43 +81,72 @@ const styles = theme => ({
     },
   },
 });
-
-const  SearchAppBar = (props) => {
-  const { classes,history } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="fixed">
-        <Toolbar>
-         <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
-            <ArrowBackIcon />
-         </IconButton>  
-          <div className={classes.search}>
-            <TextField
-              id="standard-dense"
-              label="请输入搜索内容..."
-              className={classNames(classes.textField, classes.dense)}
-              margin="dense"
-            />
-             <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-          </div>
-          <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer">
-           <MoreIcon />
-          </IconButton>  
-        </Toolbar>
-        <Grid container spacing={24}>
-            <Grid item xs={12}>
-                <TabNavigatorBar history={history}/>
-            </Grid>
-        </Grid>
-      </AppBar>
-    </div>
-  );
+const displaySearchBar = props => {
+  const { classes, topText,store } = props;
+  let displaySearch // 搜索框|文本
+  if (store.displayTopSearch) {
+    displaySearch = (
+      <div className={classes.search} >
+               <TextField
+                 id="standard-dense"
+                 label="请输入搜索内容..."
+                 className={classNames(classes.textField, classes.dense)}
+                 margin="dense"
+               />
+               <div className={classes.searchIcon}>
+                 <SearchIcon />
+               </div>
+      </div>
+    )
+  } else {
+    displaySearch = (
+      <Typography component="div" align="center" color="inherit">
+            {typeof topText === String && topText}
+      </Typography>
+    )
+  }
+  // 公共头部上的搜索框 、
+  // 先判断是否显示搜索框
+  // 没有搜索框的情况下转用文字显示
+  return displaySearch
+}
+/**
+ * @param classes 样式表
+ * @param history 路由跳转信息
+ * @param topText {String} 头部显示信息 
+ * @param {*} props 
+ */
+class CommonAppBar extends React.Component {
+  render() {
+    console.log(this.context)
+    const { classes,history, topText } = this.props;
+    return (
+      <div className={classes.root}>
+        <AppBar position="fixed">
+          <Toolbar>
+           <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
+              <ArrowBackIcon />
+           </IconButton> 
+            {
+              displaySearchBar(this.props)
+            }
+            <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer">
+             <MoreIcon />
+            </IconButton>  
+          </Toolbar>
+          <Grid container spacing={24}>
+              <Grid item xs={12}>
+                  <TabNavigatorBar history={history}/>
+              </Grid>
+          </Grid>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-SearchAppBar.propTypes = {
+CommonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SearchAppBar);
+export default withStyles(styles)(CommonAppBar);

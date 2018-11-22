@@ -9,7 +9,8 @@ import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
 import {rootRouters} from '@/router/router'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import AppBottomBar from './vendor/AppBottomBar';
+import Home from './Home'
+
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -53,26 +54,34 @@ const App = () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
         <BrowserRouter>
-            {/* 挂载所有路由  */}
+						{/* 挂载所有路由  */}
 						<Switch>
-							{
-								rootRouters.map((route,index) => {	
-										return(
-												<Route 
-												history={history}
-												key={index}
-												path={route.path}
-												exact={route.exact}
-												component={route.component}/>
-										)
-								})
-							}
-							<Route render={() => <Redirect to="/" />} />
-						</Switch>
+								  <Route exact path='/' component={Home} history={history}/>
+								  {
+									// 构建home里面带头部带底部
+									}
+									<Home>
+										{
+											// 挂载二级路由=======》基于home的路由挂载
+										}
+										<Switch>
+												{
+													rootRouters.map((route,index) => {
+															return (
+																<Route 
+																history={history}
+																key={index}
+																path={route.path}
+																component={route.component}/>
+														)
+													})
+												}	
+										</Switch>
+									</Home>
+            </Switch>
         </BrowserRouter>
     </Provider>
 		{ DevTools && <DevTools /> }
-		<AppBottomBar  history={history}/>
   </MuiThemeProvider>
 );
 export default App;

@@ -57,7 +57,6 @@ class FullWidthTabs extends React.Component {
   render() {
     const { classes, theme,history } = this.props;
     console.log(this.props)
-    
     return (      
       <div className={classes.root}>
           <Tabs
@@ -81,7 +80,7 @@ class FullWidthTabs extends React.Component {
             menuData.map((item,index) => (
               // 传入不用的路由，跳转后台获取所取数据
               this.state.value === index && 
-              <TabContainer key={item.key} className={classes.wrapContainer}>      
+              <TabContainer key={item.key} className={classes.wrapContainer}> 
                 <AppFoldingCard history={history}/>
               </TabContainer>
             ))
