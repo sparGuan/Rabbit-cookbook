@@ -20,7 +20,11 @@ class SmallBottomNavigation extends React.Component {
   };
 
   handleChange = (event, value) => {
-    this.props.history.location.pathname === '/' && value === 1 ? this.props.history.push({ pathname:'/appReleasePage',state:{} }) : this.props.history.push({ pathname:'/',state:{} })
+    if (this.props.history.location.pathname === '/' && value === 1) {
+      this.props.history.push({ pathname:'/appReleasePage',state:{} })
+    } else {
+      this.props.history.push({ pathname:'/',state:{} })
+    }
     this.setState({ value });
   };
 

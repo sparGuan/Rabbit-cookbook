@@ -11,9 +11,9 @@ const SHOW_SEARCH = 'SHOW_SEARCH'
  * 
  * @param {boolean} displayTopSearch // 是否展示头部搜索框
  */
-const displayTopSearchCreator = (displayTopSearch) => ({
+const displayTopSearchCreator = payload => ({
   type: SHOW_SEARCH,
-  payload: displayTopSearch
+  payload
 })
 /* default 导出所有 Actions Creator */
 export default {
@@ -29,7 +29,7 @@ export default {
 // 故在此直接给出处理逻辑
 // ================================
 export const ACTION_HANDLERS = {
-  [SHOW_SEARCH]: (displayTopSearchControl, { payload: displayTopSearch }) => (
-    { ...displayTopSearchControl, displayTopSearch }
+  [SHOW_SEARCH]: (displayTopSearchControl, { payload }) => (
+    { ...displayTopSearchControl, payload }
   ), // 测试输出的状态test
 }

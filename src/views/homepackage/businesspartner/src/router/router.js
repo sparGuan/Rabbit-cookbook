@@ -10,7 +10,6 @@ const loadable = (filename) => Loadable({
     loader:() => import(`@/vendor/${filename}`),
     loading:() => <CircularProgress color="secondary" />
 });
-console.log(loadable('AppReleasePage'))
 /**
  * 根路由集合
  */
