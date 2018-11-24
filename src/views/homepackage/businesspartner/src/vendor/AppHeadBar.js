@@ -26,7 +26,7 @@ class CommonAppTopBar extends React.Component {
       <div className={classes.root}>
         {
           (() => {
-            if(displayTopSearch) {
+            if(displayTopSearch === 0) {
               return <ApphasSearchTop />
             } else {
               return <AppReleasePageTop />
