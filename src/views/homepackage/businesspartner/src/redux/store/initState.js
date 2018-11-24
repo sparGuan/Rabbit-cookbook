@@ -6,7 +6,15 @@
 export default {
   /* 用户 session */
   // 调用默认函数，渲染路由页面
-  displayTopSearch: 0 // 默认展示头部搜索框
+  displayAnyTop: {
+    isShow: true,
+    showType: 0, // 0是带有搜索框的页面，1是带有标题的页面
+    showArrow: true
+  },
+  displayAnyBottom: {
+    isShow: true,
+    showType: 0 // 0是默认的地步菜单
+  }
   /*  留言板模块（按需加载） */
   
 }

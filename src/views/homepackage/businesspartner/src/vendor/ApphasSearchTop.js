@@ -88,13 +88,14 @@ const styles = theme => ({
  * @param {*} props 
  */
 class ApphasSearchTop extends React.Component {
+ 
   render() {
-    const { classes,history, topText } = this.props;
+    const { classes,goBack } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
+            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer" onClick={goBack}>
                 <ArrowBackIcon />
             </IconButton> 
             <div className={classes.search} >

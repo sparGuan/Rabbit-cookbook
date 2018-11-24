@@ -6,29 +6,34 @@
 // 挂载app
 // 实现类似爱合伙，卡片叠合风格
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import AppHeadBar from './vendor/AppHeadBar';
 import { withRouter } from 'react-router-dom';
 import AppBottomBar from './vendor/AppBottomBar';
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-	}
-});
+import { connect } from 'react-redux'
+
+@connect(
+	// 功能同 UTIL/createContainer
+	({ displayAnyTop }) => ({ displayAnyTop }),
+  require('ACTION/displayAnyTop').default
+)
 class Home extends React.Component {
 	constructor(props, context) {		
 		super(props, context);
 	}
 	render() {	
-		const {children ,history} = this.props
+		const {children ,history,displayAnyTop} = this.props
 		return (
-			<View style={styles.container}>
+			<View style={{
+				flex: 1,
+				justifyContent: 'center',
+				alignItems: 'center',
+				marginTop: displayAnyTop.isShow ? 48 : 0
+			}}>
 				{children}
 				{/* 公共头部、公共底部 */}
 				<AppHeadBar history = {history} />
-        <AppBottomBar history = {history}/> 
+        <AppBottomBar history = {history} /> 
 				{/* <AppBottomBar  history={this.props.history}/> */}
 			</View>
 		);

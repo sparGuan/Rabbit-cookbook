@@ -25,6 +25,10 @@ const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     width: '100vw',
+   marginTop:50,
+    '&>header': {
+      top:48
+    }
   },
 });
 
@@ -45,7 +49,7 @@ class AppReleasePageTopTabs extends React.Component {
     const { classes, theme } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="fixed" color="default">
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}

@@ -8,10 +8,14 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import QueueIcon from '@material-ui/icons/Queue';
 import AppReleasePageTopTabs from './AppReleasePageTopTabs';
-
+import { connect } from 'react-redux'
+import mapDispatchToProps from 'UTIL/mapDispatchToProps'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    '&>header':{
+      boxShadow:'unset'
+    },
     '&>header>div': {
       paddingLeft: 0
     }
@@ -25,30 +29,40 @@ const styles = theme => ({
     right: 0
   }
 });
+console.log(mapDispatchToProps)
+@connect(
+	// 功能同 UTIL/createContainer
+	({ displayAnyBottom }) => ({ displayAnyBottom }),
+  // mapDispatchToProps()
+  require('ACTION/displayAnyBottom').default
+)
 class AppReleasePageTop extends React.Component {
   state = {
     
   }
-  toPageStep(userId) {
-    // this.props.history.push({ pathname:'/appReleasePageStep',state:{} })
+  // 到达步骤页
+  toPageStep() {
+    console.log(this.props)
+    this.props.displayAnyBottomCreator(false)
+    this.props.history.push({ pathname:'/appReleasePageStep',state:{} })
   }
   render() {
-    const { classes } = this.props;
+    const { classes,goBack } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
-          <Toolbar variant="dense">
-            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
+          <Toolbar variant="dense" >
+            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer" onClick={goBack}>
             <ArrowBackIcon />
             </IconButton>
             <Typography component="div" align="center" color="inherit">
               我的项目
             </Typography>
-            <IconButton color="inherit" className={classes.releaseAddition} onClick={this.toPageStep(1)}>
+            <IconButton color="inherit" className={classes.releaseAddition} onClick={this.toPageStep.bind(this)}>
                 <QueueIcon />
             </IconButton>
           </Toolbar>
-          <AppReleasePageTopTabs />
+          {/* <AppReleasePageTopTabs /> */}
         </AppBar>
       </div>
     );

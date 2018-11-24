@@ -2,22 +2,22 @@
 // ================================
 // Action Type
 // ================================
-const SHOW_SEARCH = 'SHOW_SEARCH'
+const BOTTOM_CHANGE = 'BOTTOM_CHANGE'
 
 // ================================
 // Action Creator
 // ================================
 /**
  * 
- * @param {boolean} displayTopSearch // 是否展示头部搜索框
+ * @param {number} displayAnyBottom // 是否展示头部搜索框
  */
-const displayTopSearchCreator = payload => ({
-  type: SHOW_SEARCH,
-  payload
+const displayAnyBottomCreator = isShow => ({
+  type: BOTTOM_CHANGE,
+  isShow
 })
 /* default 导出所有 Actions Creator */
 export default {
-  displayTopSearchCreator
+  displayAnyBottomCreator
 }
 
 
@@ -29,7 +29,7 @@ export default {
 // 故在此直接给出处理逻辑
 // ================================
 export const ACTION_HANDLERS = {
-  [SHOW_SEARCH]: (displayTopSearchControl, { payload }) => (
-    { ...displayTopSearchControl, payload }
+  [BOTTOM_CHANGE]: (displayAnyBottomControl, { isShow }) => (
+    { ...displayAnyBottomControl, isShow  }
   ), // 测试输出的状态test
 }

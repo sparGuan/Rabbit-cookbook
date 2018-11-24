@@ -4,21 +4,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
-import AppReleasePageTop from './AppReleasePageTop';
 import { View } from 'react-native';
+import AppReleasePageTopTabs from './AppReleasePageTopTabs';
 const styles = theme => ({
   
 });
 class AppReleasePage extends React.Component {
    
   render() {
-    console.log(111111)
     const { classes } = this.props;
     return (
       <View>
-          <AppReleasePageTop />     
+         {
+           // 标签内容
+         }
+          <AppReleasePageTopTabs/>
       </View>
     );
   }
@@ -27,4 +28,4 @@ AppReleasePage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(AppReleasePage));
+export default withStyles(styles)(AppReleasePage);

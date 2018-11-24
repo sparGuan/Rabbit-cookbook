@@ -5,7 +5,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RenderSvgIcon from './RenderSvgIcon';
 import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux'
 const styles = theme => ({
   root: {
     width: '100vw'
@@ -18,21 +17,20 @@ const styles = theme => ({
 // TODO：更改状态
 @connect(
 	// 功能同 UTIL/createContainer
-	({ displayTopSearch }) => ({ displayTopSearch }),
-	dispatch =>
-		bindActionCreators(require('ACTION/displayTopSearch').default, dispatch)
+	({ displayAnyTop }) => ({ displayAnyTop }),
+  require('ACTION/displayAnyTop').default
 )
 class SmallBottomNavigation extends React.Component {
   state = {
     value: 0,
   };
-
   handleChange = (event, value) => {
     if (this.props.history.location.pathname === '/' && value === 1) {
-      console.log(this.props)
+      this.props.displayAnyTopCreator(value)
       // 重设全局状态管理
       this.props.history.push({ pathname:'/appReleasePage',state:{} })
     } else {
+      this.props.displayAnyTopCreator(value)
       this.props.history.push({ pathname:'/',state:{} })
     }
     this.setState({ value });

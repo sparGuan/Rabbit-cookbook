@@ -50,7 +50,6 @@ if (__DEV__ && __COMPONENT_DEVTOOLS__) {
   // 组件形式的 Redux DevTools
   DevTools = require('./DevTools').default
 }
-console.log(store)
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
@@ -76,7 +75,8 @@ const App = () => (
 																component={route.component}/>
 														)
 													})
-												}	
+												}
+												<Route render={() => <Redirect to="/" />} />	
 										</Switch>
 									</Home>
             </Switch>

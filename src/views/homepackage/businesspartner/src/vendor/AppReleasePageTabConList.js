@@ -15,7 +15,6 @@ import Avatar from '@material-ui/core/Avatar';
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop:10,    
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
