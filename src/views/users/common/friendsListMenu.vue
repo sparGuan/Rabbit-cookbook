@@ -103,7 +103,7 @@
                           <p class="communicators-item-content-desc" v-html="elem.descPerson"></p>
                           <div class="heard">
                               <!-- 此处去查看好友动态 -->
-                              <i data-v-3fcc4d6c="" class="iconfont icon-discover tools-ico" @click="openFriendsDynamic(elem._id)" ></i>
+                              <i data-v-3fcc4d6c="" class="iconfont icon-discover tools-ico" @click="openFriendsDynamic(elem)" ></i>
                           </div>
                         </div>
                     </li>
@@ -191,13 +191,13 @@ export default {
     mui.collapseOpenBack = this.collapseOpenBack;
   },
   methods: {
-    openFriendsDynamic(acceptUserId) {
+    openFriendsDynamic(acceptUser) {
       this.toggleMenu();
       /*
       * @param {acceptUserId} 请求的用户ID
       * 打开好友的动态
       */
-      this.$emit('openFriendsDynamic',acceptUserId)
+      this.$emit('openFriendsDynamic',acceptUser)
     },
     sendToAdd(event,acceptUserId) {
       const _this = this

@@ -1,6 +1,6 @@
 <template>
 	<div data-page="user-center">
-    <div class="mui-off-canvas-wrap mui-slide-in" ref="editDynamic">
+    <div class="mui-off-canvas-wrap mui-slide-in edit-dynamic" ref="editDynamic">
     <!-- 主页面容器 -->
     <div class="mui-inner-wrap">
         <!-- 菜单容器 -->
@@ -8,12 +8,7 @@
           <div class="canvas-left">
               <!-- 菜单具体展示内容 -->
               <user-dynamic 
-              :headImg="userInfo.headImg"  
-              :nickName="userInfo.nickName"
-              :descPerson="userInfo.descPerson"
-              :acceptUserId="this.acceptUserId"
-              v-model="isLoadComponent"
-              :parentNode="$refs['editDynamic']"
+              :acceptUser="acceptUser"              
               >
               </user-dynamic> 
           </div>
@@ -165,8 +160,13 @@ export default {
   },
   data() {
     return {
-      isLoadComponent: false,
-      acceptUserId: null,
+      acceptUser: {
+        nickName: null,
+        descPerson: null,
+        headBgImg: null,
+        headImg: null,
+        acceptUserId: app.globalService.getLoginUserInfo()._id
+      },
       userInfo: {
         nickName: '游客',
         headImg: require('../../../src/imgs/userCenter/touxiangDefault.png'),
@@ -261,9 +261,10 @@ export default {
     },
     // 展示好友的动态 
     // 不可编辑！！ 只可点赞分享等操作
-    openFriendsDynamic(acceptUserId) {
-      if(acceptUserId) {
-        this.acceptUserId = acceptUserId
+    openFriendsDynamic(acceptUser) {
+      if(acceptUser) {
+        this.acceptUser  = Object.assign({},acceptUser)
+        this.acceptUser.acceptUserId = this.acceptUser._id
         setTimeout( () => {
           this.isMaskShow = true;
           mui(this.$refs['editDynamic'])
@@ -274,7 +275,9 @@ export default {
     },
     editDynamic(e) {
       this.isMaskShow = true;
-      this.isLoadComponent = true
+      this.acceptUser = Object.assign(this.acceptUser,this.userInfo) 
+      this.acceptUser.acceptUserId = app.globalService.getLoginUserInfo()._id  
+      console.log(this.acceptUser) 
       mui(this.$refs['editDynamic'])
         .offCanvas()
         .show();

@@ -1,19 +1,19 @@
 <template>
-    <div  data-page="user-dynamic" class="user-dynamic" ref="user-dynamic" v-if="isShowComponent">
+    <div  data-page="user-dynamic" class="user-dynamic" ref="user-dynamic" >
          <header class="clearfix">
             <div ref="sixStart" class="sixStart"></div>
             <div class="bot-rel">
                 <div class="samll-head">
-                  <img :src="headImg"/>
+                  <img :src="acceptUser && acceptUser.headImg"/>
                 </div>
             </div>
             <div  class="descDetail">
-              <h5 class="txt">{{nickName}}</h5>
-              <p class="txt">{{descPerson}}</p>
+              <h5 class="txt" >{{acceptUser && acceptUser.nickName}}</h5>
+              <p class="txt">{{acceptUser &&  acceptUser.descPerson}}</p>
             </div>
          </header>
          <div class="mui-scroll-wrapper dynamic-list-content" ref="dynamic-list">
-           <ul class="mui-scroll dynamic-list-ul">
+           <ul class="mui-scroll dynamic-list-ul" v-if="listData.length > 0">
               <li class="dynamic-list-item" v-for="(item,index) in listData" :key="index">
                 <!-- 头部 -->
                 <div class="mui-row">
@@ -102,19 +102,18 @@ import Publish from './common/publish';
 const echarts = require('echarts');
 export default {
   components: { Publish },
-  props: ['headImg', 'nickName', 'descPerson','parentNode','acceptUserId','value'],
+  props: ['acceptUser'],
   watch: {
-    value(now, old) {
-      this.isShowComponent = now;
-    },
-    isShowComponent(now, old) {
-      this.$emit('input', now);
-
-    }
+     'acceptUser': {
+          handler:function(newValue,oldValue){  
+            console.log(newValue)            
+              this.queryUserAndFriendsDynamic(newValue.acceptUserId);
+          },
+          deep:true,
+      }
   },
   data() {
     return {
-      isShowComponent: true,
       shares: {}, // 分享的数据？
       showAdditive: false,
       dynamicId: '',
@@ -167,33 +166,16 @@ export default {
           }
         ]
       },
-      listData: [
-        {
-          headImg: '',
-          nickName: '',
-          create_at: '',
-          speech: '',
-          album: [],
-          phoneBy: '',
-          forwardingDynamics: {}
-        }
-      ]
+      listData: []
     };
   },
   mounted() {
     this.$nextTick(() => {
       // 基于准备好的dom，初始化echarts实例
       const myChart = echarts.init(this.$refs['sixStart']);
-      myChart.setOption(this.optionChar);
-      
-      console.log(this.$refs['user-dynamic'])
-      // document.querySelector('.mui-off-canvas-wrap').addEventListener('shown', (event) => {
-        
-      // })
+      myChart.setOption(this.optionChar);      
       // 此处需求需要更改，点击传入userId,然后才去获取数据源
       // update by 2018/11/26
-      console.log(this.acceptUserId)
-      this.queryUserAndFriendsDynamic(this.acceptUserId || app.globalService.getLoginUserInfo()._id);
       mui(this.$refs['dynamic-list']).scroll({
         deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
         indicators: false // 是否显示滚动条
@@ -293,7 +275,7 @@ export default {
       const data = { userId };
       app.api.userDynamic.queryUserAndFriendsDynamic({
         data,
-        success: res => {
+        success: res => {          
           if (res.message === 'success') {
             this.listData = res.dynamicList.map(item => {
               item.user.headImg = app.getResourceUrl(item.user.headImg);
@@ -301,8 +283,10 @@ export default {
                 return app.getResourceUrl(item.album[0][element]);
               });
               return item;
-            });
-          }
+            });            
+          } else {
+            this.listData = []
+          }          
         },
         complete: () => {}
       });
