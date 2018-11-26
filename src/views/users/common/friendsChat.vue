@@ -60,7 +60,7 @@ let $ = require('jquery');
 import { TweenMax } from 'gsap';
 require('@/js/lib/mui.pullToRefresh.js');
 require('@/js/lib/mui.pullToRefresh.material.js');
-import  HZRecorder from 'HZRecorder';
+// import  HZRecorder from 'HZRecorder';
 export default {
   // 从底部弹出显示
   components: {
@@ -173,14 +173,14 @@ export default {
           passive: false
         });
       }
-      HZRecorder.get(function (rec) {
-          recorder = rec;
-          recorder.start();
-          // setTimeout(function(){
-          //     recorder.stop();
-          //     setTimeout(saveAudio(),500);    
-          // },45000);
-      });
+      // HZRecorder.get(function (rec) {
+      //     recorder = rec;
+      //     recorder.start();
+      //     // setTimeout(function(){
+      //     //     recorder.stop();
+      //     //     setTimeout(saveAudio(),500);    
+      //     // },45000);
+      // });
     },
     stopRecord(event) {
       alert('stopRecord');

@@ -2,21 +2,21 @@
       <div  class="mirror" ref="mirror">
         <div class="path-slider">
           <!-- Slider items -->
-           <router-link :to="{name: 'cloud'}"  class="path-slider__item path-slider__item--1" exact>
+           <a  href="http://localhost:8086/"  class="path-slider__item path-slider__item--1" exact>
              <div class="item__circle"></div>
-          </router-link>
-          <router-link :to="{name: 'games'}"  class="path-slider__item path-slider__item--2" exact >
+          </a>
+          <a  href="http://localhost:8088/" class="path-slider__item path-slider__item--2"  >
               <div class="item__circle" ></div>
-          </router-link>
-          <router-link :to="{name: 'games'}"  class="path-slider__item path-slider__item--3" exact >
+          </a>
+          <a  class="path-slider__item path-slider__item--3"  >
               <div class="item__circle"></div>
-          </router-link>
-          <router-link :to="{name: 'plan'}"  class="path-slider__item path-slider__item--4" exact >
+          </a>
+          <a class="path-slider__item path-slider__item--4"  >
               <div class="item__circle" ></div>
-          </router-link> 
-          <router-link :to="{name: 'cloud'}"  class="path-slider__item path-slider__item--4" exact >
+          </a> 
+          <a  class="path-slider__item path-slider__item--4"  >
               <div class="item__circle"></div>
-          </router-link>   
+          </a>   
         </div>
       </div>    
 </template>
