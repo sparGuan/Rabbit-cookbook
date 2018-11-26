@@ -198,7 +198,7 @@ svg {
 }
 
 .path-slider__item--4 .item__circle {
-  background-image: url('../../imgs/NR/video.png');
+  background-image: url('../../imgs/NR/radio.png');
       background-size: 100px 100px;
     background-repeat: no-repeat;
     background-position: center;

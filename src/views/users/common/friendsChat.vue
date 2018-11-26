@@ -14,7 +14,7 @@
                   <div class="chat-message-bubble" v-if="item.message !== ''" > 
                     <div class="arrow"></div>
                     <div class="bubble" v-html="item.message"></div>
-                    <audio ref="player" src=""  controls></audio>
+                    <!-- <audio ref="player" src=""  controls></audio> -->
                   </div>                  
                 </li>
               </ul>
@@ -158,6 +158,7 @@ export default {
         this.$lastMessageContainer.remove();
       }
       if (Object.keys(chatList).length > 0) {
+        console.log(chatList)
         this.$emit('changeChatList', chatList);
       }
     }

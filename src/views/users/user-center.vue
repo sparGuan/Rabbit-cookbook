@@ -11,6 +11,9 @@
               :headImg="userInfo.headImg"  
               :nickName="userInfo.nickName"
               :descPerson="userInfo.descPerson"
+              :acceptUserId="this.acceptUserId"
+              v-model="isLoadComponent"
+              :parentNode="$refs['editDynamic']"
               >
               </user-dynamic> 
           </div>
@@ -91,7 +94,7 @@
         </ul>
 			</div>
     </div>
-    <user-friendsListMenu v-model="isShowMenuModal" :communicators="communicators">
+    <user-friendsListMenu v-model="isShowMenuModal" :communicators="communicators" @openFriendsDynamic="openFriendsDynamic">
     </user-friendsListMenu>
     <user-friendsChat v-model="isOpenChat" :title="friendTitle" :chatList="chatList" @changeChatList="changeChatList"></user-friendsChat>
 	</div>
@@ -103,6 +106,14 @@ import waveContnet from './common/waveContnet';
 import friendsChat from './common/friendsChat';
 import friendsListMenu from './common/friendsListMenu';
 import takeH5Photos from '../../js/utils/takeH5Photos';
+/**
+ *  2018/11/26 TODO:开始去完成分享功能，
+ *  因语音播放的功能暂时io支持不足够，所以暂时搁浅
+ *  1.完成分享
+ *  2.完成收藏
+ *  3.完成自动转发到足迹 =============//消息列表
+ *  // 预期完成日： 2018/12/6 10天
+ */
 export default {
   name: 'userCenter',
   components: {
@@ -154,6 +165,8 @@ export default {
   },
   data() {
     return {
+      isLoadComponent: false,
+      acceptUserId: null,
       userInfo: {
         nickName: '游客',
         headImg: require('../../../src/imgs/userCenter/touxiangDefault.png'),
@@ -171,7 +184,7 @@ export default {
       dataBase64: '',
       takeH5Photos: null,
       isOpenChat: false,
-      friendTitle:'Spar',
+      friendTitle:'',
       chatList: {},
       communicators: ''// 所有好友
     };
@@ -246,8 +259,22 @@ export default {
     closeOffCanvas() {
       this.isMaskShow = false;
     },
+    // 展示好友的动态 
+    // 不可编辑！！ 只可点赞分享等操作
+    openFriendsDynamic(acceptUserId) {
+      if(acceptUserId) {
+        this.acceptUserId = acceptUserId
+        setTimeout( () => {
+          this.isMaskShow = true;
+          mui(this.$refs['editDynamic'])
+            .offCanvas()
+            .show();
+        },500)
+      }
+    },
     editDynamic(e) {
       this.isMaskShow = true;
+      this.isLoadComponent = true
       mui(this.$refs['editDynamic'])
         .offCanvas()
         .show();

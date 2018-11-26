@@ -1,12 +1,12 @@
-import User, { IUser } from '../../db/schema/user';
 import * as jwt from 'jsonwebtoken';
+import DirExistUtils from '../../utils/DirExistUtils';
+import getDateAfter from '../../utils/getDateAfter';
+import User, { IUser } from '../../db/schema/user';
+import { qsms, statusCode } from '../../config/index';
 const bluebird = require('bluebird');
 const { isValid } = require('mongoose').Types.ObjectId;
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
-import { statusCode, qsms } from '../../config/index';
-import getDateAfter from '../../utils/getDateAfter';
 import Qsms = require('qcloudsms_js');
-import DirExistUtils from '../../utils/DirExistUtils';
 import formidable = require('formidable');
 class LoginController {
   private qsms: any;
@@ -42,21 +42,21 @@ class LoginController {
       const valid = global._.random(999999);
       const smsType = 0; // Enum{0: 普通短信, 1: 营销短信}
       const ssender = this.qsms.SmsSingleSender();
-      await ssender.send(
-        smsType,
-        86,
-        body.Mobile,
-        `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`,
-        '',
-        ''
-      );
+      // await ssender.send(
+      //   smsType,
+      //   86,
+      //   body.Mobile,
+      //   `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`,
+      //   '',
+      //   ''
+      // );
       ctx.body = {
         message: valid
       };
       // 单发短信
       // await this.qsms.singleSend({
-      // 	phoneNumber:body.Mobile,
-      // 	msg: `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`
+      //   phoneNumber: body.Mobile,
+      //   msg: `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`
       // });
     };
   }
@@ -72,7 +72,7 @@ class LoginController {
           exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
         },
         'secret'
-      )
+      );
       this.user = new User(body);
       const UserModel = await this.user.save();
       await LoginController.resetExpiredTime(UserModel.get('_id'));

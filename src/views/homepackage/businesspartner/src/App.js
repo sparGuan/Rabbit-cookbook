@@ -52,6 +52,9 @@ if (__DEV__ && __COMPONENT_DEVTOOLS__) {
 }
 const App = () => (
   <MuiThemeProvider theme={theme}>
+		{
+			//我是一个双向绑定的组件
+		}
     <Provider store={store}>
         <BrowserRouter>
 						{/* 挂载所有路由  */}

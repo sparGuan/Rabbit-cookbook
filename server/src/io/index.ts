@@ -7,7 +7,7 @@ module.exports = {
   // 一个是 disconnect
   filePath: resolve('/io'),
   socketConnect(socket: any) {
-    const filesArr: string[] = glob.sync(`${this.filePath}/*.connection.ts`, {
+    const filesArr: string[] = glob.sync(`${this.filePath}\\*.connection.ts`, {
       ignore: '*.connection.ts'
     });
     filesArr.forEach(item => {
@@ -16,3 +16,4 @@ module.exports = {
     });
   }
 };
+

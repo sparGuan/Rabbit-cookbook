@@ -1,6 +1,5 @@
 <template>
-
-    <div  data-page="user-dynamic" class="user-dynamic" ref="user-dynamic">
+    <div  data-page="user-dynamic" class="user-dynamic" ref="user-dynamic" v-if="isShowComponent">
          <header class="clearfix">
             <div ref="sixStart" class="sixStart"></div>
             <div class="bot-rel">
@@ -71,13 +70,19 @@
                 <!-- 底部功能 -->
                 <div class="mui-row">
                   <div class="tools-bar">
-                    <a href="#" class="button  pink drop ">
-                      <svg class="icon" style="width: 18px;height: 22px;
-                        " viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="826"><path d="M679.5264 862.1056l-155.0848 89.4976v-227.4816l155.0848-89.4976z m0 0" fill="#F95450" p-id="827"></path><path d="M861.9008 386.1504L680.96 281.6l-90.8288 83.7632-90.5728-188.416-181.1456-104.6016L227.84 201.216 499.5584 757.76 680.96 862.208l271.36-242.688z m0 0" fill="#F95450" p-id="828"></path><path d="M162.0992 161.792l156.3136-89.4464 181.1456 104.6016L343.04 266.24z m0 0" fill="#FF9797" p-id="829"></path><path d="M705.5872 475.5456l-181.1456-104.6016-90.5728 83.8656L343.04 266.24 162.0992 161.792 71.68 290.6624l271.36 556.3904 181.1456 104.5504 271.7696-242.6368z m0 0" fill="#FF7171" p-id="830"></path><path d="M524.4416 370.944L680.96 281.6l181.1456 104.6016-156.5184 89.344z m0 0" fill="#FF9797" p-id="831"></path><path d="M952.32 619.52l-156.16 89.4976-271.7696 242.6368L680.96 862.208z m0 0" fill="#EA5050" p-id="832"></path><path d="M500.7872 543.744l-64.8704-37.4784-32.4096 30.0032-32.4608-67.4816-64.8704-37.4272-32.4096 46.08 97.28 199.2704 64.8704 37.4784 97.28-87.04z m0 0" fill="#FFFFFF" p-id="833"></path></svg>
+                    <!-- 点赞 -->
+                    <a href="javascript:void(0)" @click="thumbsUp">
+                      <i class="iconfont icon-icon rollIcon" ></i>
+                      <span class="thumbs-mount">265</span>
+                      <transition name="slide-fade">
+                        <span v-if="showAdditive">+ 1</span>
+                      </transition>
                     </a>
-                    <a href="#"  class="button green"><i class="iconfont icon-jiaoya"></i></a>
-                    <a href="#" title="Reddit"  @click="shareAction" style="padding: 3px 11px;display: inline-block;vertical-align: top;" class="button blue serif back xl glass">
-                      <i class="iconfont icon-pengyouwang" style="font-size: 14px;"></i>
+                    <a href="javascript:void(0)">
+                      <i class="iconfont icon-jiaoya rollIcon"></i>
+                    </a>
+                    <a  href="javascript:void(0)" @click="shareAction" >
+                      <i class="iconfont icon-pengyouwang rollIcon" style="font-size: 18px;"></i>
                     </a>
                   </div>
                   <div class="leave-msg" @click="sendLeaveMsg(item._id)">
@@ -97,10 +102,21 @@ import Publish from './common/publish';
 const echarts = require('echarts');
 export default {
   components: { Publish },
-  props: ['headImg', 'nickName', 'descPerson'],
+  props: ['headImg', 'nickName', 'descPerson','parentNode','acceptUserId','value'],
+  watch: {
+    value(now, old) {
+      this.isShowComponent = now;
+    },
+    isShowComponent(now, old) {
+      this.$emit('input', now);
+
+    }
+  },
   data() {
     return {
-      shares: {},
+      isShowComponent: true,
+      shares: {}, // 分享的数据？
+      showAdditive: false,
       dynamicId: '',
       showModal: false,
       optionChar: {
@@ -169,7 +185,15 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       const myChart = echarts.init(this.$refs['sixStart']);
       myChart.setOption(this.optionChar);
-      this.queryUserAndFriendsDynamic();
+      
+      console.log(this.$refs['user-dynamic'])
+      // document.querySelector('.mui-off-canvas-wrap').addEventListener('shown', (event) => {
+        
+      // })
+      // 此处需求需要更改，点击传入userId,然后才去获取数据源
+      // update by 2018/11/26
+      console.log(this.acceptUserId)
+      this.queryUserAndFriendsDynamic(this.acceptUserId || app.globalService.getLoginUserInfo()._id);
       mui(this.$refs['dynamic-list']).scroll({
         deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
         indicators: false // 是否显示滚动条
@@ -190,6 +214,13 @@ export default {
     });
   },
   methods: {
+    // 实现点赞功能
+    thumbsUp() {
+      this.showAdditive = true
+      setTimeout( () => {
+        this.showAdditive = false
+      },500)
+    },
     shareAction() {
         const  ids = [{
 					id: "weixin",
@@ -254,8 +285,12 @@ export default {
       this.showModal = true;
       this.dynamicId = dynamicId;
     },
-    queryUserAndFriendsDynamic() {
-      const data = { userId: app.globalService.getLoginUserInfo()._id };
+    queryUserAndFriendsDynamic(userId) {
+      // 将此处的data改成动态
+      // 由谁的用户id来决定谁的数据展示
+      // 完成的时候将其删除
+      // const data = { userId: app.globalService.getLoginUserInfo()._id };
+      const data = { userId };
       app.api.userDynamic.queryUserAndFriendsDynamic({
         data,
         success: res => {
@@ -278,6 +313,19 @@ export default {
 <style lang="less" scoped>
 @import url('../../css/button.less');
 [data-page='user-dynamic'] {
+  /* 可以设置不同的进入和离开动画 */
+  /* 设置持续时间和动画函数 */
+  .slide-fade-enter-active {
+    transition: all .5s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active for below version 2.1.8 */ {
+    font-size: 18px;
+    opacity: 0;
+  }
   .drop.icon {
     padding-right: 0.6em;
   }
@@ -508,5 +556,23 @@ export default {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
   }
+  .rollIcon {
+        font-size: 24px;
+        margin-right: 10px;
+        color: #ccc;
+  }
+  .tools-bar {
+    &>a {
+      position: relative;
+      .thumbs-mount {
+        position: absolute;
+        left: 20px;
+        top: -17px;
+        font-size: 12px;
+        color: #ccc;
+      }
+    }
+  }
+  
 }
 </style>

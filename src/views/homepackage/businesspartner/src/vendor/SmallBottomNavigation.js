@@ -5,6 +5,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RenderSvgIcon from './RenderSvgIcon';
 import { connect } from 'react-redux'
+import { watch } from 'fs';
 const styles = theme => ({
   root: {
     width: '100vw'

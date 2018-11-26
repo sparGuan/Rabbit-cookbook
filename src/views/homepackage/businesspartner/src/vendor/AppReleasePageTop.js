@@ -29,7 +29,7 @@ const styles = theme => ({
     right: 0
   }
 });
-console.log(mapDispatchToProps)
+
 @connect(
 	// 功能同 UTIL/createContainer
 	({ displayAnyBottom }) => ({ displayAnyBottom }),
