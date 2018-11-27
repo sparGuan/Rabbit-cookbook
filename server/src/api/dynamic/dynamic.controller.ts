@@ -10,7 +10,7 @@ import formidable = require('formidable');
 import moment = require('moment');
 // 实验目的：能够在子类的controller里面使用basecontroller的公共方法
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
-class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService , Dynamic> {
+class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService , IDynamic> {
   private dynamic: IDynamic;
   private dynamicList: IDynamic[];
   private user: IUser;
