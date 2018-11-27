@@ -10,7 +10,7 @@ import formidable = require('formidable');
 import moment = require('moment');
 // 实验目的：能够在子类的controller里面使用basecontroller的公共方法
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
-class DynamicController extends BASE_OPEN_SOURCE_API {
+class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService , Dynamic> {
   private dynamic: IDynamic;
   private dynamicList: IDynamic[];
   private user: IUser;
@@ -181,11 +181,14 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
         // 就返回提示信息
         // mongoose.Types.ObjectId('576cd26698785e4913b5d0e1')
         // totalPraise +1
+        // thelast TODO: 将该业务封装至底层处理 by 2018/11/27
         const acceptUser = body.acceptUser = mongoose.Types.ObjectId(body.acceptUserId)
         const user = body.user = mongoose.Types.ObjectId(body.userId)
         // 日期处理类库moment
         const today: string = moment().format('L') as string;
         console.log(`today is ${today}`)
+        // 如何强转该类型？
+        // 直接传一个类型进去
         this.dynSingleDieList = (await DynSingleDie.find({
           acceptUser,
           user,
@@ -198,7 +201,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
           // 插入数据
           body.dynamic = mongoose.Types.ObjectId(body.dynamicId)
           this.dynSingleDie = new DynSingleDie(body);
-          const dynSingleDie = await this.dynSingleDie.save();
+          await this.dynSingleDie.save();
           const _id = body.dynamicId;
           // 给被看动态的用户点赞 +1
           this.dynamic = (await Dynamic.findById(_id) as IDynamic);

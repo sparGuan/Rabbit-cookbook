@@ -29,7 +29,7 @@ export default (filePath: string) => {
             // 如果不存在，就获取controller返回controller对象
             // 如果不存在，将获得的controller对象直接返回默认的index.ts里面的路由函数
             // 去遍历该文件夹下面的所有文件
-            const customRoutingAddr = `${filedir}\\index.ts`;
+            const customRoutingAddr = `${filedir}/index.ts`;
             const exists: boolean = fs.existsSync(customRoutingAddr);
             if (exists) {
               const filesArr: string[] = glob.sync(customRoutingAddr, {
@@ -40,7 +40,7 @@ export default (filePath: string) => {
             } else {
               // 不存在之下，去读controller.ts，使用导出的controller，生成默认的Route导出函数
               const filesArr: string[] = glob.sync(
-                `${filedir}\\*.controller.ts`,
+                `${filedir}/*.controller.ts`,
                 {
                   ignore: '*.controller.ts'
                 }
@@ -48,7 +48,7 @@ export default (filePath: string) => {
               const Controller = require(filesArr[0]);
               const Routing = (Router: any) => {
                 const ControllerdirName = filedir.substring(
-                  filedir.lastIndexOf('\\') + 1
+                  filedir.lastIndexOf('/') + 1
                 );
                 for (const reqMethod of Object.getOwnPropertyNames(
                   Object.getPrototypeOf(Controller.default)
