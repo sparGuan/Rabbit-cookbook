@@ -19,7 +19,7 @@ export const qsms = {
 export const statusCode = {
   success: 'success',
   error: 'error',
-  noOne: '没有该用户',
+  noOne: 'noOne',
   expiredTime: 3 // 过期时间是倒数三天
 };
 // 8011是gitlab库的端口

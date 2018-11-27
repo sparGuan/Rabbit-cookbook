@@ -1,6 +1,6 @@
 <template>
   <!-- 实现发布动态的组件 -->
-  <div>
+  <span>
     <div class="best-publish" @click="publishDynamic">
       <i class="iconfont icon-fabiao" style="font-size:24px;"></i>
     </div>
@@ -29,7 +29,7 @@
           </li>
         </ul>
       </div>
-  </div>  
+  </span>  
 </template>
 <style lang="less" scoped>
 .mui-backdrop.mui-backdrop-action {

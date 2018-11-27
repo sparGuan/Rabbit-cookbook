@@ -42,6 +42,17 @@ define(() =>{
 					ajaxOptions
 				)
 			);
-		}
+		},
+		// 实现赞业务
+		updateDynamicsZan: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/dynamic/updateDynamicsZan'
+					},
+					ajaxOptions
+				)
+			);
+		},
 	};
 });

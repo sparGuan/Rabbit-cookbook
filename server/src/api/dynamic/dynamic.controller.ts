@@ -1,15 +1,21 @@
 import { statusCode } from '../../config/index';
 import Dynamic, { IDynamic, IDynamicComment } from '../../db/schema/dynamic';
 import User, { IUser } from '../../db/schema/user';
+import DynSingleDie, { IDynSingleDie } from '../../db/schema/dynSingleDie';
 import DirExistUtils from '../../utils/DirExistUtils';
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
-const formidable = require('formidable');
+import dynamicService from './dynamic.service';
+import mongoose = require('mongoose');
+import formidable = require('formidable');
+import moment = require('moment');
 // 实验目的：能够在子类的controller里面使用basecontroller的公共方法
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
 class DynamicController extends BASE_OPEN_SOURCE_API {
   private dynamic: IDynamic;
   private dynamicList: IDynamic[];
   private user: IUser;
+  private dynSingleDieList: IDynSingleDie []; // 动态点赞操作
+  private dynSingleDie: IDynSingleDie ; // 动态点赞操作
   constructor() {
     super();
   }
@@ -140,13 +146,78 @@ class DynamicController extends BASE_OPEN_SOURCE_API {
           };
         } else {
           ctx.body = {
-            message: statusCode.noOne            
+            message: statusCode.noOne
           };
         }
       } else {
         ctx.body = {
-          message: statusCode.noOne            
+          message: statusCode.noOne
         };
+      }
+    };
+  }
+  /**
+   *  查询所有用户下的活动列表和所有的评论
+   *  更新动态文章的赞数量
+   *  @param {number} type 0 1 2
+   *  @param {Object} dynamic 动态Id
+   *  @param {string} user    当前用户Id
+   *  @param {string} acceptUserId 请求用户Id
+   *  @return void
+   */
+  public updateDynamicsZan() {
+    // 执行service函数 ---->
+    // 更新该文章赞数量
+    return async (ctx: any) => {
+      // 让异步变同步
+      const { body } = ctx.request;
+      console.log(32421341234234)
+      console.log(body)
+      // 当前用户和被选用户id都不为空
+      if (!global._.isEmpty(body.userId) && !global._.isEmpty(body.acceptUserId)) {
+        // 先去表里面查一下有没有该数据记录
+        // 没有的话就插入一条，然后返回成功
+        // 如果已经存在该条记录了
+        // 就返回提示信息
+        // mongoose.Types.ObjectId('576cd26698785e4913b5d0e1')
+        // totalPraise +1
+        const acceptUser = body.acceptUser = mongoose.Types.ObjectId(body.acceptUserId)
+        const user = body.user = mongoose.Types.ObjectId(body.userId)
+        // 日期处理类库moment
+        const today: string = moment().format('L') as string;
+        console.log(`today is ${today}`)
+        this.dynSingleDieList = (await DynSingleDie.find({
+          acceptUser,
+          user,
+          create_at: { $gte: today },
+          type: Number(body.type)
+        })) as IDynSingleDie [];
+        console.log(45566464664644546)
+        console.log(this.dynSingleDieList)
+        if (this.dynSingleDieList.length === 0) {
+          // 插入数据
+          body.dynamic = mongoose.Types.ObjectId(body.dynamicId)
+          this.dynSingleDie = new DynSingleDie(body);
+          const dynSingleDie = await this.dynSingleDie.save();
+          const _id = body.dynamicId;
+          // 给被看动态的用户点赞 +1
+          this.dynamic = (await Dynamic.findById(_id) as IDynamic);
+          const totalPraise = this.dynamic.meta.totalPraise + 1
+          await this.dynamic.update(
+            { $inc: {
+              'meta.totalPraise': 1
+            } },
+            { new: true });
+          ctx.body = {
+            message: statusCode.success
+          };
+        } else {
+          // 此处返回失败
+          // 今天之内不可再点赞了
+          ctx.body = {
+            message: statusCode.error
+          };
+        }
       }
     };
   }

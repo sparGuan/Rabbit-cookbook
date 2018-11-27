@@ -10,6 +10,9 @@ import { IUser } from './user'
  * @param {Array<IDynamicComment>}  评论数组
  * @param {String} user  用户ID
  **/
+/**
+ * 实现业务：1。分享 2。点赞 3。足迹
+ */
 export declare interface IDynamic extends mongoose.Document {
   speech: string;
   album: string [];
@@ -31,6 +34,7 @@ export interface IMeta {
   totalDays: number, // 在线天数
   totalPraise: number // 赞数
 }
+// 这个是分享
 export interface IforwardingDynamics {
   title: string, // 分享的标题
   content: string, // 分享的内容
@@ -77,10 +81,10 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
   update_at: { type: Date, default: Date.now },
   // 其他元信息
   meta: {
-    totalPosts: {type: Number, default: 0}, // 帖子数
-    totalCollection: {type: Number, default: 0}, // 收藏数
+    totalPosts: {type: Number, default: 0}, // 帖子数 ===> 不存于此处
+    totalCollection: {type: Number, default: 0}, // 收藏数===> 后期替换 ===》足迹
     totalShare: {type: Number, default: 0}, // 分享数
-    totalDays: {type: Number, default: 0}, // 在线天数
+    totalDays: {type: Number, default: 0}, // 在线天数===》 后期替换
     totalPraise: {type: Number, default: 0} // 赞数
   }
 })

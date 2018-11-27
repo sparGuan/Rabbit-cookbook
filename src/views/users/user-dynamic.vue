@@ -13,7 +13,7 @@
             </div>
          </header>
          <div class="mui-scroll-wrapper dynamic-list-content" ref="dynamic-list">
-           <ul class="mui-scroll dynamic-list-ul" v-if="listData.length > 0">
+           <ul class="mui-scroll dynamic-list-ul" >
               <li class="dynamic-list-item" v-for="(item,index) in listData" :key="index">
                 <!-- 头部 -->
                 <div class="mui-row">
@@ -71,18 +71,22 @@
                 <div class="mui-row">
                   <div class="tools-bar">
                     <!-- 点赞 -->
-                    <a href="javascript:void(0)" @click="thumbsUp">
-                      <i class="iconfont icon-icon rollIcon" ></i>
-                      <span class="thumbs-mount">265</span>
+                    <a href="javascript:void(0)" @click="thumbsUp(item)">
+                      <i class="iconfont icon-icon rollIcon" 
+                      :class="isZan ? 'active':''"
+                      ></i>
+                      <span class="thumbs-mount" v-if="item.meta.totalPraise > 0" v-text="item.meta.totalPraise" />
                       <transition name="slide-fade">
                         <span v-if="showAdditive">+ 1</span>
                       </transition>
                     </a>
                     <a href="javascript:void(0)">
-                      <i class="iconfont icon-jiaoya rollIcon"></i>
+                      <i class="iconfont icon-jiaoya rollIcon" :class="isShare ? 'active':''"></i>
                     </a>
                     <a  href="javascript:void(0)" @click="shareAction" >
-                      <i class="iconfont icon-pengyouwang rollIcon" style="font-size: 18px;"></i>
+                      <i class="iconfont icon-pengyouwang rollIcon" 
+                      :class="isZuJi ? 'active':''"
+                      style="font-size: 18px;"></i>
                     </a>
                   </div>
                   <div class="leave-msg" @click="sendLeaveMsg(item._id)">
@@ -115,7 +119,10 @@ export default {
   data() {
     return {
       shares: {}, // 分享的数据？
-      showAdditive: false,
+      isZan: false, // 点赞中
+      isShare:false,
+      isZuJi:false,
+      showAdditive:false,
       dynamicId: '',
       showModal: false,
       optionChar: {
@@ -197,11 +204,32 @@ export default {
   },
   methods: {
     // 实现点赞功能
-    thumbsUp() {
-      this.showAdditive = true
-      setTimeout( () => {
-        this.showAdditive = false
-      },500)
+    /**
+     *  @param {object} dynamic 动态
+     */
+    thumbsUp(dynamic) {
+      console.log(dynamic)
+      const data = {
+        dynamicId: dynamic._id,
+        userId: app.globalService.getLoginUserInfo()._id,
+        acceptUserId:dynamic.user._id,
+        type: 0
+      }
+      app.api.userDynamic.updateDynamicsZan({
+        data,
+        success: res => {
+          console.log(res.message)
+          if (res.message === 'success') {
+            // 把更新好友关系的当前用户重新设置到缓存里去
+            this.showAdditive = true
+            this.isZan = true
+            setTimeout( () => {
+              this.showAdditive = false
+            },500)
+
+          }
+        }
+      });
     },
     shareAction() {
         const  ids = [{
@@ -544,6 +572,7 @@ export default {
         font-size: 24px;
         margin-right: 10px;
         color: #ccc;
+        transition: all ease .3s;
   }
   .tools-bar {
     &>a {
@@ -554,6 +583,12 @@ export default {
         top: -17px;
         font-size: 12px;
         color: #ccc;
+      }
+      .rollIcon.active {
+        color:#007aff;
+        & + span {
+          color: #007aff;
+        }
       }
     }
   }

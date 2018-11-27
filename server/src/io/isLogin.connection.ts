@@ -55,7 +55,7 @@ export default (socket: any) => {
       // console.log(`here is isLogin.conn 23 page ${userInfo}`)
       // 返回去的token码是不带socket值的
       // 返回用户信息好签名
-      console.log(wxConfig)
+      // console.log(wxConfig)
       socket.emit(`isLogin_${emit}`, {
         userInfo,
         wxConfig

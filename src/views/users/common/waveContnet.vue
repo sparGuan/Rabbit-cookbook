@@ -291,8 +291,7 @@ export default {
   display: inline-block;
   height: calc(~'100% - 10px');
   border-radius: 5px;
-  background: linear-gradient(to bottom, #fff, rgba(0, 122, 255, 0.1)),
-    url(../../../imgs/userCenter/bg.png) no-repeat center;
+  background: linear-gradient(to bottom, #fff, rgba(0, 122, 255, 0.1))  no-repeat center;
   background-position: 0px 0px;
   // padding: 5px 10px;
   background-size: calc(~'100% + 88px');
