@@ -172,7 +172,7 @@ export default {
           success: res => {
             if (res.message === 'success') {
               this.canclDynamic();
-              this.$emit('reLoadDynamics');
+              this.$emit('reLoadDynamics',app.globalService.getLoginUserInfo()._id);
             }
           },
           complete: () => {

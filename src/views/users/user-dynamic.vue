@@ -110,14 +110,24 @@ export default {
   watch: {
      'acceptUser': {
           handler:function(newValue,oldValue){  
-            console.log(newValue)            
               this.queryUserAndFriendsDynamic(newValue.acceptUserId);
           },
           deep:true,
-      }
+      },
+      // 'listData': {
+      //    handler:function(newValue,oldValue){  
+      //         if (newValue.length > 0) {
+      //           // newValue.
+      //           this.
+      //         }
+      //   },
+      //   deep:true,
+      // }
   },
   data() {
     return {
+      myChart: null,
+      zanMount: 0,
       shares: {}, // 分享的数据？
       isZan: false, // 点赞中
       isShare:false,
@@ -136,7 +146,7 @@ export default {
             name: { show: true, textStyle: { fontSize: 16, color: '#32cd32' } },
             indicator: [
               { name: '帖子', max: 100, color: '#fff' },
-              { name: '互赞', max: 100, color: '#fff' },
+              { name: '获赞', max: 100, color: '#fff' },
               { name: '天数', max: 100, color: '#fff' },
               { name: '分享', max: 100, color: '#fff' },
               { name: '收藏', max: 100, color: '#fff' }
@@ -167,7 +177,7 @@ export default {
             },
             data: [
               {
-                value: [100, 30, 60, 60, 80, 80]
+                value: [0, 0, 0, 0, 0, 0]
               }
             ]
           }
@@ -179,8 +189,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // 基于准备好的dom，初始化echarts实例
-      const myChart = echarts.init(this.$refs['sixStart']);
-      myChart.setOption(this.optionChar);      
+      this.myChart = echarts.init(this.$refs['sixStart']);
       // 此处需求需要更改，点击传入userId,然后才去获取数据源
       // update by 2018/11/26
       mui(this.$refs['dynamic-list']).scroll({
@@ -208,7 +217,6 @@ export default {
      *  @param {object} dynamic 动态
      */
     thumbsUp(dynamic) {
-      console.log(dynamic)
       const data = {
         dynamicId: dynamic._id,
         userId: app.globalService.getLoginUserInfo()._id,
@@ -218,15 +226,18 @@ export default {
       app.api.userDynamic.updateDynamicsZan({
         data,
         success: res => {
-          console.log(res.message)
           if (res.message === 'success') {
             // 把更新好友关系的当前用户重新设置到缓存里去
+            if (dynamic.meta.totalPraise) {
+              ++dynamic.meta.totalPraise
+            } else {
+              dynamic.meta.totalPraise = 1
+            }
             this.showAdditive = true
             this.isZan = true
             setTimeout( () => {
               this.showAdditive = false
             },500)
-
           }
         }
       });
@@ -310,11 +321,14 @@ export default {
               item.album[0] = Object.keys(item.album[0]).map(element => {
                 return app.getResourceUrl(item.album[0][element]);
               });
+              this.zanMount += Number((item.meta.totalPraise || 0))
               return item;
             });            
           } else {
             this.listData = []
-          }          
+          }
+          this.optionChar.series[0].data[0].value[1] = this.zanMount
+          this.myChart.setOption(this.optionChar)
         },
         complete: () => {}
       });

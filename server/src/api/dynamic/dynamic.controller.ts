@@ -10,14 +10,14 @@ import formidable = require('formidable');
 import moment = require('moment');
 // 实验目的：能够在子类的controller里面使用basecontroller的公共方法
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
-class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService , IDynamic> {
+class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService, IDynamic> {
   private dynamic: IDynamic;
   private dynamicList: IDynamic[];
   private user: IUser;
-  private dynSingleDieList: IDynSingleDie []; // 动态点赞操作
-  private dynSingleDie: IDynSingleDie ; // 动态点赞操作
-  constructor() {
-    super();
+  private dynSingleDieList: IDynSingleDie[]; // 动态点赞操作
+  private dynSingleDie: IDynSingleDie; // 动态点赞操作
+  constructor(model: any) {
+    super(model);
   }
   /**
    *  个人动态控制器
@@ -171,52 +171,27 @@ class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService , IDynamic> 
     return async (ctx: any) => {
       // 让异步变同步
       const { body } = ctx.request;
-      console.log(32421341234234)
-      console.log(body)
       // 当前用户和被选用户id都不为空
-      if (!global._.isEmpty(body.userId) && !global._.isEmpty(body.acceptUserId)) {
-        // 先去表里面查一下有没有该数据记录
+      if (
+        !global._.isEmpty(body.userId) &&
+        !global._.isEmpty(body.acceptUserId)
+      ) {
+        // 调用底层的service zanservice
+        /**
+         * @param {child} 子表
+         * 传输的数据
+         * 底层点赞业务
+         * 先去表里面查一下有没有该数据记录
         // 没有的话就插入一条，然后返回成功
         // 如果已经存在该条记录了
         // 就返回提示信息
-        // mongoose.Types.ObjectId('576cd26698785e4913b5d0e1')
-        // totalPraise +1
-        // thelast TODO: 将该业务封装至底层处理 by 2018/11/27
-        const acceptUser = body.acceptUser = mongoose.Types.ObjectId(body.acceptUserId)
-        const user = body.user = mongoose.Types.ObjectId(body.userId)
-        // 日期处理类库moment
-        const today: string = moment().format('L') as string;
-        console.log(`today is ${today}`)
-        // 如何强转该类型？
-        // 直接传一个类型进去
-        this.dynSingleDieList = (await DynSingleDie.find({
-          acceptUser,
-          user,
-          create_at: { $gte: today },
-          type: Number(body.type)
-        })) as IDynSingleDie [];
-        console.log(45566464664644546)
-        console.log(this.dynSingleDieList)
-        if (this.dynSingleDieList.length === 0) {
-          // 插入数据
-          body.dynamic = mongoose.Types.ObjectId(body.dynamicId)
-          this.dynSingleDie = new DynSingleDie(body);
-          await this.dynSingleDie.save();
-          const _id = body.dynamicId;
-          // 给被看动态的用户点赞 +1
-          this.dynamic = (await Dynamic.findById(_id) as IDynamic);
-          const totalPraise = this.dynamic.meta.totalPraise + 1
-          await this.dynamic.update(
-            { $inc: {
-              'meta.totalPraise': 1
-            } },
-            { new: true });
+         */
+        const canZan = await this.genericSingleDie(DynSingleDie, body);
+        if (canZan) {
           ctx.body = {
             message: statusCode.success
           };
         } else {
-          // 此处返回失败
-          // 今天之内不可再点赞了
           ctx.body = {
             message: statusCode.error
           };
@@ -225,4 +200,4 @@ class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService , IDynamic> 
     };
   }
 }
-export default new DynamicController();
+export default new DynamicController(Dynamic);
