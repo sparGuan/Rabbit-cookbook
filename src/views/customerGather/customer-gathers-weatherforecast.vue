@@ -1,7 +1,7 @@
 <template>
   <div class="left-weather-forecast">
     <div class="forecast-wrapper">
-
+        <!-- 天气图标 -->
     </div>
   </div>
 </template>
@@ -22,31 +22,19 @@ export default {
      */
     cityWeather(city) {
       this.weatherData = {};
+      const data = {
+        key: "5d98a829bc563fe63d264addfe948a8b",
+        city: city,
+        extensions: "all"
+      }
       app.api.customerGather.getCityWeather({
-          data: {
-          location: city, // 城市
-          output: "json", // 格式
-          ak: "bdEv6dBwm0tHGyfELGnc67PMREZullTl" // 百度地图ak
-          },
+          data,
           success: data => {
             console.log(data);
             this.weatherData = data;
           }
       })
-      // $.ajax({
-      //   type: "POST", //默认是GET
-      //   url: "http://api.map.baidu.com/telematics/v3/weather",
-      //   dataType: "jsonp",
-      //   data: {
-      //     location: city, // 城市
-      //     output: "json", // 格式
-      //     ak: "ohA7QHfg0BBrpiY4kyuIAAsD" // 百度地图ak
-      //   },
-      //   success: data => {
-      //     console.log(data);
-      //     this.weatherData = data;
-      //   }
-      // });
+      
     }
   }
 };

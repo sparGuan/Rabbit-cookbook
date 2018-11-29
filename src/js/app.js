@@ -73,6 +73,7 @@ const site = {
 			successFunData: true, //是否验证成功回调函数的数据
 			showLoading: false //是否显示加载
 		};
+		console.log(421212414)
 		let _options = app.mui.extend(true, {}, options, _default);
 		if (!_options.data) {
 			_options.data = {};
@@ -118,6 +119,11 @@ const site = {
 			}
 			let _data = data;
 			if (_options.successFunData === true) {
+				// 兼容高德地图天气预报API
+				if (data.status === '1') {
+					options.success(_data);
+					return
+				}
 				// message有东西证明是成功
 				// error有东西证明是失败
 				// 啥都没有返回证明是非法入侵
@@ -125,7 +131,7 @@ const site = {
 					if (typeof options.success === 'function') {
 						options.success(_data);
 					}
-				} else if (data.error || data.error.message) {
+				} else if (data.error) {
 					app.mui.alert(data.error.message, '错误提示');
 					return;
 				} else {

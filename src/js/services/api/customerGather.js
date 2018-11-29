@@ -11,12 +11,12 @@ define(() =>{
 			return app.ajax(
 				window.app.mui.extend(
 					{
-            url: 'http://api.map.baidu.com/telematics/v3/weather',
-            dataType: "jsonp",
+            url: 'http://restapi.amap.com/v3/weather/weatherInfo',
 					},
 					ajaxOptions
 				)
 			);
+			
 		},
 	};
 });
