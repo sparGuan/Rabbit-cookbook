@@ -4,8 +4,8 @@ const { isValid } = require('mongoose').Types.ObjectId;
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 // 实验目的：能够在子类的controller里面使用basecontroller的公共方法
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
-import friendService from './friend.service';
-class FriendsController extends BASE_OPEN_SOURCE_API <friendService, IUser> {
+import FriendService from './friend.service';
+class FriendsController extends BASE_OPEN_SOURCE_API <FriendService, IUser> {
   private user: IUser;
   private acceptUserId: string;
   private userId: string;

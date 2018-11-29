@@ -1,4 +1,4 @@
-export default class ActivityService {
+export default class FootprintService {
   public update() {
     console.log(111)
   }

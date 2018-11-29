@@ -4,13 +4,11 @@ import User, { IUser } from '../../db/schema/user';
 import DynSingleDie, { IDynSingleDie } from '../../db/schema/dynSingleDie';
 import DirExistUtils from '../../utils/DirExistUtils';
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
-import dynamicService from './dynamic.service';
-import mongoose = require('mongoose');
+import DynamicService from './dynamic.service';
 import formidable = require('formidable');
-import moment = require('moment');
 // 实验目的：能够在子类的controller里面使用basecontroller的公共方法
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
-class DynamicController extends BASE_OPEN_SOURCE_API<dynamicService, IDynamic> {
+class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
   private dynamic: IDynamic;
   private dynamicList: IDynamic[];
   private user: IUser;

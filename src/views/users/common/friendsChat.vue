@@ -221,10 +221,11 @@ export default {
     },
     doingWrite(e) {
       // 判断服务端返回来的数据是否正在输入
-      setInterval(() => {
+      const timer = setInterval(() => {
         this.readSecond++;
       }, 50);
       if (this.readSecond < 10) {
+        clearInterval(timer)
         return;
       } else {
         if (this.wordLen !== $(e.target).text().length) {
@@ -236,7 +237,9 @@ export default {
             true
           );
           this.wordLen = $(e).text().length;
+          clearInterval(timer)
         } else {
+          clearInterval(timer)
           return;
         }
       }

@@ -56,11 +56,11 @@ let routerConfig = {
 		},
 		// 频道
 		{
-			path: '/customerGather/my-customer-gathers',
+			path: '/customerGather/customer-gathers',
 			name: 'myCustomerGathers',
 			meta: { title: '公共频道' },
 			component: () =>
-				import('../views/customerGather/my-customer-gathers.vue')
+				import('../views/customerGather/customer-gathers.vue')
 		},
 		{
 			path: '/users/welcome', // 欢迎页
