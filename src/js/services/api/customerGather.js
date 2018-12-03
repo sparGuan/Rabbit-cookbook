@@ -7,16 +7,5 @@ import app from '../../app';
 define(() =>{
 	return {
 		//上传更新活动业务
-		getCityWeather: ajaxOptions => {
-			return app.ajax(
-				window.app.mui.extend(
-					{
-            url: 'http://restapi.amap.com/v3/weather/weatherInfo',
-					},
-					ajaxOptions
-				)
-			);
-			
-		},
 	};
 });

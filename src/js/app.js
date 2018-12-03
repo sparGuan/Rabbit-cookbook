@@ -73,7 +73,6 @@ const site = {
 			successFunData: true, //是否验证成功回调函数的数据
 			showLoading: false //是否显示加载
 		};
-		console.log(421212414)
 		let _options = app.mui.extend(true, {}, options, _default);
 		if (!_options.data) {
 			_options.data = {};
@@ -105,7 +104,6 @@ const site = {
 		} else {
 			delete _options.headers;
 		}
-		console.log(_options.data)
 		// if (_options.auth === true && !app.globalService.isLogin()) {
 		// 	if (typeof _options.authFailCallbackFun === 'function') {
 		// 		_options.authFailCallbackFun()
@@ -204,6 +202,7 @@ const site = {
 				options.beforeSend(xhr);
 			}
 		};
+		console.log(_options.data)
 		app.mui.ajax(_url, _options);
 	},
 	//获取图片地址，如果地址带有 http://那么就认为是绝对地址，然后直接返回
