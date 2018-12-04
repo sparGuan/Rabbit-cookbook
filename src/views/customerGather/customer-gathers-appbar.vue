@@ -3,7 +3,7 @@
           <div class="mui-row gathers-app-bar-container">
               <div class="mui-col-xs-4">
                   <!-- TODO: 实现正在播放的音乐 🎵 -->
-                  <div class="music-pic"></div>
+                  <div class="music-pic "><i class="iconfont icon-ziyuanldpi"></i></div>
               </div>
               <div class="mui-col-xs-4 arrow-area" style="position:relative;">
                   <!-- TODO: 实现下拉式的仿QQ看点 -->
@@ -15,14 +15,18 @@
               </div>
           </div> 
           <!-- 搜索窗口 -->
-          <div class="music-palyer"></div> 
+          <div class="music-palyer">
+              <customerGathersPalyer />
+          </div> 
 		</header>
 </template>
 <script>
 import weatherForecast from './customer-gathers-weatherforecast'
+import customerGathersPalyer from './customer-gathers-palyer'
 export default {
   components: {  
-    weatherForecast
+    weatherForecast,
+    customerGathersPalyer
   },
 	data() {
 		return {};
@@ -41,18 +45,20 @@ export default {
   .arrow-area {
     text-align: center;
     line-height: 45px;
+    letter-spacing: 2px;
     .icon-arrow-down {
-      font-size: 12px;      
+      font-size: 12px;
       display: block;
       position: absolute;
-      top: 16px;
-      right: 24px;
-      transform: scale(.7);
+      top: 15px;
+      right: 28px;
+      transform: scale(0.6) rotate(180deg);
     }
   }
 	.gathers-app-bar {
       position: fixed;
       height: auto;
+      opacity: .8;
       background: linear-gradient(to right,#635499,#526d8e,#5b5d8f);
       color:#fff;
       top: 0;
@@ -63,15 +69,14 @@ export default {
           height:100%;
         }
         .music-pic {
-          background-image: url('../../imgs/custom/webwxgetmsgimg.png');
-          height:40px;
+          height: 45px;
+          line-height: 45px;
         }
       }
       .music-palyer {
         width: calc(100% + 20px);
         height: 50px;
         transform: translateX(-10px);
-        background-image: url('../../imgs/custom/webwxgetmsgimg-1.jpg');
         background-repeat: no-repeat;
         background-color: #fbfbfb;
         background-position: 40px;

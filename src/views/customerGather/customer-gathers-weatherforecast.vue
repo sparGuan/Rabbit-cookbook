@@ -3,13 +3,12 @@
     <div class="forecast-wrapper">
         <!-- 温度 -->
       <div class="weather-info">
-          <span style="position: absolute;left: 50px;top: 23px;font-size: 12px;">
-            {{ formatWeek() }}
-          </span>
-
           <span v-text="(Object.keys(weatherData).length > 0 &&  `${weatherData.forecasts[0].casts[0].daytemp}℃`) || '0 ℃'" style="    font-size: 16px;"></span>
           <br>
-          <span v-text="(Object.keys(weatherData).length > 0 &&  weatherData.forecasts[0].casts[0].dayweather) || ''" style="font-size: 12px;transform: translate3d(40px,0px,0px);display: block;"></span>
+          <span v-text="(Object.keys(weatherData).length > 0 &&  weatherData.forecasts[0].casts[0].dayweather) || ''" style="font-size: 12px;display: block;"></span>
+          <span style="position: absolute;right: 0px;top: 23px;font-size: 12px;">
+            {{ formatWeek() }}
+          </span>
       </div>
         <!-- 天气图标 -->
         <customerGathersWeatherIco :whatisWeather="whatisWeather" />

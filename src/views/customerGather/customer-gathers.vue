@@ -2,18 +2,20 @@
 	<div data-page="customer-gathers">
 		<gathersAppbar />
 		<div class="page-content">
-				<!-- 先制作天气栏 作为背景墙-->
-				<!-- 居中的为最新资讯 点击打开列表 -->
-				<!-- 搜索栏 -->
-				<!-- 直面标签栏 -->
+				<!-- 图片墙 -->
+				<!-- 横向列表 -->
+				<!-- 左右列表 -->
+				<customerGathersList />
 		</div>
 	</div>
 </template>
 <script>
 import gathersAppbar from './customer-gathers-appbar'
+import customerGathersList from './customer-gathers-list'
 export default {
 	components: {  
-    gathersAppbar
+		gathersAppbar,
+		customerGathersList
   },
 	data() {
 		return {};
