@@ -17,6 +17,7 @@
           <!-- 搜索窗口 -->
           <div class="music-palyer">
               <customerGathersPalyer />
+              
           </div> 
 		</header>
 </template>
@@ -74,13 +75,18 @@ export default {
         }
       }
       .music-palyer {
-        width: calc(100% + 20px);
+        width: calc(~'100% + 20px');
         height: 50px;
         transform: translateX(-10px);
         background-repeat: no-repeat;
-        background-color: #fbfbfb;
+        background-color: #fff;
         background-position: 40px;
         background-size: contain;
+        border-radius: 25px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        overflow: hidden;
       }
   }
 </style>
