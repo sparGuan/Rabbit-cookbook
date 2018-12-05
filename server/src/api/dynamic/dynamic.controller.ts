@@ -128,7 +128,17 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
         // this.DynamicList = await Dynamic.find({ userId: body.userId });
         const _id = body.userId;
         this.user = (await User.findById(_id)) as IUser; // 查询一条用户对象信息
+        // 在搜索所有的列表之前，先判断哪些是被该用户die过的
+        // 查询die表，type为0的且是该用户今天赞过的
+        // 查询die表，type为1的且是该用户今天分享过足迹的
+        // 执行前的操作
+        // 获取到已经赞过的ids
         if (!global._.isEmpty(this.user)) {
+          const dynamicIdsByZan: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 0}, body));
+          // 获取已经分享到足迹过的Ids
+          const dynamicIdsByShare: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 1}, body));
+          console.log(dynamicIdsByZan)
+          console.log(dynamicIdsByShare)
           const friends: IUser[] = this.user.get('friends') as IUser[];
           const userIds: string[] = [...friends, this.user].map(v => v._id);
           this.dynamicList = (await Dynamic.find({
@@ -138,6 +148,26 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
             .sort({ create_at: -1 })
             .limit(10)
             .exec()) as IDynamic[];
+            if (this.dynamicList.length > 0) {
+              this.dynamicList.forEach( (item: any) => {
+                if (dynamicIdsByZan.indexOf(item._id) > -1) {
+                  item.hasZan = true
+                }
+                if (dynamicIdsByShare.indexOf(item._id) > -1) {
+                  console.log(231412414)
+                  item.hasShare = true
+                }
+                // dynamicIdsByZan.some( keof => {
+                //   if (keof.equals(item.id)) {
+
+                //   }
+                //   return ;
+                //   });
+                // dynamicIdsByShare.some( elem => {
+                //     return elem.equals(item.id);
+                // });
+              })
+            }
           ctx.body = {
             message: statusCode.success,
             dynamicList: this.dynamicList
@@ -184,7 +214,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
         // 如果已经存在该条记录了
         // 就返回提示信息
          */
-        const canZan = await this.genericSingleDie(DynSingleDie, body);
+        const canZan = await this.genericSingleDie(Dynamic , DynSingleDie, body);
         if (canZan) {
           ctx.body = {
             message: statusCode.success

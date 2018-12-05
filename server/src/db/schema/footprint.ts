@@ -11,15 +11,15 @@ export declare interface IFootprint extends mongoose.Document {
   title: string; // 足迹标题
   album: string []; // 足迹相册
   user: IUser; // 发布的用户
-  comment: string; // 存在评论的足迹
+  comment: string []; // 存在评论的足迹 ---> 动态发布的
+  desc: string;
   create_at: Date;
   // 最后修改日期
   update_at: Date;
   // 链接类型 ===》 图文链接或者视频链接 ===> 获取的不一样 ===》 因为要展示的样式不一样
-  linkType: number;
-  link: string; // 跳转链接打开内页
-  footprintType: string; // 足迹类型 0动态发布 1 活动发布 2 QQ随机看点 3 官方发布 4广告发布
-  insidePagesId: string// 内页ID ===> 作用于查找相对的内页
+  linkType: number; // 2：有视频的类型，0：图文的类型:1：纯文本的类型:3：灯箱的类型
+  footprintType: number; // 足迹类型 0动态发布 1 活动发布 #先干掉吧 QQ随机看点 3 官方发布 4广告发布
+  sourceData: string// 内页ID ===> 作用于查找相对的内页
 }
 // 自增ID初始化
 // 1. 是否是动态发布
@@ -41,7 +41,13 @@ const footprint_schema: mongoose.Schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  // 评论
   comment: {
+    type: Array,
+    trim: true
+  },
+  // 描述
+  desc: {
     type: String,
     trim: true
   },
@@ -52,18 +58,14 @@ const footprint_schema: mongoose.Schema = new mongoose.Schema({
   update_at: { type: Date, default: Date.now },
   // 其他元信息
   linkType: {
-    type: String,
-    trim: true
-  },
-  link: {
-    type: String,
+    type: Number,
     trim: true
   },
   footprintType: {
-    type: String,
+    type: Number,
     trim: true
   },
-  insidePagesId: {
+  sourceData: {
     type: String,
     trim: true
   }

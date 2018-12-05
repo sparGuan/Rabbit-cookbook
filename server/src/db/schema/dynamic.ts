@@ -82,7 +82,7 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
   // 其他元信息
   meta: {
     totalPosts: {type: Number, default: 0}, // 帖子数 ===> 不存于此处
-    totalCollection: {type: Number, default: 0}, // 收藏数===> 后期替换 ===》足迹
+    totalFootprint: {type: Number, default: 0}, // 足迹
     totalShare: {type: Number, default: 0}, // 分享数
     totalDays: {type: Number, default: 0}, // 在线天数===》 后期替换
     totalPraise: {type: Number, default: 0} // 赞数

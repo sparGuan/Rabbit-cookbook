@@ -3,6 +3,8 @@
 export default interface IController {
   // <T>(arg: T): T;
   // ?是可选参数
-  genericSingleDie<T>(child?: T , data?: {}): void;
+  genericSingleDie<M, T>(root?: M , child?: T , data?: {}): Promise<boolean>;
+  // TODO: 查询中间表<die> 所有该用户今天操作过的动态的赞
+  queryDieByTodayCount<M>(DieIdentity?: M, data?: {}): Promise<string []>;
 }
 

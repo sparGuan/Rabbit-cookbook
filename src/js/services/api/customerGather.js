@@ -6,6 +6,19 @@
 import app from '../../app';
 define(() =>{
 	return {
-		//上传更新活动业务
+		// 保存一条足迹
+		/**
+		 * @param {object} 动态
+		 */
+		saveFootprint: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/footprint/saveFootprint'
+					},
+					ajaxOptions
+				)
+			);
+		},
 	};
 });

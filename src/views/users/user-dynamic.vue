@@ -80,7 +80,7 @@
                         <span v-if="showAdditive">+ 1</span>
                       </transition>
                     </a>
-                    <a href="javascript:void(0)">
+                    <a href="javascript:void(0)" @click="shareToFoot(item)">
                       <i class="iconfont icon-jiaoya rollIcon" :class="isShare ? 'active':''"></i>
                     </a>
                     <a  href="javascript:void(0)" @click="shareAction" >
@@ -110,7 +110,7 @@ export default {
   watch: {
      'acceptUser': {
           handler:function(newValue,oldValue){  
-              this.queryUserAndFriendsDynamic(newValue.acceptUserId);
+              this.queryUserAndFriendsDynamic(newValue.acceptUserId,app.globalService.getLoginUserInfo()._id);
           },
           deep:true,
       },
@@ -212,6 +212,34 @@ export default {
     });
   },
   methods: {
+    /**
+     * @param {object} 分享到足迹 动态数据
+     * @param {userId} 用户Id
+     * @param {acceptUserId} 被请求Id
+     * 一个用户一条动态只能分享一次
+     */
+    shareToFoot(dynamic) {
+      this.isShare = true;
+      // TODO：保存到足迹列表数据
+      // 从足迹列表数据拉出数据
+      // 分析数据结果
+      // 生成足迹
+      const data = {
+        dynamicId: dynamic._id,
+        userId: app.globalService.getLoginUserInfo()._id,
+        acceptUserId: dynamic.user._id,
+        footprintType: 0, // 类型0为动态发布
+        linkType: 0,// 0代表图文类型
+        type: 1,
+        footPrint:dynamic // 足迹为数据
+      }
+      app.api.customerGather.saveFootprint({
+        data,
+        success: res => {
+         console.log(res)
+        }
+      })
+    },
     // 实现点赞功能
     /**
      *  @param {object} dynamic 动态
@@ -306,12 +334,16 @@ export default {
       this.showModal = true;
       this.dynamicId = dynamicId;
     },
-    queryUserAndFriendsDynamic(userId) {
+    /**
+     * @param userId
+     * @param acceptUserId
+     */
+    queryUserAndFriendsDynamic(userId,acceptUserId) {
       // 将此处的data改成动态
       // 由谁的用户id来决定谁的数据展示
       // 完成的时候将其删除
       // const data = { userId: app.globalService.getLoginUserInfo()._id };
-      const data = { userId };
+      const data = { userId,acceptUserId };
       app.api.userDynamic.queryUserAndFriendsDynamic({
         data,
         success: res => {          

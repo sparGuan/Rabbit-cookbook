@@ -107,8 +107,9 @@ import takeH5Photos from '../../js/utils/takeH5Photos';
  *  1.完成分享 
  *  2.完成点赞 OK
  *  3.完成自动转发到足迹 =============//消息列表 doing 2018/11/28 仿QQ看点实现足迹
+ *  update：分享到足迹
  *  <先去实现足迹列表>
- *  // 预期完成日： 2018/12/6 10天
+ *  // 预期完成日： 2018/12/12 16天
  */
 export default {
   name: 'userCenter',
