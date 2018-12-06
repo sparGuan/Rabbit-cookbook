@@ -13,7 +13,7 @@ export declare interface IFootprint extends mongoose.Document {
   // 最后修改日期
   update_at: Date;
   // 链接类型 ===》 图文链接或者视频链接 ===> 获取的不一样 ===》 因为要展示的样式不一样
-  linkType: number; // 2：有视频的类型，0：单图文的类型:1：纯文本的类型:3：多图文灯箱的类型
+  linkType: number; // 2：有视频的类型; 0：单图文的类型; 1：纯文本的类型; 3：多图文灯箱的类型
   footprintType: number; // 足迹类型 0动态发布 1 活动发布  3 官方发布 4广告发布 --区别于不同的类型获取不同的数据结构
   sourceDataId: string// 内页ID ===> 作用于查找相对的内页 --->判断类型去获取Id，知道是哪张表
 }

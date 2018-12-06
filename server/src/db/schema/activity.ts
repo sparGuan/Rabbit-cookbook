@@ -2,6 +2,7 @@ import mongoose = require('mongoose');
 import { db } from '../connection';
 import mongoosePaginate = require('mongoose-paginate'); // 翻页插件
 import autoIncrement = require('mongoose-auto-increment'); // id自增插件
+import { IUser } from './user';
 /**
  * 用户模型
  * @param {String} uploadBgFile 首图背景
@@ -17,7 +18,7 @@ export interface IActivity extends mongoose.Document {
   ruleBg: string;
   introduce: string;
   rule: string;
-  userId: object;
+  userId: IUser;
   create_at: Date;
   // 最后修改日期
   update_at: Date;

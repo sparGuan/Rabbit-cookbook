@@ -4,12 +4,17 @@ import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 import FootprintService from './footprint.service';
 import DynSingleDie, { IDynSingleDie } from '../../db/schema/dynSingleDie';
 import Dynamic, { IDynamic, IDynamicComment } from '../../db/schema/dynamic';
+import Activity, { IActivity } from '../../db/schema/activity';
 import mongoose = require('mongoose');
 // 此处需要的是路由
 class FootprintController extends BASE_OPEN_SOURCE_API< FootprintService , IFootprint > {
   private footprint: IFootprint;
   private footprintList: IFootprint[];
   private FootprintService: any;
+  private dynamic: IDynamic;
+  private dynamicList: IDynamic [];
+  private activity: IActivity;
+  private activityList: IActivity[];
   constructor(model: any) {
     super(model)
   }
@@ -60,13 +65,71 @@ class FootprintController extends BASE_OPEN_SOURCE_API< FootprintService , IFoot
         .sort({ create_at: -1 })
         .limit(10)
         .exec()) as IFootprint [];
-        // 对该10条足迹进行分类
-        const dynamicType = [] // 动态类型
-        this.footprintList.forEach( item => {
-          if () {
-
+        console.log(this.footprintList)
+        if (this.footprintList.length > 0 ) {
+          // 对该10条足迹进行分类
+        const dynamicTypeIds: any = [] // 动态类型
+        const activityTypeIds: any = [] // 活动类型
+        // 分类筛选数据
+        // 动态类型为一组
+        // 活动类型为一组
+        this.footprintList.forEach( (item: any) => {
+          switch ( item.footprintType ) {
+            case 0:
+              dynamicTypeIds.push(item.sourceDataId)
+              break;
+            case 1:
+              activityTypeIds.push(item.sourceDataId)
+              break;
+            default:
+              break;
           }
         })
+        // 分好类型之后。。。。
+        // 向数据库发起5次请求
+        // 查询动态表
+        console.log(452345352)
+        console.log(dynamicTypeIds)
+        if ( dynamicTypeIds.length > 0 ) {
+          this.dynamicList = (await Dynamic.find({
+            _id: { $in: dynamicTypeIds }
+          })
+          .populate({ path: 'user', select: 'headImg nickName' })
+          .sort({ create_at: -1 }).exec()) as IDynamic[];
+          console.log(242123411)
+          console.log(this.dynamicList)
+        }
+        if (activityTypeIds.length > 0) {
+          this.activityList = (await Activity.find({
+            _id: { $in: activityTypeIds }
+          })
+          .populate({ path: 'user', select: 'headImg nickName' })
+          .sort({ create_at: -1 }).exec()) as IActivity[];
+        }
+        [this.dynamicList, this.activityList].forEach( (item: any []) => {
+            if (typeof item  === 'object' && item.length > 0) {
+              item.forEach( (item: any, index: number) => {
+                item._doc.footprintType = index
+              })
+            }
+        })
+        const footprintAllList = [...this.dynamicList, ...this.activityList]
+        // 最终将整个数组返回前端
+        if (footprintAllList.length > 0) {
+          ctx.body = {
+            message: statusCode.success,
+            footprintAllList
+          };
+        } else {
+          ctx.body = {
+            message: statusCode.noOne
+          };
+        }
+      } else {
+        ctx.body = {
+          message: statusCode.noOne
+        };
+      }
     };
   }
 }
