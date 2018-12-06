@@ -76,10 +76,10 @@ class FootprintController extends BASE_OPEN_SOURCE_API< FootprintService , IFoot
         this.footprintList.forEach( (item: any) => {
           switch ( item.footprintType ) {
             case 0:
-              dynamicTypeIds.push(item.sourceDataId)
+              dynamicTypeIds.push(item.sourceDataId.toString())
               break;
             case 1:
-              activityTypeIds.push(item.sourceDataId)
+              activityTypeIds.push(item.sourceDataId.toString())
               break;
             default:
               break;

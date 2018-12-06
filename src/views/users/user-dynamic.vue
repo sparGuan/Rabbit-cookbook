@@ -230,8 +230,7 @@ export default {
         acceptUserId: dynamic.user._id,
         footprintType: 0, // 类型0为动态发布
         linkType: 0,// 0代表图文类型
-        type: 1,
-        footPrint:dynamic // 足迹为数据
+        type: 1
       }
       app.api.customerGather.saveFootprint({
         data,

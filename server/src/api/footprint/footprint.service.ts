@@ -9,11 +9,9 @@ export default class FootprintService {
       if (body.footprintType === '0') {
         // 动态数据类型为0
         data.footprintType = Number(body.footprintType)
-        data.desc = body.speech
-        data.sourceData = body._id // 来源哪张表，就获取该数据的id
+        data.sourceDataId = body.sourceDataId // 来源哪张表，就获取该数据的id
         data.user = mongoose.Types.ObjectId(body.acceptUserId)
         data.linkType = Number(body.linkType)
-        data.comment = body.comment
         this.Footprint = new Footprint(data);
         this.Footprint = await this.Footprint.save();
     }
