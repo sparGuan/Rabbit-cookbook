@@ -360,7 +360,7 @@ export default {
       .community-item {
         width: 39px;
         height: 39px;
-        box-shadow: 0 0px 10px 5px #f3f3f3;
+        box-shadow: 0 0px 10px 5px #f3f3f3 inset;
         background-color: blueviolet;
         display: inline-block;
         border-radius: 50%;

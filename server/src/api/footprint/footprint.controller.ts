@@ -43,5 +43,31 @@ class FootprintController extends BASE_OPEN_SOURCE_API< FootprintService , IFoot
       }
     };
   }
+  /**
+   * TODO: 获取所有列表数据
+   * 视频获取单图文放置列表第一
+   * 如果他是单图文或者单视频，走第一
+   */
+  public queryFootPrintList() {
+    return async (ctx: any) => {
+      // 让异步变同步
+      const { body } = ctx.request;
+      // 先查询10条足迹
+      // 查询0的为第一批
+      this.footprintList = (await Footprint.find({
+      })
+        .populate({ path: 'user', select: 'headImg nickName' })
+        .sort({ create_at: -1 })
+        .limit(10)
+        .exec()) as IFootprint [];
+        // 对该10条足迹进行分类
+        const dynamicType = [] // 动态类型
+        this.footprintList.forEach( item => {
+          if () {
+
+          }
+        })
+    };
+  }
 }
 export default new FootprintController(Footprint);

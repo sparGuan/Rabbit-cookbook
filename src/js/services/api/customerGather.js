@@ -20,5 +20,16 @@ define(() =>{
 				)
 			);
 		},
+		//查询用户基本信息
+		queryFootPrintList: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/footprint/queryFootPrintList'
+					},
+					ajaxOptions
+				)
+			);
+		}
 	};
 });

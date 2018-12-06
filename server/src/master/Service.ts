@@ -69,7 +69,7 @@ export default class Service<T> {
     }).select('dynamic')
   ) as any [];
   this.MirrorList.forEach( item => {
-    ids.push(item.dynamic)
+    ids.push(item.dynamic.toString())
   })
     return ids
   }

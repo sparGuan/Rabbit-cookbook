@@ -73,7 +73,7 @@
                     <!-- 点赞 -->
                     <a href="javascript:void(0)" @click="thumbsUp(item)">
                       <i class="iconfont icon-icon rollIcon" 
-                      :class="isZan ? 'active':''"
+                      :class="isZan || item.hasZan? 'active':''"
                       ></i>
                       <span class="thumbs-mount" v-if="item.meta.totalPraise > 0" v-text="item.meta.totalPraise" />
                       <transition name="slide-fade">
@@ -81,11 +81,11 @@
                       </transition>
                     </a>
                     <a href="javascript:void(0)" @click="shareToFoot(item)">
-                      <i class="iconfont icon-jiaoya rollIcon" :class="isShare ? 'active':''"></i>
+                      <i class="iconfont icon-jiaoya rollIcon" :class="isShare  || item.hasShare? 'active':''"></i>
                     </a>
                     <a  href="javascript:void(0)" @click="shareAction" >
                       <i class="iconfont icon-pengyouwang rollIcon" 
-                      :class="isZuJi ? 'active':''"
+                      :class="isZuJi? 'active':''"
                       style="font-size: 18px;"></i>
                     </a>
                   </div>
@@ -245,6 +245,7 @@ export default {
      *  @param {object} dynamic 动态
      */
     thumbsUp(dynamic) {
+      console.log(dynamic)
       const data = {
         dynamicId: dynamic._id,
         userId: app.globalService.getLoginUserInfo()._id,

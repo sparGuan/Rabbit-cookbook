@@ -137,8 +137,6 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
           const dynamicIdsByZan: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 0}, body));
           // 获取已经分享到足迹过的Ids
           const dynamicIdsByShare: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 1}, body));
-          console.log(dynamicIdsByZan)
-          console.log(dynamicIdsByShare)
           const friends: IUser[] = this.user.get('friends') as IUser[];
           const userIds: string[] = [...friends, this.user].map(v => v._id);
           this.dynamicList = (await Dynamic.find({
@@ -150,22 +148,12 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
             .exec()) as IDynamic[];
             if (this.dynamicList.length > 0) {
               this.dynamicList.forEach( (item: any) => {
-                if (dynamicIdsByZan.indexOf(item._id) > -1) {
-                  item.hasZan = true
+                if (dynamicIdsByZan.indexOf(item._id.toString()) > -1) {
+                  item._doc.hasZan = true
                 }
-                if (dynamicIdsByShare.indexOf(item._id) > -1) {
-                  console.log(231412414)
-                  item.hasShare = true
+                if (dynamicIdsByShare.indexOf(item._id.toString()) > -1) {
+                  item._doc.hasShare = true
                 }
-                // dynamicIdsByZan.some( keof => {
-                //   if (keof.equals(item.id)) {
-
-                //   }
-                //   return ;
-                //   });
-                // dynamicIdsByShare.some( elem => {
-                //     return elem.equals(item.id);
-                // });
               })
             }
           ctx.body = {

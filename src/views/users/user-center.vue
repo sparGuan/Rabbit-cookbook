@@ -26,11 +26,11 @@
                     </div>
                     <div class="adaim">{{userInfo.nickName}}</div>
                     <div class="desc-person">{{userInfo.descPerson}}</div>
-                    <div>
+                    <!-- <div>
                         <div class="switch-btn dynamic" @click="editDynamic($event)"><i class="iconfont icon-discover" style="margin-right: 5px;"></i>动态</div>
                         <div class="switch-btn modification" @click="editModification($event)">
                           <i class="iconfont  icon-gerenxinxi1" style="margin-right: 5px;"></i>认证</div>
-                    </div>                            
+                    </div>                             -->
                   </div>          
                 </div>
                 <div class="waveWrapper">
@@ -216,7 +216,8 @@ export default {
       this.toolIndex = toolIndex;
       switch (toolIndex) {
         case 0:
-          this.takePhoto();
+          // this.takePhoto();
+          this.editDynamic(e)
           break;
         case 1:
           this.collection();
@@ -225,7 +226,8 @@ export default {
           this.userInfoSite();
           break;
         case 3:
-          this.multiplayerRoom();
+          this.editModification(e)
+          // this.multiplayerRoom();
           break;
         case 4:
           this.addActivity();
@@ -396,7 +398,7 @@ export default {
       border-radius: 50%;
       margin: 0 auto;
       border: 2px solid #f3f3f3;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
       position: relative;
       &:before {
         position: absolute;
