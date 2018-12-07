@@ -224,17 +224,27 @@ export default {
       // 从足迹列表数据拉出数据
       // 分析数据结果
       // 生成足迹
+      let linkType;
+      if (dynamic.album.length === 1) {
+        linkType = 0
+      } else {
+        linkType = 3
+      }
       const data = {
         dynamicId: dynamic._id,
         userId: app.globalService.getLoginUserInfo()._id,
         acceptUserId: dynamic.user._id,
+        type: 1,
         footprintType: 0, // 类型0为动态发布
-        linkType: 0,// 0代表图文类型
-        type: 1
+        linkType,// 0代表图文类型
+        sourceDataId: dynamic._id
       }
       app.api.customerGather.saveFootprint({
         data,
         success: res => {
+          // if (res.success === 'success') {
+          //   res.footprintAllList
+          // }
          console.log(res)
         }
       })
@@ -244,7 +254,6 @@ export default {
      *  @param {object} dynamic 动态
      */
     thumbsUp(dynamic) {
-      console.log(dynamic)
       const data = {
         dynamicId: dynamic._id,
         userId: app.globalService.getLoginUserInfo()._id,

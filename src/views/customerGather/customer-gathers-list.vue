@@ -9,8 +9,9 @@
     <ul class="mui-scroll">
         <!-- 如果是单图文类型 || 视频类型 -->
         <li class="list-item" :key="item._id" v-for="item in listItem">
-            <div>
-              <div class="lutter-full-img" >
+
+            <div v-if="getRandomListItem(item) && showRowItem">
+              <div class="lutter-full-img" :style="`background-image:url(${getImage(this.checkType(item.album[0].album0))})`">
                 <!-- 里面是否有video的图标 -->
               </div>
               <div class="lutter-img-txt">
@@ -25,7 +26,7 @@
               </div>
             </div>
             
-            <div>
+            <div v-else-if="getRandomListItem(item) && showLItem">
               <div class="grow-left-img">
               </div>
               <div class="grow-right-desc">
@@ -34,7 +35,7 @@
               </div>
             </div>
 
-            <div>
+            <div v-else-if="getRandomListItem(item) && showRItem">
               <div class="brow-left-desc">
                 <p class="brow-left-tit">单身是一种生活方式</p>
                 <p class="brow-left-msg">对于单身女性而言，年龄越大面临着来自社会及家庭的压力也越大...</p>
@@ -43,7 +44,7 @@
               </div>
             </div>
 
-            <div>
+            <div v-else-if="!getRandomListItem(item) && item.linkType === 3">
               <div class="grid-item-wrapper">
                 <ul class="grid-list mui-clearfix">
                   <li class="grid-list-item"></li>
@@ -59,48 +60,8 @@
                 <p class="grid-bottom-msg">娱小美</p>
               </div>
             </div>
+
         </li>
-        <!-- 左右排版列表 -->
-        <!-- 左图右列表 -->
-        <!-- 如果是单图文类型 -->
-        <!-- <li class="list-item">
-          <div class="grow-left-img">
-              
-          </div>
-          <div class="grow-right-desc">
-            <p class="grow-right-tit">如何用手机拍出高大上的美食 ？</p>
-            <p class="grow-right-msg">每一个资深食货都深藏着一颗拍好美食的心，还隐藏着一小份深更半夜在朋友圈拉仇恨的小小虚荣感...</p>
-          </div>
-        </li> -->
-        <!-- 右图左列表 -->
-        <!-- 如果是单图文类型 -->
-        <!-- <li class="list-item">
-          <div class="brow-left-desc">
-            <p class="brow-left-tit">单身是一种生活方式</p>
-            <p class="brow-left-msg">对于单身女性而言，年龄越大面临着来自社会及家庭的压力也越大...</p>
-          </div><div class="brow-right-img">
-
-          </div>
-        </li> -->
-        <!-- 格子多图列表 一般用于动态发表，活动发表文章 -->
-        <!-- 格子类型 -->
-        <!-- <li class="list-item">
-            <div class="grid-item-wrapper">
-              <ul class="grid-list mui-clearfix">
-                <li class="grid-list-item"></li>
-                <li class="grid-list-item"></li>
-                <li class="grid-list-item"></li>
-                <li class="grid-list-item"></li>
-                <li class="grid-list-item"></li>
-                <li class="grid-list-item"></li>
-              </ul>
-            </div>
-
-            <div class="grid-bottom-desc">
-              <p class="grid-bottom-tit">路人镜头下的杨清柠，不料被身后的男伴抢镜，网友：新男友 ？</p>
-              <p class="grid-bottom-msg">娱小美</p>
-            </div>
-        </li> -->
     </ul>
   </div>
 </template>
@@ -109,9 +70,13 @@ export default {
   props: [],
   data() {
     return {
+      showRowItem: false, // 横向图文
+      showLItem: false, // false为左
+      showRItem: false,
       listItem: []
     }
   },
+  
   mounted() {
     mui(this.$refs['custom_gathers_list']).scroll({
         deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
@@ -120,12 +85,48 @@ export default {
     this.getList()
   },
   methods: {
+    // 传入对象，判断类型，返回需要的值
+    checkType(type) {
+      if (type === 0 ) {
+        return 
+      }
+    },
+    // 获取图片
+    getImage(url) {
+      return app.getResourceUrl(url)
+    },
+    getRandomListItem(item) {
+      // 单图文或者单视频下
+      const ran = Math.random() * 10
+      if ( Number(item.linkType) === 0 || Number(item.linkType) === 2 ) {
+          if (!this.showRowItem || ran >= 8 ) {
+            this.showRowItem = true
+          } else {
+            if (!this.showLItem) {
+              this.showLItem = true
+              this.showRItem = false
+            } else {
+              this.showLItem = false
+              this.showRItem = true
+            }
+          }
+          return true
+      } else {
+        this.showRowItem = false;
+        this.showLItem = false;
+        this.showRItem = false;
+        return false
+      }
+    },
     getList() {
       const data = {}
       app.api.customerGather.queryFootPrintList({
         data,
         success: res => {
-          console.log(res)
+            if (res.message === 'success') {
+               this.listItem = res.footprintAllList
+               console.log(this.listItem)
+            }
         }
       })
     }
@@ -162,7 +163,7 @@ export default {
   font-size: 12px;
 }
 .lutter-full-img {
-  background-image: url('../../../src/imgs/custom/list-item.png');
+  // background-image: url('../../../src/imgs/custom/list-item.png');
   height: 180px;
   background-size: cover;
   background-repeat: no-repeat;
