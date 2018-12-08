@@ -85,7 +85,7 @@ export default {
         background-position: 40px;
         background-size: contain;
         border-radius: 25px;
-        border-bottom-left-radius: 0;
+        border-bottom-left-radius: 25px;
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
         overflow: hidden;

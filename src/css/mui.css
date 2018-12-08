@@ -4958,13 +4958,11 @@ body > .mui-progressbar {
 	position: absolute;
 	top: 40px;
 	bottom: 0;
-
 	width: 100%;
 	height: auto;
 }
 .mui-fullscreen.mui-slider .mui-slider-item > a {
 	top: 50%;
-
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
