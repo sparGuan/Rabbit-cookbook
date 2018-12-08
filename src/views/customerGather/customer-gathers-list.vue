@@ -11,14 +11,14 @@
         <li class="list-item" :key="item._id" v-for="item in listItem">
 
             <div v-if="getRandomListItem(item) && showRowItem">
-              <div class="lutter-full-img" :style="`background-image:url(${getImage(this.checkType(item.album[0].album0))})`">
+              <div class="lutter-full-img" :style="`background-image:url(${getImage(checkType(item,'image'))})`">
                 <!-- 里面是否有video的图标 -->
               </div>
               <div class="lutter-img-txt">
                 <div class="lutter-left-info">
 
                 </div><div class="lutter-right-desc">
-                    <p class="lutter-right-tit">武汉大学的樱花开了！</p>
+                    <p class="lutter-right-tit" v-text="checkType(item, 'title')">武汉大学的樱花开了！</p>
                     <p class="lutter-right-msg" >
                       3月底至4月初开放的垂枝樱花，位于枫园三舍南侧路边和樱园南玻绿地附近；4月初开放...
                     </p>
@@ -47,17 +47,12 @@
             <div v-else-if="!getRandomListItem(item) && item.linkType === 3">
               <div class="grid-item-wrapper">
                 <ul class="grid-list mui-clearfix">
-                  <li class="grid-list-item"></li>
-                  <li class="grid-list-item"></li>
-                  <li class="grid-list-item"></li>
-                  <li class="grid-list-item"></li>
-                  <li class="grid-list-item"></li>
-                  <li class="grid-list-item"></li>
+                  <li class="grid-list-item" v-for="(item,index) in item.album[0]" :key="index" :style="`background-image:url(${getImage(item)})`"></li>
                 </ul>
               </div>
               <div class="grid-bottom-desc">
-                <p class="grid-bottom-tit">路人镜头下的杨清柠，不料被身后的男伴抢镜，网友：新男友 ？</p>
-                <p class="grid-bottom-msg">娱小美</p>
+                <p class="grid-bottom-tit" v-text="item.speech"></p>
+                <p class="grid-bottom-msg">来自： <span class="head-box" :style="`background-image:url(${getImage(item.user.headImg)})`"></span>{{item.user.nickName}}</p>
               </div>
             </div>
 
@@ -86,13 +81,27 @@ export default {
   },
   methods: {
     // 传入对象，判断类型，返回需要的值
-    checkType(type) {
-      if (type === 0 ) {
+    // 分配数据控制器
+    checkType(item,require) {
+    // 检测类型，需要什么返回什么
+    // 0是动态类型
+      if (item.footprintType === 0) {
+        switch(require)
+        {
+            case 'image':
+                return item.album[0].album0
+            case 'title':
+                return item.speech
+                break;
+            default:
+               break;
+        }
         return 
       }
     },
     // 获取图片
     getImage(url) {
+      console.log(url)
       return app.getResourceUrl(url)
     },
     getRandomListItem(item) {
@@ -135,6 +144,23 @@ export default {
 </script>
 <style lang="less" scoped>
 @color-font:#464646;
+.custom-gathers-list {
+  max-height: calc(~'100vh - 140px');
+  margin-top: 100px;
+}
+.head-box {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 1px 0px rgba(0,0,0,.1) inset;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
 .list-item {
   margin-bottom:10px;
   background: #fff;
@@ -242,7 +268,7 @@ export default {
       display: block;
       height: 50px;
       height: 80px;
-      background-image: url('../../../src/imgs/test/yuantiao.jpg');
+      // background-image: url('../../../src/imgs/test/yuantiao.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;

@@ -23,8 +23,6 @@ export declare interface IDynamic extends mongoose.Document {
   update_at: Date;
   // 其他元信息
   meta: IMeta;
-  hasZan: boolean;
-  hasShare: boolean;
   // 分享回来展示的动态
   forwardingDynamics: IforwardingDynamics;
   dynamicCommentList: IDynamicComment[];

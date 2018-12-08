@@ -64,6 +64,7 @@ export default {
       color:#fff;
       top: 0;
       left: 0;
+      border-bottom-left-radius: 25px;
       .gathers-app-bar-container {
         height:100%;
         &>div {
@@ -77,6 +78,7 @@ export default {
       .music-palyer {
         width: calc(~'100% + 20px');
         height: 50px;
+        border-bottom-left-radius: 25px;
         transform: translateX(-10px);
         background-repeat: no-repeat;
         background-color: #fff;

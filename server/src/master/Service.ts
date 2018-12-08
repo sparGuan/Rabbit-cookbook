@@ -18,6 +18,7 @@ export default class Service<T> {
     this.MirrorList = (await Child.find({
       acceptUser,
       user,
+      dynamic: mongoose.Types.ObjectId(data.dynamicId),
       create_at: { $gte: today },
       type: Number(data.type)
     })) as any [];

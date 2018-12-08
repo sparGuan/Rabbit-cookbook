@@ -224,12 +224,7 @@ export default {
       // 从足迹列表数据拉出数据
       // 分析数据结果
       // 生成足迹
-      let linkType;
-      if (dynamic.album.length === 1) {
-        linkType = 0
-      } else {
-        linkType = 3
-      }
+      let linkType = 3;
       const data = {
         dynamicId: dynamic._id,
         userId: app.globalService.getLoginUserInfo()._id,
