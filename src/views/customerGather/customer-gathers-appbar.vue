@@ -17,7 +17,6 @@
           <!-- 搜索窗口 -->
           <div class="music-palyer">
               <customerGathersPalyer />
-              
           </div> 
 		</header>
 </template>

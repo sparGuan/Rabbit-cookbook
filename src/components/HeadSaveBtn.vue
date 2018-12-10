@@ -2,7 +2,9 @@
     <!-- 保存的模块 -->
     <div data-page="headSaveBtn">
       <label @click="$store.dispatch('saveModules')">
-        <span class="head-save-btn"><i class="iconfont icon-baocun"></i></span>
+        <span class="head-save-btn">
+          <i class="iconfont icon-jingdianfabu"></i> 
+        </span>
       </label>
     </div>
 </template>
@@ -25,13 +27,14 @@ export default {
   height: auto;
   position: absolute;
   right: 5px;
-  top: 5px;
+  top: 0px;
   padding: 5px;
   .head-save-btn {
     color: #007aff;
   }
   & i {
-    font-size: 24px;
+    font-size: 34px;
+    display: inline-block;
   }
 }
 </style>

@@ -16,7 +16,6 @@
               </div>
               <div class="lutter-img-txt">
                 <div class="lutter-left-info">
-
                 </div><div class="lutter-right-desc">
                     <p class="lutter-right-tit" v-text="checkType(item, 'title')">武汉大学的樱花开了！</p>
                     <p class="lutter-right-msg" >
@@ -101,7 +100,6 @@ export default {
     },
     // 获取图片
     getImage(url) {
-      console.log(url)
       return app.getResourceUrl(url)
     },
     getRandomListItem(item) {

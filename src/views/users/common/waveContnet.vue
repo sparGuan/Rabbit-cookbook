@@ -70,7 +70,6 @@ export default {
   },
   watch: {
     value(now,old) {
-      console.log(this.byChatUser)
       if (!now && this.byChatUser) {
         const _this = this
          this.$store.commit('SOCKET_USER_HASNEWS',{user: this.byChatUser, isHasNewChating : false, Vue: _this, })
@@ -125,14 +124,10 @@ export default {
       // 获取用户id查询该用户自己创建的活动
       // $store.keepLivesConfig.isReFlashActivityInfoList没有被访问过默认为true
       if (
-        app.globalService.isLogin() &&
-        this.$store.state.appData.keepLivesConfig.isReFlashActivityInfoList
+        app.globalService.isLogin()
       ) {
         // 用户id
         this.getUserActivityInfoList(app.globalService.getLoginUserInfo()._id);
-        this.$store.dispatch('updateKeepLivesConfig', {
-          isReFlashActivityInfoList: false
-        }); // 清除缓存数据
       }
       this.getCommunicator()
     });
@@ -261,6 +256,7 @@ export default {
       app.api.userActivity.queryUserActivityInfo({
         data,
         success: data => {
+          console.log(data)
           if (data.message === 'success') {
             data.activityList.forEach(item => {
               item.bgBanner = app.getResourceUrl(

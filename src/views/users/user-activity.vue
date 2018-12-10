@@ -299,7 +299,7 @@ export default {
       }
     },
     changeIntroduceTxtByEditor(htmlTxt) {
-      this.introduce = htmlTxt;
+      this.updateActivityData.introduce = htmlTxt;
     },
     writeIntroduce() {
       mui(this.$refs['introduce_slider'])
@@ -342,6 +342,7 @@ export default {
         .gotoItem(1); //跳转到第index张
     },
     changeRuleTxtByEditor(htmlTxt) {
+      console.log(htmlTxt)
       this.updateActivityData.rule = htmlTxt;
     },
     // 保存之前会进行截取封面图的操作
@@ -392,6 +393,8 @@ export default {
 @import '../../less/_mixins.less';
 @import 'https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css';
 [data-page='user-activity'] {
+  overflow: auto;
+  max-height: calc(~'100vh - 40px');
   &.page {
     height: auto !important;
   }

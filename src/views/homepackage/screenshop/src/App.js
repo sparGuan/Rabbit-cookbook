@@ -4,7 +4,7 @@
    组件匹配
 */
 import React from 'react';
-import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
 import {rootRouters} from '@/router/router'
@@ -51,7 +51,7 @@ if (__DEV__ && __COMPONENT_DEVTOOLS__) {
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
             {/* 挂载所有路由  */}
 						<Switch>
 							{
@@ -68,7 +68,7 @@ const App = () => (
 							}
 							<Route render={() => <Redirect to="/" />} />
 						</Switch>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
     { DevTools && <DevTools /> }
   </MuiThemeProvider>

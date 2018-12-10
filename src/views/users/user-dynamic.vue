@@ -109,7 +109,7 @@ export default {
   props: ['acceptUser'],
   watch: {
      'acceptUser': {
-          handler:function(newValue,oldValue){  
+          handler:function(newValue,oldValue){
               this.queryUserAndFriendsDynamic(newValue.acceptUserId,app.globalService.getLoginUserInfo()._id);
           },
           deep:true,
