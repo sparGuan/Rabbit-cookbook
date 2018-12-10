@@ -1,7 +1,7 @@
 // ========================================================
 // 同步 history 配置
 // ========================================================
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import { createBrowserHistory } from 'history';
 // const browserHistory = useRouterHistory(createHashHistory)({
@@ -9,7 +9,7 @@ import { createBrowserHistory } from 'history';
 //   queryKey: false // 去除随机标识符
 // })
 
-export const historyMiddleware = routerMiddleware(browserHistory)
+export const historyMiddleware = routerMiddleware(hashHistory)
 
 /**
  * @param  {Store}

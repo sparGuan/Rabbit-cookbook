@@ -6,7 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rootPath = path.resolve(__dirname, './'), // 项目根目录
   src = path.join(rootPath, 'src'),// 开发源码目录
   env = process.env.NODE_ENV.trim(),// 当前环境
-  resolve = (dir) => path.join(__dirname, './', dir);
+  resolve = (dir) => path.join(__dirname, './', dir),
+  NODE_ENV = process.env.NODE_ENV || 'dev'; //环境类型
 module.exports = {
     stats: { assets: true, children: false, chunks: false, modules: false, source: false },
     mode: "development",
@@ -117,8 +118,8 @@ module.exports = {
     },
     output: {
         libraryTarget: 'umd',
-        path: path.join(__dirname, '..', 'build'),
-        publicPath: '/static/',
+        path: path.join(__dirname, './', 'build'),
+        publicPath: NODE_ENV === 'production' ? './' : '/static/',
         filename: '[name].js',
         chunkFilename: '[name].js',
     },

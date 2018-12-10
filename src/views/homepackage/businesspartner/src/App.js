@@ -4,7 +4,7 @@
    组件匹配
 */
 import React from 'react';
-import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
 import {rootRouters} from '@/router/router'
@@ -56,7 +56,7 @@ const App = () => (
 			//我是一个双向绑定的组件
 		}
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
 						{/* 挂载所有路由  */}
 						<Switch>
 								  <Route exact path='/' component={Home} history={history}/>
@@ -83,7 +83,7 @@ const App = () => (
 										</Switch>
 									</Home>
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
 		{ DevTools && <DevTools /> }
   </MuiThemeProvider>

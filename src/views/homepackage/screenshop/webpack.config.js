@@ -8,7 +8,6 @@ const rootPath = path.resolve(__dirname, './'), // 项目根目录
   env = process.env.NODE_ENV.trim(),// 当前环境
   resolve = (dir) => path.join(__dirname, './', dir),
   NODE_ENV = process.env.NODE_ENV || 'dev'; //环境类型
-  console.log(process.env.NODE_ENV)
 module.exports = {
     stats: { assets: true, children: false, chunks: false, modules: false, source: false },
     mode: "development",

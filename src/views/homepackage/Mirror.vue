@@ -2,10 +2,10 @@
       <div  class="mirror" ref="mirror">
         <div class="path-slider">
           <!-- Slider items -->
-           <a  href="http://localhost:8086/"  class="path-slider__item path-slider__item--1" exact>
+           <a  href="./screenShop/build/index.html"  class="path-slider__item path-slider__item--1" exact>
              <div class="item__circle"></div>
           </a>
-          <a  href="http://localhost:8088/" class="path-slider__item path-slider__item--2"  >
+          <a  href="./businesspartner/build/index.html" class="path-slider__item path-slider__item--2"  >
               <div class="item__circle" ></div>
           </a>
           <a  class="path-slider__item path-slider__item--3"  >

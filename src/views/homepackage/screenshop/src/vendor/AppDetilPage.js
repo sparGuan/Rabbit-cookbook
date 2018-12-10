@@ -117,11 +117,11 @@ class RecipeReviewCard extends React.Component {
     sliding:1,
    };
   images = [
-    '/static/images/cards/paella.jpg',
-    '/static/images/cards/paella.jpg',
-    '/static/images/cards/paella.jpg',
-    '/static/images/cards/paella.jpg',
-    '/static/images/cards/paella.jpg',
+    '../static/images/cards/paella.jpg',
+    '../static/images/cards/paella.jpg',
+    '../static/images/cards/paella.jpg',
+    '../static/images/cards/paella.jpg',
+    '../static/images/cards/paella.jpg',
   ];
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));

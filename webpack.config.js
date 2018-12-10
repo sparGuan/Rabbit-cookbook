@@ -46,7 +46,7 @@ module.exports = {
 			},
 			{
 				test: /\.js(x)*$/,
-				exclude: /^node_modules$/,
+				exclude: /^node_modules$|\src\view\homepackage\businesspartner|\src\view\homepackage\screenShop\$/,
 				//loader: 'babel-loader'
 				use: ['babel-loader']
 			},
