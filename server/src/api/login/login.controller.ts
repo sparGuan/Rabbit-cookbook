@@ -8,13 +8,18 @@ const { isValid } = require('mongoose').Types.ObjectId;
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
 import Qsms = require('qcloudsms_js');
 import formidable = require('formidable');
-class LoginController {
+import LoginService from './login.service';
+import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
+class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
   private qsms: any;
   private user: IUser;
   private userInfo: any;
   private saltRounds = 5;
-  constructor() {
+  private LoginService: any;
+  constructor(model: any) {
+    super(model);
     this.qsms = new Qsms(qsms.appid, qsms.appkey);
+    this.LoginService = new LoginService ();
   }
   // 注册--手机号注册
   // 腾讯云服务
@@ -28,31 +33,16 @@ class LoginController {
   public msgValid() {
     return async (ctx: any, next: any) => {
       const { body } = ctx.request;
-      // 初始化接口
-      // 先查询该手机号是否被注册
-      this.user = (await User.findOne({ Mobile: body.Mobile })) as IUser;
-      // 如果是注册用户就要进入该判断
-      if (!global._.isEmpty(this.user) && body.register === true) {
-        // 如果存在
+      const valid = await this.LoginService.msgValidService(body)
+      if (valid) {
         ctx.body = {
-          message: '该手机号已被注册！'
+          message: valid
         };
-        return;
+      } else {
+        ctx.body = {
+          message: statusCode.error
+        };
       }
-      const valid = global._.random(999999);
-      const smsType = 0; // Enum{0: 普通短信, 1: 营销短信}
-      const ssender = this.qsms.SmsSingleSender();
-      await ssender.send(
-        smsType,
-        86,
-        body.Mobile,
-        `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`,
-        '',
-        ''
-      );
-      ctx.body = {
-        message: valid
-      };
       // 单发短信
       // await this.qsms.singleSend({
       //   phoneNumber: body.Mobile,
@@ -391,4 +381,4 @@ class LoginController {
     };
   }
 }
-export default new LoginController();
+export default new LoginController(User);
