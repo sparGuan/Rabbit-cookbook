@@ -42,14 +42,14 @@ class LoginController {
       const valid = global._.random(999999);
       const smsType = 0; // Enum{0: 普通短信, 1: 营销短信}
       const ssender = this.qsms.SmsSingleSender();
-      // await ssender.send(
-      //   smsType,
-      //   86,
-      //   body.Mobile,
-      //   `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`,
-      //   '',
-      //   ''
-      // );
+      await ssender.send(
+        smsType,
+        86,
+        body.Mobile,
+        `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`,
+        '',
+        ''
+      );
       ctx.body = {
         message: valid
       };
