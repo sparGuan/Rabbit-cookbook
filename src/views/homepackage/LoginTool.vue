@@ -46,7 +46,6 @@ export default {
         // 加载微信配置文件
         // 调用微信录音功能
         // 假设已引入微信jssdk。【支持使用 AMD/CMD 标准模块加载方法加载】
-        console.log(wxConfig)
         app.wx.config({
           debug: true,
           appId: wxConfig.appId,
@@ -73,7 +72,6 @@ export default {
           app.wx.checkJsApi({
             jsApiList: ['startRecord'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
             success: res => {
-              alert(666666)             
               // 以键值对的形式返回，可用的api值true，不可用为false
               // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
             }

@@ -110,7 +110,6 @@ class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
   public useWxOrQQLogin() {
     return async (ctx: any, next: any) => {
       const { body } = ctx.request;
-      let expiredTime;
       try {
         // 没有账号密码直接报400
         // 微信 QQ登录的自动创建账号密码
@@ -122,67 +121,15 @@ class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
           };
           return;
         }
-        this.user = (await User.findOneAndUpdate(
-          { openid: body.openid },
-          {
-            $set: {
-              // 生成 token 返回给客户端
-              token: jwt.sign(
-                {
-                  data: body.Mobile,
-                  // 设置 token 过期时间
-                  exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-                },
-                'secret'
-              )
-            }
-          },
-          { new: true }
-        )) as IUser;
-        if (global._.isEmpty(this.user)) {
-          const salt = await bcrypt.genSalt$(this.saltRounds);
-          body.passWord = await bcrypt.hash$(body.openid, salt);
-          body.token = jwt.sign(
-            {
-              data: body.openid, // 但三方登录使用openid作为token
-              // 设置 token 过期时间
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-            },
-            'secret'
-          );
-          this.user = new User(body);
-          this.user = (await this.user.save()) as IUser;
-        } else {
-          expiredTime = Date.parse(
-            getDateAfter('', statusCode.expiredTime, '/')
-          );
-          this.user = await User.update(
-            { _id: this.user._id },
-            {
-              $set: {
-                location: body.location.map((element: string) => {
-                  return Number(element);
-                }),
-                updateTime: new Date(),
-                expiredTime
-              }
-            },
-            { new: true }
-          ).select('-passWord -updateTime -logoutTime -createTime ');
-        }
+        this.user = await this.LoginService.useWxOrQQLoginService(body)
         ctx.body = {
           message: statusCode.success,
-          user: this.user,
-          token: jwt.sign(
-            {
-              data: this.user,
-              // 设置 token 过期时间
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-            },
-            'secret'
-          )
+          user: this.user
         };
       } catch (error) {
+        ctx.body = {
+          message: statusCode.error
+        };
         ctx.throw(500);
       }
     };

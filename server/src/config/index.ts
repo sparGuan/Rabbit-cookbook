@@ -3,7 +3,7 @@ export const domain =  'www.jingz100.com' // 'https//www.jingz100.com';
 export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';
-export const webServerDoMain = 'localhost';
+export const webServerDoMain = '192.168.1.119';
 export const limit = '10';
 export const emit = 'sent';
 // 微信js-sdk服务
