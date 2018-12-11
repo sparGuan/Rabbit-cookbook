@@ -38,13 +38,9 @@ export default class LoginService {
         '',
         () => ({})
       );
+      return this.valid
     } catch (error) {
       throw error
-    }
-    if (!global._.isEmpty(this.valid)) {
-      return this.valid
-    } else {
-      return ''
     }
   }
 }
