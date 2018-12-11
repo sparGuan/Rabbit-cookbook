@@ -180,16 +180,19 @@ export default {
       mui(e.target).button('loading');
       const userInfo = Object.assign({}, this.userInfo);
       const data = new FormData();
+      alert(JSON.stringify(userInfo))
       data.append('userInfo', JSON.stringify(userInfo));
       data.append('headBgImg', this.headBgImg);
       data.append('headImg', this.headImg);
       // 更新用户信息
+      alert(data.get('userInfo'))
       app.api.user.updateUserInfo({
         data,
         success: res => {
           if (res.message === 'success') {
             new Promise (reslove => {
-              const user = app.globalService.setUserInfo(Object.assign(res.user,{token:res.token}))
+              const user = app.globalService.setUserInfo(res.user)
+              console.log(user)
               reslove(user)
             }).then( user => {
               this.$router.push({ name: 'userCenter',params: {

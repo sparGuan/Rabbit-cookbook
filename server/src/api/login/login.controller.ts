@@ -1,10 +1,8 @@
 import * as jwt from 'jsonwebtoken';
-import DirExistUtils from '../../utils/DirExistUtils';
 import getDateAfter from '../../utils/getDateAfter';
 import User, { IUser } from '../../db/schema/user';
 import { qsms, statusCode } from '../../config/index';
 const bluebird = require('bluebird');
-const { isValid } = require('mongoose').Types.ObjectId;
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
 import Qsms = require('qcloudsms_js');
 import formidable = require('formidable');
@@ -250,30 +248,15 @@ class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
   public updateLoginInfo() {
     return async (ctx: any, next: any) => {
       const { userId, location } = ctx.request.body;
-      if (!global._.isEmpty(userId) && isValid(userId)) {
-        const expiredtime: number = Date.parse(
-          getDateAfter('', statusCode.expiredTime, '/')
-        );
-        this.userInfo = {
-          $set: {
-            updateTime: new Date(), // 更新时间
-            location: location.map((element: string) => {
-              return Number(element);
-            }), // 更新当前位置
-            expiredTime: expiredtime // 更新报废时长
-          }
-        };
-        this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {
-          new: true
-        })
-          .select('-passWord -updateTime -logoutTime -createTime ')
-          .populate({
-            path: 'requestList',
-            select: '-passWord -updateTime -logoutTime -createTime'
-          })) as IUser;
+      this.user = await this.LoginService.updateLoginInfo(userId, location)
+      if (this.user ) {
         ctx.body = {
           message: statusCode.success,
           user: this.user
+        };
+      } else {
+        ctx.body = {
+          message: statusCode.error
         };
       }
     };
@@ -288,33 +271,7 @@ class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
   public updateUserInfo() {
     return async (ctx: any, next: any) => {
       const form = new formidable.IncomingForm();
-      await new Promise((reslove: any, reject: any) => {
-        form.parse(ctx.req, async (err: any, fields: any, files: any) => {
-          if (err) {
-            reject(err);
-          }
-          this.userInfo = JSON.parse(fields.userInfo);
-          if (Object.keys(files).length > 0) {
-            const filePaths = await DirExistUtils.uploadFileCommon(files);
-            if (!global._.isEmpty(filePaths.headImg)) {
-              this.userInfo.headImg = filePaths.headImg;
-            }
-            if (!global._.isEmpty(filePaths.headBgImg)) {
-              this.userInfo.headBgImg = filePaths.headBgImg;
-            }
-          }
-          const _id: string = this.userInfo.userId;
-          if (!global._.isEmpty(_id) && isValid(_id)) {
-            // 有ID就update
-            this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {
-              new: true
-            }).select(
-              '-passWord -updateTime -logoutTime -createTime '
-            )) as IUser;
-            reslove();
-          }
-        });
-      });
+      this.user = await this.LoginService.updateUserInfoService(ctx.req)
       if (!global._.isEmpty(this.user)) {
         ctx.body = {
           message: statusCode.success,

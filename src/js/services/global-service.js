@@ -120,9 +120,11 @@ export default {
 			) {
 				_site_local_storage.userInfo = {}
 			}
-			if (friends) {
+			if (friends ) {
 				friends.forEach( item => {
-					item.headImg = app.getResourceUrl(item.headImg)
+					if (typeof item === 'object') {
+						item.headImg = app.getResourceUrl(item.headImg)
+					}
 				})
 			}
 			if (requestList) {
