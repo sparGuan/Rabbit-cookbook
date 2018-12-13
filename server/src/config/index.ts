@@ -3,7 +3,7 @@ export const domain =  'www.jingz100.com' // 'https//www.jingz100.com';
 export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';
-export const webServerDoMain = '192.168.0.102';
+export const webServerDoMain = '192.168.1.119';
 export const limit = '10';
 export const emit = 'sent';
 // 微信js-sdk服务
@@ -20,6 +20,7 @@ export const statusCode = {
   success: 'success',
   error: 'error',
   noOne: 'noOne',
+  isFriend: 'isFriend',
   expiredTime: 3 // 过期时间是倒数三天
 };
 // 8011是gitlab库的端口

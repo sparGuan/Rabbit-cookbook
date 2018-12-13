@@ -217,9 +217,7 @@ export default {
 // },
 getlocation(MapPoint) {
 	mui.plusReady(() => {
-		alert(333333)
 		// 成功进入第一个回调，失败进入第二个回调
-		alert(plus.geolocation.getCurrentPosition)
     plus.geolocation.getCurrentPosition(MapPoint, (e) => {
 				mui.toast("error:" + e.message);
     })

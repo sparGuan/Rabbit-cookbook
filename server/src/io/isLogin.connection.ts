@@ -56,6 +56,7 @@ export default (socket: any) => {
       // 返回去的token码是不带socket值的
       // 返回用户信息好签名
       // console.log(wxConfig)
+      console.log(`鉴定socket登录成功！！！`)
       socket.emit(`isLogin_${emit}`, {
         userInfo
        // wxConfig

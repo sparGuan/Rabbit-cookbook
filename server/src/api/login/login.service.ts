@@ -121,38 +121,40 @@ export default class LoginService {
      const form = new formidable.IncomingForm();
      return await new Promise((reslove: any, reject: any) => {
         form.parse(req, async (err: any, fields: any, files: any) => {
-          console.log(234541435)
           if (err) {
             reject(err);
           }
-          console.log(fields)
-          this.userInfo = JSON.parse(fields.userInfo);
-          if (Object.keys(files).length > 0) {
-            const filePaths = await DirExistUtils.uploadFileCommon(files);
-            if (!global._.isEmpty(filePaths.headImg)) {
-              this.userInfo.headImg = filePaths.headImg;
+          if (Object.keys(fields).length > 0) {
+            this.userInfo = JSON.parse(fields.userInfo);
+            if (Object.keys(files).length > 0) {
+              const filePaths = await DirExistUtils.uploadFileCommon(files);
+              if (!global._.isEmpty(filePaths.headImg)) {
+                this.userInfo.headImg = filePaths.headImg;
+              }
+              if (!global._.isEmpty(filePaths.headBgImg)) {
+                this.userInfo.headBgImg = filePaths.headBgImg;
+              }
             }
-            if (!global._.isEmpty(filePaths.headBgImg)) {
-              this.userInfo.headBgImg = filePaths.headBgImg;
+            const _id: string = this.userInfo.userId;
+            if (!global._.isEmpty(_id) && isValid(_id)) {
+              // 有ID就update
+              this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {
+                new: true
+              })
+              .populate({
+                path: 'friends',
+                select: ' headImg nickName descPerson sex '
+              })
+              .populate({
+                path: 'requestList',
+                select: '-passWord -updateTime -logoutTime -createTime'
+              }).select(
+                '-passWord -updateTime -logoutTime -createTime '
+              )) as IUser;
+              reslove(this.user);
             }
-          }
-          const _id: string = this.userInfo.userId;
-          if (!global._.isEmpty(_id) && isValid(_id)) {
-            // 有ID就update
-            this.user = (await User.findByIdAndUpdate(_id, this.userInfo, {
-              new: true
-            })
-            .populate({
-              path: 'friends',
-              select: ' headImg nickName descPerson sex '
-            })
-            .populate({
-              path: 'requestList',
-              select: '-passWord -updateTime -logoutTime -createTime'
-            }).select(
-              '-passWord -updateTime -logoutTime -createTime '
-            )) as IUser;
-            reslove(this.user);
+          } else {
+            reslove({});
           }
         });
       });

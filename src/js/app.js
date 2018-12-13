@@ -182,6 +182,8 @@ const site = {
 					app.mui.toast(responseJSON.error.message);
 				}
 			} else {
+				alert(error)
+				alert(JSON.stringify(error))
 				app.mui.toast(
 					'<a href="javascript:void(0);" style="text-decoration: underline;color: #FFF;" onclick="window.location.reload();">亲~服务出错了。点此刷新重试</a>',
 					{ duration: 8000, type: 'div' }

@@ -10,6 +10,7 @@ import { IUser } from './user';
  **/
 export interface ISocket extends mongoose.Document {
   id: string;
+  user: IUser; // 每一个用户对应多条动态
   ip: string;
   os: string;
   environment: string;
@@ -22,6 +23,11 @@ const socket_schema: mongoose.Schema = new mongoose.Schema({
     type: String,
     unique: true,
     index: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    trim: true,
+    ref: 'User'
   },
   ip: {
     type: String

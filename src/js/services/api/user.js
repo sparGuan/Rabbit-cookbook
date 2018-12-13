@@ -63,8 +63,10 @@ define(() => {
 					{
 						url: '/api/login/updateUserInfo',
 						cache: false,
+						dataType:'text',
 						processData: false,
-						contentType: false
+						contentType: false,
+						headers:{"Content-Type": "multipart/form-data"}
 					},
 					ajaxOptions
 				)

@@ -14,11 +14,10 @@ import vueApp from '../views/app'
 import store from './store/'
 import touch from 'vue-directive-touch'
 import 'vue-layer-mobile/need/layer.css'
-import layer from 'vue-layer-mobile';
+import layer from 'vue-layer-mobile'
 import VueSocketio from 'vue-socket.io';
-import wx from 'weixin-js-sdk'
 Object.assign(app.Config, config);// 非常重要的合并，我去
-window.app = Object.assign({}, app, { log, utils, mui, globalService, api,wx })
+window.app = Object.assign({}, app, { log, utils, mui, globalService, api })
 const initVue = () => {
 	Vue.use(Vuex)
 	Vue.use(VueRouter)
@@ -39,6 +38,7 @@ const initVue = () => {
 			message(val){
 				// 重新更新用户信息				
 				window.app.globalService.setUserInfo(val.acceptUser)
+				alert(`到此处就证明准备更新好友栏了！！`)
 				this.$store.commit('SOCKET_USER_MESSAGE',val.sentUser)
 			},
 			hasNewChating_sent(NewChating) {

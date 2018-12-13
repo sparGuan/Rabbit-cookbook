@@ -12,7 +12,7 @@
                 <div class="community">
                   <ul style="padding-top:5px;" v-if="communicator.length > 0">
                     <!-- 好友聊天小头像-->
-                    <li class="community-item" v-for="(item,index) in communicator" :key="item._id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @click="chatOrgetNewFriend(item)">
+                    <li class="community-item" v-for="(item,index) in communicator" :key="item._id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @tap.stop.prevent="chatOrgetNewFriend(item)">
                       <!-- 新好友请求-->
                       <svg class="icon new-msg" v-if="item.newMsg" style="font-size: 44px;width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="68147"><path d="M512 512m-174.40768 0a174.40768 174.40768 0 1 0 348.81536 0 174.40768 174.40768 0 1 0-348.81536 0Z" fill="#F08943" p-id="68148"></path><path d="M491.64288 416.11264h39.87456v75.50976h76.36992v40.7552h-76.36992v75.50976h-39.87456v-75.50976h-75.53024v-40.7552h75.53024v-75.50976z" fill="#FFFFFF" p-id="68149"></path></svg>
                       <!-- 有新消息时 -->
@@ -77,13 +77,14 @@ export default {
     },
     '$store.state.appSocketIoSession.requestNewFriend': {
       handler: function(now, old) {
+        alert(`到这里就证明已经有新的好友请求了`)
         const newCommunicators = Object.assign(now,{newMsg:true})
         this.communicator.push(newCommunicators);
       },
       deep: true // 深度监听
     },
     '$store.state.appSocketIoSession.newChatUser': {
-      handler: function(now, old) {        
+      handler: function(now, old) { 
         this.communicator.forEach( (item,index) => {
           now.forEach( elem => {
             if (item._id === elem._id) {
@@ -181,19 +182,13 @@ export default {
     // 后面处理忽略之后的操作
     chatOrgetNewFriend(item) {
       // 如果是新朋友提示消息
+      //alert(item.newMsg)
+      //alert(JSON.stringify(item))
       if (item.newMsg) {
         // 弹窗添加好友
         const btnArray = ['忽略', '是'];
-        this.$layer
-          .dialog({
-            content: `${item.nickName}请求添加好友?`,
-            btn: btnArray,
-            shadeClose: false,
-            contentClass: 'layer-content'
-          }) // 如果有btn
-          .then(res => {
-            // res为0时是用户点击了左边  为1时用户点击了右边
-            if (res > 0) {
+        mui.confirm(`${item.nickName}请求添加好友?`, '', btnArray, e => {
+          if (e.index > 0) {
               // 是              
               const acceptUserId = item._id
               const userId = app.globalService.getLoginUserInfo()._id
@@ -212,7 +207,7 @@ export default {
                 }
               });
             }
-          });
+        })
       } else {
         // 否则是旧好友，直接打开聊天窗口
         // 打开聊天窗
@@ -357,7 +352,6 @@ export default {
         width: 39px;
         height: 39px;
         box-shadow: 0 0px 10px 5px #f3f3f3 inset;
-        background-color: blueviolet;
         display: inline-block;
         border-radius: 50%;
       }

@@ -270,7 +270,6 @@ class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
    */
   public updateUserInfo() {
     return async (ctx: any, next: any) => {
-      const form = new formidable.IncomingForm();
       this.user = await this.LoginService.updateUserInfoService(ctx.req)
       if (!global._.isEmpty(this.user)) {
         ctx.body = {

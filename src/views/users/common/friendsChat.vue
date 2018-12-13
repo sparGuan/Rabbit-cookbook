@@ -529,6 +529,9 @@ export default {
   .voice-chat {
     display: inline-block;
   }
+  .chat-input {
+    -webkit-user-select:text;
+  }
   .chat-input-tool {
     display: inline-block;
     vertical-align: bottom;

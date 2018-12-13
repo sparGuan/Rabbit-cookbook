@@ -98,7 +98,6 @@ export default {
   },
   mounted() {
     mui.plusReady(() => {
-      alert(11111)
       this.plusReady()
     })
   },
@@ -181,7 +180,6 @@ export default {
     },
     // 第三方登录，只为微信、QQ服务
     openThirdLogin(authId) {
-      alert(authId)
       if (authId) {
         this.tenancyName = authId
         let auth = this.auths[authId]
@@ -194,15 +192,11 @@ export default {
               () => {
                 plus.nativeUI.toast('获取用户信息成功')
                 let name = auth.userInfo.nickname || auth.userInfo.name
-                 alert(name)
                 // 因为是微信登录所有没有账户，先帮他注册一个账户
                 // 如果有账户了就不注册了直接登录
-                alert(app.utils.getlocation)
                 app.utils.getlocation(position => {
                   const longitude = position.coords.longitude; //获取经度
                   const latitude = position.coords.latitude;
-                  alert(longitude)
-                  alert(latitude)
                     app.api.user.useWxOrQQLogin({
                     data: {
                       tenancyName: this.tenancyName, // 是QQ还是微信--第三方服务名
@@ -214,7 +208,6 @@ export default {
                     success: res => {
                       if (res.message === 'success') {
                         app.mui.toast('已登录')
-                        alert(JSON.stringify(res.user))
                         this.$socket.emit('isLogin', res.user);
                       }
                     },

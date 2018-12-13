@@ -94,7 +94,7 @@ export default{
 
 <style lang='less' scoped>
 .pop-up{
-	position: fixed;
+	position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%;

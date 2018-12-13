@@ -49,7 +49,7 @@
                               <div class="send-indicator-dot"></div>
                               <div class="send-indicator-dot"></div>
                             </div>
-                            <button class="send-button" ref="sendButton" @click="requestToAddOne">
+                            <button class="send-button" ref="sendButton" @click="requestToAddOne(item)">
                               <div class="sent-bg" ref="sentBg"></div>
                               <svg ref="sendIcon" class="icon send-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="45406"><path d="M768 0H256C115.2 0 0 115.2 0 256v512c0 140.8 115.2 256 256 256h512c140.8 0 256-115.2 256-256V256c0-140.8-115.2-256-256-256zM182.4 246.4c-28.8 0-51.2-22.4-51.2-51.2 0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 27.2-24 51.2-51.2 51.2z m555.2 316.8H563.2V736c0 28.8-24 51.2-51.2 51.2s-51.2-24-51.2-51.2V563.2H286.4c-28.8 0-51.2-24-51.2-51.2s24-51.2 51.2-51.2h172.8V286.4c0-28.8 24-51.2 51.2-51.2s51.2 24 51.2 51.2v172.8h172.8c28.8 0 51.2 24 51.2 51.2s-20.8 52.8-48 52.8z" fill="#FF943F" p-id="45407"></path></svg>
                               <i class="iconfont icon-icon-test1 sent-icon" ref="sentIcon"></i>
@@ -373,8 +373,24 @@ export default {
         }, 1000);
       }, 3000 + Math.random() * 3000);
     },
+    inIdArray(array,id) {
+      if (array.length > 0 && array) { 
+        let isIn = -1
+        array.forEach((item,index) => {
+          if(item._id === id) {
+            isIn = index
+          }
+        })
+        return isIn
+      }
+    },
     // 调用接口给双方增加一个备用的ID字段，存储发送增加好友请求
-    requestToAddOne() {
+    requestToAddOne(requireFriend) {
+      if (requireFriend && this.inIdArray(app.globalService.getLoginUserInfo().friends,requireFriend._id) > -1 ) {
+        app.mui.toast('你们已经是好友了。')
+        this.newFirendsList = []
+        return 
+      }
       const _this = this;
       this.sentAni({
         isOne: true,
