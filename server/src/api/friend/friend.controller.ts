@@ -1,18 +1,23 @@
 import { statusCode } from '../../config/index';
 import User, { IUser } from '../../db/schema/user';
+import Socket, { ISocket } from '../../db/schema/socket';
 const { isValid } = require('mongoose').Types.ObjectId;
+import mongoose = require('mongoose');
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 // 实验目的：能够在子类的controller里面使用basecontroller的公共方法
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
 import FriendService from './friend.service';
 class FriendsController extends BASE_OPEN_SOURCE_API <FriendService, IUser> {
   private user: IUser;
+  private acceptUser: IUser;
   private acceptUserId: string;
   private userId: string;
   private userList: IUser[];
   private willBeFriend: boolean = false; // 判断是否已经是好友再去添加好友关系
+  private friendService: any;
   constructor(model: any) {
     super(model);
+    this.friendService = new FriendService()
   }
   /**
    *  响应该好友请求，添加成功
@@ -28,81 +33,18 @@ class FriendsController extends BASE_OPEN_SOURCE_API <FriendService, IUser> {
       try {
         this.acceptUserId = body.acceptUserId;
         this.userId = body.userId;
-        if (
-          !global._.isEmpty(this.acceptUserId) &&
-          isValid(this.acceptUserId) &&
-          isValid(this.userId) &&
-          !global._.isEmpty(this.userId)
-        ) {
-          // 先查找自己的表，如果已经是好友关系，就不再更新关系而是直接返回了
-          const isFriendsCondition: IUser = await User.findById(this.acceptUserId) as IUser
-          this.willBeFriend = false;
-          isFriendsCondition.friends.forEach( item => {
-            if ( item.toString() === this.userId ) {
-              // 表明了他们已经是好友关系
-              this.willBeFriend = true
-              console.log(`我们已经是好友了。。。。准备return到前端`)
-            }
-          })
-          console.log(`正在添加双方好友。。。。`)
-          console.log(`这个是acceptUser.....${this.acceptUserId}....`)
-          if (!this.willBeFriend ) {
-            // 如果双方还不是好友
-            // 准备开始通讯
-            // 先去寻找通讯源的ID是否存在
-            const acceptUser: IUser = (await User.findByIdAndUpdate(
-              this.acceptUserId,
-              {
-                $push: {
-                  friends: this.userId
-                },
-                $pull: {
-                  requestList: this.userId
-                }
-              },
-              { new: true }
-            )
-              .populate({
-                path: 'friends',
-                select: '-passWord -updateTime -logoutTime -createTime'
-              })
-              .populate({
-                path: 'requestList',
-                select: '-passWord -updateTime -logoutTime -createTime'
-              })) as IUser;
-            // 如果id不为空
-            console.log(`这个是user......${this.userId}`)
-            const user: IUser = (await User.findByIdAndUpdate(
-              this.userId,
-              {
-                $push: {
-                  friends: this.acceptUserId
-                },
-                $pull: {
-                  requestList: this.acceptUserId
-                }
-              },
-              { new: true }
-            )
-              .populate({
-                path: 'friends',
-                select: '-passWord -updateTime -logoutTime -createTime'
-              })
-              .populate({
-                path: 'requestList',
-                select: '-passWord -updateTime -logoutTime -createTime'
-              })) as IUser;
-            // 通过验证保存双方数据
-            ctx.body = {
-              message: statusCode.success,
-              relations: { acceptUser, user }
-            };
-           } else {
-            ctx.body = {
-              message: statusCode.isFriend
-            };
-           }
-          }
+        const relations = await this.friendService.addNewFriendService(this.acceptUserId, this.userId)
+        console.log(relations)
+        if (typeof relations === 'object' && !global._.isEmpty(relations)) {
+          ctx.body = {
+            message: statusCode.success,
+            relations
+          };
+        } else {
+          ctx.body = {
+            message: relations
+          };
+        }
       } catch (error) {
         throw error;
       }

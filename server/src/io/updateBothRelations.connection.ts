@@ -7,6 +7,7 @@ socket.on('updateBothRelations', async (acceptUser: IUser) => {
     // console.log(`>>>>>>>> here is updateBothRelations ${acceptUser}`)
     try {
         console.log(`该${acceptUser._id} 用户正在请求双方同意....`)
+        console.log(`我的socketId是......${acceptUser.socket.id}`)
         socket.nsp.sockets[acceptUser.socket.id].emit(`updateBothRelations_${emit}`, acceptUser )
     } catch (error) {
         throw error

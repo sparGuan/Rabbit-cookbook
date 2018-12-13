@@ -101,7 +101,9 @@ mongoosePaginate.paginate.options = {
         { $set: { sockId: '' } }
       );
     });
-    mongoConnection(); // 最后连接数据库
+    await mongoConnection(); // 最后连接数据库
+     // 先删除socket表里面所有数据,每当服务器重启的时候
+    await Socket.remove({});
   } catch (e) {
     console.error('ERROR:', e);
     return;
