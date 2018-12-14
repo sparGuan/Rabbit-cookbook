@@ -79,6 +79,8 @@ export default {
       handler: function(now, old) {
         alert(`到这里就证明已经有新的好友请求了`)
         const newCommunicators = Object.assign(now,{newMsg:true})
+        console.log(newCommunicators.headImg)
+        alert(`我的图片路径是${newCommunicators.headImg}`)
         this.communicator.push(newCommunicators);
       },
       deep: true // 深度监听
@@ -137,7 +139,11 @@ export default {
     // 发送请求消息的用户更新
     updateBothRelations_sent(acceptUser) {
       app.globalService.setUserInfo(acceptUser)
-      this.communicator.push(acceptUser)
+      // 这步错了，不应该将对方id放进去，应该将另一个id放进去
+      alert(JSON.stringify(acceptUser.friends[acceptUser.friends.length - 1]))
+      if ( typeof acceptUser.friends[acceptUser.friends.length - 1] === 'object' ) {
+        this.communicator.push(acceptUser.friends[acceptUser.friends.length - 1])
+      }
     },
     // 接收请求的频道，加入频道进行通讯
     onChatOne_sent(chatOne) {
@@ -190,8 +196,8 @@ export default {
         mui.confirm(`${item.nickName}请求添加好友?`, '', btnArray, e => {
           if (e.index > 0) {
               // 是              
-              const acceptUserId = item._id
-              const userId = app.globalService.getLoginUserInfo()._id
+              const acceptUserId = item._id // 对方
+              const userId = app.globalService.getLoginUserInfo()._id // 我同意对方
               const data = {acceptUserId,userId}
               app.api.userFriends.addNewFriend({
                 data,
@@ -351,7 +357,7 @@ export default {
       .community-item {
         width: 39px;
         height: 39px;
-        box-shadow: 0 0px 10px 5px #f3f3f3 inset;
+        box-shadow: 0 0px 0px 1px #f3f3f3 inset;
         display: inline-block;
         border-radius: 50%;
       }

@@ -294,6 +294,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import url('../../../src/less/_mixins.less');
+
 [data-page='user-center'] {
   overflow:hidden;
   .canvas-left {

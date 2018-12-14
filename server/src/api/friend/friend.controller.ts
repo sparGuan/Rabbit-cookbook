@@ -31,10 +31,9 @@ class FriendsController extends BASE_OPEN_SOURCE_API <FriendService, IUser> {
       // 让异步变同步
       const { body } = ctx.request;
       try {
-        this.acceptUserId = body.acceptUserId;
-        this.userId = body.userId;
+        this.acceptUserId = body.acceptUserId; // 对方id
+        this.userId = body.userId; // 我的id
         const relations = await this.friendService.addNewFriendService(this.acceptUserId, this.userId)
-        console.log(relations)
         if (typeof relations === 'object' && !global._.isEmpty(relations)) {
           ctx.body = {
             message: statusCode.success,

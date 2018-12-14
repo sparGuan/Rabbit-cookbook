@@ -27,7 +27,6 @@ socket.on('addFriendRequest', async (Mobile: string, userId: string) => {
           // 将自己的个人信息发送到好友
           // 第一个蚕食是要发送的好友，第二个参数是当前用户
           acceptUser.socket = socket_schema
-          console.log(acceptUser)
           socket.nsp.sockets[socket_schema.id].emit('message', {sentUser,  acceptUser} )
         } else {
           console.log(`被请求的用户已下线`)

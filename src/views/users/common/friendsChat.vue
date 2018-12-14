@@ -34,7 +34,7 @@
                   <i class="iconfont icon-camerarotate" style="font-size: 22px;"></i>                  
                 </button>
                 <button type="text" v-if="voiceFlag" class="chat-voice record" @touchstart="startRecord($event)" @touchend="stopRecord($event)" >按住说话</button>
-                <div class="chat-input" contenteditable  @input="doingWrite($event)" v-else></div>
+                <div class="chat-input" @focus="scrollInto($event)" @blur="clearScrollInto" contenteditable  @input="doingWrite($event)" v-else></div>
                 <div style="width:50px;" v-if="voiceFlag"></div>
                 <button class="chat-send" @click="clickSendButton($event)" @keydown="keydown($event)" v-else>
                   <i class="iconfont icon-fasong1"></i>
@@ -69,6 +69,7 @@ export default {
   props: ['value', 'friendTitle', 'chatList'],
   data() {
     return {
+      interval: null,
       chatId: '',
       page: 1,
       readSecond: 0,
@@ -164,6 +165,18 @@ export default {
     }
   },
   methods: {
+    clearScrollInto() {
+      if (this.interval) {
+        clearInterval(this.interval);
+      }
+    },
+    scrollInto(event) {
+      if (app.utils.ismobile(0) === 0) {
+        this.interval = setInterval(() => {
+          event.target.scrollIntoViewIfNeeded();
+          }, 100);
+      }
+    },
     startRecord(event) {
       event.preventDefault();      
       if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {

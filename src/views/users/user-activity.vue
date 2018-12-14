@@ -87,6 +87,10 @@
 	</div>
 </template>
 <script>
+/**
+ * TODO:实现需求用户的点赞合分享到足迹
+ * 预计完成日: 12/15
+ */
 import Step from '@/components/Step.vue';
 import VueHtml5Editor from 'vue-html5-editor';
 const editor = new VueHtml5Editor({
