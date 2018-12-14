@@ -401,6 +401,7 @@ export default {
       margin: 0 auto;
       border: 2px solid #f3f3f3;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
+      overflow: hidden;
       position: relative;
       &:before {
         position: absolute;

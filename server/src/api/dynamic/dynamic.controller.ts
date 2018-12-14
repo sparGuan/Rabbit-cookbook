@@ -134,9 +134,9 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
         // 执行前的操作
         // 获取到已经赞过的ids
         if (!global._.isEmpty(this.user)) {
-          const dynamicIdsByZan: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 0}, body));
+          const dynamicIdsByZan: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 0, searchAble: 'dynamic'}, body));
           // 获取已经分享到足迹过的Ids
-          const dynamicIdsByShare: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 1}, body));
+          const dynamicIdsByZuJi: any [] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 1, searchAble: 'dynamic'}, body));
           const friends: IUser[] = this.user.get('friends') as IUser[];
           const userIds: string[] = [...friends, this.user].map(v => v._id);
           this.dynamicList = (await Dynamic.find({
@@ -151,7 +151,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                 if (dynamicIdsByZan.indexOf(item._id.toString()) > -1) {
                   item._doc.hasZan = true
                 }
-                if (dynamicIdsByShare.indexOf(item._id.toString()) > -1) {
+                if (dynamicIdsByZuJi.indexOf(item._id.toString()) > -1) {
                   item._doc.hasShare = true
                 }
               })

@@ -354,7 +354,7 @@ export default {
           if (res.message === 'success') {
             this.listData = res.dynamicList.map(item => {
               item.user.headImg = app.getResourceUrl(item.user.headImg);
-              item.album[0] = Object.keys(item.album[0]).map(element => {
+              item.album[0] = item.album[0] && Object.keys(item.album[0]).map(element => {
                 return app.getResourceUrl(item.album[0][element]);
               });
               this.zanMount += Number((item.meta.totalPraise || 0))

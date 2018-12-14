@@ -1,5 +1,6 @@
 import { statusCode } from '../../config/index';
 import Activity, { IActivity } from '../../db/schema/activity';
+import DynSingleDie, { IDynSingleDie } from '../../db/schema/dynSingleDie'; // 引入足迹点赞业务中间表
 import DirExistUtils from '../../utils/DirExistUtils';
 // import ProcessingImage from '../../utils/ProcessingImage';
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
@@ -9,8 +10,11 @@ const formidable = require('formidable');
 class ActivityController extends BASE_OPEN_SOURCE_API< ActivityService, IActivity> {
   private activity: IActivity;
   private activityList: IActivity[];
+  private activitysByZan: any [];
+  private activityService: any;
   constructor(model: any) {
     super(model)
+    this.activityService = new ActivityService()
   }
   public saveOrUpdate() {
     return async (ctx: any) => {
@@ -76,19 +80,45 @@ class ActivityController extends BASE_OPEN_SOURCE_API< ActivityService, IActivit
       // 让异步变同步
       const { body } = ctx.request;
       if (!global._.isEmpty(body.userId)) {
-        this.activityList = await Activity.find({ userId: body.userId });
+        // 判断今天是否已经有赞
+        // 需求有一个发起请求的id
+        this.activitysByZan = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 0, searchAble: 'activity'}, body));
+        this.activityList = await this.activityService.queryUserActivityInfoService(body , this.activitysByZan)
       }
-      if (this.activityList.length > 0) {
+      console.log(this.activitysByZan)
+      if (this.activitysByZan && this.activityList.length > 0) {
         ctx.body = {
           message: statusCode.success,
           activityList: this.activityList
         };
       } else {
         ctx.body = {
-          message: statusCode.error
+          message: statusCode.noOne
         };
       }
     };
+  }
+  /**
+   * 更新活动的赞
+   * @param userId
+   * @param acceptUserId
+   */
+  public updateActivitysZan() {
+    return async (ctx: any) => {
+      const { body } = ctx.request
+      console.log(`我是acceptUserId是：  ${body.acceptUserId}`)
+      const canZan = await this.genericSingleDie(Activity , DynSingleDie, body);
+      console.log(`这里测试是否可以点赞.....${canZan}`)
+      if (canZan) {
+        ctx.body = {
+          message: statusCode.success
+        };
+      } else {
+        ctx.body = {
+          message: statusCode.error
+        };
+      }
+    }
   }
 }
 export default new ActivityController(Activity);

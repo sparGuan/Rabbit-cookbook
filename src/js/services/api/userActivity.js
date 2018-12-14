@@ -30,6 +30,17 @@ define(() =>{
 					ajaxOptions
 				)
 			);
+		},
+		// 实现活动点赞业务
+		updateActivitysZan: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/activity/updateActivitysZan'
+					},
+					ajaxOptions
+				)
+			);
 		}
 	};
 });

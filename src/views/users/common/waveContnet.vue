@@ -253,7 +253,7 @@ export default {
     },
     // 打开用户中心的时候获取用户创建的活动
     getUserActivityInfoList(userId) {
-      let data = { userId };
+      let data = { userId,acceptUserId:userId };
       app.api.userActivity.queryUserActivityInfo({
         data,
         success: data => {
@@ -268,6 +268,7 @@ export default {
               }
               this.rowData.push(item);
             });
+
           }
         }
       });

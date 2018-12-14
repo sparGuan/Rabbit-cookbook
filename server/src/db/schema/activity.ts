@@ -27,7 +27,7 @@ export interface IActivity extends mongoose.Document {
 }
 export interface IMeta {
   views: number;
-  likes: number;
+  totalPraise: number;
   comments: number;
 }
 // 自增ID初始化
@@ -67,7 +67,7 @@ const activity_schema: mongoose.Schema = new mongoose.Schema({
   // 其他元信息
   meta: {
     views: { type: Number, default: 0 }, // 浏览数
-    likes: { type: Number, default: 0 }, // 喜欢数
+    totalPraise: { type: Number, default: 0 }, // 喜欢数
     comments: { type: Number, default: 0 } // 评论数
   }
 });

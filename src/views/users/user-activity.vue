@@ -36,7 +36,15 @@
 									<!-- 具体内容 -->
 									<!-- 图文描述 -->
 									<!-- 活动介绍 -->
-									<div class="introduce-tip">活动介绍</div>
+									<div class="introduce-tip">活动介绍</div><div class="button-bar">
+                    <div class="button-bar-icon" @click="tumpUpZan($event)" :class="isActiveZan || updateActivityData.hasZan ? 'active':''">
+                      <i class="iconfont icon-icon"></i>
+                      <span class="zan-num" v-text="updateActivityData.meta.totalPraise || 0"></span>
+                    </div>
+                    <div class="button-bar-icon" @click="tumpZuji">
+                      <i class="iconfont icon-jiaoya"></i>
+                    </div>
+                  </div>
 									<button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;" @click="writeIntroduce" v-show="isAddNewOne">替换文本</button>
 									<div class="introduce-desc" :style="'max-height:'+shieldingMaxHeight" v-html="updateActivityData.introduce">
 										
@@ -231,11 +239,15 @@ export default {
   components: { Step, editor },
   data() {
     return {
+      isActiveZan: false,
       isAddNewOne: true,
       bgBanner: {},
       uploadBoxPic: {},
       ruleBg: {},
       updateActivityData: {
+        meta: {
+          totalPraise:0
+        },
         _id: '',
         bgBanner: '../../../src/imgs/test/bgbingxue.png', // banner图
         uploadBoxPic: '../../../src/imgs/test/bingxuetit.png', // 标题框背景图
@@ -291,6 +303,38 @@ export default {
     this.$store.dispatch('updateSaveMethod', this.updateDataHandler);
   },
   methods: {
+    /**
+     * 实现分享到足迹业务
+     * @param acceptUserId
+     * @param userId
+     */
+    tumpZuji() {
+
+    },
+    /**
+     * TODO： 实现点赞业务
+     * @param acceptUserId
+     * @param userId
+     */
+    tumpUpZan() {
+      const data = {
+        activityId: this.updateActivityData._id,
+        userId: app.globalService.getLoginUserInfo()._id,
+        acceptUserId:this.updateActivityData.userId,
+        type: 0
+      }
+      console.log(this.updateActivityData)
+      app.api.userActivity.updateActivitysZan({
+        data,
+        success: res => {
+          if (res.message === 'success') {
+            ++this.zanMount
+            this.isActiveZan = true
+            // 把更新好友关系的当前用户重新设置到缓存里去
+          }
+        }
+      });
+    },
     spreadOutShielding() {
       if (this.readBtnTxt === '阅读更多') {
         this.shieldingMaxHeight = '1000px';
@@ -346,13 +390,13 @@ export default {
         .gotoItem(1); //跳转到第index张
     },
     changeRuleTxtByEditor(htmlTxt) {
-      console.log(htmlTxt)
       this.updateActivityData.rule = htmlTxt;
     },
     // 保存之前会进行截取封面图的操作
     updateDataHandler() {
       mui.confirm(
         '提交该活动后内容将不可修改，需要修改请联系客服进行修改！',
+        '', ['取消','确定'],
         e => {
           if (e.index === 1) {
             const userActivity = Object.assign({}, this.updateActivityData);
@@ -395,9 +439,11 @@ export default {
 </script>
 <style lang="less" scoped>
 @import '../../less/_mixins.less';
+@import '../../less/_colors-vars';
 @import 'https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css';
 [data-page='user-activity'] {
   overflow: auto;
+  -webkit-overflow-scrolling : touch;
   max-height: calc(~'100vh - 40px');
   &.page {
     height: auto !important;
@@ -431,6 +477,7 @@ export default {
           background-position: center;
           padding: 15px 25px 5px 25px;
           font-size: 12px;
+          margin-bottom: 25px;
         }
       }
       .activity-config-introduce {
@@ -439,6 +486,30 @@ export default {
           padding-left: 25px;
           display: inline-block;
           vertical-align: bottom;
+          width: calc(~'100% - 100px');
+        }
+        .button-bar {
+          display: inline-block;
+          width: 100px;
+          vertical-align: bottom;
+          text-align: left;
+          .button-bar-icon {
+            margin: 0 8px;
+            display: inline-block;
+            position: relative;
+            &.active>i, &.active span{
+              color:@blue;
+            }
+            .iconfont {
+              font-size: 22px;
+            }
+            .zan-num {
+              position: absolute;
+              bottom: -2px;
+              right: -6px;
+              font-size: 12px;
+            }
+          }
         }
         .introduce-desc {
           margin: 0 15px;
