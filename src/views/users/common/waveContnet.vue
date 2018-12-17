@@ -77,10 +77,7 @@ export default {
     },
     '$store.state.appSocketIoSession.requestNewFriend': {
       handler: function(now, old) {
-        alert(`到这里就证明已经有新的好友请求了`)
         const newCommunicators = Object.assign(now,{newMsg:true})
-        console.log(newCommunicators.headImg)
-        alert(`我的图片路径是${newCommunicators.headImg}`)
         this.communicator.push(newCommunicators);
       },
       deep: true // 深度监听
@@ -140,7 +137,6 @@ export default {
     updateBothRelations_sent(acceptUser) {
       app.globalService.setUserInfo(acceptUser)
       // 这步错了，不应该将对方id放进去，应该将另一个id放进去
-      alert(JSON.stringify(acceptUser.friends[acceptUser.friends.length - 1]))
       if ( typeof acceptUser.friends[acceptUser.friends.length - 1] === 'object' ) {
         this.communicator.push(acceptUser.friends[acceptUser.friends.length - 1])
       }

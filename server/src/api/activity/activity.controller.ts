@@ -11,6 +11,7 @@ class ActivityController extends BASE_OPEN_SOURCE_API< ActivityService, IActivit
   private activity: IActivity;
   private activityList: IActivity[];
   private activitysByZan: any [];
+  private activitysByByZuJi: any [];
   private activityService: any;
   constructor(model: any) {
     super(model)
@@ -83,9 +84,9 @@ class ActivityController extends BASE_OPEN_SOURCE_API< ActivityService, IActivit
         // 判断今天是否已经有赞
         // 需求有一个发起请求的id
         this.activitysByZan = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 0, searchAble: 'activity'}, body));
-        this.activityList = await this.activityService.queryUserActivityInfoService(body , this.activitysByZan)
+        this.activitysByByZuJi = await this.queryDieByTodayCount(DynSingleDie, Object.assign({type: 1, searchAble: 'activity'}, body));
+        this.activityList = await this.activityService.queryUserActivityInfoService(body , this.activitysByZan, this.activitysByByZuJi)
       }
-      console.log(this.activitysByZan)
       if (this.activitysByZan && this.activityList.length > 0) {
         ctx.body = {
           message: statusCode.success,

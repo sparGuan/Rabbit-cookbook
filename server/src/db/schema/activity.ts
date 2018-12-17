@@ -28,6 +28,7 @@ export interface IActivity extends mongoose.Document {
 export interface IMeta {
   views: number;
   totalPraise: number;
+  totalFootprint: number;
   comments: number;
 }
 // 自增ID初始化
@@ -68,6 +69,7 @@ const activity_schema: mongoose.Schema = new mongoose.Schema({
   meta: {
     views: { type: Number, default: 0 }, // 浏览数
     totalPraise: { type: Number, default: 0 }, // 喜欢数
+    totalFootprint: {type: Number, default: 0},
     comments: { type: Number, default: 0 } // 评论数
   }
 });

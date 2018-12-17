@@ -155,6 +155,7 @@ class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
   public useMobileLogin() {
     return async (ctx: any, next: any) => {
       const { body } = ctx.request;
+      console.log(`正在使用手机进行登录！！！`)
       // 不用用户名登录就是手机登录
       if (!global._.isEmpty(body.Mobile)) {
         this.user = (await User.findOneAndUpdate(

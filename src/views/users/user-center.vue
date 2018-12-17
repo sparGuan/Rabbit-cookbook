@@ -20,7 +20,10 @@
             <!-- 主界面具体展示内容 -->
               <div class="page-content">
                 <div class="banner">
-                  <div class="bannerWrapper" :style="userInfo.headBgImg !== '' ?'background-image:url('+userInfo.headBgImg+')': ''">
+                  <div class="bannerWrapper" >
+                    <div class="bg" :style="userInfo.headBgImg !== '' ?
+                    'background-image:url('+userInfo.headBgImg+');transform: scale(1.1);background-size: cover;background-repeat: no-repeat;background-position: center;background-attachment: fixed;filter: blur(1px) contrast(0.95)': ''" style=" ">
+                    </div>
                     <div class="circle-head-viewer">
                       <img :src="userInfo.headImg" />
                     </div>
@@ -281,7 +284,6 @@ export default {
       this.isMaskShow = true;
       this.acceptUser = Object.assign(this.acceptUser,this.userInfo) 
       this.acceptUser.acceptUserId = app.globalService.getLoginUserInfo()._id  
-      console.log(this.acceptUser) 
       mui(this.$refs['editDynamic'])
         .offCanvas()
         .show();
@@ -337,11 +339,12 @@ export default {
     .bannerWrapper {
       position: relative;
       height: 100%;
-      padding-top: 20px;
-      background: linear-gradient(to bottom, #40b9fc, #f7f7f7) no-repeat center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
+       .bg{
+         height: 100%;
+          padding-top: 20px;
+          transition: all ease .3s;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), #f7f7f7) no-repeat center;
+       }
       .switch-btn {
         width: calc(~'50% - 30px');
         position: relative;
@@ -386,15 +389,22 @@ export default {
     }
     .desc-person {
       margin-top: 10px;
-      text-align: center;
       color: #fff;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 100px;
     }
     .adaim {
-      text-align: center;
-      margin-top: 10px;
       color: #fff;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 85px;
+      display: block;
     }
     .circle-head-viewer {
+      position: absolute;
       width: 45px;
       height: 45px;
       border-radius: 50%;
@@ -402,7 +412,10 @@ export default {
       border: 2px solid #f3f3f3;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
       overflow: hidden;
-      position: relative;
+      position: absolute;
+      top: 35px;
+      left: 0;
+      right: 0;
       &:before {
         position: absolute;
         top: -19px;

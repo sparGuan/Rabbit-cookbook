@@ -4,6 +4,10 @@ export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';
 export const webServerDoMain = 'localhost';
+export const redis_host = '127.0.0.1'; //  redis配置
+export const redis_port = 6379;
+export const redis_db = 0;
+export const redis_password = '';
 export const limit = '10';
 export const emit = 'sent';
 // 微信js-sdk服务

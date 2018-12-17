@@ -59,6 +59,8 @@ export default {
           success: res => {
             if (res.message === 'success') {
               if (res.user) {
+                console.log(`输出返回的更新用户信息时候的用户是：`)
+                console.log(res.user)
                 this.$socket.emit('isLogin', res.user);
               }
             }

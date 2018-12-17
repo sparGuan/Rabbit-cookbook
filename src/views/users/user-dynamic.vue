@@ -240,6 +240,9 @@ export default {
           // if (res.success === 'success') {
           //   res.footprintAllList
           // }
+          if (res.message === 'success') {
+             app.mui.toast('成功分享到消息大厅！')
+          }
          console.log(res)
         }
       })

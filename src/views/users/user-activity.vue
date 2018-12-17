@@ -41,7 +41,7 @@
                       <i class="iconfont icon-icon"></i>
                       <span class="zan-num" v-text="updateActivityData.meta.totalPraise || 0"></span>
                     </div>
-                    <div class="button-bar-icon" @click="tumpZuji">
+                    <div class="button-bar-icon" @click="shareToFoot(updateActivityData)" :class="isActiveZuji || updateActivityData.hasShare ? 'active':''">
                       <i class="iconfont icon-jiaoya"></i>
                     </div>
                   </div>
@@ -240,6 +240,7 @@ export default {
   data() {
     return {
       isActiveZan: false,
+      isActiveZuji: false,
       isAddNewOne: true,
       bgBanner: {},
       uploadBoxPic: {},
@@ -307,9 +308,35 @@ export default {
      * 实现分享到足迹业务
      * @param acceptUserId
      * @param userId
+     * // 使用的是消息大厅的业务
      */
-    tumpZuji() {
-
+    shareToFoot(activity) {
+      if (this.isActiveZuji) {
+        return false
+      }
+      // TODO：保存到足迹列表数据
+      // 从足迹列表数据拉出数据
+      // 分析数据结果
+      // 生成足迹
+      let linkType = 0;
+      const data = {
+        activityId: activity._id,
+        userId: app.globalService.getLoginUserInfo()._id,
+        acceptUserId: activity.userId,
+        type: 1,
+        footprintType: 1, // 类型0为动态发布
+        linkType,// 0代表图文类型
+        sourceDataId: activity._id
+      }
+      app.api.customerGather.saveFootprint({
+        data,
+        success: res => {
+          if (res.message === 'success') {
+            this.isActiveZuji = true
+             app.mui.toast('成功分享到消息大厅！')
+          }
+        }
+      })
     },
     /**
      * TODO： 实现点赞业务
@@ -317,18 +344,20 @@ export default {
      * @param userId
      */
     tumpUpZan() {
+      if (this.isActiveZan || this.updateActivityData.hasZan) {
+        return false
+      }
       const data = {
         activityId: this.updateActivityData._id,
         userId: app.globalService.getLoginUserInfo()._id,
         acceptUserId:this.updateActivityData.userId,
         type: 0
       }
-      console.log(this.updateActivityData)
       app.api.userActivity.updateActivitysZan({
         data,
         success: res => {
           if (res.message === 'success') {
-            ++this.zanMount
+            ++this.updateActivityData.totalPraise
             this.isActiveZan = true
             // 把更新好友关系的当前用户重新设置到缓存里去
           }
@@ -456,6 +485,7 @@ export default {
   .activity-config-container {
     height: 100%;
     background-color: unset;
+    margin-top: 15px;
     .activity-config-list {
       .activity-config-item {
         .activity-config-title {

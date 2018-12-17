@@ -100,8 +100,9 @@
                         </div>
                         <div class="communicators-item-content">
                           <p class="communicators-item-content-name" v-html="elem.nickName"></p>
-                          <p class="communicators-item-content-desc" v-html="elem.descPerson"></p>
+                          <p class="communicators-item-content-desc" v-html="elem.descPerson || '&nbsp;'"></p>
                           <div class="heard">
+                              <span class="arrow mui-icon mui-icon-arrowleft"></span>
                               <!-- 此处去查看好友动态 -->
                               <i data-v-3fcc4d6c="" class="iconfont icon-discover tools-ico" @click="openFriendsDynamic(elem)" ></i>
                           </div>
@@ -472,6 +473,7 @@ export default {
 <style lang="less" scoped>
 @import url('./send.less');
 @import url('./friendsListViewMenu.less');
+@import url('../../../less/_colors-vars.less');
 .tools-ico {
   vertical-align: middle;
   overflow: hidden;
@@ -479,7 +481,8 @@ export default {
   margin-top: 3px;
   font-size: 20px;
   display: inline-block;
-  color: #eee;
+  color: @blue;
+  text-shadow: 5px 5px 10px #4cc0d9;
 }
 .geoNearfriends-item {
   text-align: left;
@@ -542,15 +545,30 @@ export default {
         padding-left: 15px;
         position: relative;
       .heard {
-        height: auto;
-        width: 80px;
+        height: 100%;
+        width: 0px;
         display: inline-block;
         position: absolute;
-        right: 0;
+        right: -20px;
         top: 0;        
         padding: 2px;
-        border-radius: 25px;
-        background-color: rgba(0, 0, 16, 0.6);
+        border-left: 10px solid #f3f3f3;
+        background-color: #000000;
+        box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.5);
+        transition: all .3s ease;
+        .arrow {
+          position: absolute;
+          left: -10px;
+          height: 100%;
+          width: 10px;
+          color: #333;
+          font-size: 14px;
+          &.mui-icon-arrowleft:before {
+            position: absolute;
+            bottom: calc(~'50% - 5px');
+            left: -2px;
+          }
+        }
         .heard-face {
           fill: rgb(242, 242, 242);                              
         }
