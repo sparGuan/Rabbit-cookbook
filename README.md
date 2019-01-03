@@ -46,7 +46,11 @@ MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是
 - 下载[nginx 图片资源服务器](http://nginx.org/)Nginx 是一个很强大的高性能Web和反向代理服务。该服务器用来加载图片资源灵活好用
 
 - app打包完全是基于manifest.json配置文件，它主要是用来配置app的基本信息（版本号、appid等）、图标(app的应用图标)、sdk配置、模块权限配置、页面引用关系、代码视图，具体参看dcloud提供的[文档](http://ask.dcloud.net.cn/docs/#//ask.dcloud.net.cn/article/94)。
+- jenkins 密码====9ec9aff6db1f4903881ddb198dae9237
+- github  && jenkins ----> token  4c02d8815145082da03615339c3ac736
+- 路径 http：//193.112.125.250：49001 / project /jingz
 
+- http://updates.jenkins-ci.org/update-center.json
 
 ## npm初始化
 
