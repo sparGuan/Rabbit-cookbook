@@ -52,6 +52,8 @@ MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是
 
 - http://updates.jenkins-ci.org/update-center.json
 
+
+-  服务器目录 cd /var/lib/jenkins
 ## npm初始化
 
 ##### package.json内容如下
