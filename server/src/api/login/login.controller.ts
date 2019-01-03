@@ -30,22 +30,28 @@ class LoginController extends BASE_OPEN_SOURCE_API <LoginService, IUser> {
    */
   public msgValid() {
     return async (ctx: any, next: any) => {
-      const { body } = ctx.request;
-      const valid = await this.LoginService.msgValidService(body)
-      if (valid) {
-        ctx.body = {
-          message: valid
-        };
-      } else {
-        ctx.body = {
-          message: statusCode.error
-        };
+      try {
+        const { body } = ctx.request;
+        const valid = await this.LoginService.msgValidService(body)
+        // 单发短信
+        if (this.qsms.singleSend) {
+          await this.qsms.singleSend({
+            phoneNumber: body.Mobile,
+            msg: `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`
+          });
+        }
+        if (valid) {
+          ctx.body = {
+            message: valid
+          };
+        } else {
+          ctx.body = {
+            message: statusCode.error
+          };
+        }
+      } catch (error) {
+        throw error
       }
-      // 单发短信
-      // await this.qsms.singleSend({
-      //   phoneNumber: body.Mobile,
-      //   msg: `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`
-      // });
     };
   }
   public register() {
