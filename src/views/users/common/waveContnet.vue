@@ -46,18 +46,22 @@ export default {
       rowData: [
         {
           id: '0',
+          _id: '0',
           bgBanner: require('../../../../src/imgs/userCenter/row0.png')
         },
         {
           id: '1',
+          _id: '1',
           bgBanner: require('../../../../src/imgs/userCenter/row1.gif')
         },
         {
           id: '2',
+          _id: '2',
           bgBanner: require('../../../../src/imgs/userCenter/row2.png')
         },
         {
           id: '3',
+          _id: '3',
           bgBanner: require('../../../../src/imgs/userCenter/row3.png')
         }
       ]
@@ -264,7 +268,6 @@ export default {
               }
               this.rowData.push(item);
             });
-
           }
         }
       });

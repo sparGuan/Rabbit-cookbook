@@ -41,29 +41,31 @@ export default class Service<T> {
       }
       this.Mirror = new Child(data);
       await this.Mirror.save();
-      // 活动ID或者动态id
-      const _id = data.dynamicId || data.activityId;
-      console.log(`即将被更新的数据id是：${_id}`)
-      // 给被看动态的用户点赞 +1
-      const rootTable = (await Identity.findById(_id) as any );
-      // 类型是0就是点赞，1是分享到足迹
-      if (data.type === '0') {
-        if (!global._.isEmpty(rootTable)) {
-          console.log(`该${rootTable._id}表被更新了`)
-          await rootTable.update(
-            { $inc: {
-              'meta.totalPraise': 1
-            } },
-            { new: true });
-        }
-      } else if (data.type === '1') {
-        if (!global._.isEmpty(rootTable)) {
-          console.log(`该${rootTable._id}表被更新了`)
-          await rootTable.update(
-            { $inc: {
-              'meta.totalFootprint': 1
-            } },
-            { new: true });
+      if (!global._.isEmpty(Identity)) {
+        // 活动ID或者动态id
+        const _id = data.dynamicId || data.activityId;
+        console.log(`即将被更新的数据id是：${_id}`)
+        // 给被看动态的用户点赞 +1
+        const rootTable = (await Identity.findById(_id) as any );
+        // 类型是0就是点赞，1是分享到足迹
+        if (data.type === '0') {
+          if (!global._.isEmpty(rootTable)) {
+            console.log(`该${rootTable._id}表被更新了`)
+            await rootTable.update(
+              { $inc: {
+                'meta.totalPraise': 1
+              } },
+              { new: true });
+          }
+        } else if (data.type === '1') {
+          if (!global._.isEmpty(rootTable)) {
+            console.log(`该${rootTable._id}表被更新了`)
+            await rootTable.update(
+              { $inc: {
+                'meta.totalFootprint': 1
+              } },
+              { new: true });
+          }
         }
       }
         return Promise.resolve(true)

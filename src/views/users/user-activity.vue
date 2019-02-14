@@ -3,12 +3,12 @@
     <div class="bgBanner-banner">
       <img :src="updateActivityData.bgBanner" style="max-width:100%;">
     </div>
-    <div style="left:10px;top:54px; position: absolute;" v-show="isAddNewOne">
+    <div style="left:10px;top:54px; position: absolute;" v-if="isAddNewOne">
       <button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;">替换Banner 
         <input type="file" multiple="multiple" accept="image/gif,image/jpeg,image/jpg,image/png" @change="setBgByActvity($event)" style="opacity: 0;position: absolute;left: 0px;top: 0px;z-index: 1;width: 80px;"/> 
       </button>
     </div>
-    <div style="left: 100px;top:54px; position: absolute;background: #fff;" v-show="isAddNewOne">
+    <div style="left: 100px;top:54px; position: absolute;background: #fff;" v-if="isAddNewOne">
       <button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;">替换标题背景图
         <input type="file" multiple="multiple" accept="image/gif,image/jpeg,image/jpg,image/png" @change="setBgByTitleBox($event)" style="opacity: 0;position: absolute;left: 0px;top: 0px;z-index: 1;width: 105px;"/> 
       </button>
@@ -39,20 +39,20 @@
 									<div class="introduce-tip">活动介绍</div><div class="button-bar">
                     <div class="button-bar-icon" @click="tumpUpZan($event)" :class="isActiveZan || updateActivityData.hasZan ? 'active':''">
                       <i class="iconfont icon-icon"></i>
-                      <span class="zan-num" v-text="updateActivityData.meta.totalPraise || 0"></span>
+                      <span class="zan-num" v-text="(updateActivityData.meta && updateActivityData.meta.totalPraise) || 0"></span>
                     </div>
                     <div class="button-bar-icon" @click="shareToFoot(updateActivityData)" :class="isActiveZuji || updateActivityData.hasShare ? 'active':''">
                       <i class="iconfont icon-jiaoya"></i>
                     </div>
                   </div>
-									<button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;" @click="writeIntroduce" v-show="isAddNewOne">替换文本</button>
+									<button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;" @click="writeIntroduce" v-if="isAddNewOne">替换文本</button>
 									<div class="introduce-desc" :style="'max-height:'+shieldingMaxHeight" v-html="updateActivityData.introduce">
 										
 									</div>
 									<div class="read-more"><label @click="spreadOutShielding"><a href="#" style="font-size:12px;">{{readBtnTxt}}<i class="iconfont icon-gengduo1 ico-more" :style="'transform: '+ico_rotate" ></i></a></label></div>
 								</div>
 								<!--第二个内容区-->
-								<div class="mui-slider-item" style="padding:8px;" v-show="isAddNewOne">
+								<div class="mui-slider-item" style="padding:8px;" v-if="isAddNewOne">
 									<!-- 具体内容 -->
                   <editor :content="updateActivityData.introduce" :height="100" :z-index="1000" :auto-height="false" @change="changeIntroduceTxtByEditor"></editor>
 								</div>
@@ -75,8 +75,8 @@
                   <div class="mui-slider-group">
                         <!--第一个内容区容器-->
                       <div class="mui-slider-item">
-                        <button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;margin-left:15px;" @click="writeruleTxt" v-show="isAddNewOne">编辑文本</button>
-                        <button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;" v-show="isAddNewOne">
+                        <button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;margin-left:15px;" @click="writeruleTxt" v-if="isAddNewOne">编辑文本</button>
+                        <button type="button" class="mui-btn mui-btn-outlined" style="padding: 1px 10px;font-size: 12px;line-height:1.5;" v-if="isAddNewOne">
                           替换选框背景
                           <input type="file" multiple="multiple" accept="image/gif,image/jpeg,image/jpg,image/png" @change="writeRuleBg($event)" style="opacity: 0;position: absolute;left: 0px;top: 0px;z-index: 1;width: 105px;"/> 
                         </button>
@@ -250,9 +250,9 @@ export default {
           totalPraise:0
         },
         _id: '',
-        bgBanner: '../../../src/imgs/test/bgbingxue.png', // banner图
-        uploadBoxPic: '../../../src/imgs/test/bingxuetit.png', // 标题框背景图
-        ruleBg: '../..//src/imgs/test/stepjoin.png', // 活动规则背景图
+        bgBanner: require('../../../src/imgs/test/bgbingxue.png'), // banner图
+        uploadBoxPic: require('../../../src/imgs/test/bingxuetit.png'), // 标题框背景图
+        ruleBg: require('../../../src/imgs/test/stepjoin.png'), // 活动规则背景图
         introduce:
           '<p>一、冰雪旅游活动 ' +
           '举办冰雪大世界、太阳岛雪雕艺术博览会、冰灯艺术游园会、中央大街圣诞嘉年华系列活动、伏尔加庄园城堡滑雪及冬令营系列活动、第2届哈尔滨·宾县(英杰)寒地温泉旅游文化节、第2届长岭湖冬捕冰钓旅游节以及“冰雪进社区、百姓游冰城”等活动。' +
@@ -295,6 +295,9 @@ export default {
         );
         vm.updateActivityData = vm.$route.params.activityInfo;
         vm.$store.dispatch('updateHeadSaveBtn', false);
+        vm.$store.dispatch('updateNavbarTitle', {
+        navbarTitle: '浏览当前活动'
+        })
         vm.isAddNewOne = false;
       }
     });
@@ -357,8 +360,10 @@ export default {
         data,
         success: res => {
           if (res.message === 'success') {
-            ++this.updateActivityData.totalPraise
-            this.isActiveZan = true
+            if (this.updateActivityData.totalPraise) {
+              ++this.updateActivityData.totalPraise
+              this.isActiveZan = true
+            }
             // 把更新好友关系的当前用户重新设置到缓存里去
           }
         }
@@ -430,6 +435,7 @@ export default {
           if (e.index === 1) {
             const userActivity = Object.assign({}, this.updateActivityData);
             const data = new FormData();
+            // 如果_id字段为空，不要_id字段
             if (userActivity._id === '') {
               delete userActivity._id;
             }
@@ -446,6 +452,7 @@ export default {
               data.append('ruleBg', this.ruleBg);
             }
             data.append('userActivity', JSON.stringify(userActivity));
+            console.log(data.get('bgBanner'))
             app.api.userActivity.saveOrUpdate({
               data,
               success: res => {

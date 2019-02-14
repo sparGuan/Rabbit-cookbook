@@ -237,12 +237,12 @@ export default {
 // 	alert(Lon + "," + Lat);
 // 	alert(address);  
 // },
-getlocation(MapPoint) {
-	mui.plusReady(() => {
-		// 成功进入第一个回调，失败进入第二个回调
-    plus.geolocation.getCurrentPosition(MapPoint, (e) => {
-				mui.toast("error:" + e.message);
-    })
-})
-}
+	getlocation(MapPoint) {
+		mui.plusReady(() => {
+			// 成功进入第一个回调，失败进入第二个回调
+			plus.geolocation.getCurrentPosition(MapPoint, (e) => {
+					mui.toast("error:" + e.message);
+			})
+	})
+	}
 }

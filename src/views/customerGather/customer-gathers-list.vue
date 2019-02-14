@@ -51,10 +51,9 @@
               </div>
               <div class="grid-bottom-desc">
                 <p class="grid-bottom-tit" v-text="item.speech"></p>
-                <p class="grid-bottom-msg">来自： <span class="head-box" :style="`background-image:url(${getImage(item.user.headImg)})`"></span>{{item.user.nickName}}</p>
+                <p class="grid-bottom-msg">来自： <span class="head-box" :style="`background-image:url(${getImage(item.user.headImg)})`"></span>{{item.user.nickName}} <span class="flow" @click="addToflow(item._id,item.footprintType,item.user._id)"><i  class=" iconfont icon-guanzhu putguanzhu"></i>+关注</span></p>
               </div>
             </div>
-
         </li>
     </ul>
   </div>
@@ -70,7 +69,6 @@ export default {
       listItem: []
     }
   },
-  
   mounted() {
     mui(this.$refs['custom_gathers_list']).scroll({
         deceleration: 0.0005, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
@@ -79,6 +77,30 @@ export default {
     this.getList()
   },
   methods: {
+    /**
+     * @params id 该列表id
+     * @params type 判断该足迹类型是啥类型 0：动态类型 1：活动类型
+     * 实现需求，完成关注
+     * by 19/1/5
+     * 预计完成by 19/1/7
+     */
+    addToflow(id,footprintType,acceptUserId) {
+      const data = {
+        sourceDataId:id, // 数据表id
+        sourceDataType: footprintType, // 数据表类型 、、动态  活动
+        user: app.globalService.getLoginUserInfo._id,
+        acceptUser: acceptUserId,
+        type: '3' // 类型为3代表关注
+      }
+      app.api.customerGather.saveFlow({
+        data,
+        success: res => {
+            if (res.message === 'success') {
+               app.mui.toast('已关注')
+            }
+        }
+      })
+    },
     // 传入对象，判断类型，返回需要的值
     // 分配数据控制器
     checkType(item,require) {
@@ -141,10 +163,32 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import '../../less/_colors-vars.less';
 @color-font:#464646;
 .custom-gathers-list {
   max-height: calc(~'100vh - 140px');
   margin-top: 100px;
+}
+.putguanzhu {
+  font-size: 19px; 
+  color: rgb(102, 102, 102);
+  transition:  all ease .3s;
+}
+.flow {
+  float: right;
+  width: 50px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+  transition:  all ease .3s;
+  &.active {
+    color:@blue;
+    & > .iconfont {
+      color:@blue;
+    }
+  }
 }
 .head-box {
   width: 25px;

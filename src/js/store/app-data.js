@@ -43,6 +43,7 @@ export default {
 			state.NavType = NavType
 			state.showNavbarTitle = arr.includes(navbarTitle)
 			// false是显示头部标题状态，因此app.vue使用了非判断
+			console.log(navbarTitle)
 			state.navbarTitle = navbarTitle
 		},
 		updateNavbarStatus(

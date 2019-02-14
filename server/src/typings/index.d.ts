@@ -5,5 +5,6 @@ declare module 'koa-nunjucks-2';
 declare module 'koa-socket';
 declare module 'koa-bodyparser';
 declare module 'koa-redis';
+declare module 'mongoose-auto-increment-fix';
 
 

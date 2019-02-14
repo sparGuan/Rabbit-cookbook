@@ -3,7 +3,7 @@
           <div class="mui-row gathers-app-bar-container">
               <div class="mui-col-xs-4">
                   <!-- TODO: 实现正在播放的音乐 🎵 -->
-                  <div class="music-pic "><i class="iconfont icon-ziyuanldpi"></i></div>
+                  <div class="music-pic "><i class="iconfont icon-ziyuanldpi" @click="$emit('openMusicContro')"></i></div>
               </div>
               <div class="mui-col-xs-4 arrow-area" style="position:relative;">
                   <!-- TODO: 实现下拉式的仿QQ看点 -->
@@ -42,6 +42,12 @@ export default {
 </script>
 <style lang="less" scoped>
 @import url('../../less/_colors-vars.less');
+  .icon-ziyuanldpi {
+    width: 50px;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+  }
   .arrow-area {
     text-align: center;
     line-height: 45px;
@@ -80,7 +86,6 @@ export default {
         border-bottom-left-radius: 25px;
         transform: translateX(-10px);
         background-repeat: no-repeat;
-        background-color: #fff;
         background-position: 40px;
         background-size: contain;
         border-radius: 25px;

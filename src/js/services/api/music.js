@@ -10,32 +10,31 @@ define(() =>{
 		/**
 		 * @param {object} 动态
 		 */
-		saveFootprint: ajaxOptions => {
+		queryAllSongs: ajaxOptions => {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/footprint/saveFootprint'
+						url: '/api/music/queryAllSongs'
 					},
 					ajaxOptions
 				)
 			);
 		},
-		//查询用户基本信息
-		queryFootPrintList: ajaxOptions => {
+		searchMusic: ajaxOptions =>  {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/footprint/queryFootPrintList'
+						url: '/api/music/searchMusic'
 					},
 					ajaxOptions
 				)
 			);
 		},
-		saveFlow: ajaxOptions => {
+		joinPlayList: ajaxOptions =>  {
 			return app.ajax(
 				window.app.mui.extend(
 					{
-						url: '/api/flow/saveFlow'
+						url: '/api/music/joinPlayList'
 					},
 					ajaxOptions
 				)

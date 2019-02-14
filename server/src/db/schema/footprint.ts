@@ -1,7 +1,7 @@
 import mongoose = require('mongoose');
 import { db } from '../connection';
 import mongoosePaginate = require('mongoose-paginate'); // 翻页插件
-import autoIncrement = require('mongoose-auto-increment'); // id自增插件
+import autoIncrement = require('mongoose-auto-increment-fix'); // id自增插件
 import { IUser } from './user'
 /**
  * 实现业务：足迹

@@ -26,4 +26,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.github-info {
+  transform: translate3d(53px,-40px,0px);
+}
 </style>

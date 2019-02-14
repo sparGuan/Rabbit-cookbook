@@ -4,17 +4,9 @@ import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 import FootprintService from './footprint.service';
 import DynSingleDie, { IDynSingleDie } from '../../db/schema/dynSingleDie';
 import Dynamic, { IDynamic, IDynamicComment } from '../../db/schema/dynamic';
-import Activity, { IActivity } from '../../db/schema/activity';
-import mongoose = require('mongoose');
 // 此处需要的是路由
 class FootprintController extends BASE_OPEN_SOURCE_API< FootprintService , IFootprint > {
-  private footprint: IFootprint;
-  private footprintList: IFootprint[];
   private FootprintService: any;
-  private dynamic: IDynamic;
-  private dynamicList: IDynamic [];
-  private activity: IActivity;
-  private activityList: IActivity[];
   constructor(model: any) {
     super(model)
     this.FootprintService = new FootprintService()

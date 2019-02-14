@@ -14,7 +14,8 @@ import IO = require('koa-socket');
 import Socket, { ISocket } from './db/schema/socket';
 import User from './db/schema/user';
 const flash = require('koa-flash2'); // flash中间件，用来显示消息通知
-const num_processes = require('os').cpus().length;
+// const num_processes = require('os').cpus().length;
+const num_processes  = 2
 const cluster = require('cluster'); // cluster是一个nodejs内置的模块，用于nodejs多核处理。cluster模块，可以帮助我们简化多进程并行化程序的开发难度，轻松构建一个用于负载均衡的集群。
 const net = require('net'); // net网络服务器
 const redis = require('redis'); // redis缓存

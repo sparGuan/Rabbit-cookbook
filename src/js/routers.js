@@ -249,20 +249,20 @@ let routerConfig = {
 	}
 }
 // 给homepackage页面添加额外子路由
-for (let menu of menus) {
-	// 给云应用页面添加子路由
-	let homepackageRoute = {
-		path: dirThemesAddr(menu.router), // 未发现该页面
-		name: menu.router,
-		meta: { title: menu.name },
-		component: () =>
-			import(`../views/homepackage/${menu.router}/framework.vue`)
-	}
-	if (Object.is(menu.router, 'cloud')) {
-		// 此处下次记得做---->先不完成，做完二级菜单先
-		homepackageRoute.children = []
-	}
-	routerConfig.routes.push(homepackageRoute)
-}
+// for (let menu of menus) {
+// 	// 给云应用页面添加子路由
+// 	let homepackageRoute = {
+// 		path: dirThemesAddr(menu.router), // 未发现该页面
+// 		name: menu.router,
+// 		meta: { title: menu.name },
+// 		component: () =>
+// 			import(`../views/homepackage/${menu.router}/framework.vue`)
+// 	}
+// 	if (Object.is(menu.router, 'cloud')) {
+// 		// 此处下次记得做---->先不完成，做完二级菜单先
+// 		homepackageRoute.children = []
+// 	}
+// 	routerConfig.routes.push(homepackageRoute)
+// }
 
 export default routerConfig

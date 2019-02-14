@@ -1,5 +1,5 @@
 import mongoose = require('mongoose')
-import { ISocket } from 'db/schema/socket';
+import { ISocket } from './socket';
 /**
  * 用户模型
  * @param {String} name 昵称

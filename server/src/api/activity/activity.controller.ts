@@ -28,6 +28,8 @@ class ActivityController extends BASE_OPEN_SOURCE_API< ActivityService, IActivit
               if (err) {
                 throw err;
               }
+              console.log(`上传的图片数据为....`)
+              console.log(files)
               body = JSON.parse(fields.userActivity);
               if (Object.keys(files).length > 0) {
                 const bgActivityArray: any = await DirExistUtils.uploadFileCommon(
