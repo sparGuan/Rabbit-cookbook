@@ -213,13 +213,14 @@ import jQuery from 'jquery'
          * 先去实现加入歌单功能
          * 
          */
+        app.vueApp.$store.dispatch('updateisShowPalyer', false)
+        const src = $(this).closest('.jAudio--playlist-item').attr('data-track')
+        const musicId = $(this).closest('.jAudio--playlist-item').find('.inp-value').val()
+        const imageurl = $(this).closest('.jAudio--playlist-item').find('.jAudio--playlist-thumb img').attr('src')
+        const name = $(this).closest('.jAudio--playlist-item').find('h4').text()
+        const singer = $(this).closest('.jAudio--playlist-item').find('.track-art-ist').text()
+        const userId = app.globalService.getLoginUserInfo()._id
         if ($(this).find('i').hasClass('icon-jiarugedan')) {
-          const src = $(this).closest('.jAudio--playlist-item').attr('data-track')
-          const musicId = $(this).closest('.jAudio--playlist-item').find('.inp-value').val()
-          const imageurl = $(this).closest('.jAudio--playlist-item').find('.jAudio--playlist-thumb img').attr('src')
-          const name = $(this).closest('.jAudio--playlist-item').find('h4').text()
-          const singer = $(this).closest('.jAudio--playlist-item').find('.track-art-ist').text()
-          const userId = app.globalService.getLoginUserInfo()._id
           const data = {
             play_list: {src,musicId,imageurl,name,singer},
             userId
@@ -228,8 +229,13 @@ import jQuery from 'jquery'
               data,
               success: res => {
                 if (res.message === 'success') {
-                  console.log(res)
                   $(this).find('i').toggleClass('icon-jiarugedan').toggleClass('icon-chuangjiangedan')
+                  // $store.state.appData.isShowPalyer
+                  app.vueApp.$store.dispatch('updateisShowPalyer', true)
+                  app.vueApp.$nextTick( () => {
+                    // 挂载完成后初始化d-audio
+                    app.Daudio()
+                  })
                 } else {
                   app.mui.toast(res.message)
                 }
@@ -237,7 +243,26 @@ import jQuery from 'jquery'
           });
         } else {
           // 实现删除歌单
-          
+          const userId = app.globalService.getLoginUserInfo()._id
+          const data = {
+            musicId: musicId,
+            userId
+          }
+          app.api.music.removePlayListMusic({
+            data,
+            success: res => {
+              if (res.message === 'success') {
+                $(this).find('i').toggleClass('icon-jiarugedan').toggleClass('icon-chuangjiangedan')
+                app.vueApp.$store.dispatch('updateisShowPalyer', true)
+                app.vueApp.$nextTick( () => {
+                  // 挂载完成后初始化d-audio
+                  app.Daudio()
+                })
+              } else {
+                app.mui.toast(res.message)
+              }
+          }
+        });
         }
       });
       // 点击加入歌单
@@ -471,7 +496,6 @@ import jQuery from 'jquery'
     var instantiate = function()
     {
       $(".jAudio--playlist").html('')
-      console.log(options)
       return new Plugin( $(".jAudio--player"), options );
     }
 
@@ -482,27 +506,27 @@ import jQuery from 'jquery'
 
 var t = {
   playlist: [
-    {
-      file: app.getResourceUrl("mp3/tracks/01.mp3"),
-      thumb: require("../../imgs/resources/thumbs/01.jpg"),
-      trackName: "Dusk",
-      trackArtist: "Tobu & Syndec",
-      trackAlbum: "Single",
-    },
-    {
-      file: app.getResourceUrl("mp3/tracks/02.mp3"),
-      thumb: require("../../imgs/resources/thumbs/02.jpg"),
-      trackName: "Blank",
-      trackArtist: "Disfigure",
-      trackAlbum: "Single",
-    },
-    {
-      file: app.getResourceUrl("mp3/tracks/03.mp3"),
-      thumb: require("../../imgs/resources/thumbs/03.jpg"),
-      trackName: "Fade",
-      trackArtist: "Alan Walker",
-      trackAlbum: "Single",
-    }
+    // {
+    //   file: app.getResourceUrl("mp3/tracks/01.mp3"),
+    //   thumb: require("../../imgs/resources/thumbs/01.jpg"),
+    //   trackName: "Dusk",
+    //   trackArtist: "Tobu & Syndec",
+    //   trackAlbum: "Single",
+    // },
+    // {
+    //   file: app.getResourceUrl("mp3/tracks/02.mp3"),
+    //   thumb: require("../../imgs/resources/thumbs/02.jpg"),
+    //   trackName: "Blank",
+    //   trackArtist: "Disfigure",
+    //   trackAlbum: "Single",
+    // },
+    // {
+    //   file: app.getResourceUrl("mp3/tracks/03.mp3"),
+    //   thumb: require("../../imgs/resources/thumbs/03.jpg"),
+    //   trackName: "Fade",
+    //   trackArtist: "Alan Walker",
+    //   trackAlbum: "Single",
+    // }
   ]
 }
 // jQuery(".jAudio--player").jAudio(t);

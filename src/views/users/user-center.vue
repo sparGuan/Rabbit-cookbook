@@ -21,7 +21,7 @@
               <div class="page-content">
                 <div class="banner">
                   <div class="bannerWrapper" >
-                    <div class="bg" :style="userInfo.headBgImg !== '' ?
+                    <div class="bg" :style="(userInfo.headBgImg !== '' && userInfo.headBgImg !== undefined) ?
                     'background-image:url('+userInfo.headBgImg+');transform: scale(1.1);background-size: cover;background-repeat: no-repeat;background-position: center;background-attachment: fixed;filter: blur(1px) contrast(0.95)': ''" style=" ">
                     </div>
                     <div class="circle-head-viewer">
@@ -343,7 +343,8 @@ export default {
          height: 100%;
           padding-top: 20px;
           transition: all ease .3s;
-          background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), #f7f7f7) no-repeat center;
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(163, 143, 175, .5)) no-repeat center;
+          filter:blur(10px) brightness(80%) opacity(0.8);
        }
       .switch-btn {
         width: calc(~'50% - 30px');

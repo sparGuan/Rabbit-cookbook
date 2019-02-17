@@ -30,6 +30,12 @@ export default class MusicService {
         // 进行匹配，如果匹配到就证明该歌曲是在歌单内了
         if (body) {
           this.music = (await Music.findOne({ user: body.userId })) as any;
+          // 判断是否是歌单数据
+          if (body.getplay_list) {
+            if (this.music.play_list.length > 0) {
+              return this.music.play_list
+            }
+          }
         }
         detilList.data.songlist.forEach((element: any, index: number) => {
           element.file = this.songList[index].results.url
@@ -47,7 +53,6 @@ export default class MusicService {
             songlist.push(element)
           }
         });
-        // console.log(songlist)
       }
     }
     return songlist
@@ -187,7 +192,7 @@ export default class MusicService {
         return this.music.play_list
       } else {
         // 返回默认10条数据，明天实现
-        return []
+        return await this.queryAllSongsService()
       }
     }
   }

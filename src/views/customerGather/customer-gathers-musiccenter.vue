@@ -101,7 +101,6 @@ export default {
               if (res.message === 'success') {
                 this.dataSource = res.info;
                 this.dataSource.forEach( (item,index) => {
-                  console.log(item)
                        this.videoList.playlist.push({
                         isInPlay_list: item.isInPlay_list,
                         musicId: item.data.songmid,
@@ -126,7 +125,7 @@ export default {
           }
         }
       })
-    },
+    }
 	}
 }
 </script>

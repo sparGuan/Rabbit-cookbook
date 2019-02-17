@@ -7,7 +7,7 @@
 			<!-- 主页面容器 -->
       <div class="mui-content mui-inner-wrap">
         <!-- 主页面标题 -->
-        <gathersAppbar @openMusicContro="openMusicContro"/>
+        <gathersAppbar @openMusicContro="openMusicContro" />
 				<div class="page-content">
 						<!-- 图片墙 -->
 						<!-- 横向列表 -->

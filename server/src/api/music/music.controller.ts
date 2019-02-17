@@ -18,7 +18,7 @@ class MusicController extends BASE_OPEN_SOURCE_API< MusicService, IMusic> {
    */
   public queryAllSongs() {
     return async (ctx: any) => {
-      const { body } = ctx.request;
+     const { body } = ctx.request;
      const info = await this.musicService.queryAllSongsService(body);
      ctx.body = {
       message: statusCode.success,
@@ -81,10 +81,16 @@ class MusicController extends BASE_OPEN_SOURCE_API< MusicService, IMusic> {
     return async (ctx: any) => {
       const { body } = ctx.request;
       const paly_list = await this.musicService.removePlayListMusicService(body.userId, body.musicId)
-      ctx.body = {
-        message: statusCode.success,
-        paly_list
-      };
+      if (!global._.isEmpty(paly_list)) {
+        ctx.body = {
+          message: statusCode.success,
+          paly_list
+        };
+      } else {
+        ctx.body = {
+          message: statusCode.error
+        };
+      }
     }
   }
 }

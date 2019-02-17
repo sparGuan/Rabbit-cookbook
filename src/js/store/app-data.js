@@ -15,12 +15,17 @@ export default {
 		isShowBack: true, //是否显示返回按钮
 		isConnectionHub: false, //是否连接hubs
 		rainAllowRecord: false, //是否首次进入 弹出是否授权框--微信
+		isShowPalyer: true, // 是否显示头部音乐播放器
 		locationInfo: {},
 		keepLivesConfig: {
 			isReFlashActivityInfoList: true
 		} // 缓存列表---》用于是否已经被访问过
 	},
 	mutations: {
+		// 是否显示头部播放器获取进行销毁
+		updateisShowPalyer(state, isShowPalyer) {
+			state.isShowPalyer = isShowPalyer
+		},
 		// 更新首次进入微信录音提示
 		updateRainAllowRecord(state, rainAllowRecord) {
 			state.rainAllowRecord = rainAllowRecord
@@ -68,6 +73,9 @@ export default {
 		}
 	},
 	actions: {
+		updateisShowPalyer ({ commit }, isShowPalyer) {
+			commit('updateisShowPalyer', isShowPalyer)
+		},
 		updateRainAllowRecord ({ commit }, rainAllowRecord) {
 			commit('updateRainAllowRecord', rainAllowRecord)
 		},

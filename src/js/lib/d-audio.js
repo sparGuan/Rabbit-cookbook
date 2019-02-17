@@ -1,5 +1,6 @@
 app.Daudio = function () {
-  var Daudio = function (e) {var t = {}
+  try {
+    var Daudio = function (e) {var t = {}
     function n (o) {if (t[o])return t[o].exports;var i = t[o] = {i: o,l: !1,exports: {}}
       return e[o].call(i.exports, i, i.exports, n), i.l = !0, i.exports}return n.m = e, n.c = t, n.d = function (e, t, o) {n.o(e, t) || Object.defineProperty(e, t, {configurable: !1,enumerable: !0,get: o})}, n.r = function (e) {Object.defineProperty(e, '__esModule', {value: !0})}, n.n = function (e) {var t = e && e.__esModule ? function () {return e.default} : function () {return e}
         return n.d(t, 'a', t), t}, n.o = function (e, t) {return Object.prototype.hasOwnProperty.call(e, t)}, n.p = 'http://www.daiwei.org/components/d-audio/', n(n.s = 29)}([function (e, t, n) {'use strict';var o = n(6),i = n(24),r = Object.prototype.toString
@@ -66,7 +67,6 @@ app.Daudio = function () {
           e.audioContent = document.createElement('div'), 'cricle' === this.opt.initstate ? (e.audioContent.className = 'audio-content ' + this.opt.initstate, e.audioContent.style.width = this.height + 'px') : e.audioContent.className = 'audio-content', e.audioContent.setAttribute('id', 'd-audio-content'), this.opt.ele.appendChild(e.audioContent), e.audioCricle = document.createElement('div'), e.audioCricle.className = 'audio-cricle', e.audioCricle.title = this.opt.name + ' - ' + this.opt.singer, e.audioCricle.innerHTML = '<img id="d-audio-cricleImage" src=' + (this.opt.imageurl || this.defaultimg) + '>', e.audioCricle.style.cssText = 'width: ' + this.height + 'px; height: ' + this.height + 'px;', e.audioContent.appendChild(e.audioCricle), e.audioDetail = document.createElement('div'), e.audioDetail.className = 'audio-detail', e.audioDetail.innerHTML = '<div class="left-config">\n                                      <i id="d-audio-playPause" class="pause icon-pause"></i>\n                                      <i id="d-audio-next" class="next icon-next"></i>\n                                    </div>\n                                    <div class="right-info">\n                                      <h3 id="d-audio-audioTitle" class="m-title">' + this.opt.name + '</h3>\n                                      <p id="d-audio-audioSinger" class="m-singer">' + this.opt.singer + '</p>\n                                    </div>', e.audioContent.appendChild(e.audioDetail), e.audioBg = document.createElement('div'), e.audioBg.className = 'audio-bg', e.audioBg.style.cssText = 'background: url("' + (this.opt.imageurl || this.defaultimg) + '");background-size: cover;background-position: center;', e.audioContent.appendChild(e.audioBg), e.audioLoading = document.createElement('div'), e.audioLoading.className = 'audio-loading', e.audioLoading.innerHTML = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  width="200px" height="200px"  viewBox="0 0 200 200"\n                                    xml:space="preserve">\n                                    \x3c!--#4886CD为深色值   #9DBFE4为中间值 可以随意修改--\x3e  \n                                    <style type="text/css">\n                                    .left{fill:url(#left);}\n                                    .right{fill:url(#right);}\n                                    .top{fill:rgba(72, 134, 205, 0.781);}\n                                    @keyframes load{\n                                    0%{transform:rotate(0)}\n                                    100%{transform:rotate(-360deg)}\n                                    }\n                                    #load{animation:load 1s  linear infinite; transform-origin:center center; } \n                                    </style>\n                                    <g id="load">\n                                    <linearGradient id="right" gradientUnits="userSpaceOnUse" x1="150" y1="20" x2="150" y2="180">\n                                    <stop  offset="0" style="stop-color:rgba(72, 134, 205, 0.849)"/>\n                                    <stop  offset="1" style="stop-color:rgba(157, 191, 228, 0.788)"/>\x3c!--蓝到浅蓝渐变--\x3e\n                                    </linearGradient>\n                                    <path class="right" d="M100,0v20c44.1,0,80,35.9,80,80c0,44.1-35.9,80-80,80v20c55.2,0,100-44.8,100-100S155.2,0,100,0z"/>\x3c!--右半圆环--\x3e\n                                    <linearGradient id="left" gradientUnits="userSpaceOnUse" x1="50" y1="0" x2="50" y2="180">\n                                    <stop  offset="0" style="stop-color:rgba(255, 255, 255, 0.808)"/>\n                                    <stop  offset="1" style="stop-color:rgba(157, 191, 228, 0.767)"/>\x3c!--浅蓝到白色渐变--\x3e\n                                    </linearGradient>\n                                    <path class="left" d="M20,100c0-44.1,35.9-80,80-80V0C44.8,0,0,44.8,0,100s44.8,100,100,100v-20C55.9,180,20,144.1,20,100z"/>\x3c!--左半圆环--\x3e\n                                    <circle class="top" cx="100" cy="10" r="10"/>\n                                    </g>\n                                  </svg>', e.audioContent.appendChild(e.audioLoading), this.opt.showprogress && (e.audioProgress = document.createElement('div'), e.audioProgress.className = 'audio-progress', e.audioContent.appendChild(e.audioProgress)), e.audioEle = document.createElement('audio'), e.audioEle.src = this.opt.src, this.opt.loop && (e.audioEle.loop = !0), e.audioContent.appendChild(e.audioEle), this.initDomInfo()}}, {key: 'initDomInfo',value: function () {this.dom.cricleImage = document.getElementById('d-audio-cricleImage'), this.dom.playPause = document.getElementById('d-audio-playPause'), this.dom.next = document.getElementById('d-audio-next'), this.dom.audioTitle = document.getElementById('d-audio-audioTitle'), this.dom.audioSinger = document.getElementById('d-audio-audioSinger')}}, {key: 'initEvent',value: function () {var e = this,t = this.dom,n = this
           t.audioCricle.onclick = function () {i.dom.removeClass(t.audioContent, 'cricle')}, t.audioDetail.onclick = function () {i.dom.addClass(t.audioContent, 'cricle'), t.audioContent.style.width = e.height + 'px'}, t.playPause.onclick = function (e) {e.stopPropagation(), n.playPause()}, t.next.onclick = function (e) {e.stopPropagation(), n.opt.next();
           }, t.audioEle.onplaying = function (o) {n.isplaying = !0, i.dom.addClass(t.audioCricle, 'active'), i.dom.removeClass(t.playPause, 'icon-pause'), i.dom.addClass(t.playPause, 'icon-play'), e.hideLoading()}, t.audioEle.onpause = function (e) {n.isplaying = !1, i.dom.removeClass(t.audioCricle, 'active'), i.dom.removeClass(t.playPause, 'icon-play'), i.dom.addClass(t.playPause, 'icon-pause')}, t.audioEle.onended = function () {i.dom.removeClass(t.playPause, 'icon-pause'), i.dom.addClass(t.playPause, 'icon-play'), n.opt.next()}, t.audioEle.oncanplay = function () {n.loading = !1, n.duration = t.audioEle.duration}, this.opt.showprogress && (t.audioEle.ontimeupdate = function (e) {n.updateProgress(e.target.currentTime)}), t.audioEle.onwaiting = function () {n.showLoading()}, t.audioEle.onerror = function (e) {console.error(e), n.opt.next()}}}, {key: 'checkAudio',value: function (e) {
-           //debugger; 
             var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : this.defaultimg,n = arguments[2],o = arguments[3],i = this.dom
           i.audioEle.src = e, i.cricleImage.src = t, i.audioBg.style.cssText = 'background: url("' + t + '");background-size: cover;background-position: center;', i.audioTitle.innerText = n, i.audioSinger.innerText = o, i.audioCricle.title = n + ' - ' + o, this.play()}}, {key: 'playPause',value: function () {
           this.dom.audioEle.paused ? this.play() : this.pause()}}, {key: 'play',value: function () {this.dom.audioEle.play()}}, {key: 'pause',value: function () {this.dom.audioEle.pause()}}, {key: 'updateProgress',value: function (e) {var t = this.dom
@@ -86,25 +86,40 @@ app.Daudio = function () {
       var o = r(n(28)),i = r(n(26))
       function r (e) {return e && e.__esModule ? e : {default: e}}
       i.default.post(app.Config.webapiDomain + '/api/music/queryAllSongs',{
-        userId: app.globalService.getLoginUserInfo()._id || ''
+        userId: app.globalService.getLoginUserInfo()._id || '',
+        getplay_list: true
       }).then(function (e) {
-      var t = e.data.info,n = 0;
-      var singers = ''
-      t[0].data.singer.forEach( item => {
-        singers += `${item.name} & `
-      })
-      var r = new o.default({ele: '#d-audio',src: t[0].file,imageurl: `https://y.gtimg.cn/music/photo_new/T002R90x90M000${t[0].data.albummid}.jpg??max_age=2592000`,name: t[0].data.songname,singer: singers,initstate: 'cricle',next: function () {++n > t.length - 1 && (n = 0);
-        var o = {src: t[n].file,imageurl: `https://y.gtimg.cn/music/photo_new/T002R90x90M000${t[n].data.albummid}.jpg??max_age=2592000`,name: t[n].data.songname,singer: (function() {
+      var t = e.data.info
+      if (t[0].data) {
+          var n = 0;
           var singers = ''
-          t[n].data.singer.forEach( item => {
+          t[0].data.singer.forEach( item => {
             singers += `${item.name} & `
           })
-          return singers
-        })()}
-        r.checkAudio(o.src, o.imageurl, o.name, o.singer), 
-        function (e) {console.log(e)}
-      }})
+          var r = new o.default({ele: '#d-audio',src: t[0].file,imageurl: `https://y.gtimg.cn/music/photo_new/T002R90x90M000${t[0].data.albummid}.jpg??max_age=2592000`,name: t[0].data.songname,singer: singers,initstate: 'cricle',next: function () {++n > t.length - 1 && (n = 0);
+            var o = {src: t[n].file,imageurl: `https://y.gtimg.cn/music/photo_new/T002R90x90M000${t[n].data.albummid}.jpg??max_age=2592000`,name: t[n].data.songname,singer: (function() {
+              var singers = ''
+              t[n].data.singer.forEach( item => {
+                singers += `${item.name} & `
+              })
+              return singers
+            })()}
+            r.checkAudio(o.src, o.imageurl, o.name, o.singer), 
+            function (e) {console.log(e)}
+          }})
+      } else {
+          var n = 0;
+          var r = new o.default({ele: '#d-audio',src: t[0].src,imageurl: t[0].imageurl,name: t[0].name,singer: t[0].singer,initstate: 'cricle',next: function () {++n > t.length - 1 && (n = 0);
+            var o = {src: t[n].src,imageurl: t[n].imageurl,name: t[n].name,singer: t[n].singer}
+            r.checkAudio(o.src, o.imageurl, o.name, o.singer), 
+            function (e) {console.log(e)}
+          }})
+      }
     // 需要的参数是id video路径 图片路径 歌名 歌手
       // i.default.get('http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=' + t[0].id).then(function (e) {})
     }, function (e) {console.log(e)})},,,,,,, function (e, t) {},,,,,,, function (e, t) {},,,,, function (e, t) {}]).default
+  } catch (error) {
+    throw error
+  }
+  
 }

@@ -2,7 +2,7 @@
   <div class="custom-gathers-player">
     <div id="d-audio" style="height: 40px;"></div>
         <div class="github-info">
-        <span>未曾遗忘的青春</span>
+        <!-- <span>未曾遗忘的青春</span> -->
     </div>
   </div>
 </template>
@@ -11,7 +11,8 @@ require('@/js/lib/d-audio')
 export default {
   props: [],
   data() {
-    return {}
+    return {
+    }
   },
   mounted() {
     this.$nextTick( () => {          

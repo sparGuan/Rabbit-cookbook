@@ -39,6 +39,16 @@ define(() =>{
 					ajaxOptions
 				)
 			);
+		},
+		removePlayListMusic: ajaxOptions =>  {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/music/removePlayListMusic'
+					},
+					ajaxOptions
+				)
+			);
 		}
 	};
 });
