@@ -32,7 +32,7 @@ export default class MusicService {
           this.music = (await Music.findOne({ user: body.userId })) as any;
           // 判断是否是歌单数据
           if (body.getplay_list) {
-            if (this.music.play_list.length > 0) {
+            if (!global._.isEmpty(this.music) && this.music.play_list.length > 0) {
               return this.music.play_list
             }
           }
