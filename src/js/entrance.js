@@ -45,6 +45,9 @@ const initVue = () => {
 				console.log(NewChating)
 				this.$store.commit('SOCKET_USER_HASNEWS',NewChating )
 			}
+		},
+		filters: {
+			getUrl: url => app.getResourceUrl(url)
 		}
 	}).$mount(
 		'#app'

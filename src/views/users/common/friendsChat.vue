@@ -9,8 +9,8 @@
   >
     <div data-page="friends-chat">
       <div class="chat-window">
-        <div class="chat-messages mui-scroll-wrapper" id="chat_messages" ref="chat-messages">
-          <ul class="chat-messages-list mui-scroll" v-if="Object.keys(chatList).length > 0 && chatList.Meta.length > 0">
+        <div class="chat-messages mui-scroll-wrapper"  ref="chat-messages">
+          <ul class="chat-messages-list mui-scroll">
             <li
               class="chat-message"
               v-for=" item in chatList.Meta"
@@ -19,7 +19,7 @@
             >
               <div class="user-info">
                 <span class="nick-name" v-text="item.nickName" v-if="checkMySelf(item.userId)"></span>
-                <div class="head-img" :style="'background-image:url('+item.headImg+')'"></div>
+                <div class="head-img" :style="'background-image:url('+(item.headImg || `${require('@/imgs/userCenter/touxiangDefault.png')}`)+')'"></div>
                 <span class="nick-name" v-text="item.nickName" v-if="!checkMySelf(item.userId)"></span>
               </div>
               <div class="chat-message-bubble" v-if="item.message !== ''">
@@ -156,23 +156,28 @@ export default {
     };
   },
   mounted() {
-    this.initDom();
-    this.gooOff();
-    this.updateChatHeight();
-    const _this = this;
-    mui(this.$refs["chat-messages"]).scroll({
-      deceleration: mui.os.ios ? 0.003 : 0.0009, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-      indicators: true // 是否显示滚动条
-    });
-    this.pullToRefresh = mui(this.$refs["chat-messages"]).pullToRefresh({
-      up: {
-        callback: _this.pullupRefresh, //上拉回调，必填；
-        auto: false, // 自动执行一次上拉加载，可选；
-        show: true, // 显示底部上拉加载提示信息，可选；
-        contentrefresh: "Loading...", //上拉进行中提示信息
-        contentnomore: "no More" // 上拉无更多信息时提示信息
-      }
-    });
+    this.$nextTick( () => {
+        this.initDom();
+        this.gooOff();
+        this.updateChatHeight();
+        const _this = this;
+        if (this.$refs["chat-messages"]) {
+          console.log(mui(this.$refs["chat-messages"]))
+           mui(this.$refs["chat-messages"]).scroll({
+            deceleration: mui.os.ios ? 0.003 : 0.0009, // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+            indicators: true // 是否显示滚动条
+          });
+        }
+        this.pullToRefresh = mui(this.$refs["chat-messages"]).pullToRefresh({
+          up: {
+            callback: _this.pullupRefresh, //上拉回调，必填；
+            auto: false, // 自动执行一次上拉加载，可选；
+            show: true, // 显示底部上拉加载提示信息，可选；
+            contentrefresh: "Loading...", //上拉进行中提示信息
+            contentnomore: "no More" // 上拉无更多信息时提示信息
+          }
+        });
+    })
   },
   watch: {
     value(now, old) {
@@ -215,7 +220,6 @@ export default {
         this.$lastMessageContainer.remove();
       }
       if (Object.keys(chatList).length > 0) {
-        console.log(chatList);
         this.$emit("changeChatList", chatList);
       }
     }
@@ -343,10 +347,10 @@ export default {
       let $userContent = $(
         '<div class="user-info">' +
           '<span class="nick-name">' +
-          app.globalService.getLoginUserInfo().nickName +
+          (app.globalService.getLoginUserInfo().nickName || '匿名用户') +
           "</span>" +
           '<div class="head-img" style="background-image:url(' +
-          app.globalService.getLoginUserInfo().headImg +
+          (app.globalService.getLoginUserInfo().headImg || require('@/imgs/userCenter/touxiangDefault.png')) +
           ');margin-left: 3px;"></div>' +
           "</div>"
       ).appendTo($messageContainer);

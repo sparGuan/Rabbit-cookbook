@@ -111,6 +111,7 @@ export default {
 		headImg,// 头像
 		expiredTime = -1 // 是否过期 -- 过期时间的意思是从数据库里面获取一个过期时间，如果有就获取，如果没有就生成一个，算是第一次登录
 	}) {
+		console.log(_id)
 		if (expiredTime > 0) {
 			// 如果登录没有过期
 			const _site_local_storage = app.globalService.getSiteLocalStorage()
@@ -127,9 +128,13 @@ export default {
 					}
 				})
 			}
-			if (requestList) {
+			if (requestList && requestList.length > 0) {
 				requestList.forEach(element => {
-					element.headImg = app.getResourceUrl(element.headImg )
+					if (element.headImg) {
+						element.headImg = app.getResourceUrl(element.headImg )
+					} else {
+						element.headImg = require('@/imgs/userCenter/touxiangDefault.png')
+					}
 				});
 			}
 			expiredTime = new Date().getTime() + (expiredTime - 60) * 1000 // 重新设置一个登录过期时间

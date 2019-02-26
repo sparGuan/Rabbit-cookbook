@@ -105,13 +105,14 @@ mongoosePaginate.paginate.options = {
     for (let i = 0; i < num_processes; i++) {
         spawn(i);
     }
+    const reg = /^[0-9]*$/
     const worker_index = (ip: string, len: number) => {
         if ( ip === '::1') {
           return 0; //  for mac os x
         }
         let s = '';
         for (let i = 0, _len = ip.length; i < _len; i++) {
-            if (ip[i] !== '.') {
+            if (ip[i] !== '.' && reg.test(ip[i])) {
                 s += ip[i];
             }
         }

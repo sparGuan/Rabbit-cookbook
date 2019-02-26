@@ -4,7 +4,7 @@
             <div ref="sixStart" class="sixStart"></div>
             <div class="bot-rel">
                 <div class="samll-head">
-                  <img :src="acceptUser && acceptUser.headImg"/>
+                  <img :src="(acceptUser && acceptUser.headImg | getUrl) || `${require('@/imgs/userCenter/touxiangDefault.png')}`"/>
                 </div>
             </div>
             <div  class="descDetail">
@@ -19,7 +19,7 @@
                 <div class="mui-row">
                   <!-- 头像 -->
                   <div class="item-head">
-                    <img :src="item.user && item.user.headImg"/>
+                    <img :src="(item.user && item.user.headImg | getUrl) || `${require('@/imgs/userCenter/touxiangDefault.png')}`"/>
                   </div>
                   <div class="item-txt">
                     <!-- 名称 -->

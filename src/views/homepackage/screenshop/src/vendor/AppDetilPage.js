@@ -136,13 +136,13 @@ class RecipeReviewCard extends React.Component {
     Array.from(swiper.slides)[swiper.activeIndex ].firstChild.classList.remove('scale-img-view')
   } 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
     return (
       <Card className={classes.card}>
         <CardHeader
           className={classes.headUnit}
           avatar={
-            <ArrowBackIcon />
+            <ArrowBackIcon onClick={history.goBack}/>
           }
           action={
             <IconButton>

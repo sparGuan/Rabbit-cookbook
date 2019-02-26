@@ -70,9 +70,9 @@
                 <div v-if="item.id === '0'">
                   <ul>
                     <li v-for="elem in geoNearFriends" :key="elem._id" class="geoNearfriends-item">
-                      <div class="geonear-head-img" :style="'background-image:url('+elem.headImg+');'"></div>
+                      <div class="geonear-head-img" :style="'background-image:url('+(($root.$options.filters && $root.$options.filters.getUrl(elem.headImg)) || `${require('@/imgs/userCenter/touxiangDefault.png')}`)+');'"></div>
                       <div class="geonear-content">
-                          <p class="geonear-nick" v-html="elem.nickName"></p>
+                          <p class="geonear-nick" v-html="elem.nickName || '匿名'"></p>
                           <p class="geonear-desc" v-html="elem.descPerson"></p>
                           <!-- 添加 -->
                           <div :class="'send send-filter filter-'+elem._id ">
@@ -230,7 +230,8 @@ export default {
           data,
           success: res => {
             if (res.message === 'success') {
-              this.geoNearFriends = res.userList;              
+              this.geoNearFriends = res.userList;  
+              console.log(this.geoNearFriends)            
             } else {
               // 没有搜到用户
             }
@@ -488,6 +489,8 @@ export default {
   text-align: left;
   display: block;
   position: relative;
+      padding: 15px 0;
+    padding-top: 0;
 }
 .geonear-head-img {
   width: 35px;

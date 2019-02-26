@@ -84,8 +84,11 @@ class FriendsController extends BASE_OPEN_SOURCE_API <FriendService, IUser> {
         )) as IUser;
         // 查找附近的人
         // 返回的数据只需要昵称，年龄，描述，头像
+        console.log(222222)
         if (!global._.isEmpty(this.user)) {
           const friendsQuery = this.user.friends || [];
+          friendsQuery.push(this.user._id)
+          console.log(friendsQuery)
           this.userList = (await User.find({
             location: {
               $within: {

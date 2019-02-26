@@ -25,9 +25,9 @@
                     'background-image:url('+userInfo.headBgImg+');transform: scale(1.1);background-size: cover;background-repeat: no-repeat;background-position: center;background-attachment: fixed;filter: blur(1px) contrast(0.95)': ''" style=" ">
                     </div>
                     <div class="circle-head-viewer">
-                      <img :src="userInfo.headImg" />
+                      <img :src="userInfo.headImg || `${require('@/imgs/userCenter/touxiangDefault.png')}`" />
                     </div>
-                    <div class="adaim">{{userInfo.nickName}}</div>
+                    <div class="adaim">{{userInfo.nickName || `匿名用户`}}</div>
                     <div class="desc-person">{{userInfo.descPerson}}</div>
                     <!-- <div>
                         <div class="switch-btn dynamic" @click="editDynamic($event)"><i class="iconfont icon-discover" style="margin-right: 5px;"></i>动态</div>
@@ -173,8 +173,8 @@ export default {
         acceptUserId: app.globalService.getLoginUserInfo()._id
       },
       userInfo: {
-        nickName: '游客',
-        headImg: require('../../../src/imgs/userCenter/touxiangDefault.png'),
+        nickName: null,
+        headImg: require('@/imgs/userCenter/touxiangDefault.png'),
         headBgImg: '',
         descPerson: '这个人真懒，什么都没留下~',
         Mobile: ''

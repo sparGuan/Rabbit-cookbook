@@ -87,7 +87,7 @@ const  SearchAppBar = (props) => {
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
-         <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer">
+         <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer" onClick={history.goBack}>
             <ArrowBackIcon />
           </IconButton>  
           <div className={classes.search}>

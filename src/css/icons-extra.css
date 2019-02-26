@@ -194,17 +194,17 @@
 @import url('./iconfont.css');
 
 /*  END */
-@font-face {
-  font-family: 'iconfont';  /* project id 677642 */
+/* @font-face {
+  font-family: 'iconfont';  
   src: url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.eot');
   src: url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.eot?#iefix') format('embedded-opentype'),
   url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.woff2') format('woff2'),
   url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.woff') format('woff'),
   url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.svg#iconfont') format('svg');
-}
-/* @import url('./iconfont.css'); */
-@import url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.css');
+} */
+@import url('../fonts/iconfont.css');
+/* @import url('//at.alicdn.com/t/font_677642_12sg2s36f1tm.css'); */
 .iconfont {
 	-webkit-text-stroke-width:unset !important;
 }

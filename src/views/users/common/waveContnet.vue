@@ -12,7 +12,7 @@
                 <div class="community">
                   <ul style="padding-top:5px;" v-if="communicator.length > 0">
                     <!-- 好友聊天小头像-->
-                    <li class="community-item" v-for="(item,index) in communicator" :key="item._id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+item.headImg+')'" @tap.stop.prevent="chatOrgetNewFriend(item)">
+                    <li class="community-item" v-for="(item,index) in communicator" :key="item._id" :style="'transform:translate3d('+index * -15+'px,0px,0px);background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url('+(item.headImg || `${require('@/imgs/userCenter/touxiangDefault.png')}`)+')'" @tap.stop.prevent="chatOrgetNewFriend(item)">
                       <!-- 新好友请求-->
                       <svg class="icon new-msg" v-if="item.newMsg" style="font-size: 44px;width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="68147"><path d="M512 512m-174.40768 0a174.40768 174.40768 0 1 0 348.81536 0 174.40768 174.40768 0 1 0-348.81536 0Z" fill="#F08943" p-id="68148"></path><path d="M491.64288 416.11264h39.87456v75.50976h76.36992v40.7552h-76.36992v75.50976h-39.87456v-75.50976h-75.53024v-40.7552h75.53024v-75.50976z" fill="#FFFFFF" p-id="68149"></path></svg>
                       <!-- 有新消息时 -->

@@ -51,7 +51,7 @@
               </div>
               <div class="grid-bottom-desc">
                 <p class="grid-bottom-tit" v-text="item.speech"></p>
-                <p class="grid-bottom-msg">来自： <span class="head-box" :style="`background-image:url(${getImage(item.user.headImg)})`"></span>{{item.user.nickName}} <span class="flow" @click="addToflow(item._id,item.footprintType,item.user._id)"><i  class=" iconfont icon-guanzhu putguanzhu"></i>+关注</span></p>
+                <p class="grid-bottom-msg">来自： <span class="head-box" :style="`background-image:url(${getImage((item.user && item.user.headImg))})`"></span>{{item.user && item.user.nickName}} <span class="flow" @click="addToflow(item._id,item.footprintType,(item.user && item.user._id))"><i  class=" iconfont icon-guanzhu putguanzhu"></i>+关注</span></p>
               </div>
             </div>
         </li>
