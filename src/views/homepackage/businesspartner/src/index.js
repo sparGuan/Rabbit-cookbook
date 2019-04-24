@@ -12,3 +12,7 @@ AppRegistry.runApplication('App', {
   initialProps: {},
   rootTag: document.getElementById('businesspartner-app')
 });
+window.onload = () => {
+  let childDomain = document.domain;
+  document.domain = childDomain;
+}

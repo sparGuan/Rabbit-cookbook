@@ -369,6 +369,9 @@ export default {
       background: transparent;
       padding: 5px 0px 0px 0px;
       border-radius: 3px;
+      width: 50px;
+      height: 46px;
+      text-align: right;
       .icon-sousuo {
         font-size: 18px;
       }

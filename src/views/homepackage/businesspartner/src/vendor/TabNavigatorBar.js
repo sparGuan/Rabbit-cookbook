@@ -17,9 +17,6 @@ const styles = theme => ({
   labelContainer:{
     paddingLeft:6,
     paddingRight:6,
-  },
-  wrapContainer: {
-    
   }
 });
 function TabContainer({ children }) {
@@ -32,7 +29,7 @@ function TabContainer({ children }) {
         transitionName={'SlideOut'}
       >
       <Typography component="div"  style={{ 
-        padding: '30px 30px 5px 15px',backgroundColor:'#eee',height:'100vh' }}>
+        padding: '30px 30px 5px 15px',backgroundColor:'#eee',height:'calc(100vh - 85px)' }}>
           {children}
       </Typography>
     </ReactCSSTransitionGroup>
@@ -63,8 +60,8 @@ class FullWidthTabs extends React.Component {
              onChange={this.handleChange}
              indicatorColor="secondary"
              textColor="secondary"
-             fullWidth
-             scrollable
+             variant="fullWidth"
+             variant="scrollable"
              scrollButtons="auto"
           >
             {

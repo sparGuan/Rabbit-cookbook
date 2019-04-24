@@ -31,6 +31,6 @@ const errorLogger = new (winston.Logger)({
 });
 
 module.exports = {
-    success : successLogger,
-    error : errorLogger
+    success: successLogger,
+    error: errorLogger
 }

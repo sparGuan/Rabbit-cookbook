@@ -44,4 +44,4 @@ CommonAppTopBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CommonAppTopBar) ;
+export default withStyles(styles)(CommonAppTopBar);

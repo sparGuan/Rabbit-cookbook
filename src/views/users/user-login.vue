@@ -1,5 +1,10 @@
 <template>
-  <v-dialog v-model="showModal" :showHead="true" :showFoot="true" :showHeadBg="true">
+  <v-dialog
+    v-model="showModal"
+    :showHead="true"
+    :showFoot="true"
+    :showHeadBg="true"
+  >
     <div slot="header" class="view-head">
       Sign In
     </div>
@@ -12,56 +17,91 @@
                 <div class="mui-input-group">
                   <div class="mui-input-row">
                     <label>账号</label>
-                    <input type="text" @focus="() => this.focusName=this.Mobile" v-model="Mobile" class="mui-input-clear mui-input" placeholder="请输入账号">
+                    <input
+                      type="text"
+                      @focus="() => (this.focusName = this.Mobile)"
+                      v-model="Mobile"
+                      class="mui-input-clear mui-input"
+                      placeholder="请输入账号"
+                    />
                   </div>
                   <div class="mui-input-row">
                     <label>密码</label>
-                    <input type="passWord" @focus="() => this.focusName=this.passWord" v-model="passWord" class="mui-input-clear mui-input" placeholder="请输入密码">
+                    <input
+                      type="passWord"
+                      @focus="() => (this.focusName = this.passWord)"
+                      v-model="passWord"
+                      class="mui-input-clear mui-input"
+                      placeholder="请输入密码"
+                    />
                   </div>
                 </div>
-                <button class="mui-btn mui-btn-success mui-btn-warning log-now" data-loading-icon-position="right" data-loading-text="登录中..." @tap.stop.prevent="sumbit($event)">登录</button>
+                <button
+                  class="mui-btn mui-btn-success mui-btn-warning log-now"
+                  data-loading-icon-position="right"
+                  data-loading-text="登录中..."
+                  @tap.stop.prevent="sumbit($event)"
+                >
+                  登录
+                </button>
                 <div class="link-area">
-                  <a @click.stop="goRegister">快速注册</a> 
-                  <span class="spliter">|</span> 
+                  <a @click.stop="goRegister">快速注册</a>
+                  <span class="spliter">|</span>
                   <a @click="goForgetPwd">忘记密码</a>
                 </div>
               </div>
             </transition>
             <transition name="slider_2">
               <div class="mui-slider-item" v-show="openPages === 1">
-                <Register :validCodeTxt="validCodeTxt"
-                          @sendValid="sendValid" 
-                          :checkValidCode="checkValidCode" 
-                          @backOff="backoff" 
-                          @changeEye="changeEye" 
-                          @close="(showModal) => {this.showModal = showModal}">
+                <Register
+                  :validCodeTxt="validCodeTxt"
+                  @sendValid="sendValid"
+                  :checkValidCode="checkValidCode"
+                  @backOff="backoff"
+                  @changeEye="changeEye"
+                  @close="
+                    showModal => {
+                      this.showModal = showModal;
+                    }
+                  "
+                >
                 </Register>
               </div>
             </transition>
             <transition name="slider_3">
               <div class="mui-slider-item" v-show="openPages === 2">
-                <ResetPassword 
-                          :validCodeTxt="validCodeTxt"
-                          @sendValid="sendValid" 
-                          :checkValidCode="checkValidCode" 
-                          @backOff="backoff" 
-                          @changeEye="changeEye"
-                          @close="(showModal) => {this.showModal = showModal}"
-                          >
+                <ResetPassword
+                  :validCodeTxt="validCodeTxt"
+                  @sendValid="sendValid"
+                  :checkValidCode="checkValidCode"
+                  @backOff="backoff"
+                  @changeEye="changeEye"
+                  @close="
+                    showModal => {
+                      this.showModal = showModal;
+                    }
+                  "
+                >
                 </ResetPassword>
               </div>
-            </transition>            
+            </transition>
           </div>
         </div>
       </div>
     </div>
     <div slot="footer" class="view-foot">
-      <p style="padding-left:30px;display:inline-block;vertical-align: bottom;">社交账号登陆</p>
+      <p style="padding-left:30px;display:inline-block;vertical-align: bottom;">
+        社交账号登陆
+      </p>
       <div class="login-by-else">
-        <div class="left-arrow oauth-area"
-        @tap.stop.prevent="openThirdLogin(authId.weixin)"></div>
-        <div class="right-arrow oauth-area"
-        @tap.stop.prevent="openThirdLogin(authId.qq)"></div>
+        <div
+          class="left-arrow oauth-area"
+          @tap.stop.prevent="openThirdLogin(authId.weixin)"
+        ></div>
+        <div
+          class="right-arrow oauth-area"
+          @tap.stop.prevent="openThirdLogin(authId.qq)"
+        ></div>
       </div>
     </div>
   </v-dialog>
@@ -73,7 +113,7 @@ import ResetPassword from './user-reset-password'
 export default {
   components: { 'v-dialog': Dialog, Register, ResetPassword },
   props: ['value'],
-  data() {
+  data () {
     return {
       openPages: 0,
       checkValidCode: '',
@@ -85,24 +125,40 @@ export default {
       Mobile: '15099883651',
       passWord: '123456',
       focusName: '',
-      socketId:''
+      socketId: ''
     }
   },
   watch: {
-    value(now, old) {
+    value (now, old) {
       this.showModal = now
     },
-    showModal(now, old) {
+    showModal (now, old) {
       this.$emit('input', now)
     }
   },
-  mounted() {
+  mounted () {
     mui.plusReady(() => {
       this.plusReady()
     })
   },
+  //忘记密码业务
+  // 用于获取随机的用户名
+  /*
+  need:
+  短信注册/登录(用此注册可使用手机号登录或者账号登录)
+  微信直接登录
+  QQ直接登录
+  */
+  sockets: {
+    isLogin_sent ({ userInfo }) {
+      console.log(1111)
+      app.globalService.setUserInfo(userInfo)
+      this.showModal = false
+      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
+    }
+  },
   methods: {
-    changeEye(e) {
+    changeEye (e) {
       if (
         e.target.classList.length > 0 &&
         e.target.classList.contains('mui-active')
@@ -114,20 +170,20 @@ export default {
         e.target.previousElementSibling.type = 'text'
       }
     },
-    backoff(cur) {
+    backoff (cur) {
       this.checkValidCode = ''
       this.openPages = 0
       this.validCodeTxt = '获取验证码'
     },
     //注册业务
-    goRegister() {
+    goRegister () {
       this.openPages = 1
     },
-    goForgetPwd() {
+    goForgetPwd () {
       this.openPages = 2
     },
     // 获取验证码
-    sendValid(Mobile, isRegister, e) {
+    sendValid (Mobile, isRegister, e) {
       let myreg = /^[1][3,4,5,7,8][0-9]{9}$/
       if (Mobile !== '' && myreg.test(Mobile)) {
         // 失效时间中间件由后台生产，不做处理
@@ -163,23 +219,8 @@ export default {
         app.mui.toast('请输入手机号!')
       }
     },
-    //忘记密码业务
-    // 用于获取随机的用户名
-    /*
-    need:
-    短信注册/登录(用此注册可使用手机号登录或者账号登录)
-    微信直接登录
-    QQ直接登录
-    */
-    sockets: {
-      isLogin_sent({userInfo}){
-        app.globalService.setUserInfo(userInfo)        
-        this.showModal = false
-        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
-      }
-    },
     // 第三方登录，只为微信、QQ服务
-    openThirdLogin(authId) {
+    openThirdLogin (authId) {
       if (authId) {
         this.tenancyName = authId
         let auth = this.auths[authId]
@@ -197,7 +238,7 @@ export default {
                 app.utils.getlocation(position => {
                   const longitude = position.coords.longitude; //获取经度
                   const latitude = position.coords.latitude;
-                    app.api.user.useWxOrQQLogin({
+                  app.api.user.useWxOrQQLogin({
                     data: {
                       tenancyName: this.tenancyName, // 是QQ还是微信--第三方服务名
                       nickName: name, // 昵称
@@ -216,7 +257,7 @@ export default {
                       // app.mui(e.target).button('reset')
                     }
                   })
-                })                
+                })
               },
               e => {
                 plus.nativeUI.toast('获取用户信息失败：' + e.message)
@@ -230,9 +271,9 @@ export default {
         )
       }
     },
-    plusReady() {
+    plusReady () {
       //第三方登录
-      let authBtns = ['qq','weixin'] //配置业务支持的第三方登录
+      let authBtns = ['qq', 'weixin'] //配置业务支持的第三方登录
       plus.oauth.getServices(
         services => {
           for (let i in services) {
@@ -253,7 +294,7 @@ export default {
       )
     },
     // 普通账户登录
-    sumbit(e) {
+    sumbit (e) {
       let _this = this
       if (!_this.Mobile) {
         _this.focusName = 'Mobile'
@@ -266,23 +307,23 @@ export default {
         return
       }
       app.mui(e.target).button('loading')
-        // 失效时间中间件由后台生产，不做处理
-        //登录的时候要做websocket的与服务器的对接
-        app.api.user.useMobileLogin({
-          data: {
-            Mobile: _this.Mobile,
-            passWord: _this.passWord
-          },
-          success: res => {
-            if (res.message === 'success') {
-              this.$socket.emit('isLogin', res.user);
-             // this.showModal = false
-            }
-          },
-          complete: () => {
-            app.mui(e.target).button('reset')
+      // 失效时间中间件由后台生产，不做处理
+      //登录的时候要做websocket的与服务器的对接
+      app.api.user.useMobileLogin({
+        data: {
+          Mobile: _this.Mobile,
+          passWord: _this.passWord
+        },
+        success: res => {
+          if (res.message === 'success') {
+            this.$socket.emit('isLogin', res.user);
+            // this.showModal = false
           }
-        })
+        },
+        complete: () => {
+          app.mui(e.target).button('reset')
+        }
+      })
     }
     // go: function() {
     //   const [_this, _toName, _current_query] = [
@@ -301,7 +342,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-[data-page='login'] {
+[data-page="login"] {
   .spliter {
     vertical-align: text-bottom;
   }

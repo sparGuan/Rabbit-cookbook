@@ -14,13 +14,13 @@ class takeH5Photos {
 				(t, status) => {
 					plus.nativeUI.closeWaiting();
 					//                  mui.toast("t="+JSON.stringify(t));
-					if (status == 200) {
+					if (status === 200) {
 						let msg = JSON.parse(task.responseText);
 						if (msg.message.code) {
 							//人脸验证通过
 							mui.toast(msg.message.message);
 							if (typeof callback === 'function') {
-								callback();
+								callback(t);
 							}
 							// postImg()
 						} else {
@@ -35,7 +35,7 @@ class takeH5Photos {
 			));
 		});
 	}
-	openCamera() {
+	openCamera(callback) {
 		mui.plusReady(() => {
 			let cmr = plus.camera.getCamera();
 			cmr.captureImage(
@@ -61,11 +61,13 @@ class takeH5Photos {
 									}
 									this.file_url = zip.target;
 									//转为base64
-									//                          getBase64(this.file_url);
-									if (isSendToServer) {
+									this.getBase64(this.file_url);
+									if (this.isSendToServer) {
 										this.uploadToServer(this.file_url);
 									} else {
-										return this.file_url;
+										const image = this.getBase64(this.file_url);
+										// 传入相机对象
+										typeof callback === 'function' && callback(this.file_url, image)
 									}
 								},
 								zipe => {
@@ -102,7 +104,7 @@ class takeH5Photos {
 		image.src = url;
 		image.onload = () => {
 			//onload事件不执行，后查是因为onloand事件是基于http协议的，file://。。.jpg路径没法执行，弃之
-			mui.toast('load2');
+			mui.toast('load3');
 			return ((img, width, height) => {
 				const canvas = document.createElement('canvas');
 				canvas.width = width ? width : img.width;

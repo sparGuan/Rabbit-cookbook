@@ -2,7 +2,7 @@ const assert = require('assert');
 /**
  * 全局异常捕获
  */
-module.exports =  () => {
+module.exports = () => {
     return async (ctx: any, next: any) => {
         try {
             await next();

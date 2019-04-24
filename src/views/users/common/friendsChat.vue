@@ -293,12 +293,12 @@ export default {
       // 判断服务端返回来的数据是否正在输入
       const timer = setInterval(() => {
         this.readSecond++;
-      }, 50);
-      if (this.readSecond < 10) {
+        if (this.readSecond < 10) {
         clearInterval(timer);
         return;
-      } else {
-        if (this.wordLen !== $(e.target).text().length) {
+        }
+      }, 50);
+      if (this.wordLen !== $(e.target).text().length) {
           this.readSecond = 0;
           this.$socket.emit(
             "friendIsTyping",
@@ -312,7 +312,6 @@ export default {
           clearInterval(timer);
           return;
         }
-      }
     },
     checkMySelf(userId) {
       return app.globalService.getLoginUserInfo()._id === userId;

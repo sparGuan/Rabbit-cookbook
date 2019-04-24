@@ -12,36 +12,36 @@ import { IActivity } from './activity'
  * @param {Time} 时间
  **/
 export interface IDynSingleDie extends mongoose.Document {
-  dynamic: IDynamic;
-  activity: IActivity;
-  user: IUser;
-  acceptUser: IUser;
-  type: number;
-  create_at: Date;
+    dynamic: IDynamic;
+    activity: IActivity;
+    user: IUser;
+    acceptUser: IUser;
+    type: number;
+    create_at: Date;
 }
 const dynSingleDie_schema: mongoose.Schema = new mongoose.Schema({
-  dynamic: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Dynamic'
-  },
-  activity: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Activity'
-  },
-  type: {
-    type: Number,
-    default: ''
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  acceptUser: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  // 创建日期
-  create_at: { type: Date, default: Date.now }
+    dynamic: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Dynamic'
+    },
+    activity: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Activity'
+    },
+    type: {
+        type: Number,
+        default: ''
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    acceptUser: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    // 创建日期
+    create_at: { type: Date, default: Date.now }
 });
 // 转化成普通 JavaScript 对象
 dynSingleDie_schema.set('toObject', { getters: true });

@@ -7,6 +7,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 // 只做渲染有渐变的svg图标
 const styles = theme => ({
   icon: {
+    verticalAlign: 'middle'
    // margin: theme.spacing.unit * 2,
   },
   // iconHover: {

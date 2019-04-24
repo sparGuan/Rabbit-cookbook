@@ -10,4 +10,5 @@ import userDynamic from './api/userDynamic'
 import userFriends from './api/userFriends'
 import customerGather from './api/customerGather'
 import music from './api/music'
-export default {user, order,userActivity,userDynamic,userFriends,customerGather,music}
+import auth from './api/auth'
+export default {user, order,userActivity,userDynamic,userFriends,customerGather,music,auth}

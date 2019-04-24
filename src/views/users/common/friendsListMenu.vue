@@ -14,7 +14,7 @@
               <div class="mui-collapse-content" style="padding-bottom:0;">
                <div class="mui-content" style="max-width: 320px; margin: 0 auto;background: none;"  >
                     <form action @submit.prevent="searchNewFriends">
-                      <div class="mui-input-row mui-search" :class="activeSearchToClass?'mui-active':''" @click="activeSearchStatus(true)">
+                      <div class="mui-input-row mui-search" :class="activeSearchToClass?'mui-active':''" v-touch:tap="activeSearchStatus(true)">
                           <input type="search" class="mui-input-clear search-friends" :placeholder="activeSearchToClass?'请搜索好友手机号':''" data-input-clear="15" data-input-search="15" ref="searchFriends"  @blur="activeSearchStatus(false)" v-model="Mobile"><span class="mui-icon mui-icon-clear mui-hidden" ></span><span class="mui-placeholder"><span class="mui-icon mui-icon-search"></span><span></span></span>
                       </div>
                     </form>
@@ -32,7 +32,6 @@
                         </div>
                       </li>
                     </ul>
-
                     <div class="search-list" v-if="newFirendsList.length > 0">
                       <ul>
                         <li v-for="item in newFirendsList" :key="item._id">
@@ -58,7 +57,6 @@
                         </li>
                       </ul>
                     </div>  
-
                   </div>
               </div>
             </li>
@@ -391,7 +389,8 @@ export default {
       if (requireFriend && this.inIdArray(app.globalService.getLoginUserInfo().friends,requireFriend._id) > -1 ) {
         app.mui.toast('你们已经是好友了。')
         this.newFirendsList = []
-        return 
+        return (event, start, end)  => {
+        } 
       }
       const _this = this;
       this.sentAni({
@@ -428,18 +427,22 @@ export default {
       }
     },
     activeSearchStatus(status) {
-      if (status) {
-        this.$refs['searchFriends'].focus();
-        this.activeSearchToClass = status;
-      } else if (
-        this.$refs['searchFriends'] &&
-        this.$refs['searchFriends'].value !== ''
-      ) {
-        this.$refs['searchFriends'].focus();
-        this.activeSearchToClass = true;
-      } else {
-        this.activeSearchToClass = status;
-      }
+      this.$nextTick( () => {
+            if (status) {
+              this.$refs['searchFriends'].focus();
+              this.activeSearchToClass = status;
+            } else if (
+              this.$refs['searchFriends'] &&
+              this.$refs['searchFriends'].value !== ''
+            ) {
+              this.$refs['searchFriends'].focus();
+              this.activeSearchToClass = true;
+            } else {
+              this.activeSearchToClass = status;
+            }
+        })
+        return function(event, start, end) {
+        }
     },
     toggleMenu() {
       if (this.busying) {

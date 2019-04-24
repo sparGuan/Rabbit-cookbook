@@ -19,7 +19,7 @@ const styles = theme => ({
 		backgroundColor: theme.palette.background.paper,
 		borderRadius: 10,
 		textAlign: 'center',
-		height: 'calc(100vh - 215px)',
+		height: 'calc(100vh - 130px)',
     zIndex: 1,
 		'&.active': {
 			boxShadow:
@@ -208,10 +208,11 @@ class AppCardView extends React.Component {
             }
             <div>
             </div>
-            <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
+            <Button  color="secondary" aria-label="Add" className={classes.fabButton}>
                 <LoyaltyIcon fontSize="large"/>
             </Button>
-            <Button variant="fab" color="secondary" aria-label="Add" className={classes.ForButton}>
+            {/** variant="fab" */}
+            <Button  color="secondary" aria-label="Add" className={classes.ForButton}>
                 <PhoneForwardedIcon fontSize="large"/>
             </Button>
       </Typography>

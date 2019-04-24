@@ -244,7 +244,7 @@ let routerConfig = {
 				navbarTitle: router.meta.title,
 				NavType: router.name
 			})
-			document.title = '鲸众-' + router.meta.title || ''
+			document.title = '兔包子做菜-' + router.meta.title || ''
 		}
 	}
 }

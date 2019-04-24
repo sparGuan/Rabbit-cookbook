@@ -29,10 +29,14 @@
                 </div>
                   <!-- <div class="music-pic "><i class="iconfont icon-ziyuanldpi" @click="$emit('openMusicContro')"></i></div> -->
               </div>
-              <div class="mui-col-xs-4 arrow-area" style="position:relative;">
+              <div class="mui-col-xs-4 arrow-area" style="position:relative;" @click="show = !show">
                   <!-- TODO: 实现下拉式的仿QQ看点 -->
-                  <div class="">最新<i class="iconfont icon-arrow-down"></i></div>
+                  <div class="">最新<i class="iconfont icon-arrow-down" :class="show ? 'arrow-up' : ''"></i></div>
               </div>
+              <customerGathersMenudown v-model="show"/>
+              <div class="offer-backdrop" v-show="show" @click="show = false"></div>
+              <!-- 弹出的最新菜单 -->
+            <!-- end -->
               <div class="mui-col-xs-4">
                 <!--  TODO: 实现天气预报式的顶部 -->
                  <weatherForecast />
@@ -47,17 +51,19 @@
 <script>
 import weatherForecast from './customer-gathers-weatherforecast'
 import customerGathersPalyer from './customer-gathers-palyer'
+import customerGathersMenudown from './customer-gathers-menudown'
 export default {
   components: {  
     weatherForecast,
-    customerGathersPalyer
+    customerGathersPalyer,
+    customerGathersMenudown
   },
-  props: [],
+  props: ["value"],
 	data() {
-		return {
-      show: true
-    };
-	},
+	return  {
+        show: false
+     };
+    },
 	mounted(){
         // 轮播
         this.$nextTick( () => {
@@ -65,17 +71,28 @@ export default {
         })
 	},
 	methods: {
-		
+        
 	}
 }
 </script>
 <style lang="less" scoped>
 @import url('../../less/_colors-vars.less');
   .icon-ziyuanldpi {
-    width: 50px;
-    display: block;
-    height: 30px;
-    line-height: 30px;
+        width: 50px;
+        display: block;
+        height: 30px;
+        line-height: 30px;
+    }
+    .offer-backdrop {
+        height: 100vh;
+        position: absolute;
+        z-index: 998;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 100vw;
     }
     .arrow-area {
     text-align: center;
@@ -87,13 +104,13 @@ export default {
     position: absolute;
     top: 15px;
     right: 28px;
+    transition: all .3s ease;
     transform: scale(0.6) rotate(180deg);
     }
     }
     .gathers-app-bar {
     position: fixed;
     height: auto;
-    opacity: .8;
     background: #000;//linear-gradient(to right,#635499,#526d8e,#5b5d8f);
     color:#fff;
     top: 0;
@@ -115,13 +132,16 @@ export default {
     }
     .gathers-app-bar-container {
       height:100%;
-      &>div {
-        height:100%;
-      }
+    //   &>div {
+    //     height:100%;
+    //   }
       .music-pic {
         height: 45px;
         line-height: 45px;
       }
+    }
+    .arrow-up {
+        transform: scale(0.6) rotate(0deg);
     }
     .music-palyer {
       width: calc(~'100% + 20px');

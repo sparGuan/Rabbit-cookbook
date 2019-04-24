@@ -356,7 +356,9 @@ export default {
         success: res => {          
           if (res.message === 'success') {
             this.listData = res.dynamicList.map(item => {
-              item.user.headImg = app.getResourceUrl(item.user.headImg);
+              if (item.user && item.user.headImg) {
+                item.user.headImg = app.getResourceUrl(item.user.headImg);
+              }
               item.album[0] = item.album[0] && Object.keys(item.album[0]).map(element => {
                 return app.getResourceUrl(item.album[0][element]);
               });

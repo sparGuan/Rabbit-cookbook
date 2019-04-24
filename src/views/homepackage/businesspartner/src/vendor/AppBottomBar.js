@@ -29,19 +29,19 @@ class BottomAppBar extends React.Component {
 			<React.Fragment>
 				<CssBaseline />
         {
-            displayAnyBottom.isShow && 
-            <AppBar
-            position="fixed"
-            color="primary"
-            className={classes.appBar}
-          >
-            <Toolbar className={classes.toolbar}>
-              {
-                // 以后可能有多种appbar所以就抽出来写了
-              }
-              <SmallBottomNavigation history={history} />
-            </Toolbar>
-          </AppBar>
+          //   displayAnyBottom.isShow && 
+          //   <AppBar
+          //   position="fixed"
+          //   color="primary"
+          //   className={classes.appBar}
+          // >
+          //   <Toolbar className={classes.toolbar}>
+          //     {
+          //       // 以后可能有多种appbar所以就抽出来写了
+          //     }
+          //     <SmallBottomNavigation history={history} />
+          //   </Toolbar>
+          // </AppBar>
         }
 			</React.Fragment>
 		);

@@ -33,7 +33,6 @@ export default {
   methods: {
     formatWeek() {
      if (Object.keys(this.weatherData).length > 0) {
-       console.log(this.weatherData.forecasts[0].casts[0].week)
         switch(Number(this.weatherData.forecasts[0].casts[0].week))
         {
         case 1:
@@ -49,7 +48,6 @@ export default {
         case 6:
           return '周六'
         case 7:
-        console.log(11111)
           return '周日'
         default:
           break;

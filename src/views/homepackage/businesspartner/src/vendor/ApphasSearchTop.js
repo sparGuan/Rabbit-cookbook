@@ -9,10 +9,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import TextField from '@material-ui/core/TextField';
 import classNames from 'classnames';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import TabNavigatorBar from './TabNavigatorBar';
 import Grid from '@material-ui/core/Grid';
-import Typography from "@material-ui/core/Typography";
+import AppTopMenuList from './AppTopMenuList'
 const styles = theme => ({
   root: {
     width: '100%',
@@ -88,7 +87,10 @@ const styles = theme => ({
  * @param {*} props 
  */
 class ApphasSearchTop extends React.Component {
- 
+  state = {
+    showModal: false,
+    open: false
+  };
   render() {
     const { classes,goBack } = this.props;
     return (
@@ -109,9 +111,10 @@ class ApphasSearchTop extends React.Component {
                  <SearchIcon />
                </div>
               </div>
-              <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer">
+              {/* <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer" >
               <MoreIcon />
-              </IconButton>  
+              </IconButton>   */}
+              <AppTopMenuList />
           </Toolbar>
           <Grid container spacing={24}>
               <Grid item xs={12}>
@@ -128,4 +131,4 @@ ApphasSearchTop.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ApphasSearchTop) ;
+export default withStyles(styles)(ApphasSearchTop);
