@@ -196,4 +196,20 @@ export default class Service<T> {
                 return true;
         }
     }
+    /**
+     * 格式化输出到前端
+     * @param code
+     * @param msg
+     * @param data
+     */
+    public response(code: number, msg: string, data?: any): {} {
+        const result = {
+            error_code: code,
+            error_msg: msg
+        } as any;
+        if (data) {
+            result.data = data;
+        }
+        return result;
+    }
 }

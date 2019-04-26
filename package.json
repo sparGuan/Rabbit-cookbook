@@ -1,7 +1,7 @@
  {
 	"name":"business-culture", 
 	"version":"1.0.0", 
-	"description":"兔包子做菜", 
+	"description":"尼桑兔CookBook", 
 	"main":"js/entrance.js", 
 	"keywords":"SPAR", 
 	"homepage":"homepackage", 
@@ -43,7 +43,7 @@
 		"vuex":"^2.0.0"
 	}, 
 	"devDependencies": {
-"vue-loader":"10.0.0", 
+		"vue-loader":"10.0.0", 
 		"vue-template-compiler":"^2.1.0", 
 		"vue-style-loader":"^1.0.0", 
 		"autoprefixer":"^6.4.0", 

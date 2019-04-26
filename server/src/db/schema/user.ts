@@ -4,7 +4,7 @@ import { ISocket } from './socket';
  * 用户模型
  * @param {String} name 昵称
  * @param {String} password 密码
- * @param {String} createTime 创建日期
+ * @param {String} createAt 创建日期
  * @param {String} token 标记  将用户信息加以base64编码返回前台的认证
  * @param {Date} expiredTime  * expiredTime--失效时间
  * */
@@ -21,8 +21,8 @@ export interface IUser extends mongoose.Document {
     sex: string;
     age: number;
     Mobile: string;
-    createTime: Date;
-    updateTime: Date; // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
+    createdAt: Date;
+    updatedAt: Date; // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
     loginTime: Date;
     logoutTime: Date;
     expiredTime: number; // 报废时长
@@ -88,12 +88,11 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Socket',
     },
-    createTime: { type: Date, default: Date.now },
     loginTime: { type: Date, default: Date.now },
     logoutTime: { type: Date, default: '' },
-    updateTime: { type: Date, default: Date.now },
     expiredTime: Number,
-});
+},
+{versionKey: false, timestamps: true});
 // 转化成普通 JavaScript 对象
 user_schema.set('toObject', { getters: true });
 export default mongoose.model<IUser>('User', user_schema);

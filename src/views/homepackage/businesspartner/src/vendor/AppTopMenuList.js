@@ -15,10 +15,17 @@ class AppTopMenuList extends React.Component {
     anchorEl: null,
     detals: '登录',
     open: false,
+    lock: false
   };
   componentDidMount() {
-    window.onload = () => {
-      this.state.detals = top.app.globalService.isLogin() ? '登出' : '登录';
+    // window.onload = () => {
+    //   this.state.detals = top.app.globalService.isLogin() ? '登出' : '登录';
+    // }
+  }
+  componentWillUpdate(nextProps, nextState) {
+    if (!nextState.lock) {
+      this.setState({lock: true})
+      nextState.detals = top.app.globalService.isLogin() ? '登出' : '登录';
     }
   }
   handleClick = event => {
@@ -28,6 +35,10 @@ class AppTopMenuList extends React.Component {
   handleClose = () => {
    this.setState({ anchorEl: null });
   };
+  setLogName = (detals) => {
+    console.log(detals)
+    this.setState({ detals});
+  }
   // goLog
   handleLog = () => {
     // 如果已经登录了，就去登出
@@ -35,9 +46,9 @@ class AppTopMenuList extends React.Component {
       top.mui.confirm('确定登出？', '', ['取消','确定'], e => {
         if (e.index == 1) {
           top.app.globalService.logOut();
-          this.state.detals = '登录';
+          this.setState({detals: '登录'})
         } else {
-          this.state.open = false;
+          this.setState({open: false})
         }
       });
     } else {
@@ -54,7 +65,6 @@ class AppTopMenuList extends React.Component {
   handleCloseLoginWindow = () => {
     this.setState({ open: false });
   };
-
   render() {
     const { anchorEl } = this.state;
     const { classes } = this.props;
@@ -77,7 +87,7 @@ class AppTopMenuList extends React.Component {
           <MenuItem onClick={this.handleClose}>Logout</MenuItem>
         </Menu>
         {/*  弹窗登录  */}
-        <AppLoginDialog open={this.state.open} handleCloseLoginWindow={this.handleCloseLoginWindow.bind(this)}/>
+        <AppLoginDialog open={this.state.open} handleCloseLoginWindow={this.handleCloseLoginWindow.bind(this)} setLogName={this.setLogName.bind(this)}/>
       </div>
     );
   }

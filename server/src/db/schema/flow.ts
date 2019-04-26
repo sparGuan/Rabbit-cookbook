@@ -23,10 +23,6 @@ const flow_schema: mongoose.Schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    // 发布日期
-    create_at: { type: Date, default: Date.now },
-    // 最后修改日期
-    update_at: { type: Date, default: Date.now },
     // 其他元信息
     sourceDataType: {
         type: Number,
@@ -40,7 +36,9 @@ const flow_schema: mongoose.Schema = new mongoose.Schema({
         type: String,
         trim: true
     }
-})
+},
+{versionKey: false, timestamps: true}
+)
 // 转化成普通 JavaScript 对象
 flow_schema.set('toObject', { getters: true });
 export default mongoose.model<IFlow>('Flow', flow_schema);

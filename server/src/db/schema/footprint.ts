@@ -28,10 +28,6 @@ const footprint_schema: mongoose.Schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    // 发布日期
-    create_at: { type: Date, default: Date.now },
-    // 最后修改日期
-    update_at: { type: Date, default: Date.now },
     // 其他元信息
     linkType: {
         type: Number,
@@ -45,7 +41,9 @@ const footprint_schema: mongoose.Schema = new mongoose.Schema({
         type: String,
         trim: true
     }
-})
+},
+{versionKey: false, timestamps: true}
+)
 // 转化成普通 JavaScript 对象
 footprint_schema.set('toObject', { getters: true });
 // 翻页 + 自增ID插件配置

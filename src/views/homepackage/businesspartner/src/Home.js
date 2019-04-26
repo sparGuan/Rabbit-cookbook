@@ -21,6 +21,10 @@ class Home extends React.Component {
 	constructor(props, context) {		
 		super(props, context);
 	}
+	componentDidMount() {
+    
+  };
+	
 	render() {	
 		const {children ,history,displayAnyTop} = this.props
 		return (

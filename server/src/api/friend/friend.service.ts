@@ -53,11 +53,11 @@ export default class FriendService {
                         )
                             .populate({
                                 path: 'friends',
-                                select: '-passWord -updateTime -logoutTime -createTime'
+                                select: '-passWord -updateTime -logoutTime -createAt'
                             })
                             .populate({
                                 path: 'requestList',
-                                select: '-passWord -updateTime -logoutTime -createTime'
+                                select: '-passWord -updateTime -logoutTime -createAt'
                             }).
                             populate({
                                 path: 'socket',
@@ -96,11 +96,11 @@ export default class FriendService {
                         )
                             .populate({
                                 path: 'friends',
-                                select: '-passWord -updateTime -logoutTime -createTime'
+                                select: '-passWord -updateTime -logoutTime -createAt'
                             })
                             .populate({
                                 path: 'requestList',
-                                select: '-passWord -updateTime -logoutTime -createTime'
+                                select: '-passWord -updateTime -logoutTime -createAt'
                             })) as IUser;
                     } else {
                         console.log(`该用户 ${userId}在互相添加好友中掉线了...`)

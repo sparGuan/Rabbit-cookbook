@@ -26,16 +26,6 @@ const styles = theme => ({
   textField: {
     flexBasis: 200,
   },
-  validTxtColor: {
-    position: 'absolute',
-    top: 20,
-    right: 0,
-    fontSize: 13,
-    color: 'rgba(74, 74, 74, 1)'
-  },
-  getTheCode: {
-    minWidth: 200
-  }
 });
 
 class AppRegister extends React.Component {
@@ -51,20 +41,19 @@ class AppRegister extends React.Component {
   };
   // 值改变for注册信息
   render() {
-    const { classes, openPages, registerData } = this.props;
+    const { classes, openPages, forgetData } = this.props;
     return (
-      <Zoom in={openPages === 2} style={{
-        display: openPages === 2 ? 'block' : 'none'
+      <Zoom in={openPages === 3} style={{
+        display: openPages === 3 ? 'block' : 'none'
       }}>
         <Paper elevation={4} className={classes.paperContent}>
-          {/** 注册  */}
+          {/** 手机号 验证码 密码  */}
           <FormControl className={classes.margin}>
             <InputLabel htmlFor="input-with-icon-adornment">请输入手机号</InputLabel>
             <Input
               id="input-with-icon-adornment"
-              value={registerData.Mobile}
-              type="number"
-              onChange={this.props.handleChangeObject('registerData.Mobile')}
+              value={forgetData.Mobile}
+              onChange={this.props.handleChange('forgetData.Mobile')}
               startAdornment={
                 <InputAdornment position="start">
                   <AccountCircle />
@@ -73,34 +62,41 @@ class AppRegister extends React.Component {
             />
           </FormControl>
 
-          <FormControl className={classNames(classes.margin, classes.textField, classes.getTheCode)}>
-            <InputLabel htmlFor="adornment-password" >验证码</InputLabel>
-            <Input
-              id="adornment-password"
-              value={registerData.validCode}
-              onChange={this.props.handleChangeObject('registerData.validCode')}
-              />
-             
-              <span className={classes.validTxtColor} onClick={ () => {
-                this.props.sendValid(registerData.Mobile, true)
-              }}> {this.props.validCodeTxt}</span>
-          </FormControl>
-
           <FormControl className={classNames(classes.margin, classes.textField)}>
-            <InputLabel htmlFor="adornment-password">中英文8位密码</InputLabel>
+            <InputLabel htmlFor="adornment-password">验证码</InputLabel>
             <Input
               id="adornment-password"
               type={this.state.showPassword ? 'text' : 'password'}
-              value={registerData.passWord}
-              onChange={this.props.handleChangeObject('registerData.passWord')}
+              value={forgetData.password}
+              onChange={this.props.handleChange('forgetData.validCode')}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
-                      aria-label="Toggle password visibility"
-                      onClick={this.handleClickShowPassword}
-                    >
-                      {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
+                    aria-label="Toggle password visibility"
+                    onClick={this.handleClickShowPassword}
+                  >
+                    {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+
+          <FormControl className={classNames(classes.margin, classes.textField)}>
+            <InputLabel htmlFor="adornment-password">重置中英文8位密码</InputLabel>
+            <Input
+              id="adornment-password"
+              type={this.state.showPassword ? 'text' : 'password'}
+              value={forgetData.password}
+              onChange={this.props.handleChange('forgetData.password')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="Toggle password visibility"
+                    onClick={this.handleClickShowPassword}
+                  >
+                    {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
                 </InputAdornment>
               }
             />

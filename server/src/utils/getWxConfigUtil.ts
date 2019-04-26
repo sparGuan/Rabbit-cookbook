@@ -55,7 +55,7 @@ class WxConfigUtil {
     }
 
     // timestamp
-    public createTimestamp(): number {
+    public createAtstamp(): number {
         return Number(new Date().getTime() / 1000);
     }
     /**
@@ -70,7 +70,7 @@ class WxConfigUtil {
         const ret: any = {
             jsapi_ticket,
             nonceStr: this.createNonceStr(),
-            timestamp: this.createTimestamp(),
+            timestamp: this.createAtstamp(),
             url
         };
         const string = this.raw(ret);

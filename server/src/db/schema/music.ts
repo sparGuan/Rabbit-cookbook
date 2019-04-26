@@ -33,11 +33,9 @@ const music_schema: mongoose.Schema = new mongoose.Schema({
             singer: { type: String, trim: true, required: true } // 评论数
         }
     ],
-    // 发布日期
-    create_at: { type: Date, default: Date.now },
-    // 最后修改日期
-    update_at: { type: Date, default: Date.now }
-})
+},
+{versionKey: false, timestamps: true}
+)
 // 转化成普通 JavaScript 对象
 music_schema.set('toObject', { getters: true });
 export default mongoose.model<IMusic>('Music', music_schema);

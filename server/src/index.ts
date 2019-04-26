@@ -1,20 +1,22 @@
-import mongoosePaginate = require('mongoose-paginate');
-import * as Koa from 'koa'; // koa
-import * as Router from 'koa-router'; // x导入koa路由
-import * as parser from 'koa-bodyparser'; // json
 import * as cors from 'koa2-cors';
-import * as helmet from 'koa-helmet'; // 安全相关
-import api from './routes/api';
-import routes from './routes/index';
-import mongoConnection from './db/connection';
+import * as helmet from 'koa-helmet';
+import * as Koa from 'koa';
 import * as nunjucks from 'koa-nunjucks-2';
-import { port, webServerDoMain, baseApi, limit, redis_port, redis_host, redis_db } from './config/index';
-import path = require('path');
-import IO = require('koa-socket');
+import * as parser from 'koa-bodyparser';
+import * as Router from 'koa-router';
+import * as Sentry from '@sentry/node';
+import api from './routes/api';
+import mongoConnection from './db/connection';
+import routes from './routes/index';
 import Socket, { ISocket } from './db/schema/socket';
 import User from './db/schema/user';
-import * as Sentry from '@sentry/node';
+import { baseApi, limit, port, redis_db, redis_host, redis_port, webServerDoMain } from './config/index';
+import mongoosePaginate = require('mongoose-paginate');
+import path = require('path');
+import IO = require('koa-socket');
 const flash = require('koa-flash2'); // flash中间件，用来显示消息通知
+const xerror = require('koa-xerror');
+const cookieParser = require('cookie-parser');
 // const num_processes = require('os').cpus().length;
 const num_processes = 2
 const cluster = require('cluster'); // cluster是一个nodejs内置的模块，用于nodejs多核处理。cluster模块，可以帮助我们简化多进程并行化程序的开发难度，轻松构建一个用于负载均衡的集群。
@@ -45,6 +47,7 @@ process.setMaxListeners(0);
 mongoosePaginate.paginate.options = {
     limit: `${limit}`
 };
+
 (async () => {
     try {
         await app
@@ -72,13 +75,14 @@ mongoosePaginate.paginate.options = {
             .use(parser({}))
             .use(
                 nunjucks({
-                    ext: 'html',
+                    ext: 'njk',
                     path: path.join(__dirname, './views'),
                     nunjucksConfig: {
                         trimBlocks: true
                     }
                 })
-            )
+            ).
+            use(xerror())
             .use(async (ctx: any, next: any) => {
                 try {
                     await next();

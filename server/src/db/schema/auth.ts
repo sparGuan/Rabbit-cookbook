@@ -58,13 +58,9 @@ const auth_schema: mongoose.Schema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    // 发布日期
-    // 发布日期
-    create_at: { type: Date, default: Date.now },
-    // 最后修改日期
-    // 最后修改日期
-    update_at: { type: Date, default: Date.now },
-});
+},
+{versionKey: false, timestamps: true}
+);
 // 转化成普通 JavaScript 对象
 auth_schema.set('toObject', { getters: true });
 export default mongoose.model<IAuth>('Auth', auth_schema);

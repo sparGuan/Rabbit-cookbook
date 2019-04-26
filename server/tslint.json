@@ -17,8 +17,8 @@
 "never"
 ], 
 "no-var-requires":false, 
-
-
+"no-namespace": [ false,"allpw-declarations"], // 不允许使用内部modules和命名空间
+"no-internal-module": false, // 不允许内部模块
 "prefer-const":true, 
 
 "member-access":true, 

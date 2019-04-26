@@ -8,6 +8,8 @@ const { isValid } = require('mongoose').Types.ObjectId;
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
 import Qsms = require('qcloudsms_js');
 import formidable = require('formidable');
+
+// 后期利用装饰器加入继承微服务架构
 export default class LoginService {
     private qsms: any;
     private user: IUser;
@@ -29,7 +31,6 @@ export default class LoginService {
             // 如果是注册用户就要进入该判断
             if (!global._.isEmpty(this.user) && body.register === true) {
                 // 如果存在
-
                 return this.message = '该手机号已经被注册';
             }
             this.valid = global._.random(999999);
@@ -86,7 +87,6 @@ export default class LoginService {
                             location: body.location.map((element: string) => {
                                 return Number(element);
                             }),
-                            updateTime: new Date(),
                             expiredTime: this.expiredTime,
                             token: jwt.sign(
                                 {
@@ -99,7 +99,7 @@ export default class LoginService {
                         }
                     },
                     { new: true }
-                ).select('-passWord -updateTime -logoutTime -createTime ')) as IUser;
+                ).select('-passWord -updatedAt -logoutTime -createAt ')) as IUser;
                 console.log('更新成功')
                 console.log(`QQ登录成功！！`)
             }
@@ -147,9 +147,9 @@ export default class LoginService {
                                 })
                                 .populate({
                                     path: 'requestList',
-                                    select: '-passWord -updateTime -logoutTime -createTime'
+                                    select: '-passWord -updatedAt -logoutTime -createAt'
                                 }).select(
-                                    '-passWord -updateTime -logoutTime -createTime '
+                                    '-passWord -updatedAt -logoutTime -createAt '
                                 )) as IUser;
                             reslove(this.user);
                         }
@@ -175,7 +175,7 @@ export default class LoginService {
                 );
                 this.userInfo = {
                     $set: {
-                        updateTime: new Date(), // 更新时间
+                        updatedAt: new Date(), // 更新时间
                         location: location.map((element: string) => {
                             return Number(element);
                         }), // 更新当前位置
@@ -185,19 +185,38 @@ export default class LoginService {
                 this.user = (await User.findByIdAndUpdate(userId, this.userInfo, {
                     new: true
                 })
-                    .select('-passWord -updateTime -logoutTime -createTime ')
+                    .select('-passWord -updatedAt -logoutTime -createAt ')
                     .populate({
                         path: 'friends',
                         select: ' headImg nickName descPerson sex '
                     })
                     .populate({
                         path: 'requestList',
-                        select: '-passWord -updateTime -logoutTime -createTime'
+                        select: '-passWord -updatedAt -logoutTime -createAt'
                     })) as IUser;
                 return this.user
             }
         } catch (error) {
             throw error
         }
+    }
+    /**
+     * 手机注册
+     * @param body
+     */
+    public async registerService(body: { passWord: number, token: string, Mobile: number }) {
+        const salt = await bcrypt.genSalt$(this.saltRounds);
+        body.passWord = await bcrypt.hash$(body.passWord, salt);
+        body.token = jwt.sign(
+            {
+                data: body.Mobile,
+                // 设置 token 过期时间
+                exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+            },
+            'secret'
+        );
+        this.user = new User(body) as IUser;
+        const UserModel = await this.user.save();
+        return UserModel
     }
 }

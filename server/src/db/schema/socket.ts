@@ -40,11 +40,9 @@ const socket_schema: mongoose.Schema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    // 创建日期
-    create_at: { type: Date, default: Date.now },
-    // 最后修改日期
-    update_at: { type: Date, default: Date.now }
-});
+},
+{versionKey: false, timestamps: true}
+);
 // 转化成普通 JavaScript 对象
 socket_schema.set('toObject', { getters: true });
 export default mongoose.model<ISocket>('Socket', socket_schema);

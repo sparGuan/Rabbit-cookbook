@@ -58,7 +58,7 @@ class FriendsController extends BASE_OPEN_SOURCE_API<FriendService, IUser> {
             const { body } = ctx.request;
             if (!global._.isEmpty(body.Mobile)) {
                 this.user = (await User.findOne({ Mobile: body.Mobile }).select(
-                    '-passWord -updateTime -logoutTime -createTime '
+                    '-passWord -updateTime -logoutTime -createAt '
                 )) as IUser;
                 if (!global._.isEmpty(this.user)) {
                     // 返回的数据只需要昵称，年龄，描述，头像
@@ -93,7 +93,7 @@ class FriendsController extends BASE_OPEN_SOURCE_API<FriendService, IUser> {
                         },
                         friends: { $nin: friendsQuery },
                     })
-                        .select('-passWord -updateTime -logoutTime -createTime  ')
+                        .select('-passWord -updateTime -logoutTime -createAt  ')
                         .limit(10)
                         .sort({ updateTime: -1 })
                         .skip(body.page || 1)) as IUser[];

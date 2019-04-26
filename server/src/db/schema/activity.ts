@@ -60,12 +60,6 @@ const activity_schema: mongoose.Schema = new mongoose.Schema({
         trim: true,
         ref: 'User',
     },
-    // 发布日期
-    // 发布日期
-    create_at: { type: Date, default: Date.now },
-    // 最后修改日期
-    // 最后修改日期
-    update_at: { type: Date, default: Date.now },
     // 其他元信息
     meta: {
         views: { type: Number, default: 0 }, // 浏览数
@@ -73,7 +67,9 @@ const activity_schema: mongoose.Schema = new mongoose.Schema({
         totalFootprint: { type: Number, default: 0 },
         comments: { type: Number, default: 0 }, // 评论数
     },
-});
+},
+{versionKey: false, timestamps: true}
+);
 // 转化成普通 JavaScript 对象
 activity_schema.set('toObject', { getters: true });
 // 翻页 + 自增ID插件配置

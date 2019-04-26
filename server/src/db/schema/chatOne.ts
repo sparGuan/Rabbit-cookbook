@@ -36,15 +36,9 @@ const chatOne_schema: mongoose.Schema = new mongoose.Schema({
             UserMsgDate: { type: Date, default: Date.now }, // 时间
         },
     ],
-    create_at: {
-        type: Date,
-        default: Date.now,
-    },
-    update_at: {
-        type: Date,
-        default: Date.now,
-    },
-});
+},
+{versionKey: false, timestamps: true}
+);
 // 转化成普通 JavaScript 对象
 chatOne_schema.set('toObject', { getters: true });
 export default mongoose.model<IChatOne>('ChatOne', chatOne_schema);

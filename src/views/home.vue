@@ -36,6 +36,12 @@ export default {
       this.changeMobsfIframe()
     }
   },
+  sockets: {
+    isLogin_sent ({ userInfo }) {
+      app.globalService.setUserInfo(userInfo)
+      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data——————————LoginTool.Vue)')
+    }
+  },
   beforeRouteEnter: function (to, from, next) {
     // 在渲染该组件的对应路由被 confirm 前调用
     // 不！能！获取组件实例 `this`
@@ -47,7 +53,9 @@ export default {
   },
   methods: {
   onFrameLoad() {
-    this.setDoMain();
+    this.$nextTick( () => {
+      this.setDoMain();
+    })
   },
   setDoMain() {
     let parentDomain = window.location.hostname;

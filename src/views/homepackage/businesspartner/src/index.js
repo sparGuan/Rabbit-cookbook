@@ -12,7 +12,7 @@ AppRegistry.runApplication('App', {
   initialProps: {},
   rootTag: document.getElementById('businesspartner-app')
 });
-window.onload = () => {
+window.addEventListener('load', () => {
   let childDomain = document.domain;
   document.domain = childDomain;
-}
+}, false);

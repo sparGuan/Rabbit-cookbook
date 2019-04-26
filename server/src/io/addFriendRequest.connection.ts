@@ -11,14 +11,14 @@ export default (socket: any) => {
                 // 1.处理已经是好友关系的问题
                 // 2.处理socketId报错的问题
                 console.log(userId)
-                const sentUser: IUser = await User.findById(userId).select('-passWord -updateTime -logoutTime -createTime ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
+                const sentUser: IUser = await User.findById(userId).select('-passWord -updatedAt -logoutTime -createAt ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
                     .populate({ path: 'friends', select: ' headImg nickName descPerson sex ' })
                     .exec() as IUser
                 // 先判断双方是否是好友
                 // 不允许传入空值！！！
                 if (!global._.isEmpty(sentUser)) {
                     const acceptUser: IUser = await User.findOneAndUpdate({ Mobile }, { $push: { requestList: sentUser } }, { new: true })
-                        .select('-passWord -updateTime -logoutTime -createTime ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
+                        .select('-passWord -updatedAt -logoutTime -createAt ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
                         .populate({ path: 'friends', select: ' headImg nickName descPerson sex ' })
                         .exec() as IUser
                     if (!global._.isEmpty(acceptUser)) {
@@ -50,11 +50,11 @@ export default (socket: any) => {
         // 发送请求到好友呀
         try {
             if (!global._.isEmpty(acceptUserId) && !global._.isEmpty(userId)) {
-                const sentUser: IUser = await User.findById(userId).select('-passWord -updateTime -logoutTime -createTime ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
+                const sentUser: IUser = await User.findById(userId).select('-passWord -updatedAt -logoutTime -createAt ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
                     .populate({ path: 'friends', select: ' headImg nickName descPerson sex ' })
                     .exec() as IUser
                 const acceptUser: IUser = await User.findOneAndUpdate({ _id: acceptUserId }, { $push: { requestList: sentUser } }, { new: true }).populate({ path: 'socket', select: 'id' })
-                    .select('-passWord -updateTime -logoutTime -createTime ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
+                    .select('-passWord -updatedAt -logoutTime -createAt ').populate({ path: 'requestList', select: ' headImg nickName descPerson sex ' })
                     .populate({ path: 'friends', select: ' headImg nickName descPerson sex ' })
                     .exec() as IUser
                 // 转发到当前用户客户端

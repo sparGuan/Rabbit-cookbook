@@ -8,4 +8,5 @@ export default interface IController {
     queryDieByTodayCount<M>(DieIdentity?: M, data?: {}): Promise<string[]>;
     // 获取前端参数
     getParameters(ctx: any): any;
+    response(code: number, msg: string, data?: any): {code: string, msg: string, data?: any};
 }

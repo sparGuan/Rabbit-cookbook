@@ -43,7 +43,7 @@ export interface IforwardingDynamics {
 export interface IDynamicComment {
     nickName: string;
     speech: string;
-    createTime: Date;
+    createAt: Date;
 }
 // 自增ID初始化
 autoIncrement.initialize(db.connection);
@@ -73,12 +73,6 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    // 发布日期
-    // 发布日期
-    create_at: { type: Date, default: Date.now },
-    // 最后修改日期
-    // 最后修改日期
-    update_at: { type: Date, default: Date.now },
     // 其他元信息
     meta: {
         totalPosts: { type: Number, default: 0 }, // 帖子数 ===> 不存于此处
@@ -87,7 +81,9 @@ const dynamic_schema: mongoose.Schema = new mongoose.Schema({
         totalDays: { type: Number, default: 0 }, // 在线天数===》 后期替换
         totalPraise: { type: Number, default: 0 }, // 赞数
     },
-});
+},
+{versionKey: false, timestamps: true}
+);
 // 转化成普通 JavaScript 对象
 dynamic_schema.set('toObject', { getters: true });
 // 翻页 + 自增ID插件配置

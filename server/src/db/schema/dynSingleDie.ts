@@ -40,9 +40,9 @@ const dynSingleDie_schema: mongoose.Schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    // 创建日期
-    create_at: { type: Date, default: Date.now }
-});
+},
+{versionKey: false, timestamps: true}
+);
 // 转化成普通 JavaScript 对象
 dynSingleDie_schema.set('toObject', { getters: true });
 export default mongoose.model<IDynSingleDie>('DynSingleDie', dynSingleDie_schema);

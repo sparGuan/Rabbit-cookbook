@@ -89,7 +89,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                     this.dynamic.dynamicCommentList.push({
                         nickName: this.user.nickName,
                         speech: body.speech,
-                        createTime: new Date()
+                        createAt: new Date()
                     } as IDynamicComment);
                     this.dynamic = await Dynamic.update(
                         { _id: dynamicId },

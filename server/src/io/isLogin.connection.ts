@@ -23,12 +23,12 @@ export default (socket: any) => {
                 {
                     $set: {
                         socket: socket_schema,
-                        updateTime: new Date()
+                        updatedAt: new Date()
                     }
                 },
                 { new: true }
             )
-                .select('-passWord -updateTime -logoutTime -createTime ')
+                .select('-passWord -updatedAt -logoutTime -createAt ')
                 .populate({
                     path: 'requestList',
                     select: ' headImg nickName descPerson sex '

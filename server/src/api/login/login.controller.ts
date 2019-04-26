@@ -5,7 +5,6 @@ import { qsms, statusCode } from '../../config/index';
 const bluebird = require('bluebird');
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
 import Qsms = require('qcloudsms_js');
-import formidable = require('formidable');
 import LoginService from './login.service';
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
 class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
@@ -33,13 +32,6 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
             try {
                 const { body } = ctx.request;
                 const valid = await this.LoginService.msgValidService(body)
-                // 单发短信
-                if (this.qsms.singleSend) {
-                    await this.qsms.singleSend({
-                        phoneNumber: body.Mobile,
-                        msg: `您的验证码${valid}，此验证码10分钟内有效，请勿向他人泄露`
-                    });
-                }
                 if (valid) {
                     ctx.body = {
                         message: valid
@@ -54,26 +46,25 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
             }
         };
     }
+    /**
+     * @param {string} Mobile 账号
+     * @param {string} passWord 新的密码
+     */
     public register() {
         return async (ctx: any, next: any) => {
             const { body } = ctx.request;
-            const salt = await bcrypt.genSalt$(this.saltRounds);
-            body.passWord = await bcrypt.hash$(body.passWord, salt);
-            body.token = jwt.sign(
-                {
-                    data: body.Mobile,
-                    // 设置 token 过期时间
-                    exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
-                },
-                'secret'
-            );
-            this.user = new User(body);
-            const UserModel = await this.user.save();
-            await LoginController.resetExpiredTime(UserModel.get('_id'));
-            ctx.body = {
-                message: statusCode.success,
-                UserModel
-            };
+            this.user = (await User.findOne(
+                { Mobile: body.Mobile }
+            )) as IUser;
+            if (!global._.isEmpty(this.user)) {
+                return ctx.body = this.response(-1, 'ACCOUNT_ALREADY_EXISTS');
+            }
+            const UserModel = await this.LoginService.registerService(body);
+            if (UserModel) {
+                await LoginController.resetExpiredTime(UserModel.get('_id'));
+                return ctx.body = this.response(0, 'SUCCESS', UserModel);
+            }
+            return ctx.body = this.response(-1, 'MISS_RES_USERMODEL');
         };
     }
     // 手机号找回
@@ -94,7 +85,7 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
                             passWord: body.passWord
                         }
                     }
-                ).select('-passWord -updateTime -logoutTime -createTime ');
+                ).select('-passWord -updatedAt -logoutTime -createAt ');
                 ctx.body = {
                     message: statusCode.success,
                     user: this.user
@@ -180,7 +171,7 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
                         }
                     },
                     { new: true }
-                ).select(' -updateTime -logoutTime -createTime ')) as IUser;
+                ).select(' -updatedAt -logoutTime -createAt ')) as IUser;
             }
             // 如果找不到用户，就报401
             if (global._.isEmpty(this.user)) {

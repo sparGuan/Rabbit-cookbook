@@ -26,4 +26,7 @@ export default class BASE_OPEN_SOURCE_API<S, M> implements IController {
     public getParameters(ctx: any): any {
         return this.BaseService.getParameters(this.BaseModel, ctx)
     }
+    public response(code: number, msg: string, data?: any): {code: string, msg: string, data?: any} {
+        return this.BaseService.response(code, msg, data)
+    }
 }
