@@ -78,6 +78,7 @@ export default class DatavService {
                     const map_hrefs = global._.map(this.datavList, 'hrefs');
                     // 做个交集，重复剔除
                     const read_hrefs = [...new Set([...map_hrefs, ...hrefs])]
+                    // 保存进数据库
                     child_crawler.queue(read_hrefs);
                 }
                 done();
