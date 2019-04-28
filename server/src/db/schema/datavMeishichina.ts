@@ -1,10 +1,12 @@
 import mongoose = require('mongoose');
 import { IUser } from './user'
+import { IDatavMeishichinaType } from './datavMeishichinaType'
 /**
- * 实现业务：定时爬取数据到本地数据库
+ * 实现业务：定时爬取美食天下数据到本地数据库
  */
-export declare interface IDatav extends mongoose.Document {
-    hrefs: string, // 版本控制器，已经爬取的子链接放进里面，就不再进行二次爬取
+export declare interface IDatavMeishichina extends mongoose.Document {
+    type: IDatavMeishichinaType, // 类别 ====> 具体参照类别表
+    href: string, // 版本控制器，已经爬取的子链接放进里面，就不再进行二次爬取
     big_image: string; // 大图片
     images: string[]; // 小图
     name: string; // 菜品名称
@@ -28,8 +30,9 @@ export interface IStuff {
   price: string; // 材料价格
 }
 
-const datav_schema: mongoose.Schema = new mongoose.Schema({
-  hrefs: {
+const datavMeishichina_schema: mongoose.Schema = new mongoose.Schema({
+  type: { type: mongoose.Schema.Types.ObjectId, ref: 'DatavMeishichinaType' },
+  href: {
     type: String,
     default: []
   },
@@ -73,5 +76,5 @@ const datav_schema: mongoose.Schema = new mongoose.Schema({
 {versionKey: false, timestamps: true}
 )
 // 转化成普通 JavaScript 对象
-datav_schema.set('toObject', { getters: true });
-export default mongoose.model<IDatav>('Datav', datav_schema);
+datavMeishichina_schema.set('toObject', { getters: true });
+export default mongoose.model<IDatavMeishichina>('DatavMeishichina', datavMeishichina_schema);
