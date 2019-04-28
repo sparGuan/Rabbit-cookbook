@@ -4,14 +4,15 @@ import { IUser } from './user'
  * 实现业务：定时爬取数据到本地数据库
  */
 export declare interface IDatav extends mongoose.Document {
+    hrefs: string, // 版本控制器，已经爬取的子链接放进里面，就不再进行二次爬取
     big_image: string; // 大图片
     images: string[]; // 小图
     name: string; // 菜品名称
     taste: string; // 味道
     source: ISource []; // 出处
-    cook_time: number // 烹饪时间
+    cook_time: string // 烹饪时间
     material: string; // 准备材料
-    practice: string; // 做法
+    practice: string []; // 做法
     purchase_details: IStuff[] // 材料详细
 }
 export interface ISource {
@@ -28,6 +29,10 @@ export interface IStuff {
 }
 
 const datav_schema: mongoose.Schema = new mongoose.Schema({
+  hrefs: {
+    type: String,
+    default: []
+  },
   big_image: {
     type: String,
     trim: true
@@ -49,16 +54,16 @@ const datav_schema: mongoose.Schema = new mongoose.Schema({
     default: ''
   },
   cook_time: {
-    type: Number,
-    default: 0
+    type: String,
+    default: ''
   },
   material: {
     type: String,
     trim: true
   },
   practice: {
-    type: String,
-    trim: true
+    type: Array,
+    default: []
   },
   purchase_details: {
     type: Array,
