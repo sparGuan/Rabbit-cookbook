@@ -61,9 +61,12 @@
     "music-api-next": "^1.0.0",
     "net": "^1.0.2",
     "os": "^0.1.1",
+    "pretty": "^2.0.0",
     "promise-limit": "^2.7.0",
+    "puppeteer": "^1.15.0",
     "qcloudsms_js": "^0.1.0",
     "redis": "^2.8.0",
+    "rimraf": "^2.6.3",
     "socket.io-redis": "^5.2.0",
     "winston": "^2.3.1"
   },
