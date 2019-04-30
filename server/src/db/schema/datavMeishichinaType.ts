@@ -11,16 +11,18 @@ const datav_meishichina_type_schema: mongoose.Schema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
-    unique: true
+    unique: true,
+    index: true
   },
   href: {
     type: String,
     trim: true,
-    unique: true
+    unique: true,
+    index: true
   }
 },
 {versionKey: false, timestamps: true}
 )
 // 转化成普通 JavaScript 对象
 datav_meishichina_type_schema.set('toObject', { getters: true });
-export default mongoose.model<IDatavMeishichinaType>('DatavMishichinaType', datav_meishichina_type_schema);
+export default mongoose.model<IDatavMeishichinaType>('DatavMeishichinaType', datav_meishichina_type_schema);

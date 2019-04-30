@@ -17,6 +17,8 @@ import IO = require('koa-socket');
 const flash = require('koa-flash2'); // flash中间件，用来显示消息通知
 const xerror = require('koa-xerror');
 const cookieParser = require('cookie-parser');
+import { safeifymeishichina } from './utils/safeifyToMeishichina';
+const child_process = require("child_process"); // 开启子进程
 // const num_processes = require('os').cpus().length;
 const num_processes = 2
 const cluster = require('cluster'); // cluster是一个nodejs内置的模块，用于nodejs多核处理。cluster模块，可以帮助我们简化多进程并行化程序的开发难度，轻松构建一个用于负载均衡的集群。
@@ -32,6 +34,7 @@ const ioLoader = require('./io/index');
 const catchError = require('./middlewares/catchErrors');
 const logger = require('./middlewares/logger');
 const enhanceContext = require('./middlewares/enhanceContext');
+const logRecord = require('koa-logs-full');
 // 初始化应用
 global._ = require('lodash');
 const app = new Koa();
@@ -71,6 +74,9 @@ mongoosePaginate.paginate.options = {
                     ]
                 })
             )
+            .use(logRecord(app, {
+                logdir: path.join(__dirname, 'logs')
+            }))
             .use(helmet())
             .use(parser({}))
             .use(
@@ -117,6 +123,11 @@ mongoosePaginate.paginate.options = {
             // 部署node的模板引擎
             .use(routes(Router));
         await api(app, router); // 部署所有的api
+        // app.use( function* (next) {
+        //     // 任何能够拿到context的地方都可以使用
+        //     this.logger.log("我是要输出的文本");
+        //     // 也可以使用error,warn,info.在终端输出的颜色会不同
+        // })
         // 注入应用io
         io.attach(app);
         io.use(enhanceContext);
@@ -124,6 +135,23 @@ mongoosePaginate.paginate.options = {
         await mongoConnection(); // 最后连接数据库
         // 先删除socket表里面所有数据,每当服务器重启的时候
         await Socket.remove({});
+        // 执行爬虫脚本沙箱
+        let safeVm: any = null;
+        const childProcessorExec = child_process.exec("ts-node ./src/utils/safeifyToMeishichina.ts", async function (error: Error, stdout: any, stderr: any) {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            setInterval( async () => {
+                safeVm = await safeifymeishichina();
+            }, 86400000) // 一天执行一次
+        });
+        childProcessorExec.on("exit", function(code: string) {
+          console.log("Child process =======> safeifyToMeishichina exited, code: " + code);
+          if (safeVm) {
+            safeVm.destroy();
+          }
+        });
     } catch (e) {
         console.error('ERROR:', e);
         return;
@@ -212,7 +240,7 @@ mongoosePaginate.paginate.options = {
             });
             // 6379是redis缓存数据库的接口
             app.io.socket._adapter(sio_redis({ host: webServerDoMain, port: redis_port }));
-            console.log(`适配缓存数据库中。。。`)
+            console.log(`适配缓存数据库中。。。`);
             // worker工作进程接收到master主进程分发的请求
             process.on('message', (message, connection) => {
                 // 不是主进程分发的进程都return掉

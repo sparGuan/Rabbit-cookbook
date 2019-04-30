@@ -1,20 +1,18 @@
 import DatavMeishichina, { IDatavMeishichina, IStuff } from '../../db/schema/datavMeishichina';
 import DatavMeishichinaType, { IDatavMeishichinaType } from '../../db/schema/datavMeishichinaType';
-import { statusCode } from '../../config/index';
 const PromiseLimit = require('promise-limit');
 const puppeteer = require('puppeteer');
 const Crawler = require("crawler");
-
 export declare interface IDatavMeishichinaService {
     // 爬取美食天下数据
     spidersService(): Promise<boolean>;
     // TODO: 爬取类别 动态脚本生成页面爬取
     spidersMeishichinaTypeService(): Promise<boolean>;
+    hasDietTyerapy(keys: string[], val: string): boolean;
 }
 export default class Datav_meishichinaService implements IDatavMeishichinaService {
     private datavListMeishichina: IDatavMeishichina[];
     private datavMeishichina: IDatavMeishichina;
-    private datavMeishichinaType: IDatavMeishichinaType;
     private settings: any = {
         headless: true,
         defaultViewport: {
@@ -96,7 +94,21 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
         );
         return true;
     }
+    // 判断是否是食疗分类
+    public hasDietTyerapy(keys: string[], val: string): boolean {
+        let hasDiet = false;
+        global._.each(keys, (item: string) => {
+            if (val.indexOf(item) > -1) {
+                hasDiet = true;
+            }
+        })
+        return hasDiet
+    }
     public async spidersService(): Promise<boolean> {
+        await this.spidersMeishichinaTypeService();
+        setTimeout(() => {
+            console.log('等待开始5秒执行...');
+        }, 5000);
         const c = new Crawler({
             maxConnections: 10,
             jQuery: true, // set false to suppress warning message.
@@ -127,6 +139,14 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
                                 // 烹饪时间
                                 // 味道
                                 // 做法
+                                // 获取父级分类
+                                const typehref = _$('#path a').eq(4).attr('href'); // 名称
+                                let datavMeishichinaTypeParent: IDatavMeishichinaType | null = null;
+                                if (typehref) {
+                                    datavMeishichinaTypeParent = await DatavMeishichinaType.findOne({
+                                        href: typehref
+                                    });
+                                }
                                 const name = _$('.recipe_De_title a').text(); // 名称
                                 const big_image = _$('.recipe_De_imgBox img').attr('src') || '' // 大图
                                 const purchase_details: IStuff[] = []; // 材料详细
@@ -163,6 +183,7 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
                                 });
                                 // 保存一条数据
                                 this.datavMeishichina = new DatavMeishichina({
+                                    type: datavMeishichinaTypeParent,
                                     href,
                                     name,
                                     big_image,
@@ -181,7 +202,7 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
                     // 是否已经被爬取过，如果已经被爬取过，就不进行二次爬取
                     // tslint:disable-next-line: await-promise
                     this.datavListMeishichina = (await DatavMeishichina.find({
-                        hrefs: { $in: hrefs }
+                        href: { $in: hrefs }
                     }).select('href')) as IDatavMeishichina[];
                     const map_hrefs = global._.map(this.datavListMeishichina, 'href');
                     // 做个交集，重复剔除
@@ -195,18 +216,26 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
         // 遵循先入后出了
         // 先去拉所有a标签，再去获取a标签里面的链接的详情页
         // 在此处寻找所有的分类数据
-        const datavMeishichinaTypeList: IDatavMeishichinaType[] = await DatavMeishichinaType.find({}).select('href name')
+        const datavMeishichinaTypeList: IDatavMeishichinaType[] = await DatavMeishichinaType.find({}).select('href name');
         // const lanrenshipu_href = ['https://home.meishichina.com/recipe/lanrenshipu/'];
         // 获取完1级分类
         // 放置分页数据
         const datavMeishichinaTypeListHrefs = global._.map(datavMeishichinaTypeList, 'href');
+        const child = [];
         for (let i = 0; i < datavMeishichinaTypeListHrefs.length; i++) {
-            for (let j = 0; j < 100; j++) {
-                datavMeishichinaTypeListHrefs.push(`${datavMeishichinaTypeListHrefs[i]}/page/${j}/`);
+            for (let j = 2; j < 100; j++) {
+                if (this.hasDietTyerapy(['yuejingbutiao', 'bugai', 'pinxue', 'tigaomianyili', 'yangwei', 'duikangwumai', 'runfeizhike', 'ziyin', 'zhuangyang', 'shimian', 'yangyan', 'paidu', 'bianmi', 'shoushen', 'fengxiong', 'tongjing'], datavMeishichinaTypeListHrefs[i])) {
+                    child.push(`${datavMeishichinaTypeListHrefs[i]}/${j}/`);
+                } else if (this.hasDietTyerapy(['recipe-list', 'recipe-list-view-elite', 'recipe-list-view-collection', 'recipe-menu'], datavMeishichinaTypeListHrefs[i])) {
+                    const prefx = datavMeishichinaTypeListHrefs[i].replace('.html', '');
+                    child.push(`${prefx}-page-${j}.html`);
+                }
+                else {
+                    child.push(`${datavMeishichinaTypeListHrefs[i]}/page/${j}/`);
+                }
             }
         }
-        console.log(datavMeishichinaTypeListHrefs)
-        // c.queue(datavMeishichinaTypeListHrefs);
+        c.queue([...datavMeishichinaTypeListHrefs, ...child]);
         return true
     }
 }

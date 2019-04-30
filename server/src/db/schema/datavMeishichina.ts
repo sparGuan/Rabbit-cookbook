@@ -31,10 +31,12 @@ export interface IStuff {
 }
 
 const datavMeishichina_schema: mongoose.Schema = new mongoose.Schema({
-  type: { type: mongoose.Schema.Types.ObjectId, ref: 'DatavMeishichinaType' },
+  type: { type: mongoose.Schema.Types.ObjectId, ref: 'DatavMeishichinaType', required: true, default: null },
   href: {
     type: String,
-    default: []
+    default: '',
+    index: true,
+    unique: true
   },
   big_image: {
     type: String,
@@ -46,7 +48,9 @@ const datavMeishichina_schema: mongoose.Schema = new mongoose.Schema({
   },
   name: {
       type: String,
-      trim: true
+      trim: true,
+      unique: true,
+      index: true
   },
   source: {
     type: Array,
