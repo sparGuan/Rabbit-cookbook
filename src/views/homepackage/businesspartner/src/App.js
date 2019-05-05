@@ -50,16 +50,16 @@ if (__DEV__ && __COMPONENT_DEVTOOLS__) {
   // 组件形式的 Redux DevTools
   DevTools = require('./DevTools').default
 }
-const App = () => (
+const App = (props) => (
   <MuiThemeProvider theme={theme}>
 		{
 			//我是一个双向绑定的组件
 		}
-    <Provider store={store}>
+    <Provider store={store} >
         <HashRouter>
 						{/* 挂载所有路由  */}
 						<Switch>
-								  <Route exact path='/' component={Home} history={history}/>
+								  <Route exact path='/' component={Home} history={history} />
 								  {
 									// 构建home里面带头部带底部
 									}

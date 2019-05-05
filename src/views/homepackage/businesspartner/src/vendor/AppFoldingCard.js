@@ -27,17 +27,30 @@ class AppFoldingCard extends React.Component {
   // 数据源
   state = {
     	/*用户信息数组*/
-    imgArr: [
-      '/static/images/grid-list/bike.jpg',
-      '/static/images/grid-list/breakfast.jpg',
-      '/static/images/grid-list/burgers.jpg',
-      '/static/images/grid-list/camera.jpg',
-      '/static/images/grid-list/hats.jpg'
+    tileData: [
     ]
+  }
+   // 获取datav数据
+   toQueryLileData() {
+    const data = {};
+    top.app.api.datavMeishiChina.queryDavavMeishiChinaList({
+      data,
+      success: res => {  
+        if (res.error_code === 0) {
+          console.log(res.data)
+          this.setState({
+            tileData: res.data
+          })
+        }
+      }
+    });
+  }
+  componentDidMount() {
+    this.toQueryLileData();
   }
   // 更新信息数组
   handleCardMapChange () {
-    this.setState(state => ({ cardMap:state.imgArr.shift() }));
+    this.setState(state => ({ cardMap:state.tileData.shift() }));
   }
 	// 传入产品ID获取跳转链接
 	linkToDetail(productId) {
@@ -60,14 +73,12 @@ class AppFoldingCard extends React.Component {
             {
               // 每次拖拽删除当前数据
               // 不如简单点实现，循环10个数据，拖一个删掉一个
-              <AppCardView cardMap={this.state.imgArr} handleCardMapChange ={this.handleCardMapChange.bind(this)}/>
+              <AppCardView cardMap={this.state.tileData} handleCardMapChange ={this.handleCardMapChange.bind(this)}/>
               
             }
 				</div>
 			</div>
 		);
-	}
-	componentDidMount() {
 	}
 }
 

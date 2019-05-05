@@ -42,7 +42,8 @@ TabContainer.propTypes = {
 
 class FullWidthTabs extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    meishiType: []
   };
   handleChange = (event, value) => {
     this.setState({ value });
@@ -50,7 +51,24 @@ class FullWidthTabs extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
- 
+   // 获取datav数据
+   toQueryMeishiTypeData() {
+    const data = {};
+    top.app.api.datavMeishiChina.queryDatavMeishichinaTypeList({
+      data,
+      success: res => {  
+        if (res.error_code === 0) {
+          console.log(42134134213414)
+          this.setState({
+            meishiType: res.data
+          })
+        }
+      }
+    });
+  }
+  componentDidMount() {
+    this.toQueryMeishiTypeData();
+  }
   render() {
     const { classes, theme,history } = this.props;
     return (      
@@ -64,19 +82,22 @@ class FullWidthTabs extends React.Component {
              variant="scrollable"
              scrollButtons="auto"
           >
+          {
+            console.log(this.state.meishiType)
+          }
             {
-              menuData.map(item => (
-                <Tab label={item.name}  key={item.key} classes={{
+              this.state.meishiType.map(item => (
+                <Tab label={item.name}  key={item._id} classes={{
                   labelContainer:classes.labelContainer
                 }}/>
               ))
             }
           </Tabs>
           {
-            menuData.map((item,index) => (
+            this.state.meishiType.map((item,index) => (
               // 传入不用的路由，跳转后台获取所取数据
               this.state.value === index && 
-              <TabContainer key={item.key} className={classes.wrapContainer}> 
+              <TabContainer key={index} className={classes.wrapContainer}> 
                 <AppFoldingCard history={history}/>
               </TabContainer>
             ))

@@ -137,20 +137,20 @@ mongoosePaginate.paginate.options = {
         await Socket.remove({});
         // 执行爬虫脚本沙箱
         let safeVm: any = null;
-        const childProcessorExec = child_process.exec("ts-node ./src/utils/safeifyToMeishichina.ts", async function (error: Error, stdout: any, stderr: any) {
+        const childProcessorExec = child_process.exec("ts-node ./src/utils/safeifyToMeishichina.ts", async function(error: Error, stdout: any, stderr: any) {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
             }
-            setInterval( async () => {
+            setInterval(async () => {
                 safeVm = await safeifymeishichina();
             }, 86400000) // 一天执行一次
         });
         childProcessorExec.on("exit", function(code: string) {
-          console.log("Child process =======> safeifyToMeishichina exited, code: " + code);
-          if (safeVm) {
-            safeVm.destroy();
-          }
+            console.log("Child process =======> safeifyToMeishichina exited, code: " + code);
+            if (safeVm) {
+                safeVm.destroy();
+            }
         });
     } catch (e) {
         console.error('ERROR:', e);

@@ -9,9 +9,12 @@ export declare interface IDatavMeishichinaService {
     // TODO: 爬取类别 动态脚本生成页面爬取
     spidersMeishichinaTypeService(): Promise<boolean>;
     hasDietTyerapy(keys: string[], val: string): boolean;
+    queryDavavMeishiChinaListService(): any;
+    queryDatavMeishichinaTypeService(): any;
 }
 export default class Datav_meishichinaService implements IDatavMeishichinaService {
     private datavListMeishichina: IDatavMeishichina[];
+    private datavListMeishichinaType: IDatavMeishichinaType[]
     private datavMeishichina: IDatavMeishichina;
     private settings: any = {
         headless: true,
@@ -165,7 +168,7 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
                                             const IStuff: any = {} // 材料
                                             IStuff.type = key // 主料 辅料
                                             IStuff.name = _$(item).find('.category_s1 b').text() || '';
-                                            IStuff.num = _$(item).find('.category_s2 b').text() || '';
+                                            IStuff.num = _$(item).find('.category_s2').text() || '';
                                             purchase_details.push(IStuff);
                                         })
                                     } else {
@@ -237,5 +240,20 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
         }
         c.queue([...datavMeishichinaTypeListHrefs, ...child]);
         return true
+    }
+    // 获取美食
+    public async queryDavavMeishiChinaListService(): Promise<any> {
+      this.datavListMeishichina = await DatavMeishichina.find({
+      })
+      .sort({ updatedAt: -1 })
+      .limit(10)
+      .exec()
+      return this.datavListMeishichina
+    }
+    // 获取美食分类
+    public async queryDatavMeishichinaTypeService(): Promise<any> {
+      this.datavListMeishichinaType = await DatavMeishichinaType.find({
+      })
+      return this.datavListMeishichinaType
     }
 }

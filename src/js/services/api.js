@@ -11,4 +11,5 @@ import userFriends from './api/userFriends'
 import customerGather from './api/customerGather'
 import music from './api/music'
 import auth from './api/auth'
-export default {user, order,userActivity,userDynamic,userFriends,customerGather,music,auth}
+import datavMeishiChina from './api/datavMeishiChina'
+export default {user, order,userActivity,userDynamic,userFriends,customerGather,music,auth, datavMeishiChina}

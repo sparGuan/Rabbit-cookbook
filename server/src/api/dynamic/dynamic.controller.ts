@@ -143,7 +143,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                         user: { $in: userIds }
                     })
                         .populate({ path: 'user', select: 'headImg nickName' })
-                        .sort({ create_at: -1 })
+                        .sort({ updatedAt: -1 })
                         .limit(10)
                         .exec()) as IDynamic[];
                     if (this.dynamicList.length > 0) {

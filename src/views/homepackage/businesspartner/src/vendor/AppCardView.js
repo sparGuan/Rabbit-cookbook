@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
-import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
+import GTranslateIcon from '@material-ui/icons/GTranslate';
 import AppCardViewImageGridList from './AppCardViewImageGridList'
 // import Scroll from 'react-bscroll'
 // import 'react-bscroll/lib/react-scroll.css'
@@ -19,7 +19,7 @@ const styles = theme => ({
 		backgroundColor: theme.palette.background.paper,
 		borderRadius: 10,
 		textAlign: 'center',
-		height: 'calc(100vh - 130px)',
+		height: 'calc(100vh - 150px)',
     zIndex: 1,
 		'&.active': {
 			boxShadow:
@@ -41,12 +41,24 @@ const styles = theme => ({
   fabButton:{
     position:'absolute',
     bottom: 20,
-    left: 65
+    left: 65,
+    width: 55,
+    height: 55,
+    borderRadius: '50%',
+    backgroundColor: '#fff',
+    boxShadow: '0 0 15px #9E9E9E',
+    minWidth:55
   },
   ForButton: {
     position: 'absolute',
     right: 50,
-    bottom: 20
+    bottom: 20,
+    width: 55,
+    height: 55,
+    borderRadius: '50%',
+    backgroundColor: '#fff',
+    boxShadow: '0 0 15px #9E9E9E',
+    minWidth:55
   }
 });
 // 卡片视图类
@@ -195,7 +207,7 @@ class AppCardView extends React.Component {
             transitionDuration: '0s'
           }}
         >
-            <AppCardViewImageGridList />
+            <AppCardViewImageGridList tile={item}/>
             {
               // 名称 --。编号
               // 需求：
@@ -213,7 +225,7 @@ class AppCardView extends React.Component {
             </Button>
             {/** variant="fab" */}
             <Button  color="secondary" aria-label="Add" className={classes.ForButton}>
-                <PhoneForwardedIcon fontSize="large"/>
+                <GTranslateIcon fontSize="large"/>
             </Button>
       </Typography>
       )

@@ -14,14 +14,12 @@ export const safeifymeishichina = async () =>{
   const context = {
     system: {
       meishisanbox() {
-        console.log(2342414234144141)
         return datavMeishichinaService.spidersService();
       }
     }
   };
   // 执行动态代码
   const result = await safeVm.run(`return system.meishisanbox()`, context);
-  console.log('result', result);
   // 释放资源
   // safeVm.destroy();
   return safeVm

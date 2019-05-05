@@ -7,12 +7,15 @@ import App from './App';
 // 并非资金方，应该是双方都是行业经验者
 // 爱合伙方式的自动搜索项目，引用项目合伙人制度
 // register the app
-AppRegistry.registerComponent('App', () => App);
-AppRegistry.runApplication('App', {
-  initialProps: {},
-  rootTag: document.getElementById('businesspartner-app')
-});
 window.addEventListener('load', () => {
   let childDomain = document.domain;
   document.domain = childDomain;
+  setTimeout(() => {
+    AppRegistry.registerComponent('App', () => App);
+    AppRegistry.runApplication('App', {
+      initialProps: {
+      },
+      rootTag: document.getElementById('businesspartner-app')
+    });
+  }, 50);
 }, false);
