@@ -137,7 +137,6 @@ class AppLoginDialog extends React.Component {
       const obj = props[0]
       const key = props[1]
       this.setState( { [obj]: {...this.state.registerData, [key]: event.target.value }} );
-      console.log(this.state.registerData)
     }
   };
   handleClickShowPassword = () => {

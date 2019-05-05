@@ -28,16 +28,20 @@ class AppFoldingCard extends React.Component {
   state = {
     	/*用户信息数组*/
     tileData: [
-    ]
+    ],
+    page: 1
   }
    // 获取datav数据
-   toQueryLileData() {
-    const data = {};
+   toQueryLileData(page = 1) {
+    const type = this.props.type;
+    const data = {
+      type,
+      page
+    };
     top.app.api.datavMeishiChina.queryDavavMeishiChinaList({
       data,
       success: res => {  
         if (res.error_code === 0) {
-          console.log(res.data)
           this.setState({
             tileData: res.data
           })
@@ -51,18 +55,22 @@ class AppFoldingCard extends React.Component {
   // 更新信息数组
   handleCardMapChange () {
     this.setState(state => ({ cardMap:state.tileData.shift() }));
+    if (this.state.tileData.length <= 0) {
+      this.setState(state => ({ page: ++state.page }));
+      this.toQueryLileData(this.state.page)
+    }
   }
 	// 传入产品ID获取跳转链接
-	linkToDetail(productId) {
-		// 先去get数据
-		// 跳转到详情
-		this.props.history.push({
-			pathname: '/appDetilPage',
-			state: { productId }
-		});
-	}
+	// linkToDetail(productId) {
+	// 	// 先去get数据
+	// 	// 跳转到详情
+	// 	this.props.history.push({
+	// 		pathname: '/appDetilPage',
+	// 		state: { productId }
+	// 	});
+	// }
 	render() {
-		const { classes, history } = this.props;
+    const { classes, history } = this.props;
 		// 数据发生变化就可以render了
 		return (      
 			<div className={classes.root}>
@@ -73,8 +81,7 @@ class AppFoldingCard extends React.Component {
             {
               // 每次拖拽删除当前数据
               // 不如简单点实现，循环10个数据，拖一个删掉一个
-              <AppCardView cardMap={this.state.tileData} handleCardMapChange ={this.handleCardMapChange.bind(this)}/>
-              
+              <AppCardView history={history} cardMap={this.state.tileData} handleCardMapChange ={this.handleCardMapChange.bind(this)}/>
             }
 				</div>
 			</div>

@@ -63,25 +63,26 @@ const App = (props) => (
 								  {
 									// 构建home里面带头部带底部
 									}
-									<Home>
+									{
+										rootRouters.map((route,index) => {
+												return (
+													<Route 
+													history={history}
+													key={index}
+													path={route.path}
+													component={route.component}/>
+											)
+										})
+									}
+									{/* <Home>
 										{
 											// 挂载二级路由=======》基于home的路由挂载
 										}
 										<Switch>
-												{
-													rootRouters.map((route,index) => {
-															return (
-																<Route 
-																history={history}
-																key={index}
-																path={route.path}
-																component={route.component}/>
-														)
-													})
-												}
+												
 												<Route render={() => <Redirect to="/" />} />	
 										</Switch>
-									</Home>
+									</Home> */}
             </Switch>
         </HashRouter>
     </Provider>

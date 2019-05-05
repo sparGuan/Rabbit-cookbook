@@ -36,7 +36,6 @@ class AppTopMenuList extends React.Component {
    this.setState({ anchorEl: null });
   };
   setLogName = (detals) => {
-    console.log(detals)
     this.setState({ detals});
   }
   // goLog

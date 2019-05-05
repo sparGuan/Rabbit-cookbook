@@ -92,12 +92,12 @@ class ApphasSearchTop extends React.Component {
     open: false
   };
   render() {
-    const { classes,goBack } = this.props;
+    const { classes, goBack, history } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer" onClick={goBack}>
+            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer" onClick={history.goBack}>
                 <ArrowBackIcon />
             </IconButton> 
             <div className={classes.search} >
@@ -116,6 +116,7 @@ class ApphasSearchTop extends React.Component {
               </IconButton>   */}
               <AppTopMenuList />
           </Toolbar>
+
           <Grid container spacing={24}>
               <Grid item xs={12}>
                   <TabNavigatorBar history={history}/>

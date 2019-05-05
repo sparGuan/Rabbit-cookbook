@@ -22,7 +22,7 @@ const styles = theme => ({
 )
 class CommonAppTopBar extends React.Component {
   render() {
-    const { classes, history, topText ,displayAnyTop} = this.props;
+    const { classes, history, topText , displayAnyTop} = this.props;
     return (
       <div className={classes.root}>
         {
@@ -30,11 +30,11 @@ class CommonAppTopBar extends React.Component {
           displayAnyTop.isShow &&
           <ApphasSearchTop goBack={history.goBack} history={history}/>
         }
-        {
+        {/* {
            displayAnyTop.showType === 1 &&
            displayAnyTop.isShow &&
           <AppReleasePageTop goBack={history.goBack} history={history}/>
-        }
+        } */}
       </div>
     );
   }

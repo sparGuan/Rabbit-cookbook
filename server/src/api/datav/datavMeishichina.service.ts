@@ -9,7 +9,7 @@ export declare interface IDatavMeishichinaService {
     // TODO: 爬取类别 动态脚本生成页面爬取
     spidersMeishichinaTypeService(): Promise<boolean>;
     hasDietTyerapy(keys: string[], val: string): boolean;
-    queryDavavMeishiChinaListService(): any;
+    queryDavavMeishiChinaListService(type: string, page: number): any;
     queryDatavMeishichinaTypeService(): any;
 }
 export default class Datav_meishichinaService implements IDatavMeishichinaService {
@@ -242,11 +242,14 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
         return true
     }
     // 获取美食
-    public async queryDavavMeishiChinaListService(): Promise<any> {
+    public async queryDavavMeishiChinaListService(type: string, page = 1): Promise<any> {
+      const Count = (page - 1) * 10;
       this.datavListMeishichina = await DatavMeishichina.find({
+        type
       })
       .sort({ updatedAt: -1 })
       .limit(10)
+      .skip(Count)
       .exec()
       return this.datavListMeishichina
     }

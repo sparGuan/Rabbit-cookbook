@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import RenderSvgIcon from './RenderSvgIcon'
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const styles = theme => ({
   root: {
@@ -18,7 +17,8 @@ const styles = theme => ({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     width: 'calc(100% - 20px)',
-    margin: 10
+    margin: 10,
+    marginBottom: 0
   },
   demand: {
     fontSize:12,
@@ -62,13 +62,24 @@ const styles = theme => ({
   },
   muiGrid: {
     maxHeight: 75
+  },
+  tileName: {
+    color: theme.palette.secondary.main,
+    verticalAlign: 'middle'
+  },
+  track: {
+    display:'inline-block',
+    verticalAlign: 'middle'
   }
 });
 class ImageGridList extends React.Component {
   state = {
   };
+  jumpTo(tile) {
+    this.props.history.push( {pathname:'/AppDetailPage', state: tile})
+  }
   render() {
-    const { classes, tile } = this.props;
+    const { classes, tile, history } = this.props;
     return (
         <div className={classes.root}>
               <GridList cellHeight={80} className={classes.gridList} cols={3}>
@@ -81,7 +92,7 @@ class ImageGridList extends React.Component {
               </GridList>
 
               <Grid item xs={12} className={classes.gridOneRow}>
-                  <p><span >美食名称：</span><span>{tile.name}</span></p>
+                  <p><span >美食名称：</span><span className={classes.tileName} onClick={this.jumpTo.bind(this, tile)}>{tile.name}</span><RenderSvgIcon path = "M20,18.69L12.7,22.74C12.2,23 11.7,23 11.2,22.74L4,18.69L17.05,5.54L17.4,5.44C17.7,5.44 17.87,5.57 17.9,5.84L20,18.69M9.35,5.74L4.8,13.29L6.7,1.34C6.73,1.07 6.9,0.94 7.2,0.94C7.4,0.94 7.53,1 7.6,1.19L9.75,5.14L9.35,5.74M13.85,7L4.3,16.59L11.55,4.29C11.65,4.09 11.8,4 12,4C12.2,4 12.33,4.09 12.4,4.29L13.85,7Z"/></p>
               </Grid>
               <Grid item xs={12} className={classes.gridOneRow}>
                   <p><span> 来自：</span><span>{tile.source}</span></p>
@@ -98,7 +109,7 @@ class ImageGridList extends React.Component {
                         <IconButton aria-label="people">
                           <Badge badgeContent={`口味: ${tile.taste}`} color="primary" classes={{ badge: classes.badgeThousand }}>
                               {/* <AttachMoneyIcon /> */}
-                              <RenderSvgIcon path = "M9.17 16.83c1.56 1.56 4.1 1.56 5.66 0 1.56-1.56 1.56-4.1 0-5.66l-5.66 5.66zM18 2.01L6 2c-1.11 0-2 .89-2 2v16c0 1.11.89 2 2 2h12c1.11 0 2-.89 2-2V4c0-1.11-.89-1.99-2-1.99zM10 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM7 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm5 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+                              <RenderSvgIcon path = "M22,18C22,20.21 20.21,22 18,22H15C12.79,22 11,20.21 11,18V16H17.79L20.55,11.23L22.11,12.13L19.87,16H22V18M9,22H2C2,19 2,16 2.33,12.83C2.6,10.3 3.08,7.66 3.6,5H3V3H4L7,3H8V5H7.4C7.92,7.66 8.4,10.3 8.67,12.83C9,16 9,19 9,22Z"/>
                           </Badge>
                         </IconButton>
                         {
@@ -106,7 +117,7 @@ class ImageGridList extends React.Component {
                         }
                         <IconButton aria-label="people" className={classes.timer}>
                           <Badge badgeContent={`时间：${tile.cook_time}`} color="primary" classes={{ badge: classes.badge }}>
-                              <AccessTimeIcon />
+                          <RenderSvgIcon path = "M12,20C8.13,20 5,16.87 5,13C5,9.13 8.13,6 12,6C15.87,6 19,9.13 19,13C19,16.87 15.87,20 12,20M12,4C7.03,4 3,8.03 3,13C3,17.97 7.03,22 12,22C16.97,22 21,17.97 21,13C21,8.03 16.97,4 12,4M12.5,8H11V14L15.75,16.85L16.5,15.62L12.5,13.25V8M7.88,3.39L6.6,1.86L2,5.71L3.29,7.24L7.88,3.39M22,5.72L17.4,1.86L16.11,3.39L20.71,7.25L22,5.72Z"/>
                           </Badge>
                         </IconButton>
                       </div>

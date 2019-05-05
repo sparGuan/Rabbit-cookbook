@@ -11,7 +11,7 @@ export declare interface IDatavMeishichina extends mongoose.Document {
     images: string[]; // 小图
     name: string; // 菜品名称
     taste: string; // 味道
-    source: ISource []; // 出处
+    source: ISource; // 出处
     cook_time: string // 烹饪时间
     material: string; // 准备材料
     practice: string []; // 做法
@@ -21,6 +21,7 @@ export interface ISource {
   user: IUser; // 来自用户的分析
   website: string; // 来自网站的分享
   other: string; // 其他
+  introduction: string // 引言
 }
 export interface IStuff {
   name: string; // 材料名称
@@ -53,8 +54,8 @@ const datavMeishichina_schema: mongoose.Schema = new mongoose.Schema({
       index: true
   },
   source: {
-    type: Array,
-    trim: true
+    type: Object,
+    default: {}
   },
   taste: {
     type: String,

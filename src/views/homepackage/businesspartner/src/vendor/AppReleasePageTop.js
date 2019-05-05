@@ -42,7 +42,6 @@ class AppReleasePageTop extends React.Component {
   }
   // 到达步骤页
   toPageStep() {
-    console.log(this.props)
     this.props.displayAnyBottomCreator(false)
     this.props.history.push({ pathname:'/appReleasePageStep',state:{} })
   }

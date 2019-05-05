@@ -13,7 +13,8 @@ class DatavMeishichinaController extends BASE_OPEN_SOURCE_API<DatavMeishichinaSe
     public queryDavavMeishiChinaList() {
         return async (ctx: any) => {
             // 爬取数据，录入
-            const respone = await this.DatavMeishichinaService.queryDavavMeishiChinaListService()
+            const { body } = ctx.request;
+            const respone = await this.DatavMeishichinaService.queryDavavMeishiChinaListService(body.type, body.page)
             return ctx.body = this.response(0, 'SUCCESS', respone);
         };
     }

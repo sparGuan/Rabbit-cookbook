@@ -26,7 +26,7 @@ class Home extends React.Component {
   };
 	
 	render() {	
-		const {children ,history,displayAnyTop, isInit} = this.props
+		const { history, displayAnyTop} = this.props
 		return (
 			<View style={{
 				flex: 1,
@@ -34,11 +34,7 @@ class Home extends React.Component {
 				alignItems: 'center',
 				marginTop: displayAnyTop.isShow ? 48 : 0
 			}}>
-				{children}
-				{/* 公共头部、公共底部 */}
 				<AppHeadBar history = {history}/>
-        <AppBottomBar history = {history} /> 
-				{/* <AppBottomBar  history={this.props.history}/> */}
 			</View>
 		);
 	}

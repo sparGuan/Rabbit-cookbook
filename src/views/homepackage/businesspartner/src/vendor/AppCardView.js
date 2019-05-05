@@ -113,6 +113,7 @@ class AppCardView extends React.Component {
       // this.props.cardMap.shift(); // 删除数组元素，重新渲染 ==>去告诉父组件更新数据
 			this.run = true;
 		}, 300);
+
 	}
 	// 触摸开始
 	touchCardStart(e) {    
@@ -186,7 +187,7 @@ class AppCardView extends React.Component {
 		this.left_val = 0;
 	}
 	render() {
-    const { cardMap,  handleCardMapChange , classes, history } = this.props;
+		const { cardMap,  handleCardMapChange , classes, history } = this.props;
     // 数据发生变化就可以render了
 		return cardMap.map((item, index) => {
       return (
@@ -207,7 +208,7 @@ class AppCardView extends React.Component {
             transitionDuration: '0s'
           }}
         >
-            <AppCardViewImageGridList tile={item}/>
+            <AppCardViewImageGridList tile={item} history={history}/>
             {
               // 名称 --。编号
               // 需求：
@@ -218,8 +219,6 @@ class AppCardView extends React.Component {
 							// 详情：
               // 项目计划：时间轴
             }
-            <div>
-            </div>
             <Button  color="secondary" aria-label="Add" className={classes.fabButton}>
                 <LoyaltyIcon fontSize="large"/>
             </Button>

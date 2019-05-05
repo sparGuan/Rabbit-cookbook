@@ -6,7 +6,6 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import AppFoldingCard from './AppFoldingCard';
-import menuData from './menuData';
 // 样式表
 const styles = theme => ({
   root: {
@@ -58,7 +57,6 @@ class FullWidthTabs extends React.Component {
       data,
       success: res => {  
         if (res.error_code === 0) {
-          console.log(42134134213414)
           this.setState({
             meishiType: res.data
           })
@@ -70,7 +68,7 @@ class FullWidthTabs extends React.Component {
     this.toQueryMeishiTypeData();
   }
   render() {
-    const { classes, theme,history } = this.props;
+    const { classes, theme, history } = this.props;
     return (      
       <div className={classes.root}>
           <Tabs
@@ -82,9 +80,6 @@ class FullWidthTabs extends React.Component {
              variant="scrollable"
              scrollButtons="auto"
           >
-          {
-            console.log(this.state.meishiType)
-          }
             {
               this.state.meishiType.map(item => (
                 <Tab label={item.name}  key={item._id} classes={{
@@ -98,7 +93,7 @@ class FullWidthTabs extends React.Component {
               // 传入不用的路由，跳转后台获取所取数据
               this.state.value === index && 
               <TabContainer key={index} className={classes.wrapContainer}> 
-                <AppFoldingCard history={history}/>
+                <AppFoldingCard history={history} type={item._id}/>
               </TabContainer>
             ))
           }

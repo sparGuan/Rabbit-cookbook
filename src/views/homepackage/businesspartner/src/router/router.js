@@ -22,8 +22,8 @@ const rootRouters = [
     // },
     {
       // React Route 路由的基本配置 以及 实现路由的模糊匹配（动态路由）
-      path:'/appReleasePage',
-      component:loadable('AppReleasePage')// require('@/vendor/AppReleasePage').default //
+      path:'/AppDetailPage',
+      component:loadable('AppDetailPage')// require('@/vendor/AppReleasePage').default //
     },
     {
         // React Route 路由的基本配置 以及 实现路由的模糊匹配（动态路由）
