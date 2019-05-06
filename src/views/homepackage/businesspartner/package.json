@@ -60,6 +60,7 @@
     "react-bscroll": "^1.0.7",
     "react-dom": "^16.6.0",
     "react-html5video": "^2.5.1",
+    "react-live-route": "^3.0.7",
     "react-native": "^0.57.3",
     "react-native-web": "^0.9.3",
     "react-redux": "^5.1.0",

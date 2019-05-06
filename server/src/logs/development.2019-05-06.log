@@ -1,0 +1,960 @@
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 09:01:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 23ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 09:01:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 70ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 09:02:37 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 09:02:37 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 09:08:10 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 09:08:10 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 09:20:18 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 09:20:18 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 09:44:53 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 09:44:53 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 50ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:00:18 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:00:18 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 68ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:00:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:00:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:01:46 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:01:46 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:03:25 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:03:25 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 63ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:05:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:05:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 72ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:06:08 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:06:08 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:06:41 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:06:41 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 57ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:07:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:07:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:09:10 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:09:10 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:11:31 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:11:32 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 53ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:11:58 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:11:58 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:36:56 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:36:56 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 10:59:59 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 10:59:59 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 50ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:02:02 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:02:02 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 53ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:04:53 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:04:53 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 57ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:05:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:05:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:05:39 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:05:40 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:06:32 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:06:32 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:07:01 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:07:01 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 53ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:28:49 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:28:49 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:29:08 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:29:08 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 105ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:29:21 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:29:22 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:41:39 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:41:39 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:44:14 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:44:14 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:45:20 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:45:20 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 47ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:46:21 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:46:21 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:47:19 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:47:20 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 50ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:50:42 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:50:42 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:51:56 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:51:56 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 52ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:52:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:52:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:52:26 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:52:26 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:52:48 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:52:48 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 50ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:54:19 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:54:19 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:55:08 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:55:08 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:55:27 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:55:27 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:55:40 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:55:41 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:56:47 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 44ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:56:47 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 78ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 11:58:24 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 95ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 11:58:24 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 304ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 12:03:04 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 12:03:04 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 12:03:11 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 12:03:11 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:51:51 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:51:51 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 53ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:52:14 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:52:14 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:52:39 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:52:39 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 73ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:52:42 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 18ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:52:42 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 66ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:57:38 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:57:38 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:58:07 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:58:07 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:58:55 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:58:56 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 13:59:50 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 13:59:50 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 14:04:54 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 14:04:54 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 14:11:33 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 14:11:33 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 14:16:22 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 26ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 14:16:22 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 14:25:45 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 14:25:45 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 77ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 14:27:21 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 14:27:21 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 15:26:23 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 15:26:23 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 72ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:02:03 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:02:03 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:19:33 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:19:33 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 158ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:21:44 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:21:44 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 57ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:22:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:22:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:25:08 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:25:09 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:35:49 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:35:49 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 54ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:35:59 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:35:59 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 57ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:51:16 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:51:16 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:52:07 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:52:07 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:52:11 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:52:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:52:29 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:52:30 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:53:30 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:53:30 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 63ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:53:48 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:53:48 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 54ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:53:52 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:53:52 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:53:57 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:53:58 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:54:50 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:54:50 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 63ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:54:55 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:54:55 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:55:04 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:55:04 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:55:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:55:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:55:22 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:55:22 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:55:52 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:55:52 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 54ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 19:56:14 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 19:56:14 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:01:24 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:01:26 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:01:26 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:01:31 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:01:31 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:01:32 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 65ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:01:35 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:01:35 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:01:50 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:01:50 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:01:59 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:01:59 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:17:31 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:17:31 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:17:54 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:17:56 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:17:56 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:18:39 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:18:39 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:18:57 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:18:57 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:19:19 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:19:19 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:19:45 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:19:45 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 57ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:20:54 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:24:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Mon May 06 2019 20:24:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 18ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:24:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Mon May 06 2019 20:24:12 GMT+0800 (CST)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m

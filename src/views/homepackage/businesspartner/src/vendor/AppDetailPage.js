@@ -32,9 +32,24 @@ const styles = theme => ({
   },
   media: {
     height: '100vw'
+  },
+  pageContent: {
+    maxHeight: '100vh',
+    'overflow-y': 'auto'
+  },
+  cardCon: {
+    overflow: 'unset',
+    boxShadow: 'unset'
+  },
+  padd10: {
+    padding:10
   }
 });
 class AppDetailPage extends React.Component {
+  goTop = () => {
+    const pageContent = document.querySelector(`.${this.refs.pageContent.props.className}`);
+    pageContent.scrollTop = window.innerWidth;
+  }
 	render() {
     const { classes, history, location} = this.props;
 		return (
@@ -58,53 +73,59 @@ class AppDetailPage extends React.Component {
           步骤
          */}
          {/** 大图展示 */}
-        <Card className={classes.card}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={location.state.big_image}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                菜单引言
-              </Typography>
-              <Typography component="p">
-                {location.state.source.introduction || '这是来自其他网站的分享，阅读完毕小手一个Start🌟吧'}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="secondary">
-              <span style={{
-                display:'inline-block',
-                verticalAlign: 'middle'
-              }}>Start</span>
-              <StarBorderIcon style={{
-                marginLeft: 5,
-                fontSize: 18,
-                verticalAlign: 'middle'
-              }}/>
-            </Button>
-            <Button size="small" color="secondary">
-              <span style={{
-                display:'inline-block',
-                verticalAlign: 'middle'
-              }}>FORK</span>
-              <CallSplitIcon style={{
-                marginLeft: 5,
-                fontSize: 18,
-                verticalAlign: 'middle'
-              }}/>
-            </Button>
-          </CardActions>
-        </Card>
-        {/** 步骤 */}
-        <Card className={classes.card}>
-              <CardContent>
-                <AppStepingInDetail />
-              </CardContent>
-        </Card>
+         <View className={classes.pageContent} ref="pageContent">
+            <Card className={classes.card} classes={{
+                    root: classes.cardCon
+                  }}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image={location.state.big_image}
+                  title="Contemplative Reptile"
+                />
+                <CardContent className={classes.padd10}>
+                  <Typography gutterBottom  component="h2">
+                    菜单引言
+                  </Typography>
+                  <Typography component="p">
+                    {location.state.source.introduction || '这是来自其他网站的分享，阅读完毕小手一个Start🌟吧'}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions style={{padding:0}}>
+                <Button size="small" color="secondary">
+                  <span style={{
+                    display:'inline-block',
+                    verticalAlign: 'middle'
+                  }}>Start</span>
+                  <StarBorderIcon style={{
+                    marginLeft: 5,
+                    fontSize: 18,
+                    verticalAlign: 'middle'
+                  }}/>
+                </Button>
+                <Button size="small" color="secondary">
+                  <span style={{
+                    display:'inline-block',
+                    verticalAlign: 'middle'
+                  }}>FORK</span>
+                  <CallSplitIcon style={{
+                    marginLeft: 5,
+                    fontSize: 18,
+                    verticalAlign: 'middle'
+                  }}/>
+                </Button>
+              </CardActions>
+            </Card>
+            {/** 步骤 */}
+            <Card classes={{
+                    root: classes.cardCon
+                  }}>
+                <CardContent style={{padding:0}}>
+                  <AppStepingInDetail data={location.state} goTop={this.goTop.bind(this)}/>
+                </CardContent>
+            </Card>
+          </View>
 			</View>
 		);
 	}

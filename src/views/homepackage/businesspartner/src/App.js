@@ -4,7 +4,10 @@
    组件匹配
 */
 import React from 'react';
-import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
+// import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter, HashRouter } from 'react-router-dom';
+import NotLiveRoute from 'react-live-route';
+const LiveRoute = withRouter(NotLiveRoute);
 import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
 import {rootRouters} from '@/router/router'
@@ -56,35 +59,29 @@ const App = (props) => (
 			//我是一个双向绑定的组件
 		}
     <Provider store={store} >
-        <HashRouter>
-						{/* 挂载所有路由  */}
-						<Switch>
-								  <Route exact path='/' component={Home} history={history} />
-								  {
-									// 构建home里面带头部带底部
-									}
-									{
-										rootRouters.map((route,index) => {
-												return (
-													<Route 
-													history={history}
-													key={index}
-													path={route.path}
-													component={route.component}/>
-											)
-										})
-									}
-									{/* <Home>
+         <HashRouter>
+					 	<div>
+							<Switch>
+									{/* <Route render={() => <Redirect to="/AppDetailPage" />} /> */}
 										{
-											// 挂载二级路由=======》基于home的路由挂载
+										// 构建home里面带头部带底部
 										}
-										<Switch>
-												
-												<Route render={() => <Redirect to="/" />} />	
-										</Switch>
-									</Home> */}
-            </Switch>
-        </HashRouter>
+										<Route path="/" history={history} component={Home}/>
+										{
+											rootRouters.map((route,index) => {
+													return (
+														<Route
+														history={history}
+														key={index}
+														path={route.path}
+														component={route.component}/>
+												)
+											})
+										}
+							</Switch>
+							<LiveRoute exact path="/" livePath={"/"} name="root" component={Home} history={history}/>
+						</div>
+        </HashRouter> 
     </Provider>
 		{ DevTools && <DevTools /> }
   </MuiThemeProvider>
