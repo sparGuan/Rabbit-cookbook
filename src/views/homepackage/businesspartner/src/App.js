@@ -7,13 +7,12 @@ import React from 'react';
 // import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import { Route, Switch, Redirect, withRouter, HashRouter } from 'react-router-dom';
 import NotLiveRoute from 'react-live-route';
-const LiveRoute = withRouter(NotLiveRoute);
 import { Provider } from 'react-redux'
 import store, { history } from 'STORE'
 import {rootRouters} from '@/router/router'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Home from './Home'
-
+import AppDetailPage from './vendor/AppDetailPage'
 const theme = createMuiTheme({
 	typography: {
 		useNextVariants: true
@@ -53,6 +52,7 @@ if (__DEV__ && __COMPONENT_DEVTOOLS__) {
   // 组件形式的 Redux DevTools
   DevTools = require('./DevTools').default
 }
+const LiveRoute = withRouter(NotLiveRoute);
 const App = (props) => (
   <MuiThemeProvider theme={theme}>
 		{
@@ -66,7 +66,7 @@ const App = (props) => (
 										{
 										// 构建home里面带头部带底部
 										}
-										<Route path="/" history={history} component={Home}/>
+										<Route exact path="/" history={history} />
 										{
 											rootRouters.map((route,index) => {
 													return (
@@ -74,12 +74,13 @@ const App = (props) => (
 														history={history}
 														key={index}
 														path={route.path}
-														component={route.component}/>
+														/>
 												)
 											})
 										}
 							</Switch>
-							<LiveRoute exact path="/" livePath={"/"} name="root" component={Home} history={history}/>
+							<LiveRoute  path="/" livePath={`/AppDetailPage/:id`}  component={Home} />
+							<LiveRoute  path="/AppDetailPage/:id"  component={AppDetailPage} />
 						</div>
         </HashRouter> 
     </Provider>

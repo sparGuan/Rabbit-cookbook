@@ -116,7 +116,7 @@ class AppCardView extends React.Component {
 
 	}
 	// 触摸开始
-	touchCardStart(e) {    
+	touchCardStart(e) {
 		if (!this.run) {
 			return;
 		}
@@ -149,6 +149,7 @@ class AppCardView extends React.Component {
 		this._x_end = ev.changedTouches[0].pageX;
 		this._y_end = ev.changedTouches[0].pageY;
 		var act_el = ev.currentTarget;
+		// 点击的时候传个参数过来不进行代码
 		if (
 			this.left_val > 0 &&
 			this.left_val > this.doc_width / 2 - this.doc_width / 4.5
