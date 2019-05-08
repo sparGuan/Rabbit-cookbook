@@ -67,6 +67,8 @@ class AppCardView extends React.Component {
 		super(props, context);
 	}
 	/*元素位置*/
+	state = {
+	};
 	site = {
 		_x_start: 0,
 		_y_start: 0,
@@ -75,7 +77,7 @@ class AppCardView extends React.Component {
 		_x_end: 0,
 		_y_end: 0,
 		top_val: 0,
-		left_val: 0
+		left_val: 0,
 	};
 	doc_width = window.innerWidth;
 	doc_height = window.innerHeight;
@@ -141,7 +143,7 @@ class AppCardView extends React.Component {
 		}px,0px)`;
 		act_el.style.transitionDuration = '0s';
 	}
-	touchCardEnd(e) {    
+	touchCardEnd(e) {  
 		if (!this.run) {
 			return;
 		}
@@ -149,6 +151,12 @@ class AppCardView extends React.Component {
 		this._x_end = ev.changedTouches[0].pageX;
 		this._y_end = ev.changedTouches[0].pageY;
 		var act_el = ev.currentTarget;
+		if (e.target.classList[0] && e.target.classList[0].indexOf('ImageGridList-tileName') > -1) {
+			// 此处是回归原位
+			this.animateReset(act_el);
+			this.activeEl(act_el);
+			return
+		}
 		// 点击的时候传个参数过来不进行代码
 		if (
 			this.left_val > 0 &&
@@ -183,7 +191,7 @@ class AppCardView extends React.Component {
 	rmActiveEl(el) {
 		el.classList.remove('active');
 	}
-	// /*清除位置*/
+	/*清除位置*/
 	clearLocation() {
 		this.left_val = 0;
 	}
@@ -209,7 +217,8 @@ class AppCardView extends React.Component {
             transitionDuration: '0s'
           }}
         >
-            <AppCardViewImageGridList tile={item} history={history}/>
+					{/** 实现点击一下的时候父组件改变状态 */}
+            <AppCardViewImageGridList tile={item} history={history} />
             {
               // 名称 --。编号
               // 需求：

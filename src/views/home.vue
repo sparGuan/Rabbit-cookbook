@@ -74,7 +74,7 @@ export default {
       const deviceWidth = document.body.clientWidth
       const deviceHeight = document.body.clientHeight
       mobsf.style.width = (Number(deviceWidth)) + 'px' // 数字是页面布局宽度差值
-      mobsf.style.height = (Number(deviceHeight) - 54) + 'px' // 数字是页面布局高度差
+      mobsf.style.height = (Number(deviceHeight) - 50) + 'px' // 数字是页面布局高度差
     }
   },
   beforeRouteLeave: function (to, from, next) {

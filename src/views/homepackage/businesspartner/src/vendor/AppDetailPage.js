@@ -27,14 +27,13 @@ const styles = theme => ({
     textAlign: 'center'
   },
   card: {
-    marginTop: 55,
     boxShadow: 'unset'
   },
   media: {
     height: '100vw'
   },
   pageContent: {
-    maxHeight: '100vh',
+    maxHeight: 'calc(100vh - 30px)',
     'overflow-y': 'auto'
   },
   cardCon: {

@@ -74,10 +74,8 @@ const styles = theme => ({
 });
 class ImageGridList extends React.Component {
   state = {
-    cliked: false
   };
   jumpTo(tile) {
-    this.setState({cliked: true})
     this.props.history.push( {pathname:`/AppDetailPage/:${tile._id}`, state: tile})
   }
   render() {
