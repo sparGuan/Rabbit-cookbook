@@ -13,8 +13,18 @@ class DatavMeishichinaController extends BASE_OPEN_SOURCE_API<DatavMeishichinaSe
     public queryDavavMeishiChinaList() {
         return async (ctx: any) => {
             // 爬取数据，录入
-            const { body } = ctx.request;
-            const respone = await this.DatavMeishichinaService.queryDavavMeishiChinaListService(body.type, body.page)
+            const model = {
+              type: {
+                required: true,
+                default: ''
+              },
+              page: {
+                required: true,
+                default: 1
+              }
+            };
+            const result = this.getParameters(ctx, model);
+            const respone = await this.DatavMeishichinaService.queryDavavMeishiChinaListService(result.type, result.page)
             return ctx.body = this.response(0, 'SUCCESS', respone);
         };
     }
@@ -22,6 +32,25 @@ class DatavMeishichinaController extends BASE_OPEN_SOURCE_API<DatavMeishichinaSe
       return async (ctx: any) => {
         const respone = await this.DatavMeishichinaService.queryDatavMeishichinaTypeService()
         return ctx.body = this.response(0, 'SUCCESS', respone);
+      };
+    }
+    // 实现业务， 搜索美食
+    public querySearchDatavMeishichina() {
+      return async (ctx: any) => {
+        // 爬取数据，录入
+        const model = {
+          name: {
+            required: true,
+            default: ''
+          },
+          page: {
+            required: true,
+            default: 1
+          }
+        };
+        const result = this.getParameters(ctx, model);
+        const data = await this.DatavMeishichinaService.querySearchDatavMeishichinaService(result.name, result.page)
+        return ctx.body = this.response(0, 'SUCCESS', data);
       };
     }
 }

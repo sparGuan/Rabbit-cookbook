@@ -14,17 +14,18 @@ export default class BASE_OPEN_SOURCE_API<S, M> implements IController {
     // 实现业务 ===》 点赞
     public async genericSingleDie<M, T>(root: M, child: T, data?: {}): Promise<boolean> {
         const canZan = await this.BaseService.genericSingleDieService(root, child, data)
-        return canZan
+        return canZan;
     }
     public async queryDieByTodayCount<M>(root: M, data?: {}): Promise<string[]> {
-        return await this.BaseService.queryDieByTodayCount(root, data)
+        return await this.BaseService.queryDieByTodayCount(root, data);
     }
     /**
      * 通用获取前端参数
      * @param ctx 域
      */
-    public getParameters(ctx: any): any {
-        return this.BaseService.getParameters(this.BaseModel, ctx)
+    public getParameters(ctx: any, model?: any): any {
+        const Model = model || this.BaseModel;
+        return this.BaseService.getParameters(ctx, Model)
     }
     public response(code: number, msg: string, data?: any): {code: string, msg: string, data?: any} {
         return this.BaseService.response(code, msg, data)

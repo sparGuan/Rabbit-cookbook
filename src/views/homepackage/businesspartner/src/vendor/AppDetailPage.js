@@ -16,6 +16,9 @@ import Button from '@material-ui/core/Button';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import AppStepingInDetail from './AppStepingInDetail'
+import Chip from '@material-ui/core/Chip';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
 	AppBarRoot: {
     borderBottom: '1px solid rgba(0,0,0,0.1)',
@@ -42,9 +45,25 @@ const styles = theme => ({
   },
   padd10: {
     padding:10
+  },
+  chip: {
+    minWidth: 50,
+    marginRight: 15,
+    marginBottom: 10
+  },
+  chipContent: {
+    padding: '0px 15px',
+    boxShadow: 'unset'
+  },
+  mainMaterial: {
+    display: 'inline-block',
+    verticalAlign: 'text-bottom'
   }
 });
 class AppDetailPage extends React.Component {
+  state = {
+    open: true
+  }
   goTop = () => {
     const pageContent = document.querySelector(`.${this.refs.pageContent.props.className}`);
     pageContent.scrollTop = window.innerWidth;
@@ -116,6 +135,29 @@ class AppDetailPage extends React.Component {
                 </Button>
               </CardActions>
             </Card>
+            {/** TODO: 材料环节和附近购买的便利超市 */}
+            <Paper className={classes.chipContent}>
+              <Grid item xs={12}>
+                  烹饪 
+              </Grid>
+              <Grid item xs={12}>
+                <span className={classes.mainMaterial}>主料：</span>
+                {location.state.purchase_details && location.state.purchase_details.map((item,index) => (
+                      item.type === 0 && <Chip label={item && `${item.name} ${item.num}`} className={classes.chip} key={index}/>
+                ))
+                }
+              </Grid>
+            </Paper>
+            
+            <Paper className={classes.chipContent}>
+              <Grid item xs={12}>
+                <span className={classes.mainMaterial}>辅料：</span>
+                {location.state.purchase_details && location.state.purchase_details.map((item,index) => (
+                      item.type === 1 && <Chip label={item && item.name} className={classes.chip} key={index}/>
+                ))
+                }
+              </Grid>
+            </Paper>
             {/** 步骤 */}
             <Card classes={{
                     root: classes.cardCon

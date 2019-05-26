@@ -84,17 +84,15 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
                         $set: {
                             passWord: body.passWord
                         }
-                    }
+                    },
+                    { new: true }
                 ).select('-passWord -updatedAt -logoutTime -createAt ');
-                ctx.body = {
-                    message: statusCode.success,
-                    user: this.user
-                };
+                ctx.body = this.response(0, statusCode.success, this.user);
+                return;
             } else {
                 ctx.status = 401;
-                ctx.body = {
-                    message: '该手机号还没被注册！'
-                };
+                ctx.body = this.response(-1, 'ERR_NOT_REGISTERED'); // 该手机号还没被注册！
+                return;
             }
         };
     }
@@ -171,7 +169,13 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
                         }
                     },
                     { new: true }
-                ).select(' -updatedAt -logoutTime -createAt ')) as IUser;
+                ).select('friends requestList tenancyName nickName token openid passWord headImg headBgImg sex age Mobile loginTime expiredTime descPerson location socket')) as IUser;
+            } else {
+              ctx.status = 402;
+              ctx.body = {
+                  message: '请输入手机号'
+              };
+              return;
             }
             // 如果找不到用户，就报401
             if (global._.isEmpty(this.user)) {
@@ -184,19 +188,12 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
             // 匹配密码是否相等
             // 使用中间件坐比较
             if (await bcrypt.compare(body.passWord, this.user.passWord)) {
-                ctx.status = 200;
-                let expiredTime;
-                await LoginController.resetExpiredTime(this.user.get('_id')).then(
-                    result => {
-                        expiredTime = result;
-                    }
-                ); // 设置过期时间
+                let expiredTime = 0;
+                expiredTime = await LoginController.resetExpiredTime(this.user.get('_id')) // 设置过期时间
                 delete this.user.passWord;
-                ctx.body = {
-                    message: statusCode.success,
-                    user: this.user,
-                    expiredTime
-                };
+                this.user.expiredTime = expiredTime;
+                ctx.body = this.response(0, statusCode.success, this.user);
+                return;
             } else {
                 ctx.status = 401;
                 ctx.body = {

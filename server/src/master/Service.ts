@@ -112,10 +112,9 @@ export default class Service<T> {
         return ids;
     }
     // 获取前端参数列表
-    public getParameters(module: any, ctx: any): any {
+    public getParameters(ctx: any, model: any): any {
         const result = {} as any;
-        if (module.schema && module.schema.obj) {
-            const model = module.schema.obj;
+        if (model) {
             const params = ctx.request.body;
             global._.each(model, (v: any, k: string) => {
                 // module里面有request里面没有的情况下
@@ -170,6 +169,15 @@ export default class Service<T> {
                 if (!/^1[34578]\d{9}$/.test(val)) {
                     console.log('手机号验证错误');
                     ctx.body = responseJSON(401, `VALIDATION_FAILED_MOBILE`);
+                    return false;
+                } else {
+                    return true;
+                }
+            case 'passWord':
+                // 验证手机号
+                if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/.test(val)) {
+                    console.log('密码输入错误');
+                    ctx.body = responseJSON(401, `VALIDATION_FAILED_PASSWORD`);
                     return false;
                 } else {
                     return true;

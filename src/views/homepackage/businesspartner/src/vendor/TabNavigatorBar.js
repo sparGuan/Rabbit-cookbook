@@ -38,11 +38,11 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 };
 // todo 将此函数放置redux全局调用
-
 class FullWidthTabs extends React.Component {
   state = {
     value: 0,
-    meishiType: []
+    meishiType: [],
+    data: []
   };
   handleChange = (event, value) => {
     this.setState({ value });
@@ -67,6 +67,15 @@ class FullWidthTabs extends React.Component {
   componentDidMount() {
     this.toQueryMeishiTypeData();
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data && nextProps.data.length > 0) {
+      this.setState({ data: nextProps.data})
+    }
+  }
+  getChooseType(item) {
+    this.setState({ choosedType: item._id})
+    return true
+  }
   render() {
     const { classes, theme, history } = this.props;
     return (      
@@ -90,10 +99,9 @@ class FullWidthTabs extends React.Component {
           </Tabs>
           {
             this.state.meishiType.map((item,index) => (
-              // 传入不用的路由，跳转后台获取所取数据
-              this.state.value === index && 
+              this.state.value === index &&
               <TabContainer key={index} className={classes.wrapContainer}> 
-                <AppFoldingCard history={history} type={item._id}/>
+                <AppFoldingCard history={history} type={item._id} data={this.state.data}/>
               </TabContainer>
             ))
           }

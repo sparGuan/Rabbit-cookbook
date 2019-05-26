@@ -5624,6 +5624,11 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typescript-collection-org@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/typescript-collection-org/-/typescript-collection-org-0.0.1.tgz#e9db7b193b46f168ee0eb4d66a1f9ee3d4c61f29"
+  integrity sha512-et6dTxR5M1rYX7NC5Mu4Q0po2sCAvJdXnT2XoUcVhQ9OcO6Pdf6LbErho+Hxmamz2UBPzNu04YmvzyKc9bUHvg==
+
 typescript-formatter@^7.2.2:
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/typescript-formatter/-/typescript-formatter-7.2.2.tgz#a147181839b7bb09c2377b072f20f6336547c00a"

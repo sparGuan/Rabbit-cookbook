@@ -22,7 +22,6 @@
 "prefer-const":true, 
 
 "member-access":true, 
-
 "member-ordering":[
       false,  {
 "order":[

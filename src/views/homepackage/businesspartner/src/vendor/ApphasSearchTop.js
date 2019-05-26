@@ -19,15 +19,14 @@ const styles = theme => ({
   grow: {
     flexGrow: 1,
   },
-  dense: {
-    marginTop: 19,
-  },
   textField: {
     marginLeft: theme.spacing.unit,    
     width: '90%',
-    transform: 'translateY(-5px)',
     marginTop:0,
-    marginBottom:0
+    marginBottom:0,
+    '& #standard-dense': {
+      width: 'calc(100% - 30px)'
+    }
   },
   MenuButtom: {
     marginRight:-16
@@ -50,11 +49,13 @@ const styles = theme => ({
       width: 'auto',
     },
   },
+  insert: {
+    width: 'calc(100% - 30px)'
+  },
   searchIcon: {
     width: theme.spacing.unit * 6,
     height: '100%',
     position: 'absolute',
-    pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -89,7 +90,47 @@ const styles = theme => ({
 class ApphasSearchTop extends React.Component {
   state = {
     showModal: false,
-    open: false
+    open: false,
+    name: '',
+    page: 1,
+    data: [],
+    choosedType: ''
+  };
+  // 实现搜索
+  searchFoods() {
+    if (this.state.name !== '') {
+      top.app.api.datavMeishiChina.querySearchDatavMeishichina({
+        data: {
+          name: this.state.name,
+          page: this.state.page
+        },
+        success: res => {
+          if (res.error_code === 0) {
+              // 替换数据
+              this.setState({ data: res.data})
+          }
+        }
+      })
+    }
+    if (this.state.data && this.state.data.length > 0 && this.state.name === '' && this.state.choosedType !== '') {
+      const data = {
+        type: this.state.choosedType,
+        page: 1
+      };
+      top.app.api.datavMeishiChina.queryDavavMeishiChinaList({
+        data,
+        success: res => {  
+          if (res.error_code === 0) {
+            this.setState({
+              tileData: res.data
+            })
+          }
+        }
+      });
+    }
+  }
+  handleChange = prop => event => {
+    this.setState({ [prop]: event.target.value });
   };
   render() {
     const { classes, goBack, history } = this.props;
@@ -104,22 +145,20 @@ class ApphasSearchTop extends React.Component {
                <TextField
                  id="standard-dense"
                  label="请输入搜索内容..."
-                 className={classNames(classes.textField, classes.dense)}
+                 className={classNames(classes.textField)}
                  margin="dense"
+                 onChange={this.handleChange('name')}
                />
-               <div className={classes.searchIcon}>
-                 <SearchIcon />
-               </div>
+                <IconButton className={classes.searchIcon} aria-label="Search" onClick={this.searchFoods.bind(this)}>
+                  <SearchIcon />
+                </IconButton>
               </div>
-              {/* <IconButton color="inherit" className={classes.MenuButtom} aria-label="Open drawer" >
-              <MoreIcon />
-              </IconButton>   */}
               <AppTopMenuList />
           </Toolbar>
 
           <Grid container spacing={24}>
               <Grid item xs={12}>
-                  <TabNavigatorBar history={history}/>
+                  <TabNavigatorBar history={history} data={this.state.data}/>
               </Grid>
           </Grid>
         </AppBar>

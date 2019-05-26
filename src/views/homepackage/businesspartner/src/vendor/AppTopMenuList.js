@@ -82,8 +82,8 @@ class AppTopMenuList extends React.Component {
           onClose={this.handleClose}
         >
           <MenuItem onClick={this.handleLog}>{this.state.detals}</MenuItem>
-          <MenuItem onClick={this.handleClose}>编辑菜单</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+          <MenuItem onClick={this.handleClose}>添加菜谱</MenuItem>
+          <MenuItem onClick={this.handleClose}>录制小视频</MenuItem>
         </Menu>
         {/*  弹窗登录  */}
         <AppLoginDialog open={this.state.open} handleCloseLoginWindow={this.handleCloseLoginWindow.bind(this)} setLogName={this.setLogName.bind(this)}/>

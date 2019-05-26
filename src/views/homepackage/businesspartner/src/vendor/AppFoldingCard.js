@@ -60,15 +60,11 @@ class AppFoldingCard extends React.Component {
       this.toQueryLileData(this.state.page)
     }
   }
-	// 传入产品ID获取跳转链接
-	// linkToDetail(productId) {
-	// 	// 先去get数据
-	// 	// 跳转到详情
-	// 	this.props.history.push({
-	// 		pathname: '/appDetilPage',
-	// 		state: { productId }
-	// 	});
-	// }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data && nextProps.data.length > 0) {
+      this.setState({ tileData: nextProps.data})
+    }
+  }
 	render() {
     const { classes, history } = this.props;
 		// 数据发生变化就可以render了

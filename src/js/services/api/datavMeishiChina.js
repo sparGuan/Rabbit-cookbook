@@ -31,6 +31,19 @@ define(() =>{
 					ajaxOptions
 				)
 			);
+    },
+    /**
+		 * @param {object} 美食搜索
+		 */
+		querySearchDatavMeishichina: ajaxOptions => {
+			return app.ajax(
+				window.app.mui.extend(
+					{
+						url: '/api/datav/querySearchDatavMeishichina'
+					},
+					ajaxOptions
+				)
+			);
 		}
 	};
 });

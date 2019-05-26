@@ -7,6 +7,6 @@ export default interface IController {
     // TODO: 查询中间表<die> 所有该用户今天操作过的动态的赞
     queryDieByTodayCount<M>(DieIdentity?: M, data?: {}): Promise<string[]>;
     // 获取前端参数
-    getParameters(ctx: any): any;
+    getParameters(ctx: any, model?: any): any;
     response(code: number, msg: string, data?: any): {code: string, msg: string, data?: any};
 }

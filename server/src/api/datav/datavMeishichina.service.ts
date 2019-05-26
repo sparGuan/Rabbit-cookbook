@@ -11,6 +11,7 @@ export declare interface IDatavMeishichinaService {
     hasDietTyerapy(keys: string[], val: string): boolean;
     queryDavavMeishiChinaListService(type: string, page: number): any;
     queryDatavMeishichinaTypeService(): any;
+    querySearchDatavMeishichinaService(name: string, page: number): Promise<IDatavMeishichina[]>;
 }
 export default class Datav_meishichinaService implements IDatavMeishichinaService {
     private datavListMeishichina: IDatavMeishichina[];
@@ -207,7 +208,7 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
                     this.datavListMeishichina = (await DatavMeishichina.find({
                         href: { $in: hrefs }
                     }).select('href')) as IDatavMeishichina[];
-                    const map_hrefs = global._.map(this.datavListMeishichina, 'href');
+                    const map_hrefs: any [] = global._.map(this.datavListMeishichina, 'href');
                     // 做个交集，重复剔除
                     const read_hrefs = [...new Set([...map_hrefs, ...hrefs])];
                     // 保存进数据库
@@ -258,5 +259,20 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
       this.datavListMeishichinaType = await DatavMeishichinaType.find({
       })
       return this.datavListMeishichinaType
+    }
+    // 搜索美食名称，正则搜索
+    public async querySearchDatavMeishichinaService(name: string, page: number): Promise<any> {
+      // 比如输入饺子
+      const Count = (page - 1) * 10;
+      this.datavListMeishichina = await DatavMeishichina.find({
+        name: {
+          $regex: name, $options: 'i'
+        }
+      })
+      .sort({ id: -1 })
+      .limit(10)
+      .skip(Count)
+      .exec()
+      return this.datavListMeishichina
     }
 }

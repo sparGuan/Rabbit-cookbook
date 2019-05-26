@@ -165,12 +165,10 @@ class AppLoginDialog extends React.Component {
   // 登录
   sumbit(e) {
     if (!this.state.Mobile) {
-      this.state.focusName = 'Mobile'
       top.app.mui.toast('请输入手机号登录')
       return;
     }
     if (!this.state.passWord) {
-      this.state.focusName = 'passWord'
       top.app.mui.toast('请输入密码')
       return;
     }
@@ -185,6 +183,8 @@ class AppLoginDialog extends React.Component {
       success: res => {
         if (res.error_code === 0) {
           top.app.vueApp.$socket.emit('isLogin', res.data);
+          this.props.handleCloseLoginWindow();
+          this.props.setLogName('登出');
         }
       },
       complete: () => {
@@ -215,13 +215,11 @@ class AppLoginDialog extends React.Component {
             passWord: forgetData.passWord
           },
           success: data => {
-            if (data.message === "success") {
+            if (res.error_code === 0) {
               top.app.mui.toast("修改密码成功!");
-              top.app.globalService.setUserInfo({
-                token: data.token,
-                Mobile: forgetData.Mobile,
-                expiredTime: data.expiredTime // 失效时间
-              });
+              top.app.vueApp.$socket.emit('isLogin', res.data);
+              this.props.handleCloseLoginWindow();
+              this.props.setLogName('登出');
             }
           },
           complete: () => {
@@ -261,7 +259,7 @@ class AppLoginDialog extends React.Component {
             if (res.error_code === 0) {
               // 关闭弹窗更改状态更改登录显示名称
               top.app.mui.toast('注册成功!');
-              top.app.vueApp.$socket.emit('isLogin', res.UserModel);
+              top.app.vueApp.$socket.emit('isLogin', res.data);
               this.props.handleCloseLoginWindow();
               this.props.setLogName('登出');
             }
