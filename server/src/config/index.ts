@@ -1,6 +1,6 @@
 export const port = process.env.PORT || 3011;
-export const domain = 'www.jingz100.com' // 'https//www.jingz100.com';
-export const connexionString = 'mongodb://193.112.125.250:27017/BASE_Meerkat';
+export const domain = '127.0.0.1' // 'https//www.jingz100.com';
+export const connexionString = 'mongodb://localhost:27017/BASE_Meerkat';
 export const baseApi = '/api';
 export const secret = 'jwt_secret';
 export const webServerDoMain = 'localhost';

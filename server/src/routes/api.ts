@@ -4,7 +4,7 @@ import Koa = require('koa');
 const path = require('path');
 const resolve = (dir: string) => path.join(__dirname, '..', dir);
 // 这里不再引用路由Indexjs，而是生成对应的Indexjs
-export default (app: any, Router: Router): void => {
+export default async (app: any, Router: Router): Promise<any> => {
     routesLoader(resolve('/api')).then((routes: any) => {
         routes.forEach((route: any) => {
             // 调用route的方法

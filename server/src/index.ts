@@ -17,7 +17,7 @@ import IO = require('koa-socket');
 const flash = require('koa-flash2'); // flash中间件，用来显示消息通知
 const xerror = require('koa-xerror');
 const cookieParser = require('cookie-parser');
-import { safeifymeishichina } from './utils/safeifyToMeishichina';
+import { scheduleObjectLiteralSyntax } from './utils/safeifyToMeishichina';
 const child_process = require("child_process"); // 开启子进程
 // const num_processes = require('os').cpus().length;
 const num_processes = 2
@@ -53,75 +53,73 @@ mongoosePaginate.paginate.options = {
 
 (async () => {
     try {
-        await app
-            .use(
-                cors({
-                    origin: (ctx: Koa.Context) => {
-                        if (ctx.url === '/test') {
-                            return '*'; // 允许来自所有域名请求
-                        }
-                        return '*'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
-                    },
-                    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-                    maxAge: 5,
-                    credentials: true,
-                    allowMethods: ['GET', 'POST', 'DELETE'],
-                    allowHeaders: [
-                        'Content-Type',
-                        'Authorization',
-                        'Accept',
-                        'X-Requested-With'
-                    ]
+        app
+        .use(cors({
+          origin: (ctx: Koa.Context) => {
+            if (ctx.url === '/test') {
+              return '*'; // 允许来自所有域名请求
+            }
+            return '*'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
+          },
+          exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+          maxAge: 5,
+          credentials: true,
+          allowMethods: ['GET', 'POST', 'DELETE'],
+          allowHeaders: [
+            'Content-Type',
+            'Authorization',
+            'Accept',
+            'X-Requested-With'
+          ]
+        }))
+        .use(logRecord(app, {
+          logdir: path.join(__dirname, 'logs')
+        }))
+        .use(helmet())
+        .use(parser({}))
+        .use(nunjucks({
+          ext: 'njk',
+          path: path.join(__dirname, './views'),
+          nunjucksConfig: {
+            trimBlocks: true
+          }
+        })).
+        use(xerror())
+        .use(async (ctx: any, next: any) => {
+          try {
+            await next();
+            const status = ctx.status || 404;
+            if (status === 404) {
+              ctx.throw(404);
+            }
+          }
+          catch (error) {
+            ctx.status = error.status || 500;
+            if (ctx.status === 404) {
+              await ctx.render('pc/dist/error/404', {
+                Title: '404',
+                data: JSON.stringify({
+                  Tips: 'error',
+                  Content: '无法找到页面,<a href=\\"/\\">返回</a>',
                 })
-            )
-            .use(logRecord(app, {
-                logdir: path.join(__dirname, 'logs')
-            }))
-            .use(helmet())
-            .use(parser({}))
-            .use(
-                nunjucks({
-                    ext: 'njk',
-                    path: path.join(__dirname, './views'),
-                    nunjucksConfig: {
-                        trimBlocks: true
-                    }
+              });
+            }
+            else {
+              await ctx.render('pc/dist/error/500', {
+                Title: '500',
+                data: JSON.stringify({
+                  Tips: 'error',
+                  Content: '系统错误,<a href=\\"/\\">返回</a>',
                 })
-            ).
-            use(xerror())
-            .use(async (ctx: any, next: any) => {
-                try {
-                    await next();
-                    const status = ctx.status || 404;
-                    if (status === 404) {
-                        ctx.throw(404);
-                    }
-                } catch (error) {
-                    ctx.status = error.status || 500;
-                    if (ctx.status === 404) {
-                        await ctx.render('pc/dist/error/404', {
-                            Title: '404',
-                            data: JSON.stringify({
-                                Tips: 'error',
-                                Content: '无法找到页面,<a href=\\"/\\">返回</a>',
-                            }),
-                        });
-                    } else {
-                        await ctx.render('pc/dist/error/500', {
-                            Title: '500',
-                            data: JSON.stringify({
-                                Tips: 'error',
-                                Content: '系统错误,<a href=\\"/\\">返回</a>',
-                            }),
-                        });
-                    }
-                    ctx.app.emit('error', error, ctx);
-                }
-            })
-            // 正常请求的日志
-            .use(koaLogger(logger.success))
-            // 部署node的模板引擎
-            .use(routes(Router));
+              });
+            }
+            ctx.app.emit('error', error, ctx);
+          }
+        })
+        // 正常请求的日志
+        .use(koaLogger(logger.success))
+        // 部署node的模板引擎
+        .use(routes(Router));
         await api(app, router); // 部署所有的api
         // app.use( function* (next) {
         //     // 任何能够拿到context的地方都可以使用
@@ -134,23 +132,14 @@ mongoosePaginate.paginate.options = {
         io.use(catchError);
         await mongoConnection(); // 最后连接数据库
         // 先删除socket表里面所有数据,每当服务器重启的时候
-        await Socket.remove({});
+        Socket.remove({});
         // 执行爬虫脚本沙箱
-        let safeVm: any = null;
-        const childProcessorExec = child_process.exec("ts-node ./src/utils/safeifyToMeishichina.ts", async function(error: Error, stdout: any, stderr: any) {
+        child_process.exec("ts-node ./src/utils/safeifyToMeishichina.ts", async (error: Error, stdout: any, stderr: any) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
             }
-            setInterval(async () => {
-                safeVm = await safeifymeishichina();
-            }, 86400000) // 一天执行一次
-        });
-        childProcessorExec.on("exit", function(code: string) {
-            console.log("Child process =======> safeifyToMeishichina exited, code: " + code);
-            if (safeVm) {
-                safeVm.destroy();
-            }
+           scheduleObjectLiteralSyntax();
         });
     } catch (e) {
         console.error('ERROR:', e);
@@ -204,7 +193,7 @@ mongoosePaginate.paginate.options = {
                     }),
                 finally: () => {
                     console.log('Server gracefulls shutted down.....');
-                },
+                }
             });
             //  子进程
         } else if (cluster.isWorker) {
@@ -236,7 +225,7 @@ mongoosePaginate.paginate.options = {
                     }),
                 finally: () => {
                     console.log('Server gracefulls shutted down.....');
-                },
+                }
             });
             // 6379是redis缓存数据库的接口
             app.io.socket._adapter(sio_redis({ host: webServerDoMain, port: redis_port }));
@@ -271,10 +260,10 @@ mongoosePaginate.paginate.options = {
             });
             app.io.on('disconnect', async (ctx: any) => {
                 console.log(`  >>>> disconnect ${ctx.socket.id}`);
-                await Socket.remove({
+                Socket.remove({
                     id: ctx.socket.id
                 });
-                await User.findOneAndUpdate(
+                User.findOneAndUpdate(
                     { sockId: ctx.socket.id },
                     { $set: { sockId: '' } }
                 );

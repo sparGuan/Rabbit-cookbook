@@ -12,6 +12,8 @@ import classNames from 'classnames';
 import TabNavigatorBar from './TabNavigatorBar';
 import Grid from '@material-ui/core/Grid';
 import AppTopMenuList from './AppTopMenuList'
+import ControlPointDuplicate from '@material-ui/icons/ControlPointDuplicate'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -33,7 +35,8 @@ const styles = theme => ({
   },
   arrowButtom: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 5,
+    paddingRight: 0
   },
   search: {
     position: 'relative',
@@ -94,10 +97,12 @@ class ApphasSearchTop extends React.Component {
     name: '',
     page: 1,
     data: [],
-    choosedType: ''
+    value: 0
   };
   // 实现搜索
   searchFoods() {
+    // 父组件将子组件的value设置为 -1
+    this.handleChange
     if (this.state.name !== '') {
       top.app.api.datavMeishiChina.querySearchDatavMeishichina({
         data: {
@@ -112,25 +117,12 @@ class ApphasSearchTop extends React.Component {
         }
       })
     }
-    if (this.state.data && this.state.data.length > 0 && this.state.name === '' && this.state.choosedType !== '') {
-      const data = {
-        type: this.state.choosedType,
-        page: 1
-      };
-      top.app.api.datavMeishiChina.queryDavavMeishiChinaList({
-        data,
-        success: res => {  
-          if (res.error_code === 0) {
-            this.setState({
-              tileData: res.data
-            })
-          }
-        }
-      });
-    }
   }
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
+  };
+  handleChangeIndex = (event, value) => {
+    this.setState({ value });
   };
   render() {
     const { classes, goBack, history } = this.props;
@@ -138,8 +130,8 @@ class ApphasSearchTop extends React.Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer" onClick={history.goBack}>
-                <ArrowBackIcon />
+            <IconButton className={classes.arrowButtom} color="inherit" aria-label="Open drawer" >
+                <ControlPointDuplicate fontSize="large" style={{paddingRight: 5}} color="inherit"/>
             </IconButton> 
             <div className={classes.search} >
                <TextField
@@ -158,7 +150,7 @@ class ApphasSearchTop extends React.Component {
 
           <Grid container spacing={24}>
               <Grid item xs={12}>
-                  <TabNavigatorBar history={history} data={this.state.data}/>
+                  <TabNavigatorBar history={history} data={this.state.data} value={this.state.value} handleChangeIndex={this.handleChangeIndex.bind(this)} />
               </Grid>
           </Grid>
         </AppBar>

@@ -1,0 +1,60 @@
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Thu Jan 30 2020 11:31:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 45ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Thu Jan 30 2020 11:31:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 1745ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Thu Jan 30 2020 11:31:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Thu Jan 30 2020 11:31:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Thu Jan 30 2020 11:31:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 73ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Thu Jan 30 2020 11:32:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 135ms  401
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Thu Jan 30 2020 11:32:13 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Thu Jan 30 2020 11:32:13 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 735ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Thu Jan 30 2020 11:32:13 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 821ms  200
+
+[39m
+[37mStarted POST   /api/music/searchMusic for ::1at Thu Jan 30 2020 11:32:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 276ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Thu Jan 30 2020 11:33:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 26ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Thu Jan 30 2020 11:33:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 102ms  200
+
+[39m

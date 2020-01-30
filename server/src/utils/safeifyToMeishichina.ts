@@ -1,9 +1,9 @@
 // TODO: 执行沙箱代码，执行爬虫
 import { Safeify } from "safeify";
-
+const schedule = require('node-schedule');
 import DatavMeishichinaService, { IDatavMeishichinaService } from '../api/datav/datavMeishichina.service';
-export const safeifymeishichina = async () =>{
-  console.log(1423424242141421341344214)
+
+const safeifymeishichina = async () =>{
   // 创建 safeify 实例
   const safeVm = new Safeify({
     timeout: 3000,
@@ -24,3 +24,18 @@ export const safeifymeishichina = async () =>{
   // safeVm.destroy();
   return safeVm
 };
+
+export const scheduleObjectLiteralSyntax = () => {
+    //dayOfWeek
+    //month
+    //dayOfMonth
+    //hour
+    //minute
+    //second
+      // 每周一的下午16：11分触发，其它组合可以根据我代码中的注释参数名自由组合
+      // 每天的凌晨1点1分30秒触发 ：'30 1 1 * * *'
+    schedule.scheduleJob('30 1 1 * * *', () => {
+        safeifymeishichina()
+    });
+   
+}

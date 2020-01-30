@@ -40,15 +40,9 @@ TabContainer.propTypes = {
 // todo 将此函数放置redux全局调用
 class FullWidthTabs extends React.Component {
   state = {
-    value: 0,
+    // value: 0,
     meishiType: [],
     data: []
-  };
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-  handleChangeIndex = index => {
-    this.setState({ value: index });
   };
    // 获取datav数据
    toQueryMeishiTypeData() {
@@ -81,8 +75,8 @@ class FullWidthTabs extends React.Component {
     return (      
       <div className={classes.root}>
           <Tabs
-             value={this.state.value}
-             onChange={this.handleChange}
+             value={this.props.value}
+             onChange={this.props.handleChangeIndex}
              indicatorColor="secondary"
              textColor="secondary"
              variant="fullWidth"
@@ -99,7 +93,7 @@ class FullWidthTabs extends React.Component {
           </Tabs>
           {
             this.state.meishiType.map((item,index) => (
-              this.state.value === index &&
+              this.props.value === index &&
               <TabContainer key={index} className={classes.wrapContainer}> 
                 <AppFoldingCard history={history} type={item._id} data={this.state.data}/>
               </TabContainer>

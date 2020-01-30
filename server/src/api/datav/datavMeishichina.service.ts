@@ -126,6 +126,7 @@ export default class Datav_meishichinaService implements IDatavMeishichinaServic
                     $('#J_list .detail a').each((key: number, item: any) => {
                         hrefs.push(item.attribs.href);
                     })
+                    console.log(hrefs)
                     // 去获取所有a标签的子页面
                     const child_crawler = new Crawler({
                         maxConnections: 10,
