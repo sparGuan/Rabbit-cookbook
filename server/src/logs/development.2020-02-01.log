@@ -1,0 +1,560 @@
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 14:22:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 48ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 14:22:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 4125ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 14:22:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 15:22:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19s  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 15:22:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 30ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:22:31 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 66ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 15:22:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 15:24:53 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 155ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 15:24:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 31ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:24:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 15:24:59 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 15:25:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 31ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 15:25:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 21ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:25:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sat Feb 01 2020 15:25:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 520ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 15:25:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 32ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sat Feb 01 2020 15:26:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sat Feb 01 2020 15:26:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 839ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sat Feb 01 2020 15:26:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 932ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 15:26:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:26:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sat Feb 01 2020 15:57:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 4ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sat Feb 01 2020 15:57:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 891ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sat Feb 01 2020 15:57:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 818ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 15:58:00 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:58:00 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:58:25 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 65ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:58:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 15:58:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 15:58:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 50ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 15:59:03 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 15:59:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 15:59:06 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 15:59:07 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 16:05:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 69ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:05:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 165ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:05:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 103ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:08:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 100ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:08:26 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 52ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:13:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 69ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 16:13:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 16:13:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 45ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:13:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:13:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:19:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 161ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:19:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 86ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:22:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 694ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:27:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15s  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:27:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15s  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:56:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 105ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:56:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 64ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/saveDynamic?_=1580547422216 for ::1at Sat Feb 01 2020 16:57:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580547422216"}[39m
+[37mCompleted in 163ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:57:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 16:59:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 95ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sat Feb 01 2020 16:59:24 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 85ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 17:01:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 27ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 17:01:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 95ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 17:01:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 18ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 17:01:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 17:47:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 191ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 17:49:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  500
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sat Feb 01 2020 17:54:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 130ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 17:54:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  500
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 17:54:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  500
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 17:57:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 96ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 17:57:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 98ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 17:59:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 115ms  500
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sat Feb 01 2020 18:00:07 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  401
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 18:02:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8264ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 18:02:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 18:02:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 75ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 18:04:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 190ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 18:04:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 89ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 18:04:31 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 42ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:04:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 54ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 18:17:13 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 92ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:17:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 119ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 18:33:15 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 109ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:33:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:33:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:33:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 116ms  500
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:34:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 18:34:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 75ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 18:34:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 18:34:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:34:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19ms  500
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:37:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 163ms  500
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:37:28 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 18:42:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 38ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 18:42:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 105ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 18:43:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 48ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:43:13 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 176ms  500
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:45:09 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 161ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 18:52:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12s  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 18:52:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 98ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 18:52:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 18:52:28 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:52:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 217ms  500
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 18:55:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 176ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 19:04:32 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9589ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sat Feb 01 2020 19:04:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 66ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 19:04:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sat Feb 01 2020 19:04:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 84ms  200
+
+[39m
+[37mStarted POST   /api/login/info for ::1at Sat Feb 01 2020 19:07:03 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 67ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 19:09:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 41ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 19:09:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sat Feb 01 2020 19:09:26 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 41ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sat Feb 01 2020 19:10:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sat Feb 01 2020 19:10:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sat Feb 01 2020 19:10:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sat Feb 01 2020 19:10:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sat Feb 01 2020 19:10:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 65ms  200
+
+[39m

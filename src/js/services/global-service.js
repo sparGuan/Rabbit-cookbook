@@ -71,16 +71,7 @@ export default {
 
 	//获取用户登录的Token信息
 	getLoginUserInfo() {	
-		const [_currentTime, _userInfo] = [
-			new Date().getTime(),
-			app.globalService.getSiteLocalStorage().userInfo || {}
-		]
-		if (_userInfo.expiredTime && _userInfo.expiredTime - _currentTime > 0) {
-			return _userInfo
-		} else {
-			app.globalService.setUserInfo({})
-			return {}
-		}
+		return app.globalService.getSiteLocalStorage().userInfo || {}
 	},
 
 	//退出登录
@@ -109,64 +100,54 @@ export default {
 		updatedAt,
 		Mobile, // 用户名或者邮箱
 		headImg,// 头像
-		expiredTime = -1 // 是否过期 -- 过期时间的意思是从数据库里面获取一个过期时间，如果有就获取，如果没有就生成一个，算是第一次登录
 	}) {
-		if (expiredTime > 0) {
-			// 如果登录没有过期
-			const _site_local_storage = app.globalService.getSiteLocalStorage()
-			if (
-				_site_local_storage.userInfo === null ||
-				typeof _site_local_storage.userInfo !== 'object'
-			) {
-				_site_local_storage.userInfo = {}
-			}
-			if (friends ) {
-				friends.forEach( item => {
-					if (typeof item === 'object') {
-						item.headImg = app.getResourceUrl(item.headImg)
-					}
-				})
-			}
-			if (requestList && requestList.length > 0) {
-				requestList.forEach(element => {
-					if (element.headImg) {
-						element.headImg = app.getResourceUrl(element.headImg )
-					} else {
-						element.headImg = require('@/imgs/userCenter/touxiangDefault.png')
-					}
-				});
-			}
-			expiredTime = new Date().getTime() + (expiredTime - 60) * 1000 // 重新设置一个登录过期时间
-			const userInfo = _site_local_storage.userInfo = Object.assign(_site_local_storage.userInfo, {
-				_id,
-				socketId,
-				nickName,
-				sex,
-				descPerson,
-				headBgImg: app.getResourceUrl(headBgImg),
-				openid,
-				friends,
-				requestList,
-				tenancyName,
-				token,
-				Mobile,
-				location,
-				updatedAt,
-				expiredTime,
-				headImg: app.getResourceUrl(headImg),
-				version: app.Config.innerVersion // 版本号
-			})
-			console.log(userInfo)
-			app.utils.localStorage(
-				'siteLocalStorage',
-				JSON.stringify(_site_local_storage)
-			)
-			return userInfo
-		} else {
-			// 如果登录过期了
-			//如果登录过期就清空缓存数据
-			app.utils.localStorage('siteLocalStorage', '{}')
-		}
+    const _site_local_storage = app.globalService.getSiteLocalStorage()
+    if (
+      _site_local_storage.userInfo === null ||
+      typeof _site_local_storage.userInfo !== 'object'
+    ) {
+      _site_local_storage.userInfo = {}
+    }
+    if (friends ) {
+      friends.forEach( item => {
+        if (typeof item === 'object') {
+          item.headImg = app.getResourceUrl(item.headImg)
+        }
+      })
+    }
+    if (requestList && requestList.length > 0) {
+      requestList.forEach(element => {
+        if (element.headImg) {
+          element.headImg = app.getResourceUrl(element.headImg )
+        } else {
+          element.headImg = require('@/imgs/userCenter/touxiangDefault.png')
+        }
+      });
+    }
+    const userInfo = _site_local_storage.userInfo = Object.assign(_site_local_storage.userInfo, {
+      _id,
+      socketId,
+      nickName,
+      sex,
+      descPerson,
+      headBgImg: app.getResourceUrl(headBgImg),
+      openid,
+      friends,
+      requestList,
+      tenancyName,
+      token,
+      Mobile,
+      location,
+      updatedAt,
+      headImg: app.getResourceUrl(headImg),
+      version: app.Config.innerVersion // 版本号
+    })
+    console.log(userInfo)
+    app.utils.localStorage(
+      'siteLocalStorage',
+      JSON.stringify(_site_local_storage)
+    )
+    return userInfo
 	},
 
 	//app更新升级 TODO: 需要根据实际的业务数据调整 by yujinjin

@@ -2,7 +2,7 @@ import DirExistUtils from '../../utils/DirExistUtils';
 import * as jwt from 'jsonwebtoken';
 import getDateAfter from '../../utils/getDateAfter';
 import User, { IUser } from '../../db/schema/user';
-import { qsms, statusCode } from '../../config/index';
+import { qsms, statusCode, secret } from '../../config/index';
 const bluebird = require('bluebird');
 const { isValid } = require('mongoose').Types.ObjectId;
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
@@ -66,20 +66,16 @@ export default class LoginService {
                 body.passWord = await bcrypt.hash$(body.openid, salt);
                 body.token = jwt.sign(
                     {
-                        data: body.openid, // 但三方登录使用openid作为token
-                        // 设置 token 过期时间
-                        exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+                        data: body.openid // 但三方登录使用openid作为token
                     },
-                    'secret'
+                    secret,
+                    { expiresIn: '7d' }
                 );
                 this.user = new User(body);
                 this.user = (await this.user.save()) as IUser;
                 console.log('保存成功')
                 console.log(`QQ登录成功！！`)
             } else {
-                this.expiredTime = Date.parse(
-                    getDateAfter('', statusCode.expiredTime, '/')
-                );
                 this.user = (await User.findByIdAndUpdate(
                     { _id: this.user._id },
                     {
@@ -87,14 +83,12 @@ export default class LoginService {
                             location: body.location.map((element: string) => {
                                 return Number(element);
                             }),
-                            expiredTime: this.expiredTime,
                             token: jwt.sign(
                                 {
-                                    data: body.openid,
-                                    // 设置 token 过期时间
-                                    exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+                                    data: body.openid
                                 },
-                                'secret'
+                                secret,
+                                { expiresIn: '7d' }
                             )
                         }
                     },
@@ -209,11 +203,10 @@ export default class LoginService {
         body.passWord = await bcrypt.hash$(body.passWord, salt);
         body.token = jwt.sign(
             {
-                data: body.Mobile,
-                // 设置 token 过期时间
-                exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+                data: body.Mobile
             },
-            'secret'
+            secret,
+            { expiresIn: '7d' }
         );
         this.user = new User(body) as IUser;
         const UserModel = await this.user.save();

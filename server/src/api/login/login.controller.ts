@@ -1,12 +1,13 @@
 import * as jwt from 'jsonwebtoken';
 import getDateAfter from '../../utils/getDateAfter';
 import User, { IUser } from '../../db/schema/user';
-import { qsms, statusCode } from '../../config/index';
+import { qsms, statusCode, secret } from '../../config/index';
 const bluebird = require('bluebird');
 const bcrypt = bluebird.promisifyAll(require('bcryptjs'), { suffix: '$' });
 import Qsms = require('qcloudsms_js');
 import LoginService from './login.service';
 import BASE_OPEN_SOURCE_API from '../../master/BASE_OPEN_SOURCE_API';
+import * as moment from 'moment'
 class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
     private qsms: any;
     private user: IUser;
@@ -56,12 +57,13 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
             this.user = (await User.findOne(
                 { Mobile: body.Mobile }
             )) as IUser;
+            console.log(this.user)
             if (!global._.isEmpty(this.user)) {
                 return ctx.body = this.response(-1, 'ACCOUNT_ALREADY_EXISTS');
             }
+            console.log(23413241234)
             const UserModel = await this.LoginService.registerService(body);
             if (UserModel) {
-                await LoginController.resetExpiredTime(UserModel.get('_id'));
                 return ctx.body = this.response(0, 'SUCCESS', UserModel);
             }
             return ctx.body = this.response(-1, 'MISS_RES_USERMODEL');
@@ -127,25 +129,6 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
             }
         };
     }
-    // 登录之后重设过期时间
-    // 類接口才可以使用靜態的？
-    public static async resetExpiredTime(_id: string) {
-        // 后台过期时间，如果存在就重设
-        // 不存在就默认是第一次登录（设置默认时间）
-        // 直接更新过期时间就行了！
-        const expiredTime: number = Date.parse(
-            getDateAfter('', statusCode.expiredTime, '/')
-        );
-        await User.update(
-            { _id },
-            {
-                $set: {
-                    expiredTime
-                }
-            }
-        );
-        return expiredTime;
-    }
     // 每次手机登录都生成token值
     public useMobileLogin() {
         return async (ctx: any, next: any) => {
@@ -160,11 +143,10 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
                             // 生成 token 返回给客户端
                             token: jwt.sign(
                                 {
-                                    data: body.Mobile,
-                                    // 设置 token 过期时间
-                                    exp: Math.floor(Date.now() / 1000) + 60 * 60 // 60 seconds * 60 minutes = 1 hour
+                                    data: body.Mobile
                                 },
-                                'secret'
+                                secret,
+                                { expiresIn: '7d' }
                             )
                         }
                     },
@@ -188,10 +170,7 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
             // 匹配密码是否相等
             // 使用中间件坐比较
             if (await bcrypt.compare(body.passWord, this.user.passWord)) {
-                let expiredTime = 0;
-                expiredTime = await LoginController.resetExpiredTime(this.user.get('_id')) // 设置过期时间
                 delete this.user.passWord;
-                this.user.expiredTime = expiredTime;
                 ctx.body = this.response(0, statusCode.success, this.user);
                 return;
             } else {
@@ -208,7 +187,7 @@ class LoginController extends BASE_OPEN_SOURCE_API<LoginService, IUser> {
         return async (ctx: any, next: any) => {
             const { token } = ctx.request.body;
             try {
-                const decoded: any = jwt.verify(token, 'secret');
+                const decoded: any = jwt.verify(token, secret);
                 // 过期
                 if (decoded.exp <= Date.now() / 1000) {
                     ctx.body = {

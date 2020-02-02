@@ -44,6 +44,7 @@ class DirExistUtils {
                     '../../',
                     `src/public/upload/${dirName}`
                 );
+                console.log(dir)
                 // 检查文件夹是否存在如果不存在则新建文件夹
                 this.checkDirExist(dir);
                 // 获取文件名称
@@ -51,13 +52,14 @@ class DirExistUtils {
                 const filePath = `${dir}/${fileName}`;
                 const uploadPath = `${dirName}/${fileName}`; // 反向代理服务器路径
                 // 里面有内容 读取流打开
-                const reader = await fs.createReadStream(file.path);
+                const reader = fs.createReadStream(file.path);
                 // filepath 目的地有了 等内容 写入流（先创建文件）
-                const writer = await fs.createWriteStream(filePath);
-                await reader.pipe(writer); // 将图片的内容pipe通过管道 放入创建的文件
+                const writer = fs.createWriteStream(filePath);
+                reader.pipe(writer); // 将图片的内容pipe通过管道 放入创建的文件
                 filePaths[key] = uploadPath
             }
         }
+        console.log(filePaths)
         return filePaths;
     }
 }

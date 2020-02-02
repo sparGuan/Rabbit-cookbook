@@ -73,7 +73,7 @@ const site = {
       successFunData: true, // 是否验证成功回调函数的数据
       showLoading: false // 是否显示加载
     }
-    let _options = app.mui.extend(true, {}, options, _default)
+    let _options = app.mui.extend(true, {},  _default, options)
     if (!_options.data) {
       _options.data = {}
     }
@@ -102,7 +102,7 @@ const site = {
     ) {
       _options.data = JSON.stringify(_options.data)
     } else {
-      delete _options.headers
+      _options.headers = {}
     }
     // if (_options.auth === true && !app.globalService.isLogin()) {
     // 	if (typeof _options.authFailCallbackFun === 'function') {
@@ -139,13 +139,18 @@ const site = {
       }
     }
     // 完成
-    _options.complete = (data, textStatus) => {
+    _options.complete = (xhr, textStatus) => {
       if (_options.showLoading === true) {
         _options.showLoading = false
       // router.app.$emit('vHideLoad')
       }
       if (typeof options.complete === 'function') {
-        options.complete(data, textStatus)
+        options.complete(xhr, textStatus)
+      }
+      const _token = xhr.getResponseHeader('Authorization')
+      if (_token) {
+        const userInfo = app.globalService.getLoginUserInfo()
+        app.globalService.setUserInfo({...userInfo,token: _token})
       }
     }
     _options.error = (xhr, error) => {
@@ -182,8 +187,6 @@ const site = {
           app.mui.toast(responseJSON.error.message)
         }
       } else {
-        alert(error)
-        alert(JSON.stringify(error))
         app.mui.toast(
           '<a href="javascript:void(0);" style="text-decoration: underline;color: #FFF;" onclick="window.location.reload();">亲~服务出错了。点此刷新重试</a>',
           { duration: 8000, type: 'div' }
@@ -192,19 +195,14 @@ const site = {
     }
     // 发送之前
     _options.beforeSend = xhr => {
-      // xhr.setRequestHeader("ClientVersion", app.Config.innerVersion)
       let _token = app.globalService.getLoginUserInfo().token
       if (_token) {
-        xhr.setRequestHeader('Authorization', _token)
+        xhr.setRequestHeader('Authorization', 'Bearer ' + _token)
       }
-      if (_options.showLoading === true) {
-        // router.app.$emit('vShowLoad')
-      }
-      if (typeof options.beforeSend === 'function') {
-        options.beforeSend(xhr)
-      }
+      // if (typeof options.beforeSend === 'function') {
+      //   options.beforeSend(xhr)
+      // }
     }
-    console.log(_options.data)
     app.mui.ajax(_url, _options)
   },
   // 获取图片地址，如果地址带有 http://那么就认为是绝对地址，然后直接返回

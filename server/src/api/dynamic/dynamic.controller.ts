@@ -39,14 +39,16 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                             throw err;
                         }
                         body = JSON.parse(fields.dynamic);
+                        console.log(files)
                         if (Object.keys(files).length > 0) {
                             const dynamicFilesArray: any = await DirExistUtils.uploadFileCommon(
                                 files
                             );
+                            console.log(dynamicFilesArray)
                             body.album = dynamicFilesArray; // 相册地址
                         }
-                        this.dynamic = await new Dynamic(body);
-                        this.dynamic = await this.dynamic.save();
+                        this.dynamic = new Dynamic(body);
+                        await this.dynamic.save();
                         reslove();
                     });
                 });

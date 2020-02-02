@@ -106,7 +106,7 @@ class AppDetailPage extends React.Component {
                     菜单引言
                   </Typography>
                   <Typography component="p">
-                    {location.state.source.introduction || '这是来自其他网站的分享，阅读完毕小手一个Start🌟吧'}
+                    {(location.state.source && location.state.source.introduction) || '这是来自其他网站的分享，阅读完毕小手一个Start🌟吧'}
                   </Typography>
                 </CardContent>
               </CardActionArea>

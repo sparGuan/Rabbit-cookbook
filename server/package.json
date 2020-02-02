@@ -13,6 +13,9 @@
     "koa",
     "mongodb"
   ],
+  "config": {
+    "unsafe-perm": true
+  },
   "author": "spar",
   "license": "ISC",
   "dependencies": {
@@ -41,6 +44,7 @@
     "koa-flash2": "0.0.2",
     "koa-generic-session": "^2.0.1",
     "koa-helmet": "^4.0.0",
+    "koa-jwt": "^3.6.0",
     "koa-logger-winston": "0.0.2",
     "koa-logs-full": "^0.0.8",
     "koa-nunjucks-2": "^3.0.2",

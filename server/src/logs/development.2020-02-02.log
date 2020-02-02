@@ -1,0 +1,2525 @@
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 11:54:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 41ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 11:54:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 195ms  200
+
+[39m
+[37mStarted POST   /api/login/msgValid for ::1at Sun Feb 02 2020 11:54:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 41ms  200
+
+[39m
+[37mStarted POST   /api/login/register for ::1at Sun Feb 02 2020 11:54:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 68ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 11:56:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 26ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 11:56:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 63ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 11:57:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 11:57:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 45ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 11:57:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 23ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 11:57:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 53ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 11:57:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 35ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 11:57:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 48ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 11:58:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 18ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:58:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 76ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 11:58:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:58:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:58:50 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 119ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 11:58:50 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 324ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:58:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 304ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:58:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 11:58:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 357ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:58:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 11:59:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 293ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 544ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:08 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 34ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 11:59:08 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:08 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 472ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 11:59:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 11:59:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 48ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:15 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 11:59:15 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:16 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 11:59:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 11:59:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 11:59:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 11:59:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 11:59:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:00:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:00:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 83ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:01:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 21ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:01:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 47ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 12:01:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:02:26 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 27ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:02:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 105ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:02:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 28ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:02:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 158ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:04:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 40ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:04:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:05:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 36ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:05:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 48ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 12:05:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:05:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:05:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:05:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:06:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:06:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:06:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:07:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 28ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:07:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 35ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 12:07:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:07:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 29ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:07:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 12:07:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:08:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:08:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 46ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 12:08:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 21ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:09:32 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:09:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 46ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 12:09:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:10:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 21ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:10:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 52ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:10:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:10:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:11:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 34ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:11:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 143ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:11:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 26ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:11:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 12:12:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:12:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:12:15 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:12:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 648ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:13:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 18ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 563ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:13:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 86ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 57ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 508ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:13:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 89ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 134ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 539ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:13:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 21ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:13:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 460ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:14:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 20ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:14:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:14:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 477ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:14:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:14:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:14:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 360ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:15:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:15:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 51ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:15:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 353ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:17:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:17:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:17:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 374ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:17:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:17:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 38ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:17:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 455ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:17:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:17:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 175ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:17:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 646ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:19:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:19:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 799ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:19:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 1125ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:19:31 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:19:32 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:19:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:19:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 50ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:19:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 572ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:19:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:19:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:19:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 364ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:21:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 4ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:21:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:21:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 446ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:22:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:22:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 818ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:22:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:22:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 4ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:22:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 34ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:22:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 644ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:22:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 4ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:22:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 23ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:22:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 347ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:23:40 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:23:40 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:23:40 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:24:09 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 117ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:09 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:08 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 455ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:24:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 75ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 68ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 586ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:24:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 466ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:24:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:24:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 397ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:25:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:25:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 546ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:25:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 716ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:25:26 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 345ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:25:26 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 877ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:25:27 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 494ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:26:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 733ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 213ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:26:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 102ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 1411ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:26:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:27:25 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 563ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:27:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:28:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:28:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:30:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:30:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:31:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:31:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:31:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 605ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:31:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 963ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:31:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 4ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:31:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:31:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 320ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:32:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 4ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:32:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:32:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 286ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:32:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:32:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 577ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:34:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 279ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 791ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:34:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 39ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 629ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:34:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 413ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:34:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:34:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 482ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:35:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:35:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:35:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 516ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:35:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:35:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 90ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:35:50 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 601ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:35:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 88ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:35:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:35:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 446ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:36:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:36:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 52ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:36:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 398ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:38:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:38:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 463ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:38:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 78ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:38:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 1003ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:38:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 1469ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:38:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 147ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:38:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 623ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:38:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:38:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 412ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:38:53 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:38:53 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 393ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:39:09 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:39:09 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 432ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:39:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:39:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 626ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:39:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 730ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:40:06 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:40:06 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 328ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:40:06 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 556ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:40:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:40:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 48ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 12:40:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:40:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 473ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 12:40:14 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 769ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 12:40:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 12:42:29 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 220ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 12:42:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 12:42:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:05:15 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 90ms  401
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:05:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 26ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:05:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 75ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:05:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 221ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:05:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:05:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 114ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:05:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:05:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 52ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 13:05:53 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 59ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:06:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 41ms  401
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:06:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 632ms  401
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:06:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 578ms  401
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:09:07 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 57ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:09:07 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 94ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:09:16 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:09:16 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 626ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:09:16 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 541ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:09:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:09:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 69ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 13:09:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:19:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 91ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:19:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 118ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:20:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:20:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 607ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:20:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 710ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:24:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 43ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:24:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 932ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:24:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 135ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:24:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 913ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:24:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 41ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:25:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 37ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:25:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 587ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:25:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 548ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:29:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 99ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:29:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:30:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:30:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 678ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:30:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 596ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:30:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:30:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 603ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:30:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 1348ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:31:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:31:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 375ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:31:22 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 594ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:31:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 385ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:31:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 646ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:31:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 666ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:32:03 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 30ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 592ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:03 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 598ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:32:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 12ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 398ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 689ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:32:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 233ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:43 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 575ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 536ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:32:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 435ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:32:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 515ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:34:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:34:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 517ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:34:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 722ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:34:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 139ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:34:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 737ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:34:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 912ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:35:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 86ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 659ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 796ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:35:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 451ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 594ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:35:31 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:31 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 592ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:31 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 1001ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:35:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 109ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 466ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 489ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:35:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 481ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 589ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:35:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 88ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 521ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:53 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 573ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:35:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 406ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:35:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 638ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:36:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:36:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 373ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:36:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 657ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:36:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:36:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 458ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:36:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 696ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:36:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:36:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 442ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:36:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 605ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:37:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 27ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:37:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 639ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:37:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 744ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:37:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:37:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 513ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:37:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 622ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:38:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:38:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 398ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:38:41 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 643ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:38:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:38:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 477ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:38:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 755ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:39:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:39:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 539ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:39:34 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 605ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:39:40 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:39:40 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 404ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:39:40 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 607ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:39:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 107ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:39:46 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 436ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:39:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 382ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:52:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 99ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:52:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 58ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:52:53 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 31ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:52:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 70ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:53:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 67ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:53:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 36ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:53:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 136ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:53:32 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:53:32 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 86ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 13:53:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 50ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:53:50 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:53:50 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 673ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:53:50 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 632ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:54:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:54:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 421ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:54:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 122ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:55:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 8ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:55:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:55:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 13:55:24 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 13:55:24 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 53ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 13:55:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 13:55:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 20ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:55:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 559ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 13:55:56 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 547ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:00:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:00:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 6ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:00:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:01:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 26ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:01:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 52ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 14:01:13 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:01:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 38ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:01:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 674ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:01:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 654ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:01:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:01:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 431ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:01:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 441ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:04:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:04:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 5ms  500
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:04:57 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:05:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 23ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:05:02 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 14:05:09 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:05:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:05:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 647ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:05:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 750ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:07:36 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 33ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:07:37 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 61ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:07:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 30ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:07:52 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 34ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:08:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 30ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:08:54 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 14:09:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:09:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:09:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 386ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:09:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 590ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:12:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 7ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:12:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 340ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:12:42 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 541ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:13:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 456ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:11 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 730ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:13:16 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 10ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:16 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 438ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 657ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:13:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 14ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 345ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 676ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:13:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 471ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 570ms  500
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:13:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 11ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 359ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:13:51 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 762ms  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:13:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 30ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:13:55 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/login/useMobileLogin for ::1at Sun Feb 02 2020 14:14:03 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:14:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 32ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:14:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 350ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:14:04 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 757ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:18:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 165ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:18:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:18:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 757ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:18:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 696ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:19:06 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:19:07 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 65ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:26:13 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 23ms  200
+
+[39m
+[37mStarted POST   /api/dynamic/queryUserAndFriendsDynamic for ::1at Sun Feb 02 2020 14:27:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 19ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580624897305 for ::1at Sun Feb 02 2020 14:28:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580624897305"}[39m
+[31m  Error: invalid JSON, only supports object and array
+      at parse (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:55:13)
+      at AsyncFunction.module.exports [as json] (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:41:20)
+      at processTicksAndRejections (internal/process/next_tick.js:81:5)
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:32:06 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:32:08 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 26ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:32:09 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:32:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 21ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580625145507 for ::1at Sun Feb 02 2020 14:32:25 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580625145507"}[39m
+[31m  Error: invalid JSON, only supports object and array
+      at parse (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:55:13)
+      at AsyncFunction.module.exports [as json] (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:41:20)
+      at processTicksAndRejections (internal/process/next_tick.js:81:5)
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580626330731 for ::1at Sun Feb 02 2020 14:52:10 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580626330731"}[39m
+[31m  Error: invalid JSON, only supports object and array
+      at parse (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:55:13)
+      at AsyncFunction.module.exports [as json] (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:41:20)
+      at processTicksAndRejections (internal/process/next_tick.js:81:5)
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:52:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:52:20 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 29ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:52:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 56ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 14:52:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:52:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 701ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 14:52:21 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 632ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:52:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 36ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580626353228 for ::1at Sun Feb 02 2020 14:52:33 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580626353228"}[39m
+[37mCompleted in 20s  500
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:53:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 34ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:53:48 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 113ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:53:53 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 42ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580626445062 for ::1at Sun Feb 02 2020 14:54:05 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580626445062"}[39m
+[31m  PayloadTooLargeError: request entity too large
+      at readStream (/Users/mac/Desktop/jingz/server/node_modules/raw-body/index.js:155:17)
+      at executor (/Users/mac/Desktop/jingz/server/node_modules/raw-body/index.js:112:5)
+      at new Promise (<anonymous>)
+      at getRawBody (/Users/mac/Desktop/jingz/server/node_modules/raw-body/index.js:111:10)
+      at AsyncFunction.module.exports [as form] (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/form.js:40:21)
+      at parseBody (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/index.js:94:26)
+      at bodyParser (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/index.js:76:25)
+      at dispatch (/Users/mac/Desktop/jingz/server/node_modules/koa/node_modules/koa-compose/index.js:42:32)
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 14:58:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 60ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 14:58:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 14:59:01 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 15ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580626752974 for ::1at Sun Feb 02 2020 14:59:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580626752974"}[39m
+[31m  Error: invalid JSON, only supports object and array
+      at parse (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:55:13)
+      at AsyncFunction.module.exports [as json] (/Users/mac/Desktop/jingz/server/node_modules/koa-bodyparser/node_modules/co-body/lib/json.js:41:20)
+      at processTicksAndRejections (internal/process/next_tick.js:81:5)
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:00:23 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 13ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 15:00:25 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 54ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 15:00:26 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 66ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:00:30 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580626838714 for ::1at Sun Feb 02 2020 15:00:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580626838714"}[39m
+[37mCompleted in 12ms  500
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:04:28 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 20ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 15:04:39 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 24ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 15:04:40 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 48ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 15:04:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 15:04:59 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 62ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 15:05:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 17ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 15:05:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 527ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 15:05:12 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 610ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:05:16 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580627126303 for ::1at Sun Feb 02 2020 15:05:26 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580627126303"}[39m
+[37mCompleted in 229ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 15:07:18 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 27ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 15:07:19 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 43ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 15:07:29 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 22ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 15:07:29 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 614ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 15:07:29 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 695ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:07:35 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 16ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580627265297 for ::1at Sun Feb 02 2020 15:07:45 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580627265297"}[39m
+[37mCompleted in 21ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:10:24 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 25ms  200
+
+[39m
+[37mStarted POST   /api/login/updateUserInfo?_=1580627438597 for ::1at Sun Feb 02 2020 15:10:38 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{"_":"1580627438597"}[39m
+[37mCompleted in 42ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:10:50 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 39ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:11:06 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 20ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 15:12:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 30ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 15:12:44 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 69ms  200
+
+[39m
+[37mStarted POST   /api/footprint/queryFootPrintList for ::1at Sun Feb 02 2020 15:12:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 9ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 15:12:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 395ms  200
+
+[39m
+[37mStarted POST   /api/music/queryAllSongs for ::1at Sun Feb 02 2020 15:12:47 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 610ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:12:49 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 18ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 15:12:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 23ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 15:12:58 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m
+[37mStarted POST   /api/activity/queryUserActivityInfo for ::1at Sun Feb 02 2020 15:13:17 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 20ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDatavMeishichinaTypeList for ::1at Sun Feb 02 2020 15:13:28 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 55ms  200
+
+[39m
+[37mStarted POST   /api/datav/queryDavavMeishiChinaList for ::1at Sun Feb 02 2020 15:13:28 GMT+0800 (GMT+08:00)[39m
+[37m  [35mquery[37m:{}[39m
+[37mCompleted in 49ms  200
+
+[39m

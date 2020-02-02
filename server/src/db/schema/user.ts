@@ -25,7 +25,6 @@ export interface IUser extends mongoose.Document {
     updatedAt: Date; // 更新时间，作用于每次用户进入界面更新报废时长和更新当前位置
     loginTime: Date;
     logoutTime: Date;
-    expiredTime: number; // 报废时长
     descPerson: string; // 个人描述
     location: number[];
     socket: ISocket; // 用户自己的socket，判断是否在线 -->socket为空代表已经不在线了
@@ -90,7 +89,6 @@ const user_schema: mongoose.Schema = new mongoose.Schema({
     },
     loginTime: { type: Date, default: Date.now },
     logoutTime: { type: Date, default: '' },
-    expiredTime: Number,
 },
 {versionKey: false, timestamps: true});
 // 转化成普通 JavaScript 对象

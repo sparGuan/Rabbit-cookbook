@@ -5,12 +5,14 @@ import * as nunjucks from 'koa-nunjucks-2';
 import * as parser from 'koa-bodyparser';
 import * as Router from 'koa-router';
 import * as Sentry from '@sentry/node';
+import * as koaJwt from 'koa-jwt';
+import * as jwt from 'jsonwebtoken';
 import api from './routes/api';
 import mongoConnection from './db/connection';
 import routes from './routes/index';
 import Socket, { ISocket } from './db/schema/socket';
-import User from './db/schema/user';
-import { baseApi, limit, port, redis_db, redis_host, redis_port, webServerDoMain } from './config/index';
+import User, { IUser } from './db/schema/user';
+import { baseApi, limit, port, redis_db, redis_host, redis_port, webServerDoMain, secret } from './config/index';
 import mongoosePaginate = require('mongoose-paginate');
 import path = require('path');
 import IO = require('koa-socket');
@@ -20,7 +22,7 @@ const cookieParser = require('cookie-parser');
 import { scheduleObjectLiteralSyntax } from './utils/safeifyToMeishichina';
 const child_process = require("child_process"); // 开启子进程
 // const num_processes = require('os').cpus().length;
-const num_processes = 2
+const num_processes = 1
 const cluster = require('cluster'); // cluster是一个nodejs内置的模块，用于nodejs多核处理。cluster模块，可以帮助我们简化多进程并行化程序的开发难度，轻松构建一个用于负载均衡的集群。
 const net = require('net'); // net网络服务器
 const redis = require('redis'); // redis缓存
@@ -35,6 +37,7 @@ const catchError = require('./middlewares/catchErrors');
 const logger = require('./middlewares/logger');
 const enhanceContext = require('./middlewares/enhanceContext');
 const logRecord = require('koa-logs-full');
+const moment = require('moment');
 // 初始化应用
 global._ = require('lodash');
 const app = new Koa();
@@ -61,7 +64,7 @@ mongoosePaginate.paginate.options = {
             }
             return '*'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
           },
-          exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+          exposeHeaders: ['WWW-Authenticate', 'Server-Authorization', 'Authorization'],
           maxAge: 5,
           credentials: true,
           allowMethods: ['GET', 'POST', 'DELETE'],
@@ -100,7 +103,7 @@ mongoosePaginate.paginate.options = {
                 Title: '404',
                 data: JSON.stringify({
                   Tips: 'error',
-                  Content: '无法找到页面,<a href=\\"/\\">返回</a>',
+                  Content: '无法找到页面,<a href=\\"/\\">返回</a>'
                 })
               });
             }
@@ -109,7 +112,7 @@ mongoosePaginate.paginate.options = {
                 Title: '500',
                 data: JSON.stringify({
                   Tips: 'error',
-                  Content: '系统错误,<a href=\\"/\\">返回</a>',
+                  Content: '系统错误,<a href=\\"/\\">返回</a>'
                 })
               });
             }
@@ -119,7 +122,66 @@ mongoosePaginate.paginate.options = {
         // 正常请求的日志
         .use(koaLogger(logger.success))
         // 部署node的模板引擎
-        .use(routes(Router));
+        .use(routes(Router))
+        // 路由权限控制 除了path里的路径不需要验证token 其他都要
+        .use(
+          koaJwt({
+              secret
+          }).unless({
+              path: [/^\/api\/login\/*/, /^\/api\/datav\/queryDatavMeishichinaTypeList/, /^\/api\/datav\/queryDavavMeishiChinaList/]
+          })
+        )
+        .use(async (ctx, next) => {
+          if (ctx.header && ctx.header.authorization) {
+            const parts = ctx.header.authorization.split(' ');
+            if (parts.length === 2) {
+              // 取出token
+              const scheme = parts[0];
+              const token = parts[1];
+              if (/^Bearer$/i.test(scheme)) {
+                const decoded: any = jwt.verify(token, secret);
+                // updateUser
+                if (moment().subtract(7, 'days').unix() > decoded.exp ) {
+                  ctx.status = 401;
+                  ctx.body = {
+                    error_code: 1,
+                    error_msg: '登录已过期，请重新登录'
+                  }
+                }
+                const newToken = jwt.sign(
+                  {
+                      data: decoded
+                  },
+                  secret,
+                  { expiresIn: '7d' }
+                );
+                const user = await User.findOneAndUpdate(token, {
+                  token: newToken
+                }, {new: true})
+                if (!user) {
+                  ctx.status = 401;
+                  ctx.body = {
+                    error_code: 1,
+                    error_msg: 'Protected resource, use Authorization header to get access\n'
+                  }
+                }
+                ctx.user = user
+                ctx.res.setHeader('Authorization', newToken);
+                return next()
+              }
+            }
+          }
+          return next().catch(err => {
+            if (err.status === 401) {
+              ctx.status = 401;
+              ctx.body = {
+                error_code: 1,
+                error_msg: 'Protected resource, use Authorization header to get access\n'
+              }
+            } else {
+              throw err;
+            }});
+         })
         await api(app, router); // 部署所有的api
         // app.use( function* (next) {
         //     // 任何能够拿到context的地方都可以使用
@@ -260,10 +322,10 @@ mongoosePaginate.paginate.options = {
             });
             app.io.on('disconnect', async (ctx: any) => {
                 console.log(`  >>>> disconnect ${ctx.socket.id}`);
-                Socket.remove({
+                await Socket.remove({
                     id: ctx.socket.id
                 });
-                User.findOneAndUpdate(
+                await User.findOneAndUpdate(
                     { sockId: ctx.socket.id },
                     { $set: { sockId: '' } }
                 );

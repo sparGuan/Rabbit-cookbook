@@ -183,6 +183,7 @@ class AppLoginDialog extends React.Component {
       success: res => {
         if (res.error_code === 0) {
           top.app.vueApp.$socket.emit('isLogin', res.data);
+          top.app.globalService.setUserInfo(res.data)
           this.props.handleCloseLoginWindow();
           this.props.setLogName('登出');
         }
