@@ -197,7 +197,7 @@ export default {
         indicators: false // 是否显示滚动条
       });
       mui.plusReady(() => {
-          plus.share.getServices((s) => {
+          plus && plus.share.getServices((s) => {
             console.log('进入分享服务。。。。')
             if (s && s.length > 0) {
               for (var i = 0; i < s.length; i++) {
@@ -261,7 +261,7 @@ export default {
       app.api.userDynamic.updateDynamicsZan({
         data,
         success: res => {
-          if (res.message === 'success') {
+          if (res.error_code === 0) {
             // 把更新好友关系的当前用户重新设置到缓存里去
             if (dynamic.meta.totalPraise) {
               ++dynamic.meta.totalPraise
@@ -273,6 +273,8 @@ export default {
             setTimeout( () => {
               this.showAdditive = false
             },500)
+          } else {
+            app.mui.toast(res.error_msg)
           }
         }
       });
@@ -294,7 +296,8 @@ export default {
 				}, {
 					title: "分享到QQ"
         }];
-        plus.nativeUI.actionSheet({
+        mui.plusReady(() => {
+          plus && plus.nativeUI.actionSheet({
           cancel: "取消",
           buttons: bts
         }, (e) => {
@@ -313,6 +316,7 @@ export default {
             }
           }
       });
+        })
     },
     shareMessage(share, ex) {
       var msg = {
@@ -354,8 +358,8 @@ export default {
       app.api.userDynamic.queryUserAndFriendsDynamic({
         data,
         success: res => {          
-          if (res.message === 'success') {
-            this.listData = res.dynamicList.map(item => {
+          if (res.error_code === 0) {
+            this.listData = res.data.docs.map(item => {
               if (item.user && item.user.headImg) {
                 item.user.headImg = app.getResourceUrl(item.user.headImg);
               }
@@ -367,6 +371,7 @@ export default {
             });            
           } else {
             this.listData = []
+            app.mui.toast(res.error_msg)
           }
           this.optionChar.series[0].data[0].value[1] = this.zanMount
           this.myChart.setOption(this.optionChar)

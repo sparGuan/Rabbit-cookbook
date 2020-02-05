@@ -128,7 +128,7 @@ mongoosePaginate.paginate.options = {
           koaJwt({
               secret
           }).unless({
-              path: [/^\/api\/login\/*/, /^\/api\/datav\/queryDatavMeishichinaTypeList/, /^\/api\/datav\/queryDavavMeishiChinaList/]
+              path: [/^\/api\/login\/*/, /^\/api\/footprint\/queryFootPrintList/, /^\/api\/datav\/queryDatavMeishichinaTypeList/, /^\/api\/datav\/queryDavavMeishiChinaList/]
           })
         )
         .use(async (ctx, next) => {

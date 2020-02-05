@@ -17,7 +17,6 @@ export interface IDynSingleDie extends mongoose.Document {
     user: IUser;
     acceptUser: IUser;
     type: number;
-    create_at: Date;
 }
 const dynSingleDie_schema: mongoose.Schema = new mongoose.Schema({
     dynamic: {

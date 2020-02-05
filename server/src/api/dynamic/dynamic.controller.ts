@@ -10,7 +10,7 @@ import formidable = require('formidable');
 // this指向了BASE_OPEN_SOURCE_API，实验目的：this指向baseController
 class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
     private dynamic: IDynamic;
-    private dynamicList: IDynamic[];
+    private dynamicList: any;
     private user: IUser;
     private dynSingleDieList: IDynSingleDie[]; // 动态点赞操作
     private dynSingleDie: IDynSingleDie; // 动态点赞操作
@@ -129,7 +129,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                 // 将所有的好友的Id在动态集合中使用查询$in查找出来
                 // this.DynamicList = await Dynamic.find({ userId: body.userId });
                 const _id = body.userId;
-                this.user = (await User.findById(_id)) as IUser; // 查询一条用户对象信息
+                this.user = await User.findById(_id) as IUser; // 查询一条用户对象信息
                 // 在搜索所有的列表之前，先判断哪些是被该用户die过的
                 // 查询die表，type为0的且是该用户今天赞过的
                 // 查询die表，type为1的且是该用户今天分享过足迹的
@@ -141,15 +141,16 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                     const dynamicIdsByZuJi: any[] = await this.queryDieByTodayCount(DynSingleDie, Object.assign({ type: 1, searchAble: 'dynamic' }, body));
                     const friends: IUser[] = this.user.get('friends') as IUser[];
                     const userIds: string[] = [...friends, this.user].map(v => v._id);
-                    this.dynamicList = (await Dynamic.find({
+                    this.dynamicList = await Dynamic.paginate({
                         user: { $in: userIds }
-                    })
-                        .populate({ path: 'user', select: 'headImg nickName' })
-                        .sort({ updatedAt: -1 })
-                        .limit(10)
-                        .exec()) as IDynamic[];
-                    if (this.dynamicList.length > 0) {
-                        this.dynamicList.forEach((item: any) => {
+                    }, {
+                      populate: { path: 'user', select: 'headImg nickName' },
+                      sort: { updatedAt: -1 },
+                      limit:    10,
+                      offset:   0
+                    }) as any;
+                    if (this.dynamicList.docs.length > 0) {
+                        this.dynamicList.docs.forEach((item: any) => {
                             if (dynamicIdsByZan.indexOf(item._id.toString()) > -1) {
                                 item._doc.hasZan = true
                             }
@@ -162,6 +163,7 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                         message: statusCode.success,
                         dynamicList: this.dynamicList
                     };
+                    return ctx.body = this.response(0, statusCode.success, this.dynamicList)
                 } else {
                     ctx.body = {
                         message: statusCode.noOne
@@ -206,13 +208,9 @@ class DynamicController extends BASE_OPEN_SOURCE_API<DynamicService, IDynamic> {
                  */
                 const canZan = await this.genericSingleDie(Dynamic, DynSingleDie, body);
                 if (canZan) {
-                    ctx.body = {
-                        message: statusCode.success
-                    };
+                    return ctx.body = this.response(0, statusCode.success);
                 } else {
-                    ctx.body = {
-                        message: statusCode.error
-                    };
+                    return ctx.body = this.response(1, '您今天已经点过赞了!');
                 }
             }
         };

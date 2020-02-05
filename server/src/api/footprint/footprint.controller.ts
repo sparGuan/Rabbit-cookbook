@@ -51,17 +51,8 @@ class FootprintController extends BASE_OPEN_SOURCE_API<FootprintService, IFootpr
             const { body } = ctx.request;
             const footprintAllList = await this.FootprintService.queryFootPrintListService()
             // 最终将整个数组返回前端
-            if (footprintAllList.length > 0 && footprintAllList.noOne) {
-                ctx.body = {
-                    message: statusCode.success,
-                    footprintAllList
-                };
-            } else {
-                ctx.body = {
-                    message: statusCode.noOne
-                };
-            }
+            return ctx.body = this.response(0, 'SUCCESS', footprintAllList);
         };
     }
 }
-export default new FootprintController(Footprint); 
+export default new FootprintController(Footprint);

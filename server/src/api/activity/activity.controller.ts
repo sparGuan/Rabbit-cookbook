@@ -86,6 +86,7 @@ class ActivityController extends BASE_OPEN_SOURCE_API<ActivityService, IActivity
                 // 判断今天是否已经有赞
                 // 需求有一个发起请求的id
                 this.activitysByZan = await this.queryDieByTodayCount(DynSingleDie, Object.assign({ type: 0, searchAble: 'activity' }, body));
+                console.log(this.activitysByZan)
                 this.activitysByByZuJi = await this.queryDieByTodayCount(DynSingleDie, Object.assign({ type: 1, searchAble: 'activity' }, body));
                 this.activityList = await this.activityService.queryUserActivityInfoService(body, this.activitysByZan, this.activitysByByZuJi)
             }

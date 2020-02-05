@@ -125,7 +125,7 @@ const site = {
         // message有东西证明是成功
         // error有东西证明是失败
         // 啥都没有返回证明是非法入侵
-        if (data.message || data.error_code === 0) {
+        if (data.message || data.error_code === 0 || data.error_code === 1) {
           if (typeof options.success === 'function') {
             options.success(_data)
           }

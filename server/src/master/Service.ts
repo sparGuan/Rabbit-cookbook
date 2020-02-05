@@ -15,7 +15,7 @@ export default class Service<T> {
 	 */
     public async genericSingleDieService(Identity: any, Child: any, data: any): Promise<boolean> {
         try {
-            const today: string = moment().format('L') as string;
+            const today: string = moment(new Date()).startOf('day').format() as string;
             const acceptUser = (data.acceptUser = mongoose.Types.ObjectId(data.acceptUserId));
             const user = (data.user = mongoose.Types.ObjectId(data.userId));
             // TODO: 此处要判断是动态业务处理还是活动业务处理
@@ -24,8 +24,8 @@ export default class Service<T> {
             const condition: any = {
                 acceptUser,
                 user,
-                create_at: { $gte: today },
-                type: Number(data.type),
+                createdAt: { $gte: today },
+                type: Number(data.type)
             };
             if (!global._.isEmpty(data.dynamicId)) {
                 condition.dynamic = mongoose.Types.ObjectId(data.dynamicId);
@@ -55,8 +55,8 @@ export default class Service<T> {
                             await rootTable.update(
                                 {
                                     $inc: {
-                                        'meta.totalPraise': 1,
-                                    },
+                                        'meta.totalPraise': 1
+                                    }
                                 },
                                 { new: true }
                             );
@@ -67,8 +67,8 @@ export default class Service<T> {
                             await rootTable.update(
                                 {
                                     $inc: {
-                                        'meta.totalFootprint': 1,
-                                    },
+                                        'meta.totalFootprint': 1
+                                    }
                                 },
                                 { new: true }
                             );
@@ -94,12 +94,13 @@ export default class Service<T> {
     public async queryDieByTodayCount(DieIdentity: any, data: any): Promise<string[]> {
         const ids: string[] = [];
         const acceptUser = mongoose.Types.ObjectId(data.acceptUserId);
-        const today: string = moment().format('L') as string;
-        this.MirrorList = (await DieIdentity.find({
-            acceptUser,
-            create_at: { $gte: today },
-            type: Number(data.type),
-        }).select(data.searchAble)) as any[];
+        const today = moment(new Date()).startOf('day').format()
+        const condition = {
+          acceptUser,
+          createdAt: { $gte: today },
+          type: Number(data.type)
+        } as any
+        this.MirrorList = (await DieIdentity.find(condition).select(data.searchAble)) as any[];
         // 判断存在什么类型
         this.MirrorList.forEach(item => {
             if (isValid(item.dynamic)) {
@@ -192,7 +193,7 @@ export default class Service<T> {
                     return true;
                 }
             case 'iDNumber':
-                var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                 if (!reg.test(val)) {
                     console.log('身份证号错误');
                     ctx.body = responseJSON(401, `VALIDATION_FAILED_IDNNUMBER`);

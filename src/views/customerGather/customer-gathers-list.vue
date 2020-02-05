@@ -10,7 +10,7 @@
         <!-- 如果是单图文类型 || 视频类型 -->
         <li class="list-item" :key="item._id" v-for="item in listItem">
 
-            <div v-if="getRandomListItem(item) && showRowItem">
+            <div v-if="getRandomListItem(item) === 0">
               <div class="lutter-full-img" :style="`background-image:url(${getImage(checkType(item,'image'))})`">
                 <!-- 里面是否有video的图标 -->
               </div>
@@ -25,7 +25,7 @@
               </div>
             </div>
             
-            <div v-else-if="getRandomListItem(item) && showLItem">
+            <div v-else-if="getRandomListItem(item) === 1">
               <div class="grow-left-img">
               </div>
               <div class="grow-right-desc">
@@ -34,7 +34,7 @@
               </div>
             </div>
 
-            <div v-else-if="getRandomListItem(item) && showRItem">
+            <div v-else-if="getRandomListItem(item) === 2">
               <div class="brow-left-desc">
                 <p class="brow-left-tit">单身是一种生活方式</p>
                 <p class="brow-left-msg">对于单身女性而言，年龄越大面临着来自社会及家庭的压力也越大...</p>
@@ -43,7 +43,7 @@
               </div>
             </div>
 
-            <div v-else-if="!getRandomListItem(item) && item.linkType === 3">
+            <div v-else-if="getRandomListItem(item) === 3">
               <div class="grid-item-wrapper">
                 <ul class="grid-list mui-clearfix">
                   <li class="grid-list-item" v-for="(item,index) in item.album[0]" :key="index" :style="`background-image:url(${getImage(item)})`"></li>
@@ -63,9 +63,6 @@ export default {
   props: [],
   data() {
     return {
-      showRowItem: false, // 横向图文
-      showLItem: false, // false为左
-      showRItem: false,
       listItem: []
     }
   },
@@ -126,35 +123,15 @@ export default {
     },
     getRandomListItem(item) {
       // 单图文或者单视频下
-      const ran = Math.random() * 10
-      if ( Number(item.linkType) === 0 || Number(item.linkType) === 2 ) {
-          if (!this.showRowItem || ran >= 8 ) {
-            this.showRowItem = true
-          } else {
-            if (!this.showLItem) {
-              this.showLItem = true
-              this.showRItem = false
-            } else {
-              this.showLItem = false
-              this.showRItem = true
-            }
-          }
-          return true
-      } else {
-        this.showRowItem = false;
-        this.showLItem = false;
-        this.showRItem = false;
-        return false
-      }
+      return item.linkType
     },
     getList() {
       const data = {}
       app.api.customerGather.queryFootPrintList({
         data,
         success: res => {
-            if (res.message === 'success') {
-               this.listItem = res.footprintAllList
-               console.log(this.listItem)
+            if (res.error_code === 0) {
+               this.listItem = res.data.docs
             }
         }
       })

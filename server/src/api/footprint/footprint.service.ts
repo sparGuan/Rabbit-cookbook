@@ -6,7 +6,7 @@ import { statusCode } from '../../config/index';
 const axios = require("axios");
 export default class FootprintService {
     private Footprint: any;
-    private footprintList: IFootprint[];
+    private footprintList: any;
     private dynamicList: IDynamic[];
     private activityList: IActivity[];
     public async saveFootprintService(body: any) {
@@ -25,13 +25,14 @@ export default class FootprintService {
     }
     public async queryFootPrintListService() {
         // 足迹数据列表
-        this.footprintList = (await Footprint.find({
-        })
-            .populate({ path: 'user', select: 'headImg nickName' })
-            .sort({ create_at: -1 })
-            .limit(10)
-            .exec()) as IFootprint[];
-        if (this.footprintList.length > 0) {
+        this.footprintList = await Footprint.paginate({
+        }, {
+          populate: { path: 'user', select: 'headImg nickName' },
+          sort: { create_at: -1 },
+          offset:   0,
+          limit:    10
+        }) as any;
+        if (this.footprintList.docs.length > 0) {
             // 对该10条足迹进行分类
             const dynamicTypeIds: any = [] // 动态类型
             const activityTypeIds: any = [] // 活动类型
@@ -39,7 +40,7 @@ export default class FootprintService {
             // 分类筛选数据
             // 动态类型为一组
             // 活动类型为一组
-            this.footprintList.forEach((item: any) => {
+            this.footprintList.docs.forEach((item: any) => {
                 linkTypeMap.push({
                     sourceDataId: item.sourceDataId,
                     linkType: item.linkType,
@@ -77,22 +78,20 @@ export default class FootprintService {
             } else {
                 this.activityList = []
             }
-            const footprintAllList: any[] = [...this.dynamicList, ...this.activityList]
+            let footprintAllList: any[] = [...this.dynamicList, ...this.activityList]
             // 动态，活动等等数据进行合并处理
-            footprintAllList.forEach((item: any) => {
+            footprintAllList = footprintAllList.map((item: any) => {
                 linkTypeMap.forEach(elem => {
                     if (elem.sourceDataId.toString() === item._id.toString()) {
                         item._doc.linkType = elem.linkType
                         item._doc.footprintType = elem.footprintType
                     }
                 })
+                return item
             })
             // 最终将整个数组返回前端
-            if (footprintAllList.length > 0) {
-                return footprintAllList
-            } else {
-                return statusCode.noOne
-            }
+            this.footprintList.docs = footprintAllList
+            return this.footprintList
         } else {
             return statusCode.noOne
         }
