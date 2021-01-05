@@ -20,7 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@sentry/node": "^4.6.4",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.1",
     "bluebird": "^3.5.1",
     "child_process": "^1.0.2",
