@@ -71,7 +71,7 @@
     "promise-limit": "^2.7.0",
     "puppeteer": "^1.15.0",
     "qcloudsms_js": "^0.1.0",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "rimraf": "^2.6.3",
     "safeify": "^5.0.3",
     "socket.io-redis": "^5.2.0",
